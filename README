@@ -1,0 +1,18 @@
+Title:  Column-based VS row-based storage implementation for a DB system
+
+Team members: Yi Huang(yhuang103), Jiaqi Duan(jduan4), Jinfa Zhao(jzhao30)
+
+Objective:  We plan to implement a row-based and a column-based database system with selection and join functionalities. We will compare the performance of selection operation for both systems such as runtime and IO cost. Other comparison include runtime of selection with and without indexes built on certain attributes.
+
+Core Functionality:
+1. Implement row-based SELECT operator.
+2. Implement column-based SELECT operator.
+3. Run sample queries of 2 categories.
+4. Compare running times and #disk IOs.
+5. Create indexes on selected attributes.
+6. Run additional queries which:
+     a) request projection of an index attribute,
+     b) request projection of a non-index attribute.
+
+Selection: A query is first parsed and print the records that match a given selection.
+Join: Support join two table in the query.
