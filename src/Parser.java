@@ -28,9 +28,9 @@ public class Parser {
                     conditionStr = conditionStr.trim();
                 } else {
                     tableStr = query.substring(fromPos + 4);
-                    tableStr = targetStr.trim();
+                    tableStr = tableStr.trim();
                 }
-                System.out.println("Target: " + targetStr + ",Table: " + tableStr + ",Condition: " + conditionStr); //debug
+                //System.out.println("Target: " + targetStr + ",Table: " + tableStr + ",Condition: " + conditionStr); //debug
                 //Split the elements
                 String[] targets = targetStr.split(",");
                 targets = doTrim(targets);
@@ -43,6 +43,8 @@ public class Parser {
                     cond = doTrim(cond);
                     conditions.put(cond[0],cond[1]);
                 }
+                RowbasedQuery row = new RowbasedQuery(targets,tables,conditions);
+                row.run();
             }
         }catch(IOException io){
             io.printStackTrace();
