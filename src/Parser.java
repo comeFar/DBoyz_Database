@@ -43,8 +43,12 @@ public class Parser {
                     cond = doTrim(cond);
                     conditions.put(cond[0],cond[1]);
                 }
+                long lStartTime = System.currentTimeMillis();
                 RowbasedQuery row = new RowbasedQuery(targets,tables,conditions);
                 row.run();
+                long lEndTime = System.currentTimeMillis();
+                long difference = lEndTime - lStartTime;
+                System.out.println("Elapsed milliseconds: " + difference);
             }
         }catch(IOException io){
             io.printStackTrace();
