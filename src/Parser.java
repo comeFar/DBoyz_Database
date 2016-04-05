@@ -30,7 +30,7 @@ public class Parser {
                     tableStr = query.substring(fromPos + 4);
                     tableStr = tableStr.trim();
                 }
-                //System.out.println("Target: " + targetStr + ",Table: " + tableStr + ",Condition: " + conditionStr); //debug
+//                System.out.println("Target: " + targetStr + ",Table: " + tableStr + ",Condition: " + conditionStr); //debug
                 //Split the elements
                 String[] targets = targetStr.split(",");
                 targets = doTrim(targets);
@@ -43,12 +43,23 @@ public class Parser {
                     cond = doTrim(cond);
                     conditions.put(cond[0],cond[1]);
                 }
-                long lStartTime = System.currentTimeMillis();
-                RowbasedQuery row = new RowbasedQuery(targets,tables,conditions);
-                row.run();
-                long lEndTime = System.currentTimeMillis();
-                long difference = lEndTime - lStartTime;
-                System.out.println("Elapsed milliseconds: " + difference);
+                if(tableStr.contains("col")){
+                    ColumnBasedQuery col = new ColumnBasedQuery(targets,tables,conditions);
+                    long lStartTime = System.currentTimeMillis();
+                    col.run();
+                    long lEndTime = System.currentTimeMillis();
+                    long difference = lEndTime - lStartTime;
+                    System.out.println("Elapsed milliseconds: " + difference);
+
+                }else{
+                    RowbasedQuery row = new RowbasedQuery(targets,tables,conditions);
+                    long lStartTime = System.currentTimeMillis();
+                    row.run();
+                    long lEndTime = System.currentTimeMillis();
+                    long difference = lEndTime - lStartTime;
+                    System.out.println("Elapsed milliseconds: " + difference);
+                }
+
             }
         }catch(IOException io){
             io.printStackTrace();
