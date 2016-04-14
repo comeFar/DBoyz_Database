@@ -29,7 +29,6 @@ public class ColumnBasedQuery extends RowbasedQuery {
                         sb.append(val[0] + " ");
                     }
                 }
-
             }
         }
         if ( targets.length > 0 && !targets[0].equals("*")) {
