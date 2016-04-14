@@ -1,6 +1,8 @@
 package grammar;
 import QueryUtils.BinaryOP;
 import QueryUtils.QueryOptimizer;
+import QueryUtils.SelectStmt;
+
 import java.util.List;
 
 /**
@@ -10,20 +12,34 @@ import java.util.List;
 public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
     public QueryOptimizer optimizer;
 
+    private SelectStmt currentSelectScope;
+
     public DBoyzAntlrVisitor(){
         this.optimizer = new QueryOptimizer();
+        this.currentSelectScope = new SelectStmt(SelectStmt.GLOBAL_SCOPE);
+        this.optimizer.selectStages.push(this.currentSelectScope.children);
+    }
+
+    @Override public String visitSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx){
+        SelectStmt stmt = new SelectStmt("");
+        pushScope(stmt);
+
+        visitChildren(ctx);
+
+        popScope();
+        return null;
     }
 
     @Override public String visitProjection_clause(DBoyzSQLParser.Projection_clauseContext ctx){
         List<DBoyzSQLParser.Result_columnContext> projectionList = ctx.result_column();
         for (DBoyzSQLParser.Result_columnContext i: projectionList){
-            optimizer.projections.add(visit(i));
+            currentSelectScope.projections.add(visit(i));
         }
         return null;
     }
 
     @Override public String visitBinaryOP(DBoyzSQLParser.BinaryOPContext ctx){
-        optimizer.filtering.add(new BinaryOP(visit(ctx.expr(0)), visit(ctx.expr(1)), ctx.binary_operator().getText()));
+        currentSelectScope.filters.add(new BinaryOP(visit(ctx.expr(0)), visit(ctx.expr(1)), ctx.binary_operator().getText()));
         return null;
     }
 
@@ -41,5 +57,17 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
 
     @Override public String visitLiteral_value(DBoyzSQLParser.Literal_valueContext ctx){
         return ctx.getText();
+    }
+
+    private void pushScope(SelectStmt stmt){
+        SelectStmt parent = currentSelectScope;
+        currentSelectScope = stmt;
+        currentSelectScope.parent = parent;
+        parent.children.add(currentSelectScope);
+        optimizer.selectStages.push(currentSelectScope.children);
+    }
+
+    private void popScope(){
+        currentSelectScope = currentSelectScope.parent;
     }
 }

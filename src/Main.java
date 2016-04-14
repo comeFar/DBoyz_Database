@@ -3,7 +3,6 @@ import grammar.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -13,15 +12,15 @@ public class Main {
     public static void main(String args[]){
         try{
             String line;
-            String buff = "";
+            StringBuilder buff = new StringBuilder();
             FileReader fileReader = new FileReader("sample.sql");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
-                buff += line + '\n';
+                buff.append(line).append('\n');
             }
             bufferedReader.close();
-            DBoyzSQLLexer lexer = new DBoyzSQLLexer(new ANTLRInputStream(buff));
+            DBoyzSQLLexer lexer = new DBoyzSQLLexer(new ANTLRInputStream(buff.toString()));
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             DBoyzSQLParser parser = new DBoyzSQLParser(tokens);
             ParseTree tree = parser.parse();

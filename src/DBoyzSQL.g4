@@ -313,12 +313,13 @@ expr
  | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )                                     #undecided
  | expr K_IS K_NOT? expr                                                            #undecided
  | expr K_NOT? K_BETWEEN expr K_AND expr                                            #undecided
- | expr K_NOT? K_IN ( '(' ( select_stmt
+ | expr K_NOT? K_IN ( '(' ( simple_select_stmt
+                          | select_stmt
                           | expr ( ',' expr )*
                           )?
                       ')'
                     | ( database_name '.' )? table_name )                           #undecided
- | ( ( K_NOT )? K_EXISTS )? '(' select_stmt ')'                                     #undecided
+ | ( ( K_NOT )? K_EXISTS )? '(' (simple_select_stmt | select_stmt ) ')'             #undecided
  | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END                 #undecided
  | raise_function                                                                   #undecided
  ;
