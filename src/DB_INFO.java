@@ -6,7 +6,7 @@ import java.util.List;
  *
  */
 public class DB_INFO {
-    static int FILE_SIZE = 1024 * 1024;
+    static int FILE_SIZE = 10 * 1024 * 1024;
     static String TPC_DIR = "tpc";
     static String DB_DIR = "DB";
     static String COL_DB_DIR = DB_DIR + "\\" + "column_based";

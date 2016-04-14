@@ -280,18 +280,6 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFactored_select_stmt(DBoyzSQLParser.Factored_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFactored_select_stmt(DBoyzSQLParser.Factored_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterInsert_stmt(DBoyzSQLParser.Insert_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -383,18 +371,6 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSelect_or_values(DBoyzSQLParser.Select_or_valuesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSelect_or_values(DBoyzSQLParser.Select_or_valuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

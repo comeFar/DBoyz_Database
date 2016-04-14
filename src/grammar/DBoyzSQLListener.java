@@ -228,16 +228,6 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 */
 	void exitDrop_view_stmt(DBoyzSQLParser.Drop_view_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DBoyzSQLParser#factored_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterFactored_select_stmt(DBoyzSQLParser.Factored_select_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DBoyzSQLParser#factored_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitFactored_select_stmt(DBoyzSQLParser.Factored_select_stmtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#insert_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -317,16 +307,6 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link DBoyzSQLParser#select_or_values}.
-	 * @param ctx the parse tree
-	 */
-	void enterSelect_or_values(DBoyzSQLParser.Select_or_valuesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DBoyzSQLParser#select_or_values}.
-	 * @param ctx the parse tree
-	 */
-	void exitSelect_or_values(DBoyzSQLParser.Select_or_valuesContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#update_stmt}.
 	 * @param ctx the parse tree

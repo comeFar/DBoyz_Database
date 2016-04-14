@@ -143,12 +143,6 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDrop_view_stmt(DBoyzSQLParser.Drop_view_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DBoyzSQLParser#factored_select_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFactored_select_stmt(DBoyzSQLParser.Factored_select_stmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#insert_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -196,12 +190,6 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DBoyzSQLParser#select_or_values}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSelect_or_values(DBoyzSQLParser.Select_or_valuesContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#update_stmt}.
 	 * @param ctx the parse tree
