@@ -33,13 +33,13 @@ public class GenDataFromTPC {
     }
 
     static int readSize;
-    static String rowBasedBuff = "";
-    static List<String> colBasedBuff = new LinkedList<>();
+    static StringBuilder rowBasedBuff = new StringBuilder();
+    static List<StringBuilder> colBasedBuff = new LinkedList<>();
     public static void generateDB(String line, DB_INFO.Table table) throws FileNotFoundException, UnsupportedEncodingException {
         int listLackCount = table.attrs.size() - colBasedBuff.size();
         if (listLackCount > 0){
             for (int i = 0; i < listLackCount; i++){
-                colBasedBuff.add("");
+                colBasedBuff.add(new StringBuilder());
             }
         }
 
@@ -48,40 +48,49 @@ public class GenDataFromTPC {
             writeRowBasedSplit(rowBasedBuff, table);
             writeColBasedSplit(colBasedBuff, table);
             readSize = line.length();
-            rowBasedBuff = line + '\n';
+            rowBasedBuff = new StringBuilder();
+            rowBasedBuff.append(line).append('\n');
             colBasedBuffAccumulate(line, true);
         } else {
-            rowBasedBuff += line + '\n';
+            rowBasedBuff.append(line).append('\n');
             colBasedBuffAccumulate(line, false);
         }
     }
 
-    public static void writeRowBasedSplit(String data, DB_INFO.Table table) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void writeRowBasedSplit(StringBuilder data, DB_INFO.Table table) throws FileNotFoundException, UnsupportedEncodingException {
+        long start_time, end_time;
+        start_time = System.nanoTime();
         String dirName = DB_INFO.ROW_DB_DIR + "\\" + table.name;
         new File(dirName).mkdirs();
         //todo write binary files
         PrintWriter writer = new PrintWriter(dirName + "\\" + table.rowBasedSplitCount, "UTF-8");
-        writer.println(data);
+        writer.println(data.toString());
         writer.close();
-        System.out.println("create " + dirName + "-->" + table.rowBasedSplitCount);
+        end_time = System.nanoTime();
+        System.out.println("create " + dirName + "-->" + table.rowBasedSplitCount + " time:" + (end_time-start_time)/1e6);
         table.rowBasedSplitCount++;
     }
 
-    public static void writeColBasedSplit(List<String> data, DB_INFO.Table table) throws FileNotFoundException, UnsupportedEncodingException {
+    public static void writeColBasedSplit(List<StringBuilder> data, DB_INFO.Table table) throws FileNotFoundException, UnsupportedEncodingException {
+        long start_time, end_time;
+        start_time = System.nanoTime();
         String dirName = DB_INFO.COL_DB_DIR + "\\" + table.name;
         new File(dirName).mkdirs();
         //todo write binary files
         PrintWriter writer = new PrintWriter(dirName + "\\" + table.colBasedSplitCount, "UTF-8");
-        data.forEach(writer::println);
+        for (StringBuilder b: data){
+            writer.println(b.toString());
+        }
         writer.close();
-        System.out.println("create " + dirName + "-->" + table.colBasedSplitCount);
+        end_time = System.nanoTime();
+        System.out.println("create " + dirName + "-->" + table.colBasedSplitCount + " time:" + (end_time-start_time)/1e6);
         table.colBasedSplitCount++;
     }
 
     public static void colBasedBuffAccumulate(String line, boolean reset){
         if (reset){
             for (int i = 0; i < colBasedBuff.size(); i++){
-                colBasedBuff.set(i, "");
+                colBasedBuff.set(i, new StringBuilder());
             }
         }
 
@@ -89,7 +98,9 @@ public class GenDataFromTPC {
         String splitFlag = "\\|";
         String[] splits = line.split(splitFlag);
         for (String str: splits){
-            colBasedBuff.set(index, colBasedBuff.get(index)+str + "|");
+            StringBuilder builder = colBasedBuff.get(index);
+            builder.append(str).append('|');
+            colBasedBuff.set(index, builder);
             index++;
         }
     }

@@ -82,12 +82,12 @@ public class DB_INFO {
             new Attribute("R_COMMENT", 2));
 
 
-    static List<Table> TABLES = Arrays.asList(//new Table("part.tbl", PART_TABLE_ATTRS),
+    static List<Table> TABLES = Arrays.asList(new Table("part.tbl", PART_TABLE_ATTRS),
             new Table("supplier.tbl", SUPPLIER_TABLE_ATTRS),
-            //new Table("partsupp.tbl", PARTSUPP_TABLE_ATTRS),
-            //new Table("customer.tbl", CUSTOMER_TABLE_ATTRS),
-            //new Table("orders.tbl", ORDERS_TABLE_ATTRS),
-            //new Table("lineitem.tbl", LINEITEM_TABLE_ATTRS),
+            new Table("partsupp.tbl", PARTSUPP_TABLE_ATTRS),
+            new Table("customer.tbl", CUSTOMER_TABLE_ATTRS),
+            new Table("orders.tbl", ORDERS_TABLE_ATTRS),
+            new Table("lineitem.tbl", LINEITEM_TABLE_ATTRS),
             new Table("nation.tbl", NATIOIN_TABLE_ATTRS),
             new Table("region.tbl", REGION_TABLE_ATTRS));
 
