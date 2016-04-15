@@ -1,7 +1,5 @@
 package QueryUtils;
 
-import grammar.DBoyzSQLParser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,8 +11,9 @@ import java.util.Objects;
 public class SelectStmt {
     public SelectStmt parent;
     public ArrayList<SelectStmt> children;
-    public List<String> tables, projections;
+    public List<String> tables;
     public List<BinaryOP> filters;
+    public List<Projection> projections;
 
     static public String GLOBAL_SCOPE = "global";
 

@@ -29,6 +29,7 @@ public class Main {
             DBoyzAntlrVisitor visitor = new DBoyzAntlrVisitor();
             visitor.visit(tree);
             QueryOptimizer optimizer = visitor.optimizer;
+            optimizer.execute();
             System.out.println("Finish\n");
         }
         catch (RuntimeException e){

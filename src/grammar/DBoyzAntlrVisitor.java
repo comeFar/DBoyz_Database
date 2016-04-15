@@ -1,5 +1,6 @@
 package grammar;
 import QueryUtils.BinaryOP;
+import QueryUtils.Projection;
 import QueryUtils.QueryOptimizer;
 import QueryUtils.SelectStmt;
 
@@ -33,12 +34,23 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
     @Override public String visitProjection_clause(DBoyzSQLParser.Projection_clauseContext ctx){
         List<DBoyzSQLParser.Result_columnContext> projectionList = ctx.result_column();
         for (DBoyzSQLParser.Result_columnContext i: projectionList){
-            currentSelectScope.projections.add(visit(i));
+            currentSelectScope.projections.add(new Projection(visit(i), ""));
         }
         return null;
     }
 
+    @Override public String visitTable_or_subquery(DBoyzSQLParser.Table_or_subqueryContext ctx){
+        currentSelectScope.tables.add(ctx.getText());
+        return null;
+    }
+
     @Override public String visitBinaryOP(DBoyzSQLParser.BinaryOPContext ctx){
+        BinaryOP op = new BinaryOP(visit(ctx.expr(0)), visit(ctx.expr(1)), ctx.binary_operator().getText());
+        if (ctx.expr(1).getChild(0) instanceof DBoyzSQLParser.Literal_valueContext){
+            op.type = BinaryOP.NORMAL;
+        }else{
+            op.type = BinaryOP.JOIN;
+        }
         currentSelectScope.filters.add(new BinaryOP(visit(ctx.expr(0)), visit(ctx.expr(1)), ctx.binary_operator().getText()));
         return null;
     }
