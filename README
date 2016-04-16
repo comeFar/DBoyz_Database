@@ -16,3 +16,9 @@ Core Functionality:
 
 Selection: A query is first parsed and print the records that match a given selection.
 Join: Support join two table in the query.
+
+
+How to run:
+create a directory DBoyz_Database\tpc,  put the tpc data file such as customer.tbl, lineitem.tbl ... into this dir.
+run GenDataFromTPC.java to generate db files.
+then run Main.java to execute sql.  (the sql sentence should be stored in sample.sql)
