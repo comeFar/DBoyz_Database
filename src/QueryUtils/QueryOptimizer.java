@@ -1,8 +1,6 @@
 package QueryUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by Yi on 4/13/2016.
@@ -31,24 +29,111 @@ public class QueryOptimizer {
     }
 
     private void runSelect(SelectStmt stmt){
+        System.out.println("=================Start===============");
+        StringBuilder builder = new StringBuilder();
         for (Projection p: stmt.projections){
-            System.out.println("projections: " + p.name);
+            builder.append(p.name).append(" ");
         }
-        System.out.println("tables: " + stmt.tables);
+        System.out.println("projections: " + builder.toString());
 
-        for (BinaryOP op: stmt.filters){
-            System.out.println("filters: " + op.first + " " + op.op + " " + op.second);
+        builder = new StringBuilder();
+        for (Map.Entry<String, Table> entry: stmt.tables.entrySet()){
+            builder.append(entry.getKey()).append(" ");
         }
+        System.out.println("tables: " + builder.toString());
+
+        builder = new StringBuilder();
+        for (Filter op: stmt.filters){
+            builder.append(op.first).append(" ").append(op.op).append(" ").append(op.second).append(" ");
+        }
+        System.out.println("filters: " + builder.toString());
 
         rowBasedSelect(stmt);
         colBasedSelect(stmt);
     }
 
     private void rowBasedSelect(SelectStmt stmt){
+        RB_attachFilters(stmt);
+        RB_attachProjections(stmt);
+        RB_attachJoinTables(stmt);
 
+        for (Map.Entry<String, Table> entry: stmt.tables.entrySet()){
+            entry.getValue().RB_run();
+        }
     }
 
     private void colBasedSelect(SelectStmt stmt){
 
+    }
+
+    private void RB_attachFilters(SelectStmt stmt){
+        for (Filter op: stmt.filters){
+            if (op.type == Filter.NORMAL){
+                String tableName = getTableName(op.first);
+                if (stmt.tables.containsKey(tableName)){
+                    stmt.tables.get(tableName).filters.add(op);
+                }
+            }
+        }
+    }
+
+    private void RB_attachProjections(SelectStmt stmt){
+        for (Projection p: stmt.projections){
+            String tableName = getTableName(p.name);
+            if (stmt.tables.containsKey(tableName)){
+                stmt.tables.get(tableName).projections.add(p);
+            }else{
+                System.out.println("Fatal error: " + p.name + " is not contained by any tables you specified");
+                System.exit(-1);
+            }
+        }
+    }
+
+    private void RB_attachJoinTables(SelectStmt stmt){
+        for (Filter op: stmt.filters){
+            if (op.type == Filter.JOIN){
+                String tableName = getTableName(op.first);
+                String joinName = getTableName(op.second);
+                Table joinTable;
+                if (stmt.tables.containsKey(joinName)){
+                    joinTable = stmt.tables.get(joinName);
+                }else{
+                    joinTable = new Table(joinName);
+                }
+
+                if (stmt.tables.containsKey(tableName)){
+                    stmt.tables.get(tableName).joinTables.add(joinTable);
+                }else{
+                    System.out.println("Fatal error: " + tableName + " is not contained by any tables you specified");
+                    System.exit(-1);
+                }
+            }
+        }
+    }
+
+    private String getTableName(String s){
+        String header = s.split("_")[0];
+
+        if (header.equalsIgnoreCase("c")){
+            return "customer";
+        }else if (header.equalsIgnoreCase("l")){
+            return "lineitem";
+        }else if (header.equalsIgnoreCase("n")){
+            return "nation";
+        }else if (header.equalsIgnoreCase("o")){
+            return "orders";
+        }else if (header.equalsIgnoreCase("p")){
+            return "part";
+        }else if (header.equalsIgnoreCase("ps")){
+            return "partsupp";
+        }else if (header.equalsIgnoreCase("r")){
+            return "region";
+        }else if (header.equalsIgnoreCase("s")){
+            return "supplier";
+        }else {
+            System.out.println("Unknow table name\n");
+            System.exit(-1);
+            return null;
+        }
     }
 }

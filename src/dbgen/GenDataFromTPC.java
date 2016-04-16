@@ -1,3 +1,7 @@
+package dbgen;
+
+import dbgen.DB_INFO;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;

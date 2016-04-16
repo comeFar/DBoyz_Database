@@ -25,6 +25,6 @@ public class DBoyzAntlrListener extends DBoyzSQLBaseListener {
 //
 //    @Override public void enterBinaryOP(DBoyzSQLParser.BinaryOPContext ctx){
 //        List<DBoyzSQLParser.ExprContext> list = ctx.expr();
-//        this.optimizer.filtering.add(new BinaryOP(ctx.getChild(0).getText(), ctx.binary_operator().getText(), ctx.getChild(2).getText()));
+//        this.optimizer.filtering.add(new Filter(ctx.getChild(0).getText(), ctx.binary_operator().getText(), ctx.getChild(2).getText()));
 //    }
 }

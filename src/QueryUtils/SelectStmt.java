@@ -1,8 +1,6 @@
 package QueryUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Created by Yi on 4/14/2016.
@@ -11,8 +9,8 @@ import java.util.Objects;
 public class SelectStmt {
     public SelectStmt parent;
     public ArrayList<SelectStmt> children;
-    public List<String> tables;
-    public List<BinaryOP> filters;
+    public Map<String, Table> tables;
+    public List<Filter> filters;
     public List<Projection> projections;
 
     static public String GLOBAL_SCOPE = "global";
@@ -27,7 +25,7 @@ public class SelectStmt {
     public SelectStmt(String name){
         this.children = new ArrayList<>();
         this.name = name;
-        this.tables = new ArrayList<>();
+        this.tables = new HashMap<>();
         this.filters = new ArrayList<>();
         this.projections = new ArrayList<>();
     }

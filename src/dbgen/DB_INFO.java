@@ -1,3 +1,5 @@
+package dbgen;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -6,11 +8,11 @@ import java.util.List;
  *
  */
 public class DB_INFO {
-    static int FILE_SIZE = 10 * 1024 * 1024;
-    static String TPC_DIR = "tpc";
-    static String DB_DIR = "DB";
-    static String COL_DB_DIR = DB_DIR + "\\" + "column_based";
-    static String ROW_DB_DIR = DB_DIR + "\\" + "row_based";
+    public static int FILE_SIZE = 10 * 1024 * 1024;
+    public static String TPC_DIR = "tpc";
+    public static String DB_DIR = "DB";
+    public static String COL_DB_DIR = DB_DIR + "\\" + "column_based";
+    public static String ROW_DB_DIR = DB_DIR + "\\" + "row_based";
 
     static List<Attribute> PART_TABLE_ATTRS = Arrays.asList(new Attribute("P_PARTKEY", 0),
             new Attribute("P_NAME", 1),
