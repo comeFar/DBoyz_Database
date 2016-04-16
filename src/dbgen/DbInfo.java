@@ -15,6 +15,7 @@ public class DbInfo {
     public String DB_DIR = "DB";
     public String COL_DB_DIR = DB_DIR + "/" + "column_based";
     public String ROW_DB_DIR = DB_DIR + "/" + "row_based";
+
     public List<String> PART_TABLE_ATTRS = Arrays.asList(
             "P_PARTKEY int", "P_NAME char", "P_MFGR char", "P_BRAND char", "P_TYPE char", "P_SIZE int",
             "P_CONTAINER char", "P_RETAILPRICE int", "P_COMMENT char"
