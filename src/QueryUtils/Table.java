@@ -86,7 +86,7 @@ public class Table {
         for(Projection p: projections){
             DbInfo.Attribute attrProperty = getAttrProperty(name, p.name);
             String dbValue = attrs[attrProperty.offset];
-            builder.append(dbValue).append('|');
+            builder.append(dbValue).append('\t').append('|');
         }
         return builder.toString();
     }

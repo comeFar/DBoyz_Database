@@ -1,4 +1,5 @@
 select
-	n_nationkey
+	l_suppkey,
+	l_tax
 from
-	nation
+	lineitem

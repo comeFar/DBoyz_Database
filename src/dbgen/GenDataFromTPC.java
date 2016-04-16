@@ -72,7 +72,7 @@ public class GenDataFromTPC {
         writer.println(data.toString());
         writer.close();
         end_time = System.nanoTime();
-        System.out.println("create " + dirName + "-->" + table.rowBasedSplitCount + " time:" + (end_time-start_time)/1e6);
+        System.out.println("create " + dirName + "-->" + table.rowBasedSplitCount + " time:" + (end_time-start_time)/1e9 + " sec");
         table.rowBasedSplitCount++;
     }
 
@@ -88,7 +88,7 @@ public class GenDataFromTPC {
         }
         writer.close();
         end_time = System.nanoTime();
-        System.out.println("create " + dirName + "-->" + table.colBasedSplitCount + " time:" + (end_time-start_time)/1e6);
+        System.out.println("create " + dirName + "-->" + table.colBasedSplitCount + " time:" + (end_time-start_time)/1e9 + " sec");
         table.colBasedSplitCount++;
     }
 

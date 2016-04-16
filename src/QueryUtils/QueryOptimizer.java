@@ -52,8 +52,16 @@ public class QueryOptimizer {
         attachProjections(stmt);
         attachJoinTables(stmt);
 
+        long start_time, end_time;
+        start_time = System.nanoTime();
         rowBasedSelect(stmt);
+        end_time = System.nanoTime();
+        System.out.println("Row Based Database time: " + (end_time-start_time)/1e9 + " sec");
+
+        start_time = System.nanoTime();
         colBasedSelect(stmt);
+        end_time = System.nanoTime();
+        System.out.println("Column Based Database time: " + (end_time-start_time)/1e9 + " sec");
     }
 
     private void rowBasedSelect(SelectStmt stmt){
