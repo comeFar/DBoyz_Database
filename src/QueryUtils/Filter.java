@@ -15,6 +15,6 @@ public class Filter {
         this.first = first;
         this.second = second;
         this.op = op;
-        type = 0;
+        this.type = -1;
     }
 }

@@ -48,25 +48,27 @@ public class QueryOptimizer {
         }
         System.out.println("filters: " + builder.toString());
 
-        rowBasedSelect(stmt);
+        attachFilters(stmt);
+        attachProjections(stmt);
+        attachJoinTables(stmt);
+
+//        rowBasedSelect(stmt);
         colBasedSelect(stmt);
     }
 
     private void rowBasedSelect(SelectStmt stmt){
-        RB_attachFilters(stmt);
-        RB_attachProjections(stmt);
-        RB_attachJoinTables(stmt);
-
         for (Map.Entry<String, Table> entry: stmt.tables.entrySet()){
             entry.getValue().RB_run();
         }
     }
 
     private void colBasedSelect(SelectStmt stmt){
-
+        for (Map.Entry<String, Table> entry: stmt.tables.entrySet()){
+            entry.getValue().CB_run();
+        }
     }
 
-    private void RB_attachFilters(SelectStmt stmt){
+    private void attachFilters(SelectStmt stmt){
         for (Filter op: stmt.filters){
             if (op.type == Filter.NORMAL){
                 String tableName = getTableName(op.first);
@@ -77,7 +79,7 @@ public class QueryOptimizer {
         }
     }
 
-    private void RB_attachProjections(SelectStmt stmt){
+    private void attachProjections(SelectStmt stmt){
         for (Projection p: stmt.projections){
             String tableName = getTableName(p.name);
             if (stmt.tables.containsKey(tableName)){
@@ -89,7 +91,7 @@ public class QueryOptimizer {
         }
     }
 
-    private void RB_attachJoinTables(SelectStmt stmt){
+    private void attachJoinTables(SelectStmt stmt){
         for (Filter op: stmt.filters){
             if (op.type == Filter.JOIN){
                 String tableName = getTableName(op.first);
