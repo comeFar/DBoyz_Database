@@ -1,6 +1,4 @@
 select
-	l_shipdate
+	n_nationkey
 from
-	lineitem
-where
-	l_returnflag = 'R'
+	nation

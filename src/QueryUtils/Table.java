@@ -169,8 +169,14 @@ public class Table {
         StringBuilder builder = new StringBuilder();
         for (String s: buff){
             String[] splits = s.split("\\|");
-            for (int i: masks){
-                builder.append(splits[i]).append('\n');
+            if (filters.size() == 0){
+                for (String s2: splits){
+                    builder.append(s2).append('\n');
+                }
+            }else{
+                for (int i: masks){
+                    builder.append(splits[i]).append('\n');
+                }
             }
         }
         return builder.toString();
