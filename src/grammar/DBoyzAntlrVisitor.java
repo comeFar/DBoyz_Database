@@ -37,7 +37,7 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
     }
 
     @Override public String visitTable_or_subquery(DBoyzSQLParser.Table_or_subqueryContext ctx){
-        currentSelectScope.tables.put(ctx.getText(), new Table(ctx.getText()));
+        currentSelectScope.tables.put(ctx.getText(), new Table(ctx.getText() + ".tbl"));
         return null;
     }
 
