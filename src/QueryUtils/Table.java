@@ -35,7 +35,6 @@ public class Table {
             File[] listOfFiles = folder.listFiles();
 
             assert listOfFiles != null;
-            int count = 0;
             for (File listOfFile : listOfFiles) {
                 String fileName = listOfFile.getName();
 
@@ -46,16 +45,21 @@ public class Table {
                 String line;
                 StringBuilder buff = new StringBuilder();
                 while ((line = bufferedReader.readLine()) != null) {
+                    if (line.trim().isEmpty()){
+                        continue;
+                    }
                     String[] attrs = line.split("\\|");
                     if (attrs.length != dbInfo.TABLES.get(name).attrs.size()){
-//                        System.out.println("Bad Line in " + name + ": " + line);
+                        System.out.println("Bad Line in " + name + ": " + line);
                         continue;
                     }
                     if (filter(attrs)){
                         buff.append(project(attrs)).append('\n');
                     }
                 }
-                System.out.println(buff.toString());
+                if (buff.length() != 0){
+                    System.out.println(buff.toString());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +77,7 @@ public class Table {
             if (attrProperty.type.equalsIgnoreCase("int")){
                 int leftValue = Integer.parseInt(dbValue);
                 int rightValue = Integer.parseInt(value);
-                if ((op.equals("=") && (leftValue != rightValue))
+                if (((op.equals("=") || op.equals("==")) && (leftValue != rightValue))
                         || (op.equals(">") && (leftValue <= rightValue))
                         || (op.equals("<") && (leftValue >= rightValue))
                         || (op.equals(">=") && (leftValue < rightValue))
@@ -83,8 +87,8 @@ public class Table {
                 }
             }else if(attrProperty.type.equalsIgnoreCase("char")){
                 String leftValue = dbValue;
-                String rightValue = value.replaceAll("'", "");
-                if ((op.equals("=") && (!leftValue.equals(rightValue)))
+                String rightValue = value.substring(1, value.length()-1);       //remove ' in the value
+                if (((op.equals("=") || (op.equals("=="))) && (!leftValue.equals(rightValue)))
                         || (op.equals("!=") && leftValue.equals(rightValue))){
                     return false;
                 }
