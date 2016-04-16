@@ -52,7 +52,7 @@ public class QueryOptimizer {
         attachProjections(stmt);
         attachJoinTables(stmt);
 
-//        rowBasedSelect(stmt);
+        rowBasedSelect(stmt);
         colBasedSelect(stmt);
     }
 

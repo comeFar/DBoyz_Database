@@ -2,10 +2,7 @@ package QueryUtils;
 
 import dbgen.DbInfo;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -57,7 +54,7 @@ public class Table {
                     }
                 }
                 if (buff.length() != 0){
-                    System.out.println(buff.toString());
+                    writeOutput(buff.toString(), "rowBase.out");
                 }
             }
         } catch (IOException e) {
@@ -135,7 +132,7 @@ public class Table {
                     }
                     lineCount++;
                 }
-                System.out.println(CB_project(result, projectionBuff));
+                writeOutput(CB_project(result, projectionBuff), "colBase.out");
 
             }
         } catch (IOException e) {
@@ -207,5 +204,11 @@ public class Table {
 
     private DbInfo.Attribute getAttrProperty(String tableName, String attr){
         return dbInfo.TABLES.get(tableName).attrs.get(attr);
+    }
+
+    private void writeOutput(String s, String fileName) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+        writer.println(s);
+        writer.close();
     }
 }
