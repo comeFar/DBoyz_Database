@@ -1,5 +1,9 @@
 select
-	l_suppkey,
-	l_tax
+	p_partkey,
+	p_mfgr,
 from
-	lineitem
+	part,
+	partsupp
+where
+	p_partkey = ps_partkey
+	and p_size = 12
