@@ -27,7 +27,7 @@ public class Table {
 
     public void RB_run(){
         try {
-            File folder = new File(dbInfo.ROW_DB_DIR + "\\" + name);
+            File folder = new File(dbInfo.ROW_DB_DIR + "/" + name);
             File[] listOfFiles = folder.listFiles();
 
             assert listOfFiles != null;
@@ -35,7 +35,7 @@ public class Table {
                 String fileName = listOfFile.getName();
 
                 FileReader fileReader;
-                fileReader = new FileReader(dbInfo.ROW_DB_DIR + "\\" + name + "\\" + fileName);
+                fileReader = new FileReader(dbInfo.ROW_DB_DIR + "/" + name + "/" + fileName);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
 
                 String line;
@@ -93,7 +93,7 @@ public class Table {
 
     public void CB_run(){
         try {
-            File folder = new File(dbInfo.COL_DB_DIR + "\\" + name);
+            File folder = new File(dbInfo.COL_DB_DIR + "/" + name);
             File[] listOfFiles = folder.listFiles();
 
             assert listOfFiles != null;
@@ -101,7 +101,7 @@ public class Table {
                 String fileName = listOfFile.getName();
 
                 FileReader fileReader;
-                fileReader = new FileReader(dbInfo.COL_DB_DIR + "\\" + name + "\\" + fileName);
+                fileReader = new FileReader(dbInfo.COL_DB_DIR + "/" + name + "/" + fileName);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
 
                 String line;

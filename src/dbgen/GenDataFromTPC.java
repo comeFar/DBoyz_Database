@@ -19,7 +19,7 @@ public class GenDataFromTPC {
             String file = table.name;
 
             try {
-                FileReader fileReader = new FileReader(dbInfo.TPC_DIR + "\\" + file);
+                FileReader fileReader = new FileReader(dbInfo.TPC_DIR + "/" + file);
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
 
                 while((line = bufferedReader.readLine()) != null) {
@@ -65,10 +65,10 @@ public class GenDataFromTPC {
     public static void writeRowBasedSplit(StringBuilder data, DbInfo.Table table, DbInfo dbInfo) throws FileNotFoundException, UnsupportedEncodingException {
         long start_time, end_time;
         start_time = System.nanoTime();
-        String dirName = dbInfo.ROW_DB_DIR + "\\" + table.name;
+        String dirName = dbInfo.ROW_DB_DIR + "/" + table.name;
         new File(dirName).mkdirs();
         //todo write binary files
-        PrintWriter writer = new PrintWriter(dirName + "\\" + table.rowBasedSplitCount, "UTF-8");
+        PrintWriter writer = new PrintWriter(dirName + "/" + table.rowBasedSplitCount, "UTF-8");
         writer.println(data.toString());
         writer.close();
         end_time = System.nanoTime();
@@ -79,10 +79,10 @@ public class GenDataFromTPC {
     public static void writeColBasedSplit(List<StringBuilder> data, DbInfo.Table table, DbInfo dbInfo) throws FileNotFoundException, UnsupportedEncodingException {
         long start_time, end_time;
         start_time = System.nanoTime();
-        String dirName = dbInfo.COL_DB_DIR + "\\" + table.name;
+        String dirName = dbInfo.COL_DB_DIR + "/" + table.name;
         new File(dirName).mkdirs();
         //todo write binary files
-        PrintWriter writer = new PrintWriter(dirName + "\\" + table.colBasedSplitCount, "UTF-8");
+        PrintWriter writer = new PrintWriter(dirName + "/" + table.colBasedSplitCount, "UTF-8");
         for (StringBuilder b: data){
             writer.println(b.toString());
         }
