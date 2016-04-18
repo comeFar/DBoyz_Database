@@ -1,4 +1,4 @@
-package dbgen;
+package db_struct;
 
 import java.io.*;
 import java.util.LinkedList;

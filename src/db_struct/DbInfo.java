@@ -1,4 +1,4 @@
-package dbgen;
+package db_struct;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class DbInfo {
     public int FILE_SIZE = 10 * 1024 * 1024;
-    public int JOIN_BUFF_SIZE = 20;      // actual size = JOIN_BUFF_SIZE * FILE_SIZE
+    public int JOIN_BUFF_SIZE = 1;      // actual size = JOIN_BUFF_SIZE * FILE_SIZE
     public String TPC_DIR = "tpc";
     public String DB_DIR = "DB";
     public String COL_DB_DIR = DB_DIR + "/" + "column_based";

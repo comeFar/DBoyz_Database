@@ -3,7 +3,7 @@ package preprocessor;
 import Symbols.*;
 import accessmode.BlockBuff;
 import accessmode.SelectHandler;
-import dbgen.DbInfo;
+import db_struct.DbInfo;
 
 import java.io.IOException;
 import java.util.*;
@@ -15,12 +15,12 @@ import java.util.*;
 public class Planer {
     public SQLSegment sqlTree;
     public DbInfo dbInfo;
-    public HashMap<String, SelectHandler> pool;
+    public TreeMap<String, SelectHandler> pool;
 
     public Planer(SQLSegment sqlTree){
         this.sqlTree = sqlTree;
         this.dbInfo = new DbInfo();
-        this.pool = new HashMap<>();
+        this.pool = new TreeMap<>();
     }
 
     public void run(){
@@ -72,46 +72,59 @@ public class Planer {
         }
         for (SQLSegment sqlSegment: stmt.getChild(SQLSegment.SELECT_JOIN_SEG)){
             Join j = (Join) sqlSegment;
-            String tableName = dbInfo.getTableName(j.table1);
+            String leftTableName = dbInfo.getTableName(j.left);
+            String rightTableName = dbInfo.getTableName(j.right);
 
-            pool.get(tableName).joins.add(tableName);
-
-            tableName = dbInfo.getTableName(j.table2);
-            pool.get(tableName).joins.add(tableName);
+            pool.get(leftTableName).joins.put(rightTableName+"."+j.right, leftTableName+"."+j.left);
+            pool.get(rightTableName).joins.put(leftTableName+"."+j.left, rightTableName+"."+j.right);
         }
 
         SelectHandler next = getNextSelectHandler();
         while (next != null){
             try {
-                nestedBlockJoin(next);
+                if (next.joins.size() == 0){
+                    BlockBuff buff = next.getNextBlock();
+                    BlockBuff aggregateBuff = new BlockBuff();
+                    while (null != buff){
+                        aggregateBuff.merge(buff);
+                        buff = next.getNextBlock();
+                    }
+                    next.setProcessed(aggregateBuff);
+                }else{
+                    for (String joinTable: next.joins.keySet()){
+                        nestedBlockJoin(next, joinTable);
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
             next = getNextSelectHandler();
         }
-        System.out.println("Done\n");
+
+        System.out.println("===================Done===================");
+//        System.out.println(pool.firstEntry().getValue().getIntermediateBuff().buff.toString());
     }
 
-    public void nestedBlockJoin(SelectHandler handler) throws IOException {
+    public void nestedBlockJoin(SelectHandler handler, String joinTableName) throws IOException {
         BlockBuff buff1 = handler.getNextBlock();
-        for (String s: handler.joins){
-            SelectHandler joinTable = pool.get(s);
-            if (joinTable.isProcessed()){
-                BlockBuff newBlockBuff = buff1.blockNestedLoopJoin(joinTable.intermediateResult);
-                handler.setProcessed(newBlockBuff);
-                joinTable.setProcessed(newBlockBuff);
-                continue;
-            }
-
-            BlockBuff buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
-            BlockBuff aggregateBuff = new BlockBuff();
-            while (buff2.buff.length() != 0){
-                aggregateBuff.merge(buff1.blockNestedLoopJoin(buff2));
+        BlockBuff aggregateBuff = new BlockBuff();
+        SelectHandler joinTable = pool.get(joinTableName.split("\\.")[0]);
+        while (null != buff1) {
+            BlockBuff buff2;
+            if (joinTable.isProcessed()) {
+                buff2 = joinTable.getIntermediateBuff();
+                aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
+            }else{
                 buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
+                while (buff2 != null) {
+                    aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
+                    buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
+                }
             }
-            joinTable.setProcessed(aggregateBuff);
-            handler.setProcessed(aggregateBuff);
+            buff1 = handler.getNextBlock();
         }
+        handler.setProcessed(aggregateBuff);
+        joinTable.setProcessed(aggregateBuff);
     }
 
     private SelectHandler getNextSelectHandler(){

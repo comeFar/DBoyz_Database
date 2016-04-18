@@ -5,11 +5,11 @@ package Symbols;
  *
  */
 public class Join extends SQLSegment {
-    public String table1, table2;
+    public String left, right;
 
-    public Join(String table1, String table2){
+    public Join(String left, String right){
         super(SQLSegment.SELECT_JOIN_SEG);
-        this.table1 = table1;
-        this.table2 = table2;
+        this.left = left;
+        this.right = right;
     }
 }

@@ -1,7 +1,7 @@
 package accessmode;
 
 import Symbols.*;
-import dbgen.DbInfo;
+import db_struct.DbInfo;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,9 +14,10 @@ import java.util.List;
  */
 public class SelectHandler {
     public List<Filter> filters;
-    public List<String> projectors, joins;
-    public BlockBuff intermediateResult;
+    public List<String> projectors;
+    public HashMap<String, String> joins;
 
+    private BlockBuff intermediateResult;
     private DbInfo dbInfo;
     private boolean processed;
     private String name;
@@ -30,7 +31,7 @@ public class SelectHandler {
         this.folderName = dbInfo.ROW_DB_DIR + "/" + tableName + "/";
         filters = new ArrayList<>();
         projectors = new ArrayList<>();
-        joins = new ArrayList<>();
+        joins = new HashMap<>();
         this.dbInfo = dbInfo;
         processed = false;
         blockIndex = 0;
@@ -45,8 +46,8 @@ public class SelectHandler {
         }
     }
 
-    public String getName(){
-        return this.name;
+    public BlockBuff getIntermediateBuff(){
+        return this.intermediateResult;
     }
 
     public void setProcessed(BlockBuff blockBuff){
@@ -58,14 +59,6 @@ public class SelectHandler {
         return processed;
     }
 
-    public String getNextJoinTable(){
-        if (joins.size() > 0){
-            return joins.remove(0);
-        }else{
-            return null;
-        }
-    }
-
     public BlockBuff getNextNBlock(int number) throws IOException {
         BlockBuff blockBuff = new BlockBuff();
         for (int i = 0; i < number; i++){
@@ -73,7 +66,7 @@ public class SelectHandler {
             if (null != bb){
                 blockBuff.merge(bb);
             }else{
-                break;
+                return null;
             }
         }
         return blockBuff;
@@ -81,6 +74,10 @@ public class SelectHandler {
 
     public BlockBuff getNextBlock() throws IOException {
         if (blockIndex >= numOfBlocks){
+            return null;
+        }
+        if ((projectors.size() == 0) && (joins.size() == 0)){
+            System.out.println("Table "+name+" has no projection and join, this means this table can be delete from your SQL sentence");
             return null;
         }
 
@@ -100,9 +97,11 @@ public class SelectHandler {
                 continue;
             }
             if (RB_filter(attrs)){
-                blockBuff.buff.append(RB_project(attrs, blockBuff)).append('\n');
+                RB_project(attrs, blockBuff);
             }
         }
+
+        bufferedReader.close();
         return blockBuff;
     }
 
@@ -122,18 +121,19 @@ public class SelectHandler {
         return true;
     }
 
-    private String RB_project(String[] attrs, BlockBuff blockBuff){
-        if (projectors.size() == 0){
-            return "";
-        }
-        StringBuilder builder = new StringBuilder();
+    private void RB_project(String[] attrs, BlockBuff blockBuff){
         for(String p: projectors){
             DbInfo.Attribute attrProperty = getAttrProperty(name, p);
             String dbValue = attrs[attrProperty.offset];
-            builder.append(dbValue).append('\t').append('|');
-            blockBuff.addHeader(name+"."+p);
+            blockBuff.addValue(name+"."+attrProperty.name, dbValue);
         }
-        return builder.toString();
+
+        for(String s: joins.values()){
+            String[] list = s.split("\\.");
+            DbInfo.Attribute attrProperty = getAttrProperty(list[0], list[1]);
+            String dbValue = attrs[attrProperty.offset];
+            blockBuff.addValue(name+"."+attrProperty.name, dbValue);
+        }
     }
 
 //    public void CB_run(){
