@@ -17,7 +17,7 @@ public class SelectHandler {
     public List<String> projectors;
     public HashMap<String, String> joins;
 
-    private BlockBuff intermediateResult;
+    private PhysicalBlockBuff intermediateResult;
     private DbInfo dbInfo;
     private boolean processed;
     private String name;
@@ -46,12 +46,12 @@ public class SelectHandler {
         }
     }
 
-    public BlockBuff getIntermediateBuff(){
+    public PhysicalBlockBuff getIntermediateBuff(){
         return this.intermediateResult;
     }
 
-    public void setProcessed(BlockBuff blockBuff){
-        this.intermediateResult = blockBuff;
+    public void setProcessed(PhysicalBlockBuff physicalBlockBuff){
+        this.intermediateResult = physicalBlockBuff;
         processed = true;
     }
 
@@ -59,20 +59,20 @@ public class SelectHandler {
         return processed;
     }
 
-    public BlockBuff getNextNBlock(int number) throws IOException {
-        BlockBuff blockBuff = new BlockBuff();
+    public PhysicalBlockBuff getNextNBlock(int number) throws IOException {
+        PhysicalBlockBuff physicalBlockBuff = new PhysicalBlockBuff();
         for (int i = 0; i < number; i++){
-            BlockBuff bb = getNextBlock();
+            PhysicalBlockBuff bb = getNextBlock();
             if (null != bb){
-                blockBuff.merge(bb);
+                physicalBlockBuff.merge(bb);
             }else{
                 return null;
             }
         }
-        return blockBuff;
+        return physicalBlockBuff;
     }
 
-    public BlockBuff getNextBlock() throws IOException {
+    public PhysicalBlockBuff getNextBlock() throws IOException {
         if (blockIndex >= numOfBlocks){
             return null;
         }
@@ -80,12 +80,13 @@ public class SelectHandler {
             System.out.println("Table "+name+" has no projection and join, this means this table can be delete from your SQL sentence");
             return null;
         }
+        System.out.println("Get next block for " + name);
 
         FileReader fileReader;
         fileReader = new FileReader(folderName + Integer.toString(blockIndex++));
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        BlockBuff blockBuff = new BlockBuff();
+        PhysicalBlockBuff physicalBlockBuff = new PhysicalBlockBuff();
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             if (line.trim().isEmpty()){
@@ -97,12 +98,12 @@ public class SelectHandler {
                 continue;
             }
             if (RB_filter(attrs)){
-                RB_project(attrs, blockBuff);
+                RB_project(attrs, physicalBlockBuff);
             }
         }
 
         bufferedReader.close();
-        return blockBuff;
+        return physicalBlockBuff;
     }
 
     private boolean RB_filter(String[] attrs){
@@ -121,18 +122,18 @@ public class SelectHandler {
         return true;
     }
 
-    private void RB_project(String[] attrs, BlockBuff blockBuff){
+    private void RB_project(String[] attrs, PhysicalBlockBuff physicalBlockBuff){
         for(String p: projectors){
             DbInfo.Attribute attrProperty = getAttrProperty(name, p);
             String dbValue = attrs[attrProperty.offset];
-            blockBuff.addValue(name+"."+attrProperty.name, dbValue);
+            physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue);
         }
 
         for(String s: joins.values()){
             String[] list = s.split("\\.");
             DbInfo.Attribute attrProperty = getAttrProperty(list[0], list[1]);
             String dbValue = attrs[attrProperty.offset];
-            blockBuff.addValue(name+"."+attrProperty.name, dbValue);
+            physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue);
         }
     }
 

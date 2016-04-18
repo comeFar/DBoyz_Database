@@ -1,8 +1,11 @@
 select
-  l_tax,
-  o_clerk
+  c_name,
+  n_name,
+  s_name
 from
-  lineitem,
-  orders
+  customer,
+  nation,
+  supplier
 WHERE
-  o_orderkey = l_orderkey
+  c_nationkey = n_nationkey
+  and s_nationkey = n_nationkey

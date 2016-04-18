@@ -120,7 +120,7 @@ public class DbInfo {
                 result = "orders";
                 break;
             case 'p':
-                if (header.charAt(1) == 's'){
+                if ((header.length() != 1) && (header.charAt(1) == 's')){
                     result = "partsupp";
                 }else{
                     result = "part";

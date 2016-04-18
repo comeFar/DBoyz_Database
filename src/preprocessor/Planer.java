@@ -1,7 +1,7 @@
 package preprocessor;
 
 import Symbols.*;
-import accessmode.BlockBuff;
+import accessmode.PhysicalBlockBuff;
 import accessmode.SelectHandler;
 import db_struct.DbInfo;
 
@@ -83,8 +83,8 @@ public class Planer {
         while (next != null){
             try {
                 if (next.joins.size() == 0){
-                    BlockBuff buff = next.getNextBlock();
-                    BlockBuff aggregateBuff = new BlockBuff();
+                    PhysicalBlockBuff buff = next.getNextBlock();
+                    PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
                     while (null != buff){
                         aggregateBuff.merge(buff);
                         buff = next.getNextBlock();
@@ -106,11 +106,11 @@ public class Planer {
     }
 
     public void nestedBlockJoin(SelectHandler handler, String joinTableName) throws IOException {
-        BlockBuff buff1 = handler.getNextBlock();
-        BlockBuff aggregateBuff = new BlockBuff();
+        PhysicalBlockBuff buff1 = handler.getNextBlock();
+        PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
         SelectHandler joinTable = pool.get(joinTableName.split("\\.")[0]);
         while (null != buff1) {
-            BlockBuff buff2;
+            PhysicalBlockBuff buff2;
             if (joinTable.isProcessed()) {
                 buff2 = joinTable.getIntermediateBuff();
                 aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
