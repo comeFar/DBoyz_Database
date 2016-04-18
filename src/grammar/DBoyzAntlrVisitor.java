@@ -1,26 +1,38 @@
 package grammar;
-import QueryUtils.*;
-
-import java.util.List;
+import Symbols.*;
+import preprocessor.Planer;
 
 /**
  * Created by Yi on 4/12/2016.
  *
  */
-public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
-    public QueryOptimizer optimizer;
+public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<SQLSegment> {
+    public Planer optimizer;
 
     private SelectStmt currentSelectScope;
+    private SQLSegment currentScope;
 
     public DBoyzAntlrVisitor(){
-        this.optimizer = new QueryOptimizer();
-        this.currentSelectScope = new SelectStmt(SelectStmt.GLOBAL_SCOPE);
-        this.optimizer.selectStages.push(this.currentSelectScope.children);
+        this.currentScope = new SQLSegment(SQLSegment.GLOBAL_SCOPE);
+        this.optimizer = new Planer(currentScope);
+        this.currentSelectScope = null;
     }
 
-    @Override public String visitSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx){
-        SelectStmt stmt = new SelectStmt("");
+    @Override public SQLSegment visitSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx){
+        SelectStmt stmt = new SelectStmt();
         pushScope(stmt);
+        pushSelectScope(stmt);
+
+        visitChildren(ctx);
+
+        popSelectScope();
+        popScope();
+        return null;
+    }
+
+    @Override public SQLSegment visitProjector(DBoyzSQLParser.ProjectorContext ctx){
+        Projector p = new Projector(ctx);
+        pushScope(p);
 
         visitChildren(ctx);
 
@@ -28,55 +40,103 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<String> {
         return null;
     }
 
-    @Override public String visitProjection_clause(DBoyzSQLParser.Projection_clauseContext ctx){
-        List<DBoyzSQLParser.Result_columnContext> projectionList = ctx.result_column();
-        for (DBoyzSQLParser.Result_columnContext i: projectionList){
-            currentSelectScope.projections.add(new Projection(visit(i), ""));
-        }
-        return null;
-    }
+    @Override public SQLSegment visitTable_or_subquery(DBoyzSQLParser.Table_or_subqueryContext ctx){
+        String tableName;
 
-    @Override public String visitTable_or_subquery(DBoyzSQLParser.Table_or_subqueryContext ctx){
-        currentSelectScope.tables.put(ctx.getText(), new Table(ctx.getText() + ".tbl"));
-        return null;
-    }
-
-    @Override public String visitBinaryOP(DBoyzSQLParser.BinaryOPContext ctx){
-        Filter op = new Filter(visit(ctx.expr(0)), visit(ctx.expr(1)), ctx.binary_operator().getText());
-        if (ctx.expr(1).getChild(0) instanceof DBoyzSQLParser.Literal_valueContext){
-            op.type = Filter.NORMAL;
+        if (ctx.table_name() != null){
+            tableName = ctx.table_name().getText();
         }else{
-            op.type = Filter.JOIN;
+            tableName = null;
         }
-        currentSelectScope.filters.add(op);
+
+        Table t = new Table(tableName);
+        pushScope(t);
+
+        visitChildren(ctx);
+
+        popScope();
         return null;
     }
 
-    @Override public String visitAny_name(DBoyzSQLParser.Any_nameContext ctx){
-        if (ctx.IDENTIFIER() != null){
-            return ctx.IDENTIFIER().getText();
-        }else if (ctx.STRING_LITERAL() != null){
-            return ctx.STRING_LITERAL().getText();
-        }else if (ctx.keyword() != null){
-            return ctx.keyword().getText();
+    @Override public SQLSegment visitBinaryOP(DBoyzSQLParser.BinaryOPContext ctx){
+        SQLSegment sqlSegment;
+        if (ctx.expr(1).getChild(0) instanceof DBoyzSQLParser.Column_nameContext){
+            sqlSegment = new Join(ctx.expr(0).getText(), ctx.expr(1).getText());
         }else{
-            return visit(ctx.any_name());
+            sqlSegment = new Filter(ctx.expr(0).getText(), ctx.binary_operator().getText(), ctx.expr(1));
         }
+        pushScope(sqlSegment);
+
+        visitChildren(ctx);
+        if (sqlSegment instanceof Filter){
+            Filter f = (Filter)sqlSegment;
+            f.right.remove(0);
+        }
+
+        popScope();
+        return null;
     }
 
-    @Override public String visitLiteral_value(DBoyzSQLParser.Literal_valueContext ctx){
-        return ctx.getText();
+    @Override public SQLSegment visitColumn_name(DBoyzSQLParser.Column_nameContext ctx){
+        if (currentScope instanceof Projector){
+            Projector p = (Projector) currentScope;
+            p.columnNames.add(ctx.getText());
+        }else if (currentScope instanceof Filter){
+            Filter f = (Filter) currentScope;
+            f.right.add(ctx.getText());
+        }
+        visitChildren(ctx);
+        return null;
     }
 
-    private void pushScope(SelectStmt stmt){
-        SelectStmt parent = currentSelectScope;
-        currentSelectScope = stmt;
-        currentSelectScope.parent = parent;
-        parent.children.add(currentSelectScope);
-        optimizer.selectStages.push(currentSelectScope.children);
+    @Override public SQLSegment visitAny_name(DBoyzSQLParser.Any_nameContext ctx){
+        if (ctx.any_name() == null){
+            Identifier id = new Identifier(ctx.getText());
+            pushScope(id);
+            visitChildren(ctx);
+            popScope();
+        }else{
+            visitChildren(ctx);
+        }
+        return null;
+    }
+
+    @Override public SQLSegment visitLiteral_value(DBoyzSQLParser.Literal_valueContext ctx){
+        if (currentScope instanceof Filter){
+            Filter f = (Filter) currentScope;
+            f.right.add(ctx.getText());
+        }
+
+        currentScope.addChild(SQLSegment.IDENTIFIER, new Identifier(ctx.getText()));
+        return null;
+    }
+
+    @Override public SQLSegment visitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx){
+        currentScope.addChild(SQLSegment.IDENTIFIER, new Identifier(ctx.getText()));
+        return null;
+    }
+
+    private void pushScope(SQLSegment stmt){
+        SQLSegment parent = currentScope;
+        currentScope = stmt;
+        currentScope.parent = parent;
+        parent.addChild(stmt.type, stmt);
     }
 
     private void popScope(){
-        currentSelectScope = currentSelectScope.parent;
+        currentScope = currentScope.parent;
+    }
+
+    private void pushSelectScope(SelectStmt stmt){
+        SelectStmt parent = currentSelectScope;
+        currentSelectScope = stmt;
+        currentSelectScope.parentSelectStmt = parent;
+        if (parent != null){
+            parent.addChild(stmt.type, stmt);
+        }
+    }
+
+    private void popSelectScope(){
+        currentSelectScope = currentSelectScope.parentSelectStmt;
     }
 }

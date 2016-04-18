@@ -1,25 +1,21 @@
 package grammar;
 
-import QueryUtils.*;
-
-import java.util.List;
-
 /**
  * Created by Yi on 4/11/2016.
  *
  */
 
 public class DBoyzAntlrListener extends DBoyzSQLBaseListener {
-//    QueryOptimizer optimizer;
+//    Planer optimizer;
 //
-//    public DBoyzAntlrListener(QueryOptimizer optimizer){
+//    public DBoyzAntlrListener(Planer optimizer){
 //        this.optimizer = optimizer;
 //    }
 //
 //    @Override public void enterProjection_clause(DBoyzSQLParser.Projection_clauseContext ctx){
 //        List<DBoyzSQLParser.Result_columnContext> projectionList = ctx.result_column();
 //        for (DBoyzSQLParser.Result_columnContext i: projectionList){
-//            optimizer.projections.add(i.expr().getText());
+//            optimizer.projectors.add(i.expr().getText());
 //        }
 //    }
 //

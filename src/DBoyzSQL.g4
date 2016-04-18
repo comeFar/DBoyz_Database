@@ -70,7 +70,6 @@ sql_stmt
                                       | release_stmt
                                       | rollback_stmt
                                       | savepoint_stmt
-                                      | simple_select_stmt
                                       | select_stmt
                                       | update_stmt
                                       | update_stmt_limited
@@ -211,12 +210,6 @@ savepoint_stmt
  : K_SAVEPOINT savepoint_name
  ;
 
-simple_select_stmt
- : ( K_WITH K_RECURSIVE? common_table_expression ( ',' common_table_expression )* )?
-   select_core ( K_ORDER K_BY ordering_term ( ',' ordering_term )* )?
-   ( K_LIMIT expr ( ( K_OFFSET | ',' ) expr )? )?
- ;
-
 select_stmt
  : ( K_WITH K_RECURSIVE? common_table_expression ( ',' common_table_expression )* )?
    select_core ( compound_operator select_core )*
@@ -292,20 +285,23 @@ conflict_clause
     AND
     OR
 */
+binary_operator
+ : ( '=' | '==' | '!=' | '<>' | '||' | '<' | '<=' | '>' | '>='
+ | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP )
+ ;
+
 expr
  : literal_value                                 #undecided
  | BIND_PARAMETER                                   #undecided
  | ( ( database_name '.' )? table_name '.' )? column_name   #undecided
  | unary_operator expr                                        #undecided
- | expr '||' expr                                       #binaryOP
  | expr ( '*' | '/' | '%' ) expr            #undecided
  | expr ( '+' | '-' ) expr                  #undecided
  | expr ( '<<' | '>>' | '&' | '|' ) expr    #undecided
- | expr ( '<' | '<=' | '>' | '>=' ) expr    #undecided
  | expr binary_operator expr     #binaryOP
  | expr K_AND expr                                              #undecided
  | expr K_OR expr                                               #undecided
- | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'      #undecided
+ | function_name '(' ( K_DISTINCT? expr ( ',' expr )* | '*' )? ')'      #function
  | '(' expr ')'                                                         #undecided
  | K_CAST '(' expr K_AS type_name ')'                                   #undecided
  | expr K_COLLATE collation_name                                        #undecided
@@ -313,13 +309,12 @@ expr
  | expr ( K_ISNULL | K_NOTNULL | K_NOT K_NULL )                                     #undecided
  | expr K_IS K_NOT? expr                                                            #undecided
  | expr K_NOT? K_BETWEEN expr K_AND expr                                            #undecided
- | expr K_NOT? K_IN ( '(' ( simple_select_stmt
-                          | select_stmt
+ | expr K_NOT? K_IN ( '(' ( select_stmt
                           | expr ( ',' expr )*
                           )?
                       ')'
                     | ( database_name '.' )? table_name )                           #undecided
- | ( ( K_NOT )? K_EXISTS )? '(' (simple_select_stmt | select_stmt ) ')'             #undecided
+ | ( ( K_NOT )? K_EXISTS )? '(' select_stmt ')'             #undecided
  | K_CASE expr? ( K_WHEN expr K_THEN expr )+ ( K_ELSE expr )? K_END                 #undecided
  | raise_function                                                                   #undecided
  ;
@@ -378,7 +373,7 @@ common_table_expression
  : table_name ( '(' column_name ( ',' column_name )* ')' )? K_AS '(' select_stmt ')'
  ;
 
-result_column
+projector
  : '*'
  | table_name '.' '*'
  | expr ( K_AS? column_alias )?
@@ -417,7 +412,7 @@ select_core
  ;
 
  projection_clause
- : result_column ( ',' result_column )*
+ : projector ( ',' projector )*
  ;
 
  where_clause
@@ -454,10 +449,6 @@ unary_operator
  | '+'
  | '~'
  | K_NOT
- ;
-
-binary_operator
- : ( '=' | '==' | '!=' | '<>' | K_IS | K_IS K_NOT | K_IN | K_LIKE | K_GLOB | K_MATCH | K_REGEXP )
  ;
 
 error_message

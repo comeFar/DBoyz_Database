@@ -1,9 +1,18 @@
 select
-	p_partkey,
-	p_mfgr,
+	c_custkey,
+	c_name,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
 from
-	part,
-	partsupp
+	customer,
+	orders,
+	lineitem,
+	nation
 where
-	p_partkey = ps_partkey
-	and p_size = 12
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey

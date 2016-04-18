@@ -53,24 +53,23 @@ public class DBoyzSQLParser extends Parser {
 		RULE_drop_table_stmt = 19, RULE_drop_trigger_stmt = 20, RULE_drop_view_stmt = 21, 
 		RULE_insert_stmt = 22, RULE_pragma_stmt = 23, RULE_reindex_stmt = 24, 
 		RULE_release_stmt = 25, RULE_rollback_stmt = 26, RULE_savepoint_stmt = 27, 
-		RULE_simple_select_stmt = 28, RULE_select_stmt = 29, RULE_update_stmt = 30, 
-		RULE_update_stmt_limited = 31, RULE_vacuum_stmt = 32, RULE_column_def = 33, 
-		RULE_type_name = 34, RULE_column_constraint = 35, RULE_conflict_clause = 36, 
-		RULE_expr = 37, RULE_foreign_key_clause = 38, RULE_raise_function = 39, 
-		RULE_indexed_column = 40, RULE_table_constraint = 41, RULE_with_clause = 42, 
-		RULE_qualified_table_name = 43, RULE_ordering_term = 44, RULE_pragma_value = 45, 
-		RULE_common_table_expression = 46, RULE_result_column = 47, RULE_table_or_subquery = 48, 
-		RULE_join_clause = 49, RULE_join_operator = 50, RULE_join_constraint = 51, 
-		RULE_select_core = 52, RULE_projection_clause = 53, RULE_where_clause = 54, 
-		RULE_compound_operator = 55, RULE_cte_table_name = 56, RULE_signed_number = 57, 
-		RULE_literal_value = 58, RULE_unary_operator = 59, RULE_binary_operator = 60, 
-		RULE_error_message = 61, RULE_module_argument = 62, RULE_column_alias = 63, 
-		RULE_keyword = 64, RULE_name = 65, RULE_function_name = 66, RULE_database_name = 67, 
-		RULE_table_name = 68, RULE_table_or_index_name = 69, RULE_new_table_name = 70, 
-		RULE_column_name = 71, RULE_collation_name = 72, RULE_foreign_table = 73, 
-		RULE_index_name = 74, RULE_trigger_name = 75, RULE_view_name = 76, RULE_module_name = 77, 
-		RULE_pragma_name = 78, RULE_savepoint_name = 79, RULE_table_alias = 80, 
-		RULE_transaction_name = 81, RULE_any_name = 82;
+		RULE_select_stmt = 28, RULE_update_stmt = 29, RULE_update_stmt_limited = 30, 
+		RULE_vacuum_stmt = 31, RULE_column_def = 32, RULE_type_name = 33, RULE_column_constraint = 34, 
+		RULE_conflict_clause = 35, RULE_binary_operator = 36, RULE_expr = 37, 
+		RULE_foreign_key_clause = 38, RULE_raise_function = 39, RULE_indexed_column = 40, 
+		RULE_table_constraint = 41, RULE_with_clause = 42, RULE_qualified_table_name = 43, 
+		RULE_ordering_term = 44, RULE_pragma_value = 45, RULE_common_table_expression = 46, 
+		RULE_projector = 47, RULE_table_or_subquery = 48, RULE_join_clause = 49, 
+		RULE_join_operator = 50, RULE_join_constraint = 51, RULE_select_core = 52, 
+		RULE_projection_clause = 53, RULE_where_clause = 54, RULE_compound_operator = 55, 
+		RULE_cte_table_name = 56, RULE_signed_number = 57, RULE_literal_value = 58, 
+		RULE_unary_operator = 59, RULE_error_message = 60, RULE_module_argument = 61, 
+		RULE_column_alias = 62, RULE_keyword = 63, RULE_name = 64, RULE_function_name = 65, 
+		RULE_database_name = 66, RULE_table_name = 67, RULE_table_or_index_name = 68, 
+		RULE_new_table_name = 69, RULE_column_name = 70, RULE_collation_name = 71, 
+		RULE_foreign_table = 72, RULE_index_name = 73, RULE_trigger_name = 74, 
+		RULE_view_name = 75, RULE_module_name = 76, RULE_pragma_name = 77, RULE_savepoint_name = 78, 
+		RULE_table_alias = 79, RULE_transaction_name = 80, RULE_any_name = 81;
 	public static final String[] ruleNames = {
 		"parse", "error", "sql_stmt_list", "sql_stmt", "alter_table_stmt", "analyze_stmt", 
 		"attach_stmt", "begin_stmt", "commit_stmt", "compound_select_stmt", "create_index_stmt", 
@@ -78,19 +77,18 @@ public class DBoyzSQLParser extends Parser {
 		"delete_stmt", "delete_stmt_limited", "detach_stmt", "drop_index_stmt", 
 		"drop_table_stmt", "drop_trigger_stmt", "drop_view_stmt", "insert_stmt", 
 		"pragma_stmt", "reindex_stmt", "release_stmt", "rollback_stmt", "savepoint_stmt", 
-		"simple_select_stmt", "select_stmt", "update_stmt", "update_stmt_limited", 
-		"vacuum_stmt", "column_def", "type_name", "column_constraint", "conflict_clause", 
+		"select_stmt", "update_stmt", "update_stmt_limited", "vacuum_stmt", "column_def", 
+		"type_name", "column_constraint", "conflict_clause", "binary_operator", 
 		"expr", "foreign_key_clause", "raise_function", "indexed_column", "table_constraint", 
 		"with_clause", "qualified_table_name", "ordering_term", "pragma_value", 
-		"common_table_expression", "result_column", "table_or_subquery", "join_clause", 
+		"common_table_expression", "projector", "table_or_subquery", "join_clause", 
 		"join_operator", "join_constraint", "select_core", "projection_clause", 
 		"where_clause", "compound_operator", "cte_table_name", "signed_number", 
-		"literal_value", "unary_operator", "binary_operator", "error_message", 
-		"module_argument", "column_alias", "keyword", "name", "function_name", 
-		"database_name", "table_name", "table_or_index_name", "new_table_name", 
-		"column_name", "collation_name", "foreign_table", "index_name", "trigger_name", 
-		"view_name", "module_name", "pragma_name", "savepoint_name", "table_alias", 
-		"transaction_name", "any_name"
+		"literal_value", "unary_operator", "error_message", "module_argument", 
+		"column_alias", "keyword", "name", "function_name", "database_name", "table_name", 
+		"table_or_index_name", "new_table_name", "column_name", "collation_name", 
+		"foreign_table", "index_name", "trigger_name", "view_name", "module_name", 
+		"pragma_name", "savepoint_name", "table_alias", "transaction_name", "any_name"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -214,12 +212,12 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(170);
+			setState(168);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << SCOL) | (1L << K_ALTER) | (1L << K_ANALYZE) | (1L << K_ATTACH) | (1L << K_BEGIN) | (1L << K_COMMIT) | (1L << K_CREATE) | (1L << K_DELETE) | (1L << K_DETACH) | (1L << K_DROP))) != 0) || ((((_la - 66)) & ~0x3f) == 0 && ((1L << (_la - 66)) & ((1L << (K_END - 66)) | (1L << (K_EXPLAIN - 66)) | (1L << (K_INSERT - 66)) | (1L << (K_PRAGMA - 66)) | (1L << (K_REINDEX - 66)) | (1L << (K_RELEASE - 66)) | (1L << (K_REPLACE - 66)) | (1L << (K_ROLLBACK - 66)) | (1L << (K_SAVEPOINT - 66)) | (1L << (K_SELECT - 66)))) != 0) || ((((_la - 139)) & ~0x3f) == 0 && ((1L << (_la - 139)) & ((1L << (K_UPDATE - 139)) | (1L << (K_VACUUM - 139)) | (1L << (K_VALUES - 139)) | (1L << (K_WITH - 139)) | (1L << (UNEXPECTED_CHAR - 139)))) != 0)) {
 				{
-				setState(168);
+				setState(166);
 				switch (_input.LA(1)) {
 				case SCOL:
 				case K_ALTER:
@@ -246,13 +244,13 @@ public class DBoyzSQLParser extends Parser {
 				case K_VALUES:
 				case K_WITH:
 					{
-					setState(166);
+					setState(164);
 					sql_stmt_list();
 					}
 					break;
 				case UNEXPECTED_CHAR:
 					{
-					setState(167);
+					setState(165);
 					error();
 					}
 					break;
@@ -260,11 +258,11 @@ public class DBoyzSQLParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(172);
+				setState(170);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(173);
+			setState(171);
 			match(EOF);
 			}
 		}
@@ -307,7 +305,7 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(175);
+			setState(173);
 			((ErrorContext)_localctx).UNEXPECTED_CHAR = match(UNEXPECTED_CHAR);
 
 			     throw new RuntimeException("UNEXPECTED_CHAR=" + (((ErrorContext)_localctx).UNEXPECTED_CHAR!=null?((ErrorContext)_localctx).UNEXPECTED_CHAR.getText():null));
@@ -359,65 +357,65 @@ public class DBoyzSQLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(181);
+			setState(179);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==SCOL) {
 				{
 				{
-				setState(178);
+				setState(176);
 				match(SCOL);
 				}
 				}
-				setState(183);
+				setState(181);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(184);
+			setState(182);
 			sql_stmt();
-			setState(193);
+			setState(191);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(186); 
+					setState(184); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(185);
+						setState(183);
 						match(SCOL);
 						}
 						}
-						setState(188); 
+						setState(186); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( _la==SCOL );
-					setState(190);
+					setState(188);
 					sql_stmt();
 					}
 					} 
 				}
-				setState(195);
+				setState(193);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			}
-			setState(199);
+			setState(197);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(196);
+					setState(194);
 					match(SCOL);
 					}
 					} 
 				}
-				setState(201);
+				setState(199);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
 			}
@@ -507,9 +505,6 @@ public class DBoyzSQLParser extends Parser {
 		public Savepoint_stmtContext savepoint_stmt() {
 			return getRuleContext(Savepoint_stmtContext.class,0);
 		}
-		public Simple_select_stmtContext simple_select_stmt() {
-			return getRuleContext(Simple_select_stmtContext.class,0);
-		}
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
 		}
@@ -551,19 +546,19 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(207);
+			setState(205);
 			_la = _input.LA(1);
 			if (_la==K_EXPLAIN) {
 				{
-				setState(202);
+				setState(200);
 				match(K_EXPLAIN);
-				setState(205);
+				setState(203);
 				_la = _input.LA(1);
 				if (_la==K_QUERY) {
 					{
-					setState(203);
+					setState(201);
 					match(K_QUERY);
-					setState(204);
+					setState(202);
 					match(K_PLAN);
 					}
 				}
@@ -571,179 +566,173 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(238);
+			setState(235);
 			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				{
-				setState(209);
+				setState(207);
 				alter_table_stmt();
 				}
 				break;
 			case 2:
 				{
-				setState(210);
+				setState(208);
 				analyze_stmt();
 				}
 				break;
 			case 3:
 				{
-				setState(211);
+				setState(209);
 				attach_stmt();
 				}
 				break;
 			case 4:
 				{
-				setState(212);
+				setState(210);
 				begin_stmt();
 				}
 				break;
 			case 5:
 				{
-				setState(213);
+				setState(211);
 				commit_stmt();
 				}
 				break;
 			case 6:
 				{
-				setState(214);
+				setState(212);
 				compound_select_stmt();
 				}
 				break;
 			case 7:
 				{
-				setState(215);
+				setState(213);
 				create_index_stmt();
 				}
 				break;
 			case 8:
 				{
-				setState(216);
+				setState(214);
 				create_table_stmt();
 				}
 				break;
 			case 9:
 				{
-				setState(217);
+				setState(215);
 				create_trigger_stmt();
 				}
 				break;
 			case 10:
 				{
-				setState(218);
+				setState(216);
 				create_view_stmt();
 				}
 				break;
 			case 11:
 				{
-				setState(219);
+				setState(217);
 				create_virtual_table_stmt();
 				}
 				break;
 			case 12:
 				{
-				setState(220);
+				setState(218);
 				delete_stmt();
 				}
 				break;
 			case 13:
 				{
-				setState(221);
+				setState(219);
 				delete_stmt_limited();
 				}
 				break;
 			case 14:
 				{
-				setState(222);
+				setState(220);
 				detach_stmt();
 				}
 				break;
 			case 15:
 				{
-				setState(223);
+				setState(221);
 				drop_index_stmt();
 				}
 				break;
 			case 16:
 				{
-				setState(224);
+				setState(222);
 				drop_table_stmt();
 				}
 				break;
 			case 17:
 				{
-				setState(225);
+				setState(223);
 				drop_trigger_stmt();
 				}
 				break;
 			case 18:
 				{
-				setState(226);
+				setState(224);
 				drop_view_stmt();
 				}
 				break;
 			case 19:
 				{
-				setState(227);
+				setState(225);
 				insert_stmt();
 				}
 				break;
 			case 20:
 				{
-				setState(228);
+				setState(226);
 				pragma_stmt();
 				}
 				break;
 			case 21:
 				{
-				setState(229);
+				setState(227);
 				reindex_stmt();
 				}
 				break;
 			case 22:
 				{
-				setState(230);
+				setState(228);
 				release_stmt();
 				}
 				break;
 			case 23:
 				{
-				setState(231);
+				setState(229);
 				rollback_stmt();
 				}
 				break;
 			case 24:
 				{
-				setState(232);
+				setState(230);
 				savepoint_stmt();
 				}
 				break;
 			case 25:
 				{
-				setState(233);
-				simple_select_stmt();
+				setState(231);
+				select_stmt();
 				}
 				break;
 			case 26:
 				{
-				setState(234);
-				select_stmt();
+				setState(232);
+				update_stmt();
 				}
 				break;
 			case 27:
 				{
-				setState(235);
-				update_stmt();
+				setState(233);
+				update_stmt_limited();
 				}
 				break;
 			case 28:
 				{
-				setState(236);
-				update_stmt_limited();
-				}
-				break;
-			case 29:
-				{
-				setState(237);
+				setState(234);
 				vacuum_stmt();
 				}
 				break;
@@ -805,49 +794,49 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(240);
+			setState(237);
 			match(K_ALTER);
-			setState(241);
+			setState(238);
 			match(K_TABLE);
-			setState(245);
+			setState(242);
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				{
-				setState(242);
+				setState(239);
 				database_name();
-				setState(243);
+				setState(240);
 				match(DOT);
 				}
 				break;
 			}
-			setState(247);
+			setState(244);
 			table_name();
-			setState(256);
+			setState(253);
 			switch (_input.LA(1)) {
 			case K_RENAME:
 				{
-				setState(248);
+				setState(245);
 				match(K_RENAME);
-				setState(249);
+				setState(246);
 				match(K_TO);
-				setState(250);
+				setState(247);
 				new_table_name();
 				}
 				break;
 			case K_ADD:
 				{
-				setState(251);
+				setState(248);
 				match(K_ADD);
-				setState(253);
+				setState(250);
 				switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 				case 1:
 					{
-					setState(252);
+					setState(249);
 					match(K_COLUMN);
 					}
 					break;
 				}
-				setState(255);
+				setState(252);
 				column_def();
 				}
 				break;
@@ -900,29 +889,29 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(258);
+			setState(255);
 			match(K_ANALYZE);
-			setState(265);
+			setState(262);
 			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
 			case 1:
 				{
-				setState(259);
+				setState(256);
 				database_name();
 				}
 				break;
 			case 2:
 				{
-				setState(260);
+				setState(257);
 				table_or_index_name();
 				}
 				break;
 			case 3:
 				{
-				setState(261);
+				setState(258);
 				database_name();
-				setState(262);
+				setState(259);
 				match(DOT);
-				setState(263);
+				setState(260);
 				table_or_index_name();
 				}
 				break;
@@ -975,22 +964,22 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(267);
+			setState(264);
 			match(K_ATTACH);
-			setState(269);
+			setState(266);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
 				{
-				setState(268);
+				setState(265);
 				match(K_DATABASE);
 				}
 				break;
 			}
-			setState(271);
+			setState(268);
 			expr(0);
-			setState(272);
+			setState(269);
 			match(K_AS);
-			setState(273);
+			setState(270);
 			database_name();
 			}
 		}
@@ -1040,13 +1029,13 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(275);
+			setState(272);
 			match(K_BEGIN);
-			setState(277);
+			setState(274);
 			_la = _input.LA(1);
 			if (((((_la - 58)) & ~0x3f) == 0 && ((1L << (_la - 58)) & ((1L << (K_DEFERRED - 58)) | (1L << (K_EXCLUSIVE - 58)) | (1L << (K_IMMEDIATE - 58)))) != 0)) {
 				{
-				setState(276);
+				setState(273);
 				_la = _input.LA(1);
 				if ( !(((((_la - 58)) & ~0x3f) == 0 && ((1L << (_la - 58)) & ((1L << (K_DEFERRED - 58)) | (1L << (K_EXCLUSIVE - 58)) | (1L << (K_IMMEDIATE - 58)))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -1056,17 +1045,17 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(283);
+			setState(280);
 			_la = _input.LA(1);
 			if (_la==K_TRANSACTION) {
 				{
-				setState(279);
+				setState(276);
 				match(K_TRANSACTION);
-				setState(281);
+				setState(278);
 				switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 				case 1:
 					{
-					setState(280);
+					setState(277);
 					transaction_name();
 					}
 					break;
@@ -1120,24 +1109,24 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(285);
+			setState(282);
 			_la = _input.LA(1);
 			if ( !(_la==K_COMMIT || _la==K_END) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
 			}
-			setState(290);
+			setState(287);
 			_la = _input.LA(1);
 			if (_la==K_TRANSACTION) {
 				{
-				setState(286);
+				setState(283);
 				match(K_TRANSACTION);
-				setState(288);
+				setState(285);
 				switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 				case 1:
 					{
-					setState(287);
+					setState(284);
 					transaction_name();
 					}
 					break;
@@ -1231,61 +1220,61 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(304);
+			setState(301);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(292);
+				setState(289);
 				match(K_WITH);
-				setState(294);
+				setState(291);
 				switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 				case 1:
 					{
-					setState(293);
+					setState(290);
 					match(K_RECURSIVE);
 					}
 					break;
 				}
-				setState(296);
+				setState(293);
 				common_table_expression();
-				setState(301);
+				setState(298);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(297);
+					setState(294);
 					match(COMMA);
-					setState(298);
+					setState(295);
 					common_table_expression();
 					}
 					}
-					setState(303);
+					setState(300);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(306);
+			setState(303);
 			select_core();
-			setState(316); 
+			setState(313); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(313);
+				setState(310);
 				switch (_input.LA(1)) {
 				case K_UNION:
 					{
-					setState(307);
+					setState(304);
 					match(K_UNION);
-					setState(309);
+					setState(306);
 					_la = _input.LA(1);
 					if (_la==K_ALL) {
 						{
-						setState(308);
+						setState(305);
 						match(K_ALL);
 						}
 					}
@@ -1294,76 +1283,76 @@ public class DBoyzSQLParser extends Parser {
 					break;
 				case K_INTERSECT:
 					{
-					setState(311);
+					setState(308);
 					match(K_INTERSECT);
 					}
 					break;
 				case K_EXCEPT:
 					{
-					setState(312);
+					setState(309);
 					match(K_EXCEPT);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(315);
+				setState(312);
 				select_core();
 				}
 				}
-				setState(318); 
+				setState(315); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==K_EXCEPT || _la==K_INTERSECT || _la==K_UNION );
-			setState(330);
+			setState(327);
 			_la = _input.LA(1);
 			if (_la==K_ORDER) {
 				{
-				setState(320);
+				setState(317);
 				match(K_ORDER);
-				setState(321);
+				setState(318);
 				match(K_BY);
-				setState(322);
+				setState(319);
 				ordering_term();
-				setState(327);
+				setState(324);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(323);
+					setState(320);
 					match(COMMA);
-					setState(324);
+					setState(321);
 					ordering_term();
 					}
 					}
-					setState(329);
+					setState(326);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(338);
+			setState(335);
 			_la = _input.LA(1);
 			if (_la==K_LIMIT) {
 				{
-				setState(332);
+				setState(329);
 				match(K_LIMIT);
-				setState(333);
+				setState(330);
 				expr(0);
-				setState(336);
+				setState(333);
 				_la = _input.LA(1);
 				if (_la==COMMA || _la==K_OFFSET) {
 					{
-					setState(334);
+					setState(331);
 					_la = _input.LA(1);
 					if ( !(_la==COMMA || _la==K_OFFSET) ) {
 					_errHandler.recoverInline(this);
 					} else {
 						consume();
 					}
-					setState(335);
+					setState(332);
 					expr(0);
 					}
 				}
@@ -1437,78 +1426,78 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(340);
+			setState(337);
 			match(K_CREATE);
-			setState(342);
+			setState(339);
 			_la = _input.LA(1);
 			if (_la==K_UNIQUE) {
 				{
-				setState(341);
+				setState(338);
 				match(K_UNIQUE);
 				}
 			}
 
-			setState(344);
+			setState(341);
 			match(K_INDEX);
-			setState(348);
+			setState(345);
 			switch ( getInterpreter().adaptivePredict(_input,30,_ctx) ) {
 			case 1:
 				{
-				setState(345);
+				setState(342);
 				match(K_IF);
-				setState(346);
+				setState(343);
 				match(K_NOT);
-				setState(347);
+				setState(344);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(353);
+			setState(350);
 			switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
 			case 1:
 				{
-				setState(350);
+				setState(347);
 				database_name();
-				setState(351);
+				setState(348);
 				match(DOT);
 				}
 				break;
 			}
-			setState(355);
+			setState(352);
 			index_name();
-			setState(356);
+			setState(353);
 			match(K_ON);
-			setState(357);
+			setState(354);
 			table_name();
-			setState(358);
+			setState(355);
 			match(OPEN_PAR);
-			setState(359);
+			setState(356);
 			indexed_column();
-			setState(364);
+			setState(361);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(360);
+				setState(357);
 				match(COMMA);
-				setState(361);
+				setState(358);
 				indexed_column();
 				}
 				}
-				setState(366);
+				setState(363);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(367);
+			setState(364);
 			match(CLOSE_PAR);
-			setState(370);
+			setState(367);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(368);
+				setState(365);
 				match(K_WHERE);
-				setState(369);
+				setState(366);
 				expr(0);
 				}
 			}
@@ -1585,13 +1574,13 @@ public class DBoyzSQLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(372);
+			setState(369);
 			match(K_CREATE);
-			setState(374);
+			setState(371);
 			_la = _input.LA(1);
 			if (_la==K_TEMP || _la==K_TEMPORARY) {
 				{
-				setState(373);
+				setState(370);
 				_la = _input.LA(1);
 				if ( !(_la==K_TEMP || _la==K_TEMPORARY) ) {
 				_errHandler.recoverInline(this);
@@ -1601,85 +1590,85 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(376);
+			setState(373);
 			match(K_TABLE);
-			setState(380);
+			setState(377);
 			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
 			case 1:
 				{
-				setState(377);
+				setState(374);
 				match(K_IF);
-				setState(378);
+				setState(375);
 				match(K_NOT);
-				setState(379);
+				setState(376);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(385);
+			setState(382);
 			switch ( getInterpreter().adaptivePredict(_input,36,_ctx) ) {
 			case 1:
 				{
-				setState(382);
+				setState(379);
 				database_name();
-				setState(383);
+				setState(380);
 				match(DOT);
 				}
 				break;
 			}
-			setState(387);
+			setState(384);
 			table_name();
-			setState(411);
+			setState(408);
 			switch (_input.LA(1)) {
 			case OPEN_PAR:
 				{
-				setState(388);
+				setState(385);
 				match(OPEN_PAR);
-				setState(389);
+				setState(386);
 				column_def();
-				setState(394);
+				setState(391);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,37,_ctx);
 				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 					if ( _alt==1 ) {
 						{
 						{
-						setState(390);
+						setState(387);
 						match(COMMA);
-						setState(391);
+						setState(388);
 						column_def();
 						}
 						} 
 					}
-					setState(396);
+					setState(393);
 					_errHandler.sync(this);
 					_alt = getInterpreter().adaptivePredict(_input,37,_ctx);
 				}
-				setState(401);
+				setState(398);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(397);
+					setState(394);
 					match(COMMA);
-					setState(398);
+					setState(395);
 					table_constraint();
 					}
 					}
-					setState(403);
+					setState(400);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(404);
+				setState(401);
 				match(CLOSE_PAR);
-				setState(407);
+				setState(404);
 				_la = _input.LA(1);
 				if (_la==K_WITHOUT) {
 					{
-					setState(405);
+					setState(402);
 					match(K_WITHOUT);
-					setState(406);
+					setState(403);
 					match(IDENTIFIER);
 					}
 				}
@@ -1688,9 +1677,9 @@ public class DBoyzSQLParser extends Parser {
 				break;
 			case K_AS:
 				{
-				setState(409);
+				setState(406);
 				match(K_AS);
-				setState(410);
+				setState(407);
 				select_stmt();
 				}
 				break;
@@ -1806,13 +1795,13 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(413);
+			setState(410);
 			match(K_CREATE);
-			setState(415);
+			setState(412);
 			_la = _input.LA(1);
 			if (_la==K_TEMP || _la==K_TEMPORARY) {
 				{
-				setState(414);
+				setState(411);
 				_la = _input.LA(1);
 				if ( !(_la==K_TEMP || _la==K_TEMPORARY) ) {
 				_errHandler.recoverInline(this);
@@ -1822,53 +1811,53 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(417);
+			setState(414);
 			match(K_TRIGGER);
-			setState(421);
+			setState(418);
 			switch ( getInterpreter().adaptivePredict(_input,42,_ctx) ) {
 			case 1:
 				{
-				setState(418);
+				setState(415);
 				match(K_IF);
-				setState(419);
+				setState(416);
 				match(K_NOT);
-				setState(420);
+				setState(417);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(426);
+			setState(423);
 			switch ( getInterpreter().adaptivePredict(_input,43,_ctx) ) {
 			case 1:
 				{
-				setState(423);
+				setState(420);
 				database_name();
-				setState(424);
+				setState(421);
 				match(DOT);
 				}
 				break;
 			}
-			setState(428);
+			setState(425);
 			trigger_name();
-			setState(433);
+			setState(430);
 			switch (_input.LA(1)) {
 			case K_BEFORE:
 				{
-				setState(429);
+				setState(426);
 				match(K_BEFORE);
 				}
 				break;
 			case K_AFTER:
 				{
-				setState(430);
+				setState(427);
 				match(K_AFTER);
 				}
 				break;
 			case K_INSTEAD:
 				{
-				setState(431);
+				setState(428);
 				match(K_INSTEAD);
-				setState(432);
+				setState(429);
 				match(K_OF);
 				}
 				break;
@@ -1879,45 +1868,45 @@ public class DBoyzSQLParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(449);
+			setState(446);
 			switch (_input.LA(1)) {
 			case K_DELETE:
 				{
-				setState(435);
+				setState(432);
 				match(K_DELETE);
 				}
 				break;
 			case K_INSERT:
 				{
-				setState(436);
+				setState(433);
 				match(K_INSERT);
 				}
 				break;
 			case K_UPDATE:
 				{
-				setState(437);
+				setState(434);
 				match(K_UPDATE);
-				setState(447);
+				setState(444);
 				_la = _input.LA(1);
 				if (_la==K_OF) {
 					{
-					setState(438);
+					setState(435);
 					match(K_OF);
-					setState(439);
+					setState(436);
 					column_name();
-					setState(444);
+					setState(441);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(440);
+						setState(437);
 						match(COMMA);
-						setState(441);
+						setState(438);
 						column_name();
 						}
 						}
-						setState(446);
+						setState(443);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
@@ -1929,89 +1918,89 @@ public class DBoyzSQLParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(451);
+			setState(448);
 			match(K_ON);
-			setState(455);
+			setState(452);
 			switch ( getInterpreter().adaptivePredict(_input,48,_ctx) ) {
 			case 1:
 				{
-				setState(452);
+				setState(449);
 				database_name();
-				setState(453);
+				setState(450);
 				match(DOT);
 				}
 				break;
 			}
-			setState(457);
+			setState(454);
 			table_name();
-			setState(461);
+			setState(458);
 			_la = _input.LA(1);
 			if (_la==K_FOR) {
 				{
-				setState(458);
+				setState(455);
 				match(K_FOR);
-				setState(459);
+				setState(456);
 				match(K_EACH);
-				setState(460);
+				setState(457);
 				match(K_ROW);
 				}
 			}
 
-			setState(465);
+			setState(462);
 			_la = _input.LA(1);
 			if (_la==K_WHEN) {
 				{
-				setState(463);
+				setState(460);
 				match(K_WHEN);
-				setState(464);
+				setState(461);
 				expr(0);
 				}
 			}
 
-			setState(467);
+			setState(464);
 			match(K_BEGIN);
-			setState(476); 
+			setState(473); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(472);
+				setState(469);
 				switch ( getInterpreter().adaptivePredict(_input,51,_ctx) ) {
 				case 1:
 					{
-					setState(468);
+					setState(465);
 					update_stmt();
 					}
 					break;
 				case 2:
 					{
-					setState(469);
+					setState(466);
 					insert_stmt();
 					}
 					break;
 				case 3:
 					{
-					setState(470);
+					setState(467);
 					delete_stmt();
 					}
 					break;
 				case 4:
 					{
-					setState(471);
+					setState(468);
 					select_stmt();
 					}
 					break;
 				}
-				setState(474);
+				setState(471);
 				match(SCOL);
 				}
 				}
-				setState(478); 
+				setState(475); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( _la==K_DELETE || ((((_la - 88)) & ~0x3f) == 0 && ((1L << (_la - 88)) & ((1L << (K_INSERT - 88)) | (1L << (K_REPLACE - 88)) | (1L << (K_SELECT - 88)) | (1L << (K_UPDATE - 88)) | (1L << (K_VALUES - 88)) | (1L << (K_WITH - 88)))) != 0) );
-			setState(480);
+			setState(477);
 			match(K_END);
 			}
 		}
@@ -2070,13 +2059,13 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(482);
+			setState(479);
 			match(K_CREATE);
-			setState(484);
+			setState(481);
 			_la = _input.LA(1);
 			if (_la==K_TEMP || _la==K_TEMPORARY) {
 				{
-				setState(483);
+				setState(480);
 				_la = _input.LA(1);
 				if ( !(_la==K_TEMP || _la==K_TEMPORARY) ) {
 				_errHandler.recoverInline(this);
@@ -2086,37 +2075,37 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(486);
+			setState(483);
 			match(K_VIEW);
-			setState(490);
+			setState(487);
 			switch ( getInterpreter().adaptivePredict(_input,54,_ctx) ) {
 			case 1:
 				{
-				setState(487);
+				setState(484);
 				match(K_IF);
-				setState(488);
+				setState(485);
 				match(K_NOT);
-				setState(489);
+				setState(486);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(495);
+			setState(492);
 			switch ( getInterpreter().adaptivePredict(_input,55,_ctx) ) {
 			case 1:
 				{
-				setState(492);
+				setState(489);
 				database_name();
-				setState(493);
+				setState(490);
 				match(DOT);
 				}
 				break;
 			}
-			setState(497);
+			setState(494);
 			view_name();
-			setState(498);
+			setState(495);
 			match(K_AS);
-			setState(499);
+			setState(496);
 			select_stmt();
 			}
 		}
@@ -2180,67 +2169,67 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(501);
+			setState(498);
 			match(K_CREATE);
-			setState(502);
+			setState(499);
 			match(K_VIRTUAL);
-			setState(503);
+			setState(500);
 			match(K_TABLE);
-			setState(507);
+			setState(504);
 			switch ( getInterpreter().adaptivePredict(_input,56,_ctx) ) {
 			case 1:
 				{
-				setState(504);
+				setState(501);
 				match(K_IF);
-				setState(505);
+				setState(502);
 				match(K_NOT);
-				setState(506);
+				setState(503);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(512);
+			setState(509);
 			switch ( getInterpreter().adaptivePredict(_input,57,_ctx) ) {
 			case 1:
 				{
-				setState(509);
+				setState(506);
 				database_name();
-				setState(510);
+				setState(507);
 				match(DOT);
 				}
 				break;
 			}
-			setState(514);
+			setState(511);
 			table_name();
-			setState(515);
+			setState(512);
 			match(K_USING);
-			setState(516);
+			setState(513);
 			module_name();
-			setState(528);
+			setState(525);
 			_la = _input.LA(1);
 			if (_la==OPEN_PAR) {
 				{
-				setState(517);
+				setState(514);
 				match(OPEN_PAR);
-				setState(518);
+				setState(515);
 				module_argument();
-				setState(523);
+				setState(520);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(519);
+					setState(516);
 					match(COMMA);
-					setState(520);
+					setState(517);
 					module_argument();
 					}
 					}
-					setState(525);
+					setState(522);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(526);
+				setState(523);
 				match(CLOSE_PAR);
 				}
 			}
@@ -2297,28 +2286,28 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(531);
+			setState(528);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(530);
+				setState(527);
 				with_clause();
 				}
 			}
 
-			setState(533);
+			setState(530);
 			match(K_DELETE);
-			setState(534);
+			setState(531);
 			match(K_FROM);
-			setState(535);
+			setState(532);
 			qualified_table_name();
-			setState(538);
+			setState(535);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(536);
+				setState(533);
 				match(K_WHERE);
-				setState(537);
+				setState(534);
 				expr(0);
 				}
 			}
@@ -2388,81 +2377,81 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(541);
+			setState(538);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(540);
+				setState(537);
 				with_clause();
 				}
 			}
 
-			setState(543);
+			setState(540);
 			match(K_DELETE);
-			setState(544);
+			setState(541);
 			match(K_FROM);
-			setState(545);
+			setState(542);
 			qualified_table_name();
-			setState(548);
+			setState(545);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(546);
+				setState(543);
 				match(K_WHERE);
-				setState(547);
+				setState(544);
 				expr(0);
 				}
 			}
 
-			setState(568);
+			setState(565);
 			_la = _input.LA(1);
 			if (_la==K_LIMIT || _la==K_ORDER) {
 				{
-				setState(560);
+				setState(557);
 				_la = _input.LA(1);
 				if (_la==K_ORDER) {
 					{
-					setState(550);
+					setState(547);
 					match(K_ORDER);
-					setState(551);
+					setState(548);
 					match(K_BY);
-					setState(552);
+					setState(549);
 					ordering_term();
-					setState(557);
+					setState(554);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(553);
+						setState(550);
 						match(COMMA);
-						setState(554);
+						setState(551);
 						ordering_term();
 						}
 						}
-						setState(559);
+						setState(556);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(562);
+				setState(559);
 				match(K_LIMIT);
-				setState(563);
+				setState(560);
 				expr(0);
-				setState(566);
+				setState(563);
 				_la = _input.LA(1);
 				if (_la==COMMA || _la==K_OFFSET) {
 					{
-					setState(564);
+					setState(561);
 					_la = _input.LA(1);
 					if ( !(_la==COMMA || _la==K_OFFSET) ) {
 					_errHandler.recoverInline(this);
 					} else {
 						consume();
 					}
-					setState(565);
+					setState(562);
 					expr(0);
 					}
 				}
@@ -2514,18 +2503,18 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(570);
+			setState(567);
 			match(K_DETACH);
-			setState(572);
+			setState(569);
 			switch ( getInterpreter().adaptivePredict(_input,68,_ctx) ) {
 			case 1:
 				{
-				setState(571);
+				setState(568);
 				match(K_DATABASE);
 				}
 				break;
 			}
-			setState(574);
+			setState(571);
 			database_name();
 			}
 		}
@@ -2576,33 +2565,33 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(576);
+			setState(573);
 			match(K_DROP);
-			setState(577);
+			setState(574);
 			match(K_INDEX);
-			setState(580);
+			setState(577);
 			switch ( getInterpreter().adaptivePredict(_input,69,_ctx) ) {
 			case 1:
 				{
-				setState(578);
+				setState(575);
 				match(K_IF);
-				setState(579);
+				setState(576);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(585);
+			setState(582);
 			switch ( getInterpreter().adaptivePredict(_input,70,_ctx) ) {
 			case 1:
 				{
-				setState(582);
+				setState(579);
 				database_name();
-				setState(583);
+				setState(580);
 				match(DOT);
 				}
 				break;
 			}
-			setState(587);
+			setState(584);
 			index_name();
 			}
 		}
@@ -2653,33 +2642,33 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(589);
+			setState(586);
 			match(K_DROP);
-			setState(590);
+			setState(587);
 			match(K_TABLE);
-			setState(593);
+			setState(590);
 			switch ( getInterpreter().adaptivePredict(_input,71,_ctx) ) {
 			case 1:
 				{
-				setState(591);
+				setState(588);
 				match(K_IF);
-				setState(592);
+				setState(589);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(598);
+			setState(595);
 			switch ( getInterpreter().adaptivePredict(_input,72,_ctx) ) {
 			case 1:
 				{
-				setState(595);
+				setState(592);
 				database_name();
-				setState(596);
+				setState(593);
 				match(DOT);
 				}
 				break;
 			}
-			setState(600);
+			setState(597);
 			table_name();
 			}
 		}
@@ -2730,33 +2719,33 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(602);
+			setState(599);
 			match(K_DROP);
-			setState(603);
+			setState(600);
 			match(K_TRIGGER);
-			setState(606);
+			setState(603);
 			switch ( getInterpreter().adaptivePredict(_input,73,_ctx) ) {
 			case 1:
 				{
-				setState(604);
+				setState(601);
 				match(K_IF);
-				setState(605);
+				setState(602);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(611);
+			setState(608);
 			switch ( getInterpreter().adaptivePredict(_input,74,_ctx) ) {
 			case 1:
 				{
-				setState(608);
+				setState(605);
 				database_name();
-				setState(609);
+				setState(606);
 				match(DOT);
 				}
 				break;
 			}
-			setState(613);
+			setState(610);
 			trigger_name();
 			}
 		}
@@ -2807,33 +2796,33 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(615);
+			setState(612);
 			match(K_DROP);
-			setState(616);
+			setState(613);
 			match(K_VIEW);
-			setState(619);
+			setState(616);
 			switch ( getInterpreter().adaptivePredict(_input,75,_ctx) ) {
 			case 1:
 				{
-				setState(617);
+				setState(614);
 				match(K_IF);
-				setState(618);
+				setState(615);
 				match(K_EXISTS);
 				}
 				break;
 			}
-			setState(624);
+			setState(621);
 			switch ( getInterpreter().adaptivePredict(_input,76,_ctx) ) {
 			case 1:
 				{
-				setState(621);
+				setState(618);
 				database_name();
-				setState(622);
+				setState(619);
 				match(DOT);
 				}
 				break;
 			}
-			setState(626);
+			setState(623);
 			view_name();
 			}
 		}
@@ -2909,185 +2898,185 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(629);
+			setState(626);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(628);
+				setState(625);
 				with_clause();
 				}
 			}
 
-			setState(648);
+			setState(645);
 			switch ( getInterpreter().adaptivePredict(_input,78,_ctx) ) {
 			case 1:
 				{
-				setState(631);
+				setState(628);
 				match(K_INSERT);
 				}
 				break;
 			case 2:
 				{
-				setState(632);
+				setState(629);
 				match(K_REPLACE);
 				}
 				break;
 			case 3:
+				{
+				setState(630);
+				match(K_INSERT);
+				setState(631);
+				match(K_OR);
+				setState(632);
+				match(K_REPLACE);
+				}
+				break;
+			case 4:
 				{
 				setState(633);
 				match(K_INSERT);
 				setState(634);
 				match(K_OR);
 				setState(635);
-				match(K_REPLACE);
+				match(K_ROLLBACK);
 				}
 				break;
-			case 4:
+			case 5:
 				{
 				setState(636);
 				match(K_INSERT);
 				setState(637);
 				match(K_OR);
 				setState(638);
-				match(K_ROLLBACK);
+				match(K_ABORT);
 				}
 				break;
-			case 5:
+			case 6:
 				{
 				setState(639);
 				match(K_INSERT);
 				setState(640);
 				match(K_OR);
 				setState(641);
-				match(K_ABORT);
+				match(K_FAIL);
 				}
 				break;
-			case 6:
+			case 7:
 				{
 				setState(642);
 				match(K_INSERT);
 				setState(643);
 				match(K_OR);
 				setState(644);
-				match(K_FAIL);
-				}
-				break;
-			case 7:
-				{
-				setState(645);
-				match(K_INSERT);
-				setState(646);
-				match(K_OR);
-				setState(647);
 				match(K_IGNORE);
 				}
 				break;
 			}
-			setState(650);
+			setState(647);
 			match(K_INTO);
-			setState(654);
+			setState(651);
 			switch ( getInterpreter().adaptivePredict(_input,79,_ctx) ) {
 			case 1:
 				{
-				setState(651);
+				setState(648);
 				database_name();
-				setState(652);
+				setState(649);
 				match(DOT);
 				}
 				break;
 			}
-			setState(656);
+			setState(653);
 			table_name();
-			setState(668);
+			setState(665);
 			_la = _input.LA(1);
 			if (_la==OPEN_PAR) {
 				{
-				setState(657);
+				setState(654);
 				match(OPEN_PAR);
-				setState(658);
+				setState(655);
 				column_name();
-				setState(663);
+				setState(660);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(659);
+					setState(656);
 					match(COMMA);
-					setState(660);
+					setState(657);
 					column_name();
 					}
 					}
-					setState(665);
+					setState(662);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(666);
+				setState(663);
 				match(CLOSE_PAR);
 				}
 			}
 
-			setState(701);
+			setState(698);
 			switch ( getInterpreter().adaptivePredict(_input,85,_ctx) ) {
 			case 1:
 				{
-				setState(670);
+				setState(667);
 				match(K_VALUES);
-				setState(671);
+				setState(668);
 				match(OPEN_PAR);
-				setState(672);
+				setState(669);
 				expr(0);
-				setState(677);
+				setState(674);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(673);
+					setState(670);
 					match(COMMA);
-					setState(674);
+					setState(671);
 					expr(0);
 					}
 					}
-					setState(679);
+					setState(676);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(680);
+				setState(677);
 				match(CLOSE_PAR);
-				setState(695);
+				setState(692);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(681);
+					setState(678);
 					match(COMMA);
-					setState(682);
+					setState(679);
 					match(OPEN_PAR);
-					setState(683);
+					setState(680);
 					expr(0);
-					setState(688);
+					setState(685);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(684);
+						setState(681);
 						match(COMMA);
-						setState(685);
+						setState(682);
 						expr(0);
 						}
 						}
-						setState(690);
+						setState(687);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(691);
+					setState(688);
 					match(CLOSE_PAR);
 					}
 					}
-					setState(697);
+					setState(694);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -3095,15 +3084,15 @@ public class DBoyzSQLParser extends Parser {
 				break;
 			case 2:
 				{
-				setState(698);
+				setState(695);
 				select_stmt();
 				}
 				break;
 			case 3:
 				{
-				setState(699);
+				setState(696);
 				match(K_DEFAULT);
-				setState(700);
+				setState(697);
 				match(K_VALUES);
 				}
 				break;
@@ -3157,38 +3146,38 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(703);
+			setState(700);
 			match(K_PRAGMA);
-			setState(707);
+			setState(704);
 			switch ( getInterpreter().adaptivePredict(_input,86,_ctx) ) {
 			case 1:
 				{
-				setState(704);
+				setState(701);
 				database_name();
-				setState(705);
+				setState(702);
 				match(DOT);
 				}
 				break;
 			}
-			setState(709);
+			setState(706);
 			pragma_name();
-			setState(716);
+			setState(713);
 			switch (_input.LA(1)) {
 			case ASSIGN:
 				{
-				setState(710);
+				setState(707);
 				match(ASSIGN);
-				setState(711);
+				setState(708);
 				pragma_value();
 				}
 				break;
 			case OPEN_PAR:
 				{
-				setState(712);
+				setState(709);
 				match(OPEN_PAR);
-				setState(713);
+				setState(710);
 				pragma_value();
-				setState(714);
+				setState(711);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -3274,40 +3263,40 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(718);
+			setState(715);
 			match(K_REINDEX);
-			setState(729);
+			setState(726);
 			switch ( getInterpreter().adaptivePredict(_input,90,_ctx) ) {
 			case 1:
 				{
-				setState(719);
+				setState(716);
 				collation_name();
 				}
 				break;
 			case 2:
 				{
-				setState(723);
+				setState(720);
 				switch ( getInterpreter().adaptivePredict(_input,88,_ctx) ) {
 				case 1:
 					{
-					setState(720);
+					setState(717);
 					database_name();
-					setState(721);
+					setState(718);
 					match(DOT);
 					}
 					break;
 				}
-				setState(727);
+				setState(724);
 				switch ( getInterpreter().adaptivePredict(_input,89,_ctx) ) {
 				case 1:
 					{
-					setState(725);
+					setState(722);
 					table_name();
 					}
 					break;
 				case 2:
 					{
-					setState(726);
+					setState(723);
 					index_name();
 					}
 					break;
@@ -3359,18 +3348,18 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(731);
+			setState(728);
 			match(K_RELEASE);
-			setState(733);
+			setState(730);
 			switch ( getInterpreter().adaptivePredict(_input,91,_ctx) ) {
 			case 1:
 				{
-				setState(732);
+				setState(729);
 				match(K_SAVEPOINT);
 				}
 				break;
 			}
-			setState(735);
+			setState(732);
 			savepoint_name();
 			}
 		}
@@ -3422,19 +3411,19 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(737);
+			setState(734);
 			match(K_ROLLBACK);
-			setState(742);
+			setState(739);
 			_la = _input.LA(1);
 			if (_la==K_TRANSACTION) {
 				{
-				setState(738);
+				setState(735);
 				match(K_TRANSACTION);
-				setState(740);
+				setState(737);
 				switch ( getInterpreter().adaptivePredict(_input,92,_ctx) ) {
 				case 1:
 					{
-					setState(739);
+					setState(736);
 					transaction_name();
 					}
 					break;
@@ -3442,22 +3431,22 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(749);
+			setState(746);
 			_la = _input.LA(1);
 			if (_la==K_TO) {
 				{
-				setState(744);
+				setState(741);
 				match(K_TO);
-				setState(746);
+				setState(743);
 				switch ( getInterpreter().adaptivePredict(_input,94,_ctx) ) {
 				case 1:
 					{
-					setState(745);
+					setState(742);
 					match(K_SAVEPOINT);
 					}
 					break;
 				}
-				setState(748);
+				setState(745);
 				savepoint_name();
 				}
 			}
@@ -3505,171 +3494,10 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(751);
+			setState(748);
 			match(K_SAVEPOINT);
-			setState(752);
+			setState(749);
 			savepoint_name();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Simple_select_stmtContext extends ParserRuleContext {
-		public Select_coreContext select_core() {
-			return getRuleContext(Select_coreContext.class,0);
-		}
-		public TerminalNode K_WITH() { return getToken(DBoyzSQLParser.K_WITH, 0); }
-		public List<Common_table_expressionContext> common_table_expression() {
-			return getRuleContexts(Common_table_expressionContext.class);
-		}
-		public Common_table_expressionContext common_table_expression(int i) {
-			return getRuleContext(Common_table_expressionContext.class,i);
-		}
-		public TerminalNode K_ORDER() { return getToken(DBoyzSQLParser.K_ORDER, 0); }
-		public TerminalNode K_BY() { return getToken(DBoyzSQLParser.K_BY, 0); }
-		public List<Ordering_termContext> ordering_term() {
-			return getRuleContexts(Ordering_termContext.class);
-		}
-		public Ordering_termContext ordering_term(int i) {
-			return getRuleContext(Ordering_termContext.class,i);
-		}
-		public TerminalNode K_LIMIT() { return getToken(DBoyzSQLParser.K_LIMIT, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public TerminalNode K_RECURSIVE() { return getToken(DBoyzSQLParser.K_RECURSIVE, 0); }
-		public TerminalNode K_OFFSET() { return getToken(DBoyzSQLParser.K_OFFSET, 0); }
-		public Simple_select_stmtContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_simple_select_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterSimple_select_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitSimple_select_stmt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitSimple_select_stmt(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Simple_select_stmtContext simple_select_stmt() throws RecognitionException {
-		Simple_select_stmtContext _localctx = new Simple_select_stmtContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_simple_select_stmt);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(766);
-			_la = _input.LA(1);
-			if (_la==K_WITH) {
-				{
-				setState(754);
-				match(K_WITH);
-				setState(756);
-				switch ( getInterpreter().adaptivePredict(_input,96,_ctx) ) {
-				case 1:
-					{
-					setState(755);
-					match(K_RECURSIVE);
-					}
-					break;
-				}
-				setState(758);
-				common_table_expression();
-				setState(763);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==COMMA) {
-					{
-					{
-					setState(759);
-					match(COMMA);
-					setState(760);
-					common_table_expression();
-					}
-					}
-					setState(765);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
-			}
-
-			setState(768);
-			select_core();
-			setState(779);
-			_la = _input.LA(1);
-			if (_la==K_ORDER) {
-				{
-				setState(769);
-				match(K_ORDER);
-				setState(770);
-				match(K_BY);
-				setState(771);
-				ordering_term();
-				setState(776);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==COMMA) {
-					{
-					{
-					setState(772);
-					match(COMMA);
-					setState(773);
-					ordering_term();
-					}
-					}
-					setState(778);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				}
-			}
-
-			setState(787);
-			_la = _input.LA(1);
-			if (_la==K_LIMIT) {
-				{
-				setState(781);
-				match(K_LIMIT);
-				setState(782);
-				expr(0);
-				setState(785);
-				_la = _input.LA(1);
-				if (_la==COMMA || _la==K_OFFSET) {
-					{
-					setState(783);
-					_la = _input.LA(1);
-					if ( !(_la==COMMA || _la==K_OFFSET) ) {
-					_errHandler.recoverInline(this);
-					} else {
-						consume();
-					}
-					setState(784);
-					expr(0);
-					}
-				}
-
-				}
-			}
-
 			}
 		}
 		catch (RecognitionException re) {
@@ -3741,114 +3569,114 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Select_stmtContext select_stmt() throws RecognitionException {
 		Select_stmtContext _localctx = new Select_stmtContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_select_stmt);
+		enterRule(_localctx, 56, RULE_select_stmt);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(801);
+			setState(763);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(789);
+				setState(751);
 				match(K_WITH);
-				setState(791);
-				switch ( getInterpreter().adaptivePredict(_input,103,_ctx) ) {
+				setState(753);
+				switch ( getInterpreter().adaptivePredict(_input,96,_ctx) ) {
 				case 1:
 					{
-					setState(790);
+					setState(752);
 					match(K_RECURSIVE);
 					}
 					break;
 				}
-				setState(793);
+				setState(755);
 				common_table_expression();
-				setState(798);
+				setState(760);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(794);
+					setState(756);
 					match(COMMA);
-					setState(795);
+					setState(757);
 					common_table_expression();
 					}
 					}
-					setState(800);
+					setState(762);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(803);
+			setState(765);
 			select_core();
-			setState(809);
+			setState(771);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==K_EXCEPT || _la==K_INTERSECT || _la==K_UNION) {
 				{
 				{
-				setState(804);
+				setState(766);
 				compound_operator();
-				setState(805);
+				setState(767);
 				select_core();
 				}
 				}
-				setState(811);
+				setState(773);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(822);
+			setState(784);
 			_la = _input.LA(1);
 			if (_la==K_ORDER) {
 				{
-				setState(812);
+				setState(774);
 				match(K_ORDER);
-				setState(813);
+				setState(775);
 				match(K_BY);
-				setState(814);
+				setState(776);
 				ordering_term();
-				setState(819);
+				setState(781);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(815);
+					setState(777);
 					match(COMMA);
-					setState(816);
+					setState(778);
 					ordering_term();
 					}
 					}
-					setState(821);
+					setState(783);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
 				}
 			}
 
-			setState(830);
+			setState(792);
 			_la = _input.LA(1);
 			if (_la==K_LIMIT) {
 				{
-				setState(824);
+				setState(786);
 				match(K_LIMIT);
-				setState(825);
+				setState(787);
 				expr(0);
-				setState(828);
+				setState(790);
 				_la = _input.LA(1);
 				if (_la==COMMA || _la==K_OFFSET) {
 					{
-					setState(826);
+					setState(788);
 					_la = _input.LA(1);
 					if ( !(_la==COMMA || _la==K_OFFSET) ) {
 					_errHandler.recoverInline(this);
 					} else {
 						consume();
 					}
-					setState(827);
+					setState(789);
 					expr(0);
 					}
 				}
@@ -3918,102 +3746,102 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Update_stmtContext update_stmt() throws RecognitionException {
 		Update_stmtContext _localctx = new Update_stmtContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_update_stmt);
+		enterRule(_localctx, 58, RULE_update_stmt);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(833);
+			setState(795);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(832);
+				setState(794);
 				with_clause();
 				}
 			}
 
-			setState(835);
+			setState(797);
 			match(K_UPDATE);
-			setState(846);
-			switch ( getInterpreter().adaptivePredict(_input,112,_ctx) ) {
+			setState(808);
+			switch ( getInterpreter().adaptivePredict(_input,105,_ctx) ) {
 			case 1:
 				{
-				setState(836);
+				setState(798);
 				match(K_OR);
-				setState(837);
+				setState(799);
 				match(K_ROLLBACK);
 				}
 				break;
 			case 2:
 				{
-				setState(838);
+				setState(800);
 				match(K_OR);
-				setState(839);
+				setState(801);
 				match(K_ABORT);
 				}
 				break;
 			case 3:
 				{
-				setState(840);
+				setState(802);
 				match(K_OR);
-				setState(841);
+				setState(803);
 				match(K_REPLACE);
 				}
 				break;
 			case 4:
 				{
-				setState(842);
+				setState(804);
 				match(K_OR);
-				setState(843);
+				setState(805);
 				match(K_FAIL);
 				}
 				break;
 			case 5:
 				{
-				setState(844);
+				setState(806);
 				match(K_OR);
-				setState(845);
+				setState(807);
 				match(K_IGNORE);
 				}
 				break;
 			}
-			setState(848);
+			setState(810);
 			qualified_table_name();
-			setState(849);
+			setState(811);
 			match(K_SET);
-			setState(850);
+			setState(812);
 			column_name();
-			setState(851);
+			setState(813);
 			match(ASSIGN);
-			setState(852);
+			setState(814);
 			expr(0);
-			setState(860);
+			setState(822);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(853);
+				setState(815);
 				match(COMMA);
-				setState(854);
+				setState(816);
 				column_name();
-				setState(855);
+				setState(817);
 				match(ASSIGN);
-				setState(856);
+				setState(818);
 				expr(0);
 				}
 				}
-				setState(862);
+				setState(824);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(865);
+			setState(827);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(863);
+				setState(825);
 				match(K_WHERE);
-				setState(864);
+				setState(826);
 				expr(0);
 				}
 			}
@@ -4090,155 +3918,155 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Update_stmt_limitedContext update_stmt_limited() throws RecognitionException {
 		Update_stmt_limitedContext _localctx = new Update_stmt_limitedContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_update_stmt_limited);
+		enterRule(_localctx, 60, RULE_update_stmt_limited);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(868);
+			setState(830);
 			_la = _input.LA(1);
 			if (_la==K_WITH) {
 				{
-				setState(867);
+				setState(829);
 				with_clause();
 				}
 			}
 
-			setState(870);
+			setState(832);
 			match(K_UPDATE);
-			setState(881);
-			switch ( getInterpreter().adaptivePredict(_input,116,_ctx) ) {
+			setState(843);
+			switch ( getInterpreter().adaptivePredict(_input,109,_ctx) ) {
 			case 1:
 				{
-				setState(871);
+				setState(833);
 				match(K_OR);
-				setState(872);
+				setState(834);
 				match(K_ROLLBACK);
 				}
 				break;
 			case 2:
 				{
-				setState(873);
+				setState(835);
 				match(K_OR);
-				setState(874);
+				setState(836);
 				match(K_ABORT);
 				}
 				break;
 			case 3:
 				{
-				setState(875);
+				setState(837);
 				match(K_OR);
-				setState(876);
+				setState(838);
 				match(K_REPLACE);
 				}
 				break;
 			case 4:
 				{
-				setState(877);
+				setState(839);
 				match(K_OR);
-				setState(878);
+				setState(840);
 				match(K_FAIL);
 				}
 				break;
 			case 5:
 				{
-				setState(879);
+				setState(841);
 				match(K_OR);
-				setState(880);
+				setState(842);
 				match(K_IGNORE);
 				}
 				break;
 			}
-			setState(883);
+			setState(845);
 			qualified_table_name();
-			setState(884);
+			setState(846);
 			match(K_SET);
-			setState(885);
+			setState(847);
 			column_name();
-			setState(886);
+			setState(848);
 			match(ASSIGN);
-			setState(887);
+			setState(849);
 			expr(0);
-			setState(895);
+			setState(857);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(888);
+				setState(850);
 				match(COMMA);
-				setState(889);
+				setState(851);
 				column_name();
-				setState(890);
+				setState(852);
 				match(ASSIGN);
-				setState(891);
+				setState(853);
 				expr(0);
 				}
 				}
-				setState(897);
+				setState(859);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(900);
+			setState(862);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(898);
+				setState(860);
 				match(K_WHERE);
-				setState(899);
+				setState(861);
 				expr(0);
 				}
 			}
 
-			setState(920);
+			setState(882);
 			_la = _input.LA(1);
 			if (_la==K_LIMIT || _la==K_ORDER) {
 				{
-				setState(912);
+				setState(874);
 				_la = _input.LA(1);
 				if (_la==K_ORDER) {
 					{
-					setState(902);
+					setState(864);
 					match(K_ORDER);
-					setState(903);
+					setState(865);
 					match(K_BY);
-					setState(904);
+					setState(866);
 					ordering_term();
-					setState(909);
+					setState(871);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(905);
+						setState(867);
 						match(COMMA);
-						setState(906);
+						setState(868);
 						ordering_term();
 						}
 						}
-						setState(911);
+						setState(873);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
 					}
 				}
 
-				setState(914);
+				setState(876);
 				match(K_LIMIT);
-				setState(915);
+				setState(877);
 				expr(0);
-				setState(918);
+				setState(880);
 				_la = _input.LA(1);
 				if (_la==COMMA || _la==K_OFFSET) {
 					{
-					setState(916);
+					setState(878);
 					_la = _input.LA(1);
 					if ( !(_la==COMMA || _la==K_OFFSET) ) {
 					_errHandler.recoverInline(this);
 					} else {
 						consume();
 					}
-					setState(917);
+					setState(879);
 					expr(0);
 					}
 				}
@@ -4282,11 +4110,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Vacuum_stmtContext vacuum_stmt() throws RecognitionException {
 		Vacuum_stmtContext _localctx = new Vacuum_stmtContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_vacuum_stmt);
+		enterRule(_localctx, 62, RULE_vacuum_stmt);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(922);
+			setState(884);
 			match(K_VACUUM);
 			}
 		}
@@ -4335,33 +4163,33 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Column_defContext column_def() throws RecognitionException {
 		Column_defContext _localctx = new Column_defContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_column_def);
+		enterRule(_localctx, 64, RULE_column_def);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(924);
+			setState(886);
 			column_name();
-			setState(926);
-			switch ( getInterpreter().adaptivePredict(_input,123,_ctx) ) {
+			setState(888);
+			switch ( getInterpreter().adaptivePredict(_input,116,_ctx) ) {
 			case 1:
 				{
-				setState(925);
+				setState(887);
 				type_name();
 				}
 				break;
 			}
-			setState(931);
+			setState(893);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << K_CHECK) | (1L << K_COLLATE) | (1L << K_CONSTRAINT) | (1L << K_DEFAULT))) != 0) || ((((_la - 102)) & ~0x3f) == 0 && ((1L << (_la - 102)) & ((1L << (K_NOT - 102)) | (1L << (K_NULL - 102)) | (1L << (K_PRIMARY - 102)) | (1L << (K_REFERENCES - 102)) | (1L << (K_UNIQUE - 102)))) != 0)) {
 				{
 				{
-				setState(928);
+				setState(890);
 				column_constraint();
 				}
 				}
-				setState(933);
+				setState(895);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -4412,12 +4240,12 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Type_nameContext type_name() throws RecognitionException {
 		Type_nameContext _localctx = new Type_nameContext(_ctx, getState());
-		enterRule(_localctx, 68, RULE_type_name);
+		enterRule(_localctx, 66, RULE_type_name);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(935); 
+			setState(897); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -4425,7 +4253,7 @@ public class DBoyzSQLParser extends Parser {
 				case 1:
 					{
 					{
-					setState(934);
+					setState(896);
 					name();
 					}
 					}
@@ -4433,33 +4261,33 @@ public class DBoyzSQLParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(937); 
+				setState(899); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,125,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,118,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(949);
-			switch ( getInterpreter().adaptivePredict(_input,126,_ctx) ) {
+			setState(911);
+			switch ( getInterpreter().adaptivePredict(_input,119,_ctx) ) {
 			case 1:
 				{
-				setState(939);
+				setState(901);
 				match(OPEN_PAR);
-				setState(940);
+				setState(902);
 				signed_number();
-				setState(941);
+				setState(903);
 				match(CLOSE_PAR);
 				}
 				break;
 			case 2:
 				{
-				setState(943);
+				setState(905);
 				match(OPEN_PAR);
-				setState(944);
+				setState(906);
 				signed_number();
-				setState(945);
+				setState(907);
 				match(COMMA);
-				setState(946);
+				setState(908);
 				signed_number();
-				setState(947);
+				setState(909);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -4532,35 +4360,35 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Column_constraintContext column_constraint() throws RecognitionException {
 		Column_constraintContext _localctx = new Column_constraintContext(_ctx, getState());
-		enterRule(_localctx, 70, RULE_column_constraint);
+		enterRule(_localctx, 68, RULE_column_constraint);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(953);
+			setState(915);
 			_la = _input.LA(1);
 			if (_la==K_CONSTRAINT) {
 				{
-				setState(951);
+				setState(913);
 				match(K_CONSTRAINT);
-				setState(952);
+				setState(914);
 				name();
 				}
 			}
 
-			setState(988);
+			setState(950);
 			switch (_input.LA(1)) {
 			case K_PRIMARY:
 				{
-				setState(955);
+				setState(917);
 				match(K_PRIMARY);
-				setState(956);
+				setState(918);
 				match(K_KEY);
-				setState(958);
+				setState(920);
 				_la = _input.LA(1);
 				if (_la==K_ASC || _la==K_DESC) {
 					{
-					setState(957);
+					setState(919);
 					_la = _input.LA(1);
 					if ( !(_la==K_ASC || _la==K_DESC) ) {
 					_errHandler.recoverInline(this);
@@ -4570,13 +4398,13 @@ public class DBoyzSQLParser extends Parser {
 					}
 				}
 
-				setState(960);
+				setState(922);
 				conflict_clause();
-				setState(962);
+				setState(924);
 				_la = _input.LA(1);
 				if (_la==K_AUTOINCREMENT) {
 					{
-					setState(961);
+					setState(923);
 					match(K_AUTOINCREMENT);
 					}
 				}
@@ -4586,66 +4414,66 @@ public class DBoyzSQLParser extends Parser {
 			case K_NOT:
 			case K_NULL:
 				{
-				setState(965);
+				setState(927);
 				_la = _input.LA(1);
 				if (_la==K_NOT) {
 					{
-					setState(964);
+					setState(926);
 					match(K_NOT);
 					}
 				}
 
-				setState(967);
+				setState(929);
 				match(K_NULL);
-				setState(968);
+				setState(930);
 				conflict_clause();
 				}
 				break;
 			case K_UNIQUE:
 				{
-				setState(969);
+				setState(931);
 				match(K_UNIQUE);
-				setState(970);
+				setState(932);
 				conflict_clause();
 				}
 				break;
 			case K_CHECK:
 				{
-				setState(971);
+				setState(933);
 				match(K_CHECK);
-				setState(972);
+				setState(934);
 				match(OPEN_PAR);
-				setState(973);
+				setState(935);
 				expr(0);
-				setState(974);
+				setState(936);
 				match(CLOSE_PAR);
 				}
 				break;
 			case K_DEFAULT:
 				{
-				setState(976);
+				setState(938);
 				match(K_DEFAULT);
-				setState(983);
-				switch ( getInterpreter().adaptivePredict(_input,131,_ctx) ) {
+				setState(945);
+				switch ( getInterpreter().adaptivePredict(_input,124,_ctx) ) {
 				case 1:
 					{
-					setState(977);
+					setState(939);
 					signed_number();
 					}
 					break;
 				case 2:
 					{
-					setState(978);
+					setState(940);
 					literal_value();
 					}
 					break;
 				case 3:
 					{
-					setState(979);
+					setState(941);
 					match(OPEN_PAR);
-					setState(980);
+					setState(942);
 					expr(0);
-					setState(981);
+					setState(943);
 					match(CLOSE_PAR);
 					}
 					break;
@@ -4654,15 +4482,15 @@ public class DBoyzSQLParser extends Parser {
 				break;
 			case K_COLLATE:
 				{
-				setState(985);
+				setState(947);
 				match(K_COLLATE);
-				setState(986);
+				setState(948);
 				collation_name();
 				}
 				break;
 			case K_REFERENCES:
 				{
-				setState(987);
+				setState(949);
 				foreign_key_clause();
 				}
 				break;
@@ -4711,20 +4539,20 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Conflict_clauseContext conflict_clause() throws RecognitionException {
 		Conflict_clauseContext _localctx = new Conflict_clauseContext(_ctx, getState());
-		enterRule(_localctx, 72, RULE_conflict_clause);
+		enterRule(_localctx, 70, RULE_conflict_clause);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(993);
+			setState(955);
 			_la = _input.LA(1);
 			if (_la==K_ON) {
 				{
-				setState(990);
+				setState(952);
 				match(K_ON);
-				setState(991);
+				setState(953);
 				match(K_CONFLICT);
-				setState(992);
+				setState(954);
 				_la = _input.LA(1);
 				if ( !(_la==K_ABORT || ((((_la - 72)) & ~0x3f) == 0 && ((1L << (_la - 72)) & ((1L << (K_FAIL - 72)) | (1L << (K_IGNORE - 72)) | (1L << (K_REPLACE - 72)) | (1L << (K_ROLLBACK - 72)))) != 0)) ) {
 				_errHandler.recoverInline(this);
@@ -4734,6 +4562,153 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Binary_operatorContext extends ParserRuleContext {
+		public TerminalNode K_IS() { return getToken(DBoyzSQLParser.K_IS, 0); }
+		public TerminalNode K_NOT() { return getToken(DBoyzSQLParser.K_NOT, 0); }
+		public TerminalNode K_IN() { return getToken(DBoyzSQLParser.K_IN, 0); }
+		public TerminalNode K_LIKE() { return getToken(DBoyzSQLParser.K_LIKE, 0); }
+		public TerminalNode K_GLOB() { return getToken(DBoyzSQLParser.K_GLOB, 0); }
+		public TerminalNode K_MATCH() { return getToken(DBoyzSQLParser.K_MATCH, 0); }
+		public TerminalNode K_REGEXP() { return getToken(DBoyzSQLParser.K_REGEXP, 0); }
+		public Binary_operatorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_binary_operator; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterBinary_operator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitBinary_operator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitBinary_operator(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Binary_operatorContext binary_operator() throws RecognitionException {
+		Binary_operatorContext _localctx = new Binary_operatorContext(_ctx, getState());
+		enterRule(_localctx, 72, RULE_binary_operator);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(974);
+			switch ( getInterpreter().adaptivePredict(_input,127,_ctx) ) {
+			case 1:
+				{
+				setState(957);
+				match(ASSIGN);
+				}
+				break;
+			case 2:
+				{
+				setState(958);
+				match(EQ);
+				}
+				break;
+			case 3:
+				{
+				setState(959);
+				match(NOT_EQ1);
+				}
+				break;
+			case 4:
+				{
+				setState(960);
+				match(NOT_EQ2);
+				}
+				break;
+			case 5:
+				{
+				setState(961);
+				match(PIPE2);
+				}
+				break;
+			case 6:
+				{
+				setState(962);
+				match(LT);
+				}
+				break;
+			case 7:
+				{
+				setState(963);
+				match(LT_EQ);
+				}
+				break;
+			case 8:
+				{
+				setState(964);
+				match(GT);
+				}
+				break;
+			case 9:
+				{
+				setState(965);
+				match(GT_EQ);
+				}
+				break;
+			case 10:
+				{
+				setState(966);
+				match(K_IS);
+				}
+				break;
+			case 11:
+				{
+				setState(967);
+				match(K_IS);
+				setState(968);
+				match(K_NOT);
+				}
+				break;
+			case 12:
+				{
+				setState(969);
+				match(K_IN);
+				}
+				break;
+			case 13:
+				{
+				setState(970);
+				match(K_LIKE);
+				}
+				break;
+			case 14:
+				{
+				setState(971);
+				match(K_GLOB);
+				}
+				break;
+			case 15:
+				{
+				setState(972);
+				match(K_MATCH);
+				}
+				break;
+			case 16:
+				{
+				setState(973);
+				match(K_REGEXP);
+				}
+				break;
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -4806,17 +4781,10 @@ public class DBoyzSQLParser extends Parser {
 		public Database_nameContext database_name() {
 			return getRuleContext(Database_nameContext.class,0);
 		}
-		public Function_nameContext function_name() {
-			return getRuleContext(Function_nameContext.class,0);
-		}
-		public TerminalNode K_DISTINCT() { return getToken(DBoyzSQLParser.K_DISTINCT, 0); }
 		public TerminalNode K_CAST() { return getToken(DBoyzSQLParser.K_CAST, 0); }
 		public TerminalNode K_AS() { return getToken(DBoyzSQLParser.K_AS, 0); }
 		public Type_nameContext type_name() {
 			return getRuleContext(Type_nameContext.class,0);
-		}
-		public Simple_select_stmtContext simple_select_stmt() {
-			return getRuleContext(Simple_select_stmtContext.class,0);
 		}
 		public Select_stmtContext select_stmt() {
 			return getRuleContext(Select_stmtContext.class,0);
@@ -4869,6 +4837,32 @@ public class DBoyzSQLParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class FunctionContext extends ExprContext {
+		public Function_nameContext function_name() {
+			return getRuleContext(Function_nameContext.class,0);
+		}
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public TerminalNode K_DISTINCT() { return getToken(DBoyzSQLParser.K_DISTINCT, 0); }
+		public FunctionContext(ExprContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterFunction(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitFunction(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitFunction(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 
 	public final ExprContext expr() throws RecognitionException {
 		return expr(0);
@@ -4886,18 +4880,18 @@ public class DBoyzSQLParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1074);
-			switch ( getInterpreter().adaptivePredict(_input,145,_ctx) ) {
+			setState(1052);
+			switch ( getInterpreter().adaptivePredict(_input,138,_ctx) ) {
 			case 1:
 				{
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(996);
+				setState(977);
 				unary_operator();
-				setState(997);
-				expr(21);
+				setState(978);
+				expr(19);
 				}
 				break;
 			case 2:
@@ -4905,7 +4899,7 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(999);
+				setState(980);
 				literal_value();
 				}
 				break;
@@ -4914,7 +4908,7 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1000);
+				setState(981);
 				match(BIND_PARAMETER);
 				}
 				break;
@@ -4923,42 +4917,42 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1009);
-				switch ( getInterpreter().adaptivePredict(_input,135,_ctx) ) {
+				setState(990);
+				switch ( getInterpreter().adaptivePredict(_input,129,_ctx) ) {
 				case 1:
 					{
-					setState(1004);
-					switch ( getInterpreter().adaptivePredict(_input,134,_ctx) ) {
+					setState(985);
+					switch ( getInterpreter().adaptivePredict(_input,128,_ctx) ) {
 					case 1:
 						{
-						setState(1001);
+						setState(982);
 						database_name();
-						setState(1002);
+						setState(983);
 						match(DOT);
 						}
 						break;
 					}
-					setState(1006);
+					setState(987);
 					table_name();
-					setState(1007);
+					setState(988);
 					match(DOT);
 					}
 					break;
 				}
-				setState(1011);
+				setState(992);
 				column_name();
 				}
 				break;
 			case 5:
 				{
-				_localctx = new UndecidedContext(_localctx);
+				_localctx = new FunctionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1012);
+				setState(993);
 				function_name();
-				setState(1013);
+				setState(994);
 				match(OPEN_PAR);
-				setState(1026);
+				setState(1007);
 				switch (_input.LA(1)) {
 				case OPEN_PAR:
 				case PLUS:
@@ -5094,30 +5088,30 @@ public class DBoyzSQLParser extends Parser {
 				case STRING_LITERAL:
 				case BLOB_LITERAL:
 					{
-					setState(1015);
-					switch ( getInterpreter().adaptivePredict(_input,136,_ctx) ) {
+					setState(996);
+					switch ( getInterpreter().adaptivePredict(_input,130,_ctx) ) {
 					case 1:
 						{
-						setState(1014);
+						setState(995);
 						match(K_DISTINCT);
 						}
 						break;
 					}
-					setState(1017);
+					setState(998);
 					expr(0);
-					setState(1022);
+					setState(1003);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(1018);
+						setState(999);
 						match(COMMA);
-						setState(1019);
+						setState(1000);
 						expr(0);
 						}
 						}
-						setState(1024);
+						setState(1005);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
@@ -5125,7 +5119,7 @@ public class DBoyzSQLParser extends Parser {
 					break;
 				case STAR:
 					{
-					setState(1025);
+					setState(1006);
 					match(STAR);
 					}
 					break;
@@ -5134,7 +5128,7 @@ public class DBoyzSQLParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(1028);
+				setState(1009);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -5143,11 +5137,11 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1030);
+				setState(1011);
 				match(OPEN_PAR);
-				setState(1031);
+				setState(1012);
 				expr(0);
-				setState(1032);
+				setState(1013);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -5156,17 +5150,17 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1034);
+				setState(1015);
 				match(K_CAST);
-				setState(1035);
+				setState(1016);
 				match(OPEN_PAR);
-				setState(1036);
+				setState(1017);
 				expr(0);
-				setState(1037);
+				setState(1018);
 				match(K_AS);
-				setState(1038);
+				setState(1019);
 				type_name();
-				setState(1039);
+				setState(1020);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -5175,42 +5169,29 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1045);
+				setState(1026);
 				_la = _input.LA(1);
 				if (_la==K_EXISTS || _la==K_NOT) {
 					{
-					setState(1042);
+					setState(1023);
 					_la = _input.LA(1);
 					if (_la==K_NOT) {
 						{
-						setState(1041);
+						setState(1022);
 						match(K_NOT);
 						}
 					}
 
-					setState(1044);
+					setState(1025);
 					match(K_EXISTS);
 					}
 				}
 
-				setState(1047);
+				setState(1028);
 				match(OPEN_PAR);
-				setState(1050);
-				switch ( getInterpreter().adaptivePredict(_input,141,_ctx) ) {
-				case 1:
-					{
-					setState(1048);
-					simple_select_stmt();
-					}
-					break;
-				case 2:
-					{
-					setState(1049);
-					select_stmt();
-					}
-					break;
-				}
-				setState(1052);
+				setState(1029);
+				select_stmt();
+				setState(1030);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -5219,49 +5200,49 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1054);
+				setState(1032);
 				match(K_CASE);
-				setState(1056);
-				switch ( getInterpreter().adaptivePredict(_input,142,_ctx) ) {
+				setState(1034);
+				switch ( getInterpreter().adaptivePredict(_input,135,_ctx) ) {
 				case 1:
 					{
-					setState(1055);
+					setState(1033);
 					expr(0);
 					}
 					break;
 				}
-				setState(1063); 
+				setState(1041); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				do {
 					{
 					{
-					setState(1058);
+					setState(1036);
 					match(K_WHEN);
-					setState(1059);
+					setState(1037);
 					expr(0);
-					setState(1060);
+					setState(1038);
 					match(K_THEN);
-					setState(1061);
+					setState(1039);
 					expr(0);
 					}
 					}
-					setState(1065); 
+					setState(1043); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				} while ( _la==K_WHEN );
-				setState(1069);
+				setState(1047);
 				_la = _input.LA(1);
 				if (_la==K_ELSE) {
 					{
-					setState(1067);
+					setState(1045);
 					match(K_ELSE);
-					setState(1068);
+					setState(1046);
 					expr(0);
 					}
 				}
 
-				setState(1071);
+				setState(1049);
 				match(K_END);
 				}
 				break;
@@ -5270,258 +5251,229 @@ public class DBoyzSQLParser extends Parser {
 				_localctx = new UndecidedContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(1073);
+				setState(1051);
 				raise_function();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(1165);
+			setState(1136);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,157,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,150,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(1163);
-					switch ( getInterpreter().adaptivePredict(_input,156,_ctx) ) {
+					setState(1134);
+					switch ( getInterpreter().adaptivePredict(_input,149,_ctx) ) {
 					case 1:
-						{
-						_localctx = new BinaryOPContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1076);
-						if (!(precpred(_ctx, 20))) throw new FailedPredicateException(this, "precpred(_ctx, 20)");
-						setState(1077);
-						match(PIPE2);
-						setState(1078);
-						expr(21);
-						}
-						break;
-					case 2:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1079);
-						if (!(precpred(_ctx, 19))) throw new FailedPredicateException(this, "precpred(_ctx, 19)");
-						setState(1080);
+						setState(1054);
+						if (!(precpred(_ctx, 18))) throw new FailedPredicateException(this, "precpred(_ctx, 18)");
+						setState(1055);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << STAR) | (1L << DIV) | (1L << MOD))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(1081);
-						expr(20);
+						setState(1056);
+						expr(19);
 						}
 						break;
-					case 3:
+					case 2:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1082);
-						if (!(precpred(_ctx, 18))) throw new FailedPredicateException(this, "precpred(_ctx, 18)");
-						setState(1083);
+						setState(1057);
+						if (!(precpred(_ctx, 17))) throw new FailedPredicateException(this, "precpred(_ctx, 17)");
+						setState(1058);
 						_la = _input.LA(1);
 						if ( !(_la==PLUS || _la==MINUS) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(1084);
-						expr(19);
+						setState(1059);
+						expr(18);
 						}
 						break;
-					case 4:
+					case 3:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1085);
-						if (!(precpred(_ctx, 17))) throw new FailedPredicateException(this, "precpred(_ctx, 17)");
-						setState(1086);
+						setState(1060);
+						if (!(precpred(_ctx, 16))) throw new FailedPredicateException(this, "precpred(_ctx, 16)");
+						setState(1061);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LT2) | (1L << GT2) | (1L << AMP) | (1L << PIPE))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(1087);
-						expr(18);
+						setState(1062);
+						expr(17);
+						}
+						break;
+					case 4:
+						{
+						_localctx = new BinaryOPContext(new ExprContext(_parentctx, _parentState));
+						pushNewRecursionContext(_localctx, _startState, RULE_expr);
+						setState(1063);
+						if (!(precpred(_ctx, 15))) throw new FailedPredicateException(this, "precpred(_ctx, 15)");
+						setState(1064);
+						binary_operator();
+						setState(1065);
+						expr(16);
 						}
 						break;
 					case 5:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1088);
-						if (!(precpred(_ctx, 16))) throw new FailedPredicateException(this, "precpred(_ctx, 16)");
-						setState(1089);
-						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << LT) | (1L << LT_EQ) | (1L << GT) | (1L << GT_EQ))) != 0)) ) {
-						_errHandler.recoverInline(this);
-						} else {
-							consume();
-						}
-						setState(1090);
-						expr(17);
+						setState(1067);
+						if (!(precpred(_ctx, 14))) throw new FailedPredicateException(this, "precpred(_ctx, 14)");
+						setState(1068);
+						match(K_AND);
+						setState(1069);
+						expr(15);
 						}
 						break;
 					case 6:
 						{
-						_localctx = new BinaryOPContext(new ExprContext(_parentctx, _parentState));
+						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1091);
-						if (!(precpred(_ctx, 15))) throw new FailedPredicateException(this, "precpred(_ctx, 15)");
-						setState(1092);
-						binary_operator();
-						setState(1093);
-						expr(16);
+						setState(1070);
+						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
+						setState(1071);
+						match(K_OR);
+						setState(1072);
+						expr(14);
 						}
 						break;
 					case 7:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1095);
-						if (!(precpred(_ctx, 14))) throw new FailedPredicateException(this, "precpred(_ctx, 14)");
-						setState(1096);
-						match(K_AND);
-						setState(1097);
-						expr(15);
+						setState(1073);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(1074);
+						match(K_IS);
+						setState(1076);
+						switch ( getInterpreter().adaptivePredict(_input,139,_ctx) ) {
+						case 1:
+							{
+							setState(1075);
+							match(K_NOT);
+							}
+							break;
+						}
+						setState(1078);
+						expr(7);
 						}
 						break;
 					case 8:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1098);
-						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
-						setState(1099);
-						match(K_OR);
-						setState(1100);
-						expr(14);
+						setState(1079);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(1081);
+						_la = _input.LA(1);
+						if (_la==K_NOT) {
+							{
+							setState(1080);
+							match(K_NOT);
+							}
+						}
+
+						setState(1083);
+						match(K_BETWEEN);
+						setState(1084);
+						expr(0);
+						setState(1085);
+						match(K_AND);
+						setState(1086);
+						expr(6);
 						}
 						break;
 					case 9:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1101);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(1102);
-						match(K_IS);
-						setState(1104);
-						switch ( getInterpreter().adaptivePredict(_input,146,_ctx) ) {
-						case 1:
-							{
-							setState(1103);
-							match(K_NOT);
-							}
-							break;
-						}
-						setState(1106);
-						expr(7);
+						setState(1088);
+						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
+						setState(1089);
+						match(K_COLLATE);
+						setState(1090);
+						collation_name();
 						}
 						break;
 					case 10:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1107);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(1109);
-						_la = _input.LA(1);
-						if (_la==K_NOT) {
-							{
-							setState(1108);
-							match(K_NOT);
-							}
-						}
-
-						setState(1111);
-						match(K_BETWEEN);
-						setState(1112);
-						expr(0);
-						setState(1113);
-						match(K_AND);
-						setState(1114);
-						expr(6);
-						}
-						break;
-					case 11:
-						{
-						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1116);
-						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(1117);
-						match(K_COLLATE);
-						setState(1118);
-						collation_name();
-						}
-						break;
-					case 12:
-						{
-						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1119);
+						setState(1091);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(1121);
+						setState(1093);
 						_la = _input.LA(1);
 						if (_la==K_NOT) {
 							{
-							setState(1120);
+							setState(1092);
 							match(K_NOT);
 							}
 						}
 
-						setState(1123);
+						setState(1095);
 						_la = _input.LA(1);
 						if ( !(((((_la - 77)) & ~0x3f) == 0 && ((1L << (_la - 77)) & ((1L << (K_GLOB - 77)) | (1L << (K_LIKE - 77)) | (1L << (K_MATCH - 77)) | (1L << (K_REGEXP - 77)))) != 0)) ) {
 						_errHandler.recoverInline(this);
 						} else {
 							consume();
 						}
-						setState(1124);
+						setState(1096);
 						expr(0);
-						setState(1127);
-						switch ( getInterpreter().adaptivePredict(_input,149,_ctx) ) {
+						setState(1099);
+						switch ( getInterpreter().adaptivePredict(_input,142,_ctx) ) {
 						case 1:
 							{
-							setState(1125);
+							setState(1097);
 							match(K_ESCAPE);
-							setState(1126);
+							setState(1098);
 							expr(0);
 							}
 							break;
 						}
 						}
 						break;
-					case 13:
+					case 11:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1129);
+						setState(1101);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(1134);
+						setState(1106);
 						switch (_input.LA(1)) {
 						case K_ISNULL:
 							{
-							setState(1130);
+							setState(1102);
 							match(K_ISNULL);
 							}
 							break;
 						case K_NOTNULL:
 							{
-							setState(1131);
+							setState(1103);
 							match(K_NOTNULL);
 							}
 							break;
 						case K_NOT:
 							{
-							setState(1132);
+							setState(1104);
 							match(K_NOT);
-							setState(1133);
+							setState(1105);
 							match(K_NULL);
 							}
 							break;
@@ -5530,84 +5482,78 @@ public class DBoyzSQLParser extends Parser {
 						}
 						}
 						break;
-					case 14:
+					case 12:
 						{
 						_localctx = new UndecidedContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(1136);
+						setState(1108);
 						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(1138);
+						setState(1110);
 						_la = _input.LA(1);
 						if (_la==K_NOT) {
 							{
-							setState(1137);
+							setState(1109);
 							match(K_NOT);
 							}
 						}
 
-						setState(1140);
+						setState(1112);
 						match(K_IN);
-						setState(1161);
-						switch ( getInterpreter().adaptivePredict(_input,155,_ctx) ) {
+						setState(1132);
+						switch ( getInterpreter().adaptivePredict(_input,148,_ctx) ) {
 						case 1:
 							{
-							setState(1141);
+							setState(1113);
 							match(OPEN_PAR);
-							setState(1152);
-							switch ( getInterpreter().adaptivePredict(_input,153,_ctx) ) {
+							setState(1123);
+							switch ( getInterpreter().adaptivePredict(_input,146,_ctx) ) {
 							case 1:
 								{
-								setState(1142);
-								simple_select_stmt();
+								setState(1114);
+								select_stmt();
 								}
 								break;
 							case 2:
 								{
-								setState(1143);
-								select_stmt();
-								}
-								break;
-							case 3:
-								{
-								setState(1144);
+								setState(1115);
 								expr(0);
-								setState(1149);
+								setState(1120);
 								_errHandler.sync(this);
 								_la = _input.LA(1);
 								while (_la==COMMA) {
 									{
 									{
-									setState(1145);
+									setState(1116);
 									match(COMMA);
-									setState(1146);
+									setState(1117);
 									expr(0);
 									}
 									}
-									setState(1151);
+									setState(1122);
 									_errHandler.sync(this);
 									_la = _input.LA(1);
 								}
 								}
 								break;
 							}
-							setState(1154);
+							setState(1125);
 							match(CLOSE_PAR);
 							}
 							break;
 						case 2:
 							{
-							setState(1158);
-							switch ( getInterpreter().adaptivePredict(_input,154,_ctx) ) {
+							setState(1129);
+							switch ( getInterpreter().adaptivePredict(_input,147,_ctx) ) {
 							case 1:
 								{
-								setState(1155);
+								setState(1126);
 								database_name();
-								setState(1156);
+								setState(1127);
 								match(DOT);
 								}
 								break;
 							}
-							setState(1160);
+							setState(1131);
 							table_name();
 							}
 							break;
@@ -5617,9 +5563,9 @@ public class DBoyzSQLParser extends Parser {
 					}
 					} 
 				}
-				setState(1167);
+				setState(1138);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,157,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,150,_ctx);
 			}
 			}
 		}
@@ -5726,93 +5672,93 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1168);
+			setState(1139);
 			match(K_REFERENCES);
-			setState(1169);
+			setState(1140);
 			foreign_table();
-			setState(1181);
+			setState(1152);
 			_la = _input.LA(1);
 			if (_la==OPEN_PAR) {
 				{
-				setState(1170);
+				setState(1141);
 				match(OPEN_PAR);
-				setState(1171);
+				setState(1142);
 				column_name();
-				setState(1176);
+				setState(1147);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1172);
+					setState(1143);
 					match(COMMA);
-					setState(1173);
+					setState(1144);
 					column_name();
 					}
 					}
-					setState(1178);
+					setState(1149);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1179);
+				setState(1150);
 				match(CLOSE_PAR);
 				}
 			}
 
-			setState(1201);
+			setState(1172);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==K_MATCH || _la==K_ON) {
 				{
 				{
-				setState(1197);
+				setState(1168);
 				switch (_input.LA(1)) {
 				case K_ON:
 					{
-					setState(1183);
+					setState(1154);
 					match(K_ON);
-					setState(1184);
+					setState(1155);
 					_la = _input.LA(1);
 					if ( !(_la==K_DELETE || _la==K_UPDATE) ) {
 					_errHandler.recoverInline(this);
 					} else {
 						consume();
 					}
-					setState(1193);
-					switch ( getInterpreter().adaptivePredict(_input,160,_ctx) ) {
+					setState(1164);
+					switch ( getInterpreter().adaptivePredict(_input,153,_ctx) ) {
 					case 1:
 						{
-						setState(1185);
+						setState(1156);
 						match(K_SET);
-						setState(1186);
+						setState(1157);
 						match(K_NULL);
 						}
 						break;
 					case 2:
 						{
-						setState(1187);
+						setState(1158);
 						match(K_SET);
-						setState(1188);
+						setState(1159);
 						match(K_DEFAULT);
 						}
 						break;
 					case 3:
 						{
-						setState(1189);
+						setState(1160);
 						match(K_CASCADE);
 						}
 						break;
 					case 4:
 						{
-						setState(1190);
+						setState(1161);
 						match(K_RESTRICT);
 						}
 						break;
 					case 5:
 						{
-						setState(1191);
+						setState(1162);
 						match(K_NO);
-						setState(1192);
+						setState(1163);
 						match(K_ACTION);
 						}
 						break;
@@ -5821,9 +5767,9 @@ public class DBoyzSQLParser extends Parser {
 					break;
 				case K_MATCH:
 					{
-					setState(1195);
+					setState(1166);
 					match(K_MATCH);
-					setState(1196);
+					setState(1167);
 					name();
 					}
 					break;
@@ -5832,40 +5778,40 @@ public class DBoyzSQLParser extends Parser {
 				}
 				}
 				}
-				setState(1203);
+				setState(1174);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(1214);
-			switch ( getInterpreter().adaptivePredict(_input,165,_ctx) ) {
+			setState(1185);
+			switch ( getInterpreter().adaptivePredict(_input,158,_ctx) ) {
 			case 1:
 				{
-				setState(1205);
+				setState(1176);
 				_la = _input.LA(1);
 				if (_la==K_NOT) {
 					{
-					setState(1204);
+					setState(1175);
 					match(K_NOT);
 					}
 				}
 
-				setState(1207);
+				setState(1178);
 				match(K_DEFERRABLE);
-				setState(1212);
-				switch ( getInterpreter().adaptivePredict(_input,164,_ctx) ) {
+				setState(1183);
+				switch ( getInterpreter().adaptivePredict(_input,157,_ctx) ) {
 				case 1:
 					{
-					setState(1208);
+					setState(1179);
 					match(K_INITIALLY);
-					setState(1209);
+					setState(1180);
 					match(K_DEFERRED);
 					}
 					break;
 				case 2:
 					{
-					setState(1210);
+					setState(1181);
 					match(K_INITIALLY);
-					setState(1211);
+					setState(1182);
 					match(K_IMMEDIATE);
 					}
 					break;
@@ -5921,15 +5867,15 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1216);
+			setState(1187);
 			match(K_RAISE);
-			setState(1217);
+			setState(1188);
 			match(OPEN_PAR);
-			setState(1222);
+			setState(1193);
 			switch (_input.LA(1)) {
 			case K_IGNORE:
 				{
-				setState(1218);
+				setState(1189);
 				match(K_IGNORE);
 				}
 				break;
@@ -5937,23 +5883,23 @@ public class DBoyzSQLParser extends Parser {
 			case K_FAIL:
 			case K_ROLLBACK:
 				{
-				setState(1219);
+				setState(1190);
 				_la = _input.LA(1);
 				if ( !(_la==K_ABORT || _la==K_FAIL || _la==K_ROLLBACK) ) {
 				_errHandler.recoverInline(this);
 				} else {
 					consume();
 				}
-				setState(1220);
+				setState(1191);
 				match(COMMA);
-				setState(1221);
+				setState(1192);
 				error_message();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(1224);
+			setState(1195);
 			match(CLOSE_PAR);
 			}
 		}
@@ -6004,24 +5950,24 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1226);
+			setState(1197);
 			column_name();
-			setState(1229);
+			setState(1200);
 			_la = _input.LA(1);
 			if (_la==K_COLLATE) {
 				{
-				setState(1227);
+				setState(1198);
 				match(K_COLLATE);
-				setState(1228);
+				setState(1199);
 				collation_name();
 				}
 			}
 
-			setState(1232);
+			setState(1203);
 			_la = _input.LA(1);
 			if (_la==K_ASC || _la==K_DESC) {
 				{
-				setState(1231);
+				setState(1202);
 				_la = _input.LA(1);
 				if ( !(_la==K_ASC || _la==K_DESC) ) {
 				_errHandler.recoverInline(this);
@@ -6101,108 +6047,108 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1236);
+			setState(1207);
 			_la = _input.LA(1);
 			if (_la==K_CONSTRAINT) {
 				{
-				setState(1234);
+				setState(1205);
 				match(K_CONSTRAINT);
-				setState(1235);
+				setState(1206);
 				name();
 				}
 			}
 
-			setState(1274);
+			setState(1245);
 			switch (_input.LA(1)) {
 			case K_PRIMARY:
 			case K_UNIQUE:
 				{
-				setState(1241);
+				setState(1212);
 				switch (_input.LA(1)) {
 				case K_PRIMARY:
 					{
-					setState(1238);
+					setState(1209);
 					match(K_PRIMARY);
-					setState(1239);
+					setState(1210);
 					match(K_KEY);
 					}
 					break;
 				case K_UNIQUE:
 					{
-					setState(1240);
+					setState(1211);
 					match(K_UNIQUE);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(1243);
+				setState(1214);
 				match(OPEN_PAR);
-				setState(1244);
+				setState(1215);
 				indexed_column();
-				setState(1249);
+				setState(1220);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1245);
+					setState(1216);
 					match(COMMA);
-					setState(1246);
+					setState(1217);
 					indexed_column();
 					}
 					}
-					setState(1251);
+					setState(1222);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1252);
+				setState(1223);
 				match(CLOSE_PAR);
-				setState(1253);
+				setState(1224);
 				conflict_clause();
 				}
 				break;
 			case K_CHECK:
 				{
-				setState(1255);
+				setState(1226);
 				match(K_CHECK);
-				setState(1256);
+				setState(1227);
 				match(OPEN_PAR);
-				setState(1257);
+				setState(1228);
 				expr(0);
-				setState(1258);
+				setState(1229);
 				match(CLOSE_PAR);
 				}
 				break;
 			case K_FOREIGN:
 				{
-				setState(1260);
+				setState(1231);
 				match(K_FOREIGN);
-				setState(1261);
+				setState(1232);
 				match(K_KEY);
-				setState(1262);
+				setState(1233);
 				match(OPEN_PAR);
-				setState(1263);
+				setState(1234);
 				column_name();
-				setState(1268);
+				setState(1239);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1264);
+					setState(1235);
 					match(COMMA);
-					setState(1265);
+					setState(1236);
 					column_name();
 					}
 					}
-					setState(1270);
+					setState(1241);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1271);
+				setState(1242);
 				match(CLOSE_PAR);
-				setState(1272);
+				setState(1243);
 				foreign_key_clause();
 				}
 				break;
@@ -6267,48 +6213,48 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1276);
+			setState(1247);
 			match(K_WITH);
-			setState(1278);
-			switch ( getInterpreter().adaptivePredict(_input,174,_ctx) ) {
+			setState(1249);
+			switch ( getInterpreter().adaptivePredict(_input,167,_ctx) ) {
 			case 1:
 				{
-				setState(1277);
+				setState(1248);
 				match(K_RECURSIVE);
 				}
 				break;
 			}
-			setState(1280);
+			setState(1251);
 			cte_table_name();
-			setState(1281);
+			setState(1252);
 			match(K_AS);
-			setState(1282);
+			setState(1253);
 			match(OPEN_PAR);
-			setState(1283);
+			setState(1254);
 			select_stmt();
-			setState(1284);
+			setState(1255);
 			match(CLOSE_PAR);
-			setState(1294);
+			setState(1265);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(1285);
+				setState(1256);
 				match(COMMA);
-				setState(1286);
+				setState(1257);
 				cte_table_name();
-				setState(1287);
+				setState(1258);
 				match(K_AS);
-				setState(1288);
+				setState(1259);
 				match(OPEN_PAR);
-				setState(1289);
+				setState(1260);
 				select_stmt();
-				setState(1290);
+				setState(1261);
 				match(CLOSE_PAR);
 				}
 				}
-				setState(1296);
+				setState(1267);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -6363,36 +6309,36 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1300);
-			switch ( getInterpreter().adaptivePredict(_input,176,_ctx) ) {
+			setState(1271);
+			switch ( getInterpreter().adaptivePredict(_input,169,_ctx) ) {
 			case 1:
 				{
-				setState(1297);
+				setState(1268);
 				database_name();
-				setState(1298);
+				setState(1269);
 				match(DOT);
 				}
 				break;
 			}
-			setState(1302);
+			setState(1273);
 			table_name();
-			setState(1308);
+			setState(1279);
 			switch (_input.LA(1)) {
 			case K_INDEXED:
 				{
-				setState(1303);
+				setState(1274);
 				match(K_INDEXED);
-				setState(1304);
+				setState(1275);
 				match(K_BY);
-				setState(1305);
+				setState(1276);
 				index_name();
 				}
 				break;
 			case K_NOT:
 				{
-				setState(1306);
+				setState(1277);
 				match(K_NOT);
-				setState(1307);
+				setState(1278);
 				match(K_INDEXED);
 				}
 				break;
@@ -6479,24 +6425,24 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1310);
+			setState(1281);
 			expr(0);
-			setState(1313);
+			setState(1284);
 			_la = _input.LA(1);
 			if (_la==K_COLLATE) {
 				{
-				setState(1311);
+				setState(1282);
 				match(K_COLLATE);
-				setState(1312);
+				setState(1283);
 				collation_name();
 				}
 			}
 
-			setState(1316);
+			setState(1287);
 			_la = _input.LA(1);
 			if (_la==K_ASC || _la==K_DESC) {
 				{
-				setState(1315);
+				setState(1286);
 				_la = _input.LA(1);
 				if ( !(_la==K_ASC || _la==K_DESC) ) {
 				_errHandler.recoverInline(this);
@@ -6550,26 +6496,26 @@ public class DBoyzSQLParser extends Parser {
 		Pragma_valueContext _localctx = new Pragma_valueContext(_ctx, getState());
 		enterRule(_localctx, 90, RULE_pragma_value);
 		try {
-			setState(1321);
-			switch ( getInterpreter().adaptivePredict(_input,180,_ctx) ) {
+			setState(1292);
+			switch ( getInterpreter().adaptivePredict(_input,173,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1318);
+				setState(1289);
 				signed_number();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1319);
+				setState(1290);
 				name();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(1320);
+				setState(1291);
 				match(STRING_LITERAL);
 				}
 				break;
@@ -6626,44 +6572,44 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1323);
+			setState(1294);
 			table_name();
-			setState(1335);
+			setState(1306);
 			_la = _input.LA(1);
 			if (_la==OPEN_PAR) {
 				{
-				setState(1324);
+				setState(1295);
 				match(OPEN_PAR);
-				setState(1325);
+				setState(1296);
 				column_name();
-				setState(1330);
+				setState(1301);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1326);
+					setState(1297);
 					match(COMMA);
-					setState(1327);
+					setState(1298);
 					column_name();
 					}
 					}
-					setState(1332);
+					setState(1303);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1333);
+				setState(1304);
 				match(CLOSE_PAR);
 				}
 			}
 
-			setState(1337);
+			setState(1308);
 			match(K_AS);
-			setState(1338);
+			setState(1309);
 			match(OPEN_PAR);
-			setState(1339);
+			setState(1310);
 			select_stmt();
-			setState(1340);
+			setState(1311);
 			match(CLOSE_PAR);
 			}
 		}
@@ -6678,7 +6624,7 @@ public class DBoyzSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Result_columnContext extends ParserRuleContext {
+	public static class ProjectorContext extends ParserRuleContext {
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
@@ -6689,69 +6635,69 @@ public class DBoyzSQLParser extends Parser {
 			return getRuleContext(Column_aliasContext.class,0);
 		}
 		public TerminalNode K_AS() { return getToken(DBoyzSQLParser.K_AS, 0); }
-		public Result_columnContext(ParserRuleContext parent, int invokingState) {
+		public ProjectorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_result_column; }
+		@Override public int getRuleIndex() { return RULE_projector; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterResult_column(this);
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterProjector(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitResult_column(this);
+			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitProjector(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitResult_column(this);
+			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitProjector(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Result_columnContext result_column() throws RecognitionException {
-		Result_columnContext _localctx = new Result_columnContext(_ctx, getState());
-		enterRule(_localctx, 94, RULE_result_column);
+	public final ProjectorContext projector() throws RecognitionException {
+		ProjectorContext _localctx = new ProjectorContext(_ctx, getState());
+		enterRule(_localctx, 94, RULE_projector);
 		int _la;
 		try {
-			setState(1354);
-			switch ( getInterpreter().adaptivePredict(_input,185,_ctx) ) {
+			setState(1325);
+			switch ( getInterpreter().adaptivePredict(_input,178,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1342);
+				setState(1313);
 				match(STAR);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1343);
+				setState(1314);
 				table_name();
-				setState(1344);
+				setState(1315);
 				match(DOT);
-				setState(1345);
+				setState(1316);
 				match(STAR);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(1347);
+				setState(1318);
 				expr(0);
-				setState(1352);
+				setState(1323);
 				_la = _input.LA(1);
 				if (_la==K_AS || _la==IDENTIFIER || _la==STRING_LITERAL) {
 					{
-					setState(1349);
+					setState(1320);
 					_la = _input.LA(1);
 					if (_la==K_AS) {
 						{
-						setState(1348);
+						setState(1319);
 						match(K_AS);
 						}
 					}
 
-					setState(1351);
+					setState(1322);
 					column_alias();
 					}
 				}
@@ -6824,59 +6770,59 @@ public class DBoyzSQLParser extends Parser {
 		enterRule(_localctx, 96, RULE_table_or_subquery);
 		int _la;
 		try {
-			setState(1403);
-			switch ( getInterpreter().adaptivePredict(_input,196,_ctx) ) {
+			setState(1374);
+			switch ( getInterpreter().adaptivePredict(_input,189,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1359);
-				switch ( getInterpreter().adaptivePredict(_input,186,_ctx) ) {
+				setState(1330);
+				switch ( getInterpreter().adaptivePredict(_input,179,_ctx) ) {
 				case 1:
 					{
-					setState(1356);
+					setState(1327);
 					database_name();
-					setState(1357);
+					setState(1328);
 					match(DOT);
 					}
 					break;
 				}
-				setState(1361);
+				setState(1332);
 				table_name();
-				setState(1366);
-				switch ( getInterpreter().adaptivePredict(_input,188,_ctx) ) {
+				setState(1337);
+				switch ( getInterpreter().adaptivePredict(_input,181,_ctx) ) {
 				case 1:
 					{
-					setState(1363);
-					switch ( getInterpreter().adaptivePredict(_input,187,_ctx) ) {
+					setState(1334);
+					switch ( getInterpreter().adaptivePredict(_input,180,_ctx) ) {
 					case 1:
 						{
-						setState(1362);
+						setState(1333);
 						match(K_AS);
 						}
 						break;
 					}
-					setState(1365);
+					setState(1336);
 					table_alias();
 					}
 					break;
 				}
-				setState(1373);
+				setState(1344);
 				switch (_input.LA(1)) {
 				case K_INDEXED:
 					{
-					setState(1368);
+					setState(1339);
 					match(K_INDEXED);
-					setState(1369);
+					setState(1340);
 					match(K_BY);
-					setState(1370);
+					setState(1341);
 					index_name();
 					}
 					break;
 				case K_NOT:
 					{
-					setState(1371);
+					setState(1342);
 					match(K_NOT);
-					setState(1372);
+					setState(1343);
 					match(K_INDEXED);
 					}
 					break;
@@ -6931,27 +6877,27 @@ public class DBoyzSQLParser extends Parser {
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1375);
+				setState(1346);
 				match(OPEN_PAR);
-				setState(1385);
-				switch ( getInterpreter().adaptivePredict(_input,191,_ctx) ) {
+				setState(1356);
+				switch ( getInterpreter().adaptivePredict(_input,184,_ctx) ) {
 				case 1:
 					{
-					setState(1376);
+					setState(1347);
 					table_or_subquery();
-					setState(1381);
+					setState(1352);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(1377);
+						setState(1348);
 						match(COMMA);
-						setState(1378);
+						setState(1349);
 						table_or_subquery();
 						}
 						}
-						setState(1383);
+						setState(1354);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
@@ -6959,27 +6905,27 @@ public class DBoyzSQLParser extends Parser {
 					break;
 				case 2:
 					{
-					setState(1384);
+					setState(1355);
 					join_clause();
 					}
 					break;
 				}
-				setState(1387);
+				setState(1358);
 				match(CLOSE_PAR);
-				setState(1392);
-				switch ( getInterpreter().adaptivePredict(_input,193,_ctx) ) {
+				setState(1363);
+				switch ( getInterpreter().adaptivePredict(_input,186,_ctx) ) {
 				case 1:
 					{
-					setState(1389);
-					switch ( getInterpreter().adaptivePredict(_input,192,_ctx) ) {
+					setState(1360);
+					switch ( getInterpreter().adaptivePredict(_input,185,_ctx) ) {
 					case 1:
 						{
-						setState(1388);
+						setState(1359);
 						match(K_AS);
 						}
 						break;
 					}
-					setState(1391);
+					setState(1362);
 					table_alias();
 					}
 					break;
@@ -6989,26 +6935,26 @@ public class DBoyzSQLParser extends Parser {
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(1394);
+				setState(1365);
 				match(OPEN_PAR);
-				setState(1395);
+				setState(1366);
 				select_stmt();
-				setState(1396);
+				setState(1367);
 				match(CLOSE_PAR);
-				setState(1401);
-				switch ( getInterpreter().adaptivePredict(_input,195,_ctx) ) {
+				setState(1372);
+				switch ( getInterpreter().adaptivePredict(_input,188,_ctx) ) {
 				case 1:
 					{
-					setState(1398);
-					switch ( getInterpreter().adaptivePredict(_input,194,_ctx) ) {
+					setState(1369);
+					switch ( getInterpreter().adaptivePredict(_input,187,_ctx) ) {
 					case 1:
 						{
-						setState(1397);
+						setState(1368);
 						match(K_AS);
 						}
 						break;
 					}
-					setState(1400);
+					setState(1371);
 					table_alias();
 					}
 					break;
@@ -7073,23 +7019,23 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1405);
+			setState(1376);
 			table_or_subquery();
-			setState(1412);
+			setState(1383);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA || _la==K_CROSS || ((((_la - 87)) & ~0x3f) == 0 && ((1L << (_la - 87)) & ((1L << (K_INNER - 87)) | (1L << (K_JOIN - 87)) | (1L << (K_LEFT - 87)) | (1L << (K_NATURAL - 87)))) != 0)) {
 				{
 				{
-				setState(1406);
+				setState(1377);
 				join_operator();
-				setState(1407);
+				setState(1378);
 				table_or_subquery();
-				setState(1408);
+				setState(1379);
 				join_constraint();
 				}
 				}
-				setState(1414);
+				setState(1385);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -7137,12 +7083,12 @@ public class DBoyzSQLParser extends Parser {
 		enterRule(_localctx, 100, RULE_join_operator);
 		int _la;
 		try {
-			setState(1428);
+			setState(1399);
 			switch (_input.LA(1)) {
 			case COMMA:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1415);
+				setState(1386);
 				match(COMMA);
 				}
 				break;
@@ -7153,26 +7099,26 @@ public class DBoyzSQLParser extends Parser {
 			case K_NATURAL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1417);
+				setState(1388);
 				_la = _input.LA(1);
 				if (_la==K_NATURAL) {
 					{
-					setState(1416);
+					setState(1387);
 					match(K_NATURAL);
 					}
 				}
 
-				setState(1425);
+				setState(1396);
 				switch (_input.LA(1)) {
 				case K_LEFT:
 					{
-					setState(1419);
+					setState(1390);
 					match(K_LEFT);
-					setState(1421);
+					setState(1392);
 					_la = _input.LA(1);
 					if (_la==K_OUTER) {
 						{
-						setState(1420);
+						setState(1391);
 						match(K_OUTER);
 						}
 					}
@@ -7181,13 +7127,13 @@ public class DBoyzSQLParser extends Parser {
 					break;
 				case K_INNER:
 					{
-					setState(1423);
+					setState(1394);
 					match(K_INNER);
 					}
 					break;
 				case K_CROSS:
 					{
-					setState(1424);
+					setState(1395);
 					match(K_CROSS);
 					}
 					break;
@@ -7196,7 +7142,7 @@ public class DBoyzSQLParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(1427);
+				setState(1398);
 				match(K_JOIN);
 				}
 				break;
@@ -7253,41 +7199,41 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1444);
+			setState(1415);
 			switch (_input.LA(1)) {
 			case K_ON:
 				{
-				setState(1430);
+				setState(1401);
 				match(K_ON);
-				setState(1431);
+				setState(1402);
 				expr(0);
 				}
 				break;
 			case K_USING:
 				{
-				setState(1432);
+				setState(1403);
 				match(K_USING);
-				setState(1433);
+				setState(1404);
 				match(OPEN_PAR);
-				setState(1434);
+				setState(1405);
 				column_name();
-				setState(1439);
+				setState(1410);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1435);
+					setState(1406);
 					match(COMMA);
-					setState(1436);
+					setState(1407);
 					column_name();
 					}
 					}
-					setState(1441);
+					setState(1412);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1442);
+				setState(1413);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -7402,18 +7348,18 @@ public class DBoyzSQLParser extends Parser {
 		enterRule(_localctx, 104, RULE_select_core);
 		int _la;
 		try {
-			setState(1510);
+			setState(1481);
 			switch (_input.LA(1)) {
 			case K_SELECT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1446);
+				setState(1417);
 				match(K_SELECT);
-				setState(1448);
-				switch ( getInterpreter().adaptivePredict(_input,204,_ctx) ) {
+				setState(1419);
+				switch ( getInterpreter().adaptivePredict(_input,197,_ctx) ) {
 				case 1:
 					{
-					setState(1447);
+					setState(1418);
 					_la = _input.LA(1);
 					if ( !(_la==K_ALL || _la==K_DISTINCT) ) {
 					_errHandler.recoverInline(this);
@@ -7423,33 +7369,33 @@ public class DBoyzSQLParser extends Parser {
 					}
 					break;
 				}
-				setState(1450);
+				setState(1421);
 				projection_clause();
-				setState(1463);
+				setState(1434);
 				_la = _input.LA(1);
 				if (_la==K_FROM) {
 					{
-					setState(1451);
+					setState(1422);
 					match(K_FROM);
-					setState(1461);
-					switch ( getInterpreter().adaptivePredict(_input,206,_ctx) ) {
+					setState(1432);
+					switch ( getInterpreter().adaptivePredict(_input,199,_ctx) ) {
 					case 1:
 						{
-						setState(1452);
+						setState(1423);
 						table_or_subquery();
-						setState(1457);
+						setState(1428);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						while (_la==COMMA) {
 							{
 							{
-							setState(1453);
+							setState(1424);
 							match(COMMA);
-							setState(1454);
+							setState(1425);
 							table_or_subquery();
 							}
 							}
-							setState(1459);
+							setState(1430);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
 						}
@@ -7457,7 +7403,7 @@ public class DBoyzSQLParser extends Parser {
 						break;
 					case 2:
 						{
-						setState(1460);
+						setState(1431);
 						join_clause();
 						}
 						break;
@@ -7465,41 +7411,41 @@ public class DBoyzSQLParser extends Parser {
 					}
 				}
 
-				setState(1465);
+				setState(1436);
 				where_clause();
-				setState(1480);
+				setState(1451);
 				_la = _input.LA(1);
 				if (_la==K_GROUP) {
 					{
-					setState(1466);
+					setState(1437);
 					match(K_GROUP);
-					setState(1467);
+					setState(1438);
 					match(K_BY);
-					setState(1468);
+					setState(1439);
 					expr(0);
-					setState(1473);
+					setState(1444);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(1469);
+						setState(1440);
 						match(COMMA);
-						setState(1470);
+						setState(1441);
 						expr(0);
 						}
 						}
-						setState(1475);
+						setState(1446);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(1478);
+					setState(1449);
 					_la = _input.LA(1);
 					if (_la==K_HAVING) {
 						{
-						setState(1476);
+						setState(1447);
 						match(K_HAVING);
-						setState(1477);
+						setState(1448);
 						expr(0);
 						}
 					}
@@ -7512,63 +7458,63 @@ public class DBoyzSQLParser extends Parser {
 			case K_VALUES:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1482);
+				setState(1453);
 				match(K_VALUES);
-				setState(1483);
+				setState(1454);
 				match(OPEN_PAR);
-				setState(1484);
+				setState(1455);
 				expr(0);
-				setState(1489);
+				setState(1460);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1485);
+					setState(1456);
 					match(COMMA);
-					setState(1486);
+					setState(1457);
 					expr(0);
 					}
 					}
-					setState(1491);
+					setState(1462);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1492);
+				setState(1463);
 				match(CLOSE_PAR);
-				setState(1507);
+				setState(1478);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1493);
+					setState(1464);
 					match(COMMA);
-					setState(1494);
+					setState(1465);
 					match(OPEN_PAR);
-					setState(1495);
+					setState(1466);
 					expr(0);
-					setState(1500);
+					setState(1471);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(1496);
+						setState(1467);
 						match(COMMA);
-						setState(1497);
+						setState(1468);
 						expr(0);
 						}
 						}
-						setState(1502);
+						setState(1473);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(1503);
+					setState(1474);
 					match(CLOSE_PAR);
 					}
 					}
-					setState(1509);
+					setState(1480);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -7590,11 +7536,11 @@ public class DBoyzSQLParser extends Parser {
 	}
 
 	public static class Projection_clauseContext extends ParserRuleContext {
-		public List<Result_columnContext> result_column() {
-			return getRuleContexts(Result_columnContext.class);
+		public List<ProjectorContext> projector() {
+			return getRuleContexts(ProjectorContext.class);
 		}
-		public Result_columnContext result_column(int i) {
-			return getRuleContext(Result_columnContext.class,i);
+		public ProjectorContext projector(int i) {
+			return getRuleContext(ProjectorContext.class,i);
 		}
 		public Projection_clauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -7622,21 +7568,21 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1512);
-			result_column();
-			setState(1517);
+			setState(1483);
+			projector();
+			setState(1488);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(1513);
+				setState(1484);
 				match(COMMA);
-				setState(1514);
-				result_column();
+				setState(1485);
+				projector();
 				}
 				}
-				setState(1519);
+				setState(1490);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -7684,13 +7630,13 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1522);
+			setState(1493);
 			_la = _input.LA(1);
 			if (_la==K_WHERE) {
 				{
-				setState(1520);
+				setState(1491);
 				match(K_WHERE);
-				setState(1521);
+				setState(1492);
 				expr(0);
 				}
 			}
@@ -7736,35 +7682,35 @@ public class DBoyzSQLParser extends Parser {
 		Compound_operatorContext _localctx = new Compound_operatorContext(_ctx, getState());
 		enterRule(_localctx, 110, RULE_compound_operator);
 		try {
-			setState(1529);
-			switch ( getInterpreter().adaptivePredict(_input,217,_ctx) ) {
+			setState(1500);
+			switch ( getInterpreter().adaptivePredict(_input,210,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1524);
+				setState(1495);
 				match(K_UNION);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1525);
+				setState(1496);
 				match(K_UNION);
-				setState(1526);
+				setState(1497);
 				match(K_ALL);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(1527);
+				setState(1498);
 				match(K_INTERSECT);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(1528);
+				setState(1499);
 				match(K_EXCEPT);
 				}
 				break;
@@ -7817,33 +7763,33 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1531);
+			setState(1502);
 			table_name();
-			setState(1543);
+			setState(1514);
 			_la = _input.LA(1);
 			if (_la==OPEN_PAR) {
 				{
-				setState(1532);
+				setState(1503);
 				match(OPEN_PAR);
-				setState(1533);
+				setState(1504);
 				column_name();
-				setState(1538);
+				setState(1509);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(1534);
+					setState(1505);
 					match(COMMA);
-					setState(1535);
+					setState(1506);
 					column_name();
 					}
 					}
-					setState(1540);
+					setState(1511);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(1541);
+				setState(1512);
 				match(CLOSE_PAR);
 				}
 			}
@@ -7889,11 +7835,11 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1546);
+			setState(1517);
 			_la = _input.LA(1);
 			if (_la==PLUS || _la==MINUS) {
 				{
-				setState(1545);
+				setState(1516);
 				_la = _input.LA(1);
 				if ( !(_la==PLUS || _la==MINUS) ) {
 				_errHandler.recoverInline(this);
@@ -7903,7 +7849,7 @@ public class DBoyzSQLParser extends Parser {
 				}
 			}
 
-			setState(1548);
+			setState(1519);
 			match(NUMERIC_LITERAL);
 			}
 		}
@@ -7952,7 +7898,7 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1550);
+			setState(1521);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << K_CURRENT_DATE) | (1L << K_CURRENT_TIME) | (1L << K_CURRENT_TIMESTAMP))) != 0) || ((((_la - 104)) & ~0x3f) == 0 && ((1L << (_la - 104)) & ((1L << (K_NULL - 104)) | (1L << (NUMERIC_LITERAL - 104)) | (1L << (STRING_LITERAL - 104)) | (1L << (BLOB_LITERAL - 104)))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -8000,129 +7946,12 @@ public class DBoyzSQLParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1552);
+			setState(1523);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PLUS) | (1L << MINUS) | (1L << TILDE))) != 0) || _la==K_NOT) ) {
 			_errHandler.recoverInline(this);
 			} else {
 				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Binary_operatorContext extends ParserRuleContext {
-		public TerminalNode K_IS() { return getToken(DBoyzSQLParser.K_IS, 0); }
-		public TerminalNode K_NOT() { return getToken(DBoyzSQLParser.K_NOT, 0); }
-		public TerminalNode K_IN() { return getToken(DBoyzSQLParser.K_IN, 0); }
-		public TerminalNode K_LIKE() { return getToken(DBoyzSQLParser.K_LIKE, 0); }
-		public TerminalNode K_GLOB() { return getToken(DBoyzSQLParser.K_GLOB, 0); }
-		public TerminalNode K_MATCH() { return getToken(DBoyzSQLParser.K_MATCH, 0); }
-		public TerminalNode K_REGEXP() { return getToken(DBoyzSQLParser.K_REGEXP, 0); }
-		public Binary_operatorContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_binary_operator; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).enterBinary_operator(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DBoyzSQLListener ) ((DBoyzSQLListener)listener).exitBinary_operator(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DBoyzSQLVisitor ) return ((DBoyzSQLVisitor<? extends T>)visitor).visitBinary_operator(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Binary_operatorContext binary_operator() throws RecognitionException {
-		Binary_operatorContext _localctx = new Binary_operatorContext(_ctx, getState());
-		enterRule(_localctx, 120, RULE_binary_operator);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(1566);
-			switch ( getInterpreter().adaptivePredict(_input,221,_ctx) ) {
-			case 1:
-				{
-				setState(1554);
-				match(ASSIGN);
-				}
-				break;
-			case 2:
-				{
-				setState(1555);
-				match(EQ);
-				}
-				break;
-			case 3:
-				{
-				setState(1556);
-				match(NOT_EQ1);
-				}
-				break;
-			case 4:
-				{
-				setState(1557);
-				match(NOT_EQ2);
-				}
-				break;
-			case 5:
-				{
-				setState(1558);
-				match(K_IS);
-				}
-				break;
-			case 6:
-				{
-				setState(1559);
-				match(K_IS);
-				setState(1560);
-				match(K_NOT);
-				}
-				break;
-			case 7:
-				{
-				setState(1561);
-				match(K_IN);
-				}
-				break;
-			case 8:
-				{
-				setState(1562);
-				match(K_LIKE);
-				}
-				break;
-			case 9:
-				{
-				setState(1563);
-				match(K_GLOB);
-				}
-				break;
-			case 10:
-				{
-				setState(1564);
-				match(K_MATCH);
-				}
-				break;
-			case 11:
-				{
-				setState(1565);
-				match(K_REGEXP);
-				}
-				break;
 			}
 			}
 		}
@@ -8160,11 +7989,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Error_messageContext error_message() throws RecognitionException {
 		Error_messageContext _localctx = new Error_messageContext(_ctx, getState());
-		enterRule(_localctx, 122, RULE_error_message);
+		enterRule(_localctx, 120, RULE_error_message);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1568);
+			setState(1525);
 			match(STRING_LITERAL);
 			}
 		}
@@ -8207,21 +8036,21 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Module_argumentContext module_argument() throws RecognitionException {
 		Module_argumentContext _localctx = new Module_argumentContext(_ctx, getState());
-		enterRule(_localctx, 124, RULE_module_argument);
+		enterRule(_localctx, 122, RULE_module_argument);
 		try {
-			setState(1572);
-			switch ( getInterpreter().adaptivePredict(_input,222,_ctx) ) {
+			setState(1529);
+			switch ( getInterpreter().adaptivePredict(_input,214,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1570);
+				setState(1527);
 				expr(0);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1571);
+				setState(1528);
 				column_def();
 				}
 				break;
@@ -8262,12 +8091,12 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Column_aliasContext column_alias() throws RecognitionException {
 		Column_aliasContext _localctx = new Column_aliasContext(_ctx, getState());
-		enterRule(_localctx, 126, RULE_column_alias);
+		enterRule(_localctx, 124, RULE_column_alias);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1574);
+			setState(1531);
 			_la = _input.LA(1);
 			if ( !(_la==IDENTIFIER || _la==STRING_LITERAL) ) {
 			_errHandler.recoverInline(this);
@@ -8433,12 +8262,12 @@ public class DBoyzSQLParser extends Parser {
 
 	public final KeywordContext keyword() throws RecognitionException {
 		KeywordContext _localctx = new KeywordContext(_ctx, getState());
-		enterRule(_localctx, 128, RULE_keyword);
+		enterRule(_localctx, 126, RULE_keyword);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1576);
+			setState(1533);
 			_la = _input.LA(1);
 			if ( !(((((_la - 25)) & ~0x3f) == 0 && ((1L << (_la - 25)) & ((1L << (K_ABORT - 25)) | (1L << (K_ACTION - 25)) | (1L << (K_ADD - 25)) | (1L << (K_AFTER - 25)) | (1L << (K_ALL - 25)) | (1L << (K_ALTER - 25)) | (1L << (K_ANALYZE - 25)) | (1L << (K_AND - 25)) | (1L << (K_AS - 25)) | (1L << (K_ASC - 25)) | (1L << (K_ATTACH - 25)) | (1L << (K_AUTOINCREMENT - 25)) | (1L << (K_BEFORE - 25)) | (1L << (K_BEGIN - 25)) | (1L << (K_BETWEEN - 25)) | (1L << (K_BY - 25)) | (1L << (K_CASCADE - 25)) | (1L << (K_CASE - 25)) | (1L << (K_CAST - 25)) | (1L << (K_CHECK - 25)) | (1L << (K_COLLATE - 25)) | (1L << (K_COLUMN - 25)) | (1L << (K_COMMIT - 25)) | (1L << (K_CONFLICT - 25)) | (1L << (K_CONSTRAINT - 25)) | (1L << (K_CREATE - 25)) | (1L << (K_CROSS - 25)) | (1L << (K_CURRENT_DATE - 25)) | (1L << (K_CURRENT_TIME - 25)) | (1L << (K_CURRENT_TIMESTAMP - 25)) | (1L << (K_DATABASE - 25)) | (1L << (K_DEFAULT - 25)) | (1L << (K_DEFERRABLE - 25)) | (1L << (K_DEFERRED - 25)) | (1L << (K_DELETE - 25)) | (1L << (K_DESC - 25)) | (1L << (K_DETACH - 25)) | (1L << (K_DISTINCT - 25)) | (1L << (K_DROP - 25)) | (1L << (K_EACH - 25)) | (1L << (K_ELSE - 25)) | (1L << (K_END - 25)) | (1L << (K_ESCAPE - 25)) | (1L << (K_EXCEPT - 25)) | (1L << (K_EXCLUSIVE - 25)) | (1L << (K_EXISTS - 25)) | (1L << (K_EXPLAIN - 25)) | (1L << (K_FAIL - 25)) | (1L << (K_FOR - 25)) | (1L << (K_FOREIGN - 25)) | (1L << (K_FROM - 25)) | (1L << (K_FULL - 25)) | (1L << (K_GLOB - 25)) | (1L << (K_GROUP - 25)) | (1L << (K_HAVING - 25)) | (1L << (K_IF - 25)) | (1L << (K_IGNORE - 25)) | (1L << (K_IMMEDIATE - 25)) | (1L << (K_IN - 25)) | (1L << (K_INDEX - 25)) | (1L << (K_INDEXED - 25)) | (1L << (K_INITIALLY - 25)) | (1L << (K_INNER - 25)) | (1L << (K_INSERT - 25)))) != 0) || ((((_la - 89)) & ~0x3f) == 0 && ((1L << (_la - 89)) & ((1L << (K_INSTEAD - 89)) | (1L << (K_INTERSECT - 89)) | (1L << (K_INTO - 89)) | (1L << (K_IS - 89)) | (1L << (K_ISNULL - 89)) | (1L << (K_JOIN - 89)) | (1L << (K_KEY - 89)) | (1L << (K_LEFT - 89)) | (1L << (K_LIKE - 89)) | (1L << (K_LIMIT - 89)) | (1L << (K_MATCH - 89)) | (1L << (K_NATURAL - 89)) | (1L << (K_NO - 89)) | (1L << (K_NOT - 89)) | (1L << (K_NOTNULL - 89)) | (1L << (K_NULL - 89)) | (1L << (K_OF - 89)) | (1L << (K_OFFSET - 89)) | (1L << (K_ON - 89)) | (1L << (K_OR - 89)) | (1L << (K_ORDER - 89)) | (1L << (K_OUTER - 89)) | (1L << (K_PLAN - 89)) | (1L << (K_PRAGMA - 89)) | (1L << (K_PRIMARY - 89)) | (1L << (K_QUERY - 89)) | (1L << (K_RAISE - 89)) | (1L << (K_RECURSIVE - 89)) | (1L << (K_REFERENCES - 89)) | (1L << (K_REGEXP - 89)) | (1L << (K_REINDEX - 89)) | (1L << (K_RELEASE - 89)) | (1L << (K_RENAME - 89)) | (1L << (K_REPLACE - 89)) | (1L << (K_RESTRICT - 89)) | (1L << (K_RIGHT - 89)) | (1L << (K_ROLLBACK - 89)) | (1L << (K_ROW - 89)) | (1L << (K_SAVEPOINT - 89)) | (1L << (K_SELECT - 89)) | (1L << (K_SET - 89)) | (1L << (K_TABLE - 89)) | (1L << (K_TEMP - 89)) | (1L << (K_TEMPORARY - 89)) | (1L << (K_THEN - 89)) | (1L << (K_TO - 89)) | (1L << (K_TRANSACTION - 89)) | (1L << (K_TRIGGER - 89)) | (1L << (K_UNION - 89)) | (1L << (K_UNIQUE - 89)) | (1L << (K_UPDATE - 89)) | (1L << (K_USING - 89)) | (1L << (K_VACUUM - 89)) | (1L << (K_VALUES - 89)) | (1L << (K_VIEW - 89)) | (1L << (K_VIRTUAL - 89)) | (1L << (K_WHEN - 89)) | (1L << (K_WHERE - 89)) | (1L << (K_WITH - 89)) | (1L << (K_WITHOUT - 89)))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -8483,11 +8312,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final NameContext name() throws RecognitionException {
 		NameContext _localctx = new NameContext(_ctx, getState());
-		enterRule(_localctx, 130, RULE_name);
+		enterRule(_localctx, 128, RULE_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1578);
+			setState(1535);
 			any_name();
 			}
 		}
@@ -8527,11 +8356,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Function_nameContext function_name() throws RecognitionException {
 		Function_nameContext _localctx = new Function_nameContext(_ctx, getState());
-		enterRule(_localctx, 132, RULE_function_name);
+		enterRule(_localctx, 130, RULE_function_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1580);
+			setState(1537);
 			any_name();
 			}
 		}
@@ -8571,11 +8400,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Database_nameContext database_name() throws RecognitionException {
 		Database_nameContext _localctx = new Database_nameContext(_ctx, getState());
-		enterRule(_localctx, 134, RULE_database_name);
+		enterRule(_localctx, 132, RULE_database_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1582);
+			setState(1539);
 			any_name();
 			}
 		}
@@ -8615,11 +8444,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Table_nameContext table_name() throws RecognitionException {
 		Table_nameContext _localctx = new Table_nameContext(_ctx, getState());
-		enterRule(_localctx, 136, RULE_table_name);
+		enterRule(_localctx, 134, RULE_table_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1584);
+			setState(1541);
 			any_name();
 			}
 		}
@@ -8659,11 +8488,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Table_or_index_nameContext table_or_index_name() throws RecognitionException {
 		Table_or_index_nameContext _localctx = new Table_or_index_nameContext(_ctx, getState());
-		enterRule(_localctx, 138, RULE_table_or_index_name);
+		enterRule(_localctx, 136, RULE_table_or_index_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1586);
+			setState(1543);
 			any_name();
 			}
 		}
@@ -8703,11 +8532,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final New_table_nameContext new_table_name() throws RecognitionException {
 		New_table_nameContext _localctx = new New_table_nameContext(_ctx, getState());
-		enterRule(_localctx, 140, RULE_new_table_name);
+		enterRule(_localctx, 138, RULE_new_table_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1588);
+			setState(1545);
 			any_name();
 			}
 		}
@@ -8747,11 +8576,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Column_nameContext column_name() throws RecognitionException {
 		Column_nameContext _localctx = new Column_nameContext(_ctx, getState());
-		enterRule(_localctx, 142, RULE_column_name);
+		enterRule(_localctx, 140, RULE_column_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1590);
+			setState(1547);
 			any_name();
 			}
 		}
@@ -8791,11 +8620,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Collation_nameContext collation_name() throws RecognitionException {
 		Collation_nameContext _localctx = new Collation_nameContext(_ctx, getState());
-		enterRule(_localctx, 144, RULE_collation_name);
+		enterRule(_localctx, 142, RULE_collation_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1592);
+			setState(1549);
 			any_name();
 			}
 		}
@@ -8835,11 +8664,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Foreign_tableContext foreign_table() throws RecognitionException {
 		Foreign_tableContext _localctx = new Foreign_tableContext(_ctx, getState());
-		enterRule(_localctx, 146, RULE_foreign_table);
+		enterRule(_localctx, 144, RULE_foreign_table);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1594);
+			setState(1551);
 			any_name();
 			}
 		}
@@ -8879,11 +8708,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Index_nameContext index_name() throws RecognitionException {
 		Index_nameContext _localctx = new Index_nameContext(_ctx, getState());
-		enterRule(_localctx, 148, RULE_index_name);
+		enterRule(_localctx, 146, RULE_index_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1596);
+			setState(1553);
 			any_name();
 			}
 		}
@@ -8923,11 +8752,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Trigger_nameContext trigger_name() throws RecognitionException {
 		Trigger_nameContext _localctx = new Trigger_nameContext(_ctx, getState());
-		enterRule(_localctx, 150, RULE_trigger_name);
+		enterRule(_localctx, 148, RULE_trigger_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1598);
+			setState(1555);
 			any_name();
 			}
 		}
@@ -8967,11 +8796,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final View_nameContext view_name() throws RecognitionException {
 		View_nameContext _localctx = new View_nameContext(_ctx, getState());
-		enterRule(_localctx, 152, RULE_view_name);
+		enterRule(_localctx, 150, RULE_view_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1600);
+			setState(1557);
 			any_name();
 			}
 		}
@@ -9011,11 +8840,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Module_nameContext module_name() throws RecognitionException {
 		Module_nameContext _localctx = new Module_nameContext(_ctx, getState());
-		enterRule(_localctx, 154, RULE_module_name);
+		enterRule(_localctx, 152, RULE_module_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1602);
+			setState(1559);
 			any_name();
 			}
 		}
@@ -9055,11 +8884,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Pragma_nameContext pragma_name() throws RecognitionException {
 		Pragma_nameContext _localctx = new Pragma_nameContext(_ctx, getState());
-		enterRule(_localctx, 156, RULE_pragma_name);
+		enterRule(_localctx, 154, RULE_pragma_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1604);
+			setState(1561);
 			any_name();
 			}
 		}
@@ -9099,11 +8928,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Savepoint_nameContext savepoint_name() throws RecognitionException {
 		Savepoint_nameContext _localctx = new Savepoint_nameContext(_ctx, getState());
-		enterRule(_localctx, 158, RULE_savepoint_name);
+		enterRule(_localctx, 156, RULE_savepoint_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1606);
+			setState(1563);
 			any_name();
 			}
 		}
@@ -9143,11 +8972,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Table_aliasContext table_alias() throws RecognitionException {
 		Table_aliasContext _localctx = new Table_aliasContext(_ctx, getState());
-		enterRule(_localctx, 160, RULE_table_alias);
+		enterRule(_localctx, 158, RULE_table_alias);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1608);
+			setState(1565);
 			any_name();
 			}
 		}
@@ -9187,11 +9016,11 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Transaction_nameContext transaction_name() throws RecognitionException {
 		Transaction_nameContext _localctx = new Transaction_nameContext(_ctx, getState());
-		enterRule(_localctx, 162, RULE_transaction_name);
+		enterRule(_localctx, 160, RULE_transaction_name);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(1610);
+			setState(1567);
 			any_name();
 			}
 		}
@@ -9236,14 +9065,14 @@ public class DBoyzSQLParser extends Parser {
 
 	public final Any_nameContext any_name() throws RecognitionException {
 		Any_nameContext _localctx = new Any_nameContext(_ctx, getState());
-		enterRule(_localctx, 164, RULE_any_name);
+		enterRule(_localctx, 162, RULE_any_name);
 		try {
-			setState(1619);
+			setState(1576);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(1612);
+				setState(1569);
 				match(IDENTIFIER);
 				}
 				break;
@@ -9373,25 +9202,25 @@ public class DBoyzSQLParser extends Parser {
 			case K_WITHOUT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(1613);
+				setState(1570);
 				keyword();
 				}
 				break;
 			case STRING_LITERAL:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(1614);
+				setState(1571);
 				match(STRING_LITERAL);
 				}
 				break;
 			case OPEN_PAR:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(1615);
+				setState(1572);
 				match(OPEN_PAR);
-				setState(1616);
+				setState(1573);
 				any_name();
-				setState(1617);
+				setState(1574);
 				match(CLOSE_PAR);
 				}
 				break;
@@ -9420,39 +9249,35 @@ public class DBoyzSQLParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 20);
-		case 1:
-			return precpred(_ctx, 19);
-		case 2:
 			return precpred(_ctx, 18);
-		case 3:
+		case 1:
 			return precpred(_ctx, 17);
-		case 4:
+		case 2:
 			return precpred(_ctx, 16);
-		case 5:
+		case 3:
 			return precpred(_ctx, 15);
-		case 6:
+		case 4:
 			return precpred(_ctx, 14);
-		case 7:
+		case 5:
 			return precpred(_ctx, 13);
-		case 8:
+		case 6:
 			return precpred(_ctx, 6);
-		case 9:
+		case 7:
 			return precpred(_ctx, 5);
-		case 10:
+		case 8:
 			return precpred(_ctx, 9);
-		case 11:
+		case 9:
 			return precpred(_ctx, 8);
-		case 12:
+		case 10:
 			return precpred(_ctx, 7);
-		case 13:
+		case 11:
 			return precpred(_ctx, 4);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u009f\u0658\4\2\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\u009f\u062d\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -9461,668 +9286,651 @@ public class DBoyzSQLParser extends Parser {
 		",\t,\4-\t-\4.\t.\4/\t/\4\60\t\60\4\61\t\61\4\62\t\62\4\63\t\63\4\64\t"+
 		"\64\4\65\t\65\4\66\t\66\4\67\t\67\48\t8\49\t9\4:\t:\4;\t;\4<\t<\4=\t="+
 		"\4>\t>\4?\t?\4@\t@\4A\tA\4B\tB\4C\tC\4D\tD\4E\tE\4F\tF\4G\tG\4H\tH\4I"+
-		"\tI\4J\tJ\4K\tK\4L\tL\4M\tM\4N\tN\4O\tO\4P\tP\4Q\tQ\4R\tR\4S\tS\4T\tT"+
-		"\3\2\3\2\7\2\u00ab\n\2\f\2\16\2\u00ae\13\2\3\2\3\2\3\3\3\3\3\3\3\4\7\4"+
-		"\u00b6\n\4\f\4\16\4\u00b9\13\4\3\4\3\4\6\4\u00bd\n\4\r\4\16\4\u00be\3"+
-		"\4\7\4\u00c2\n\4\f\4\16\4\u00c5\13\4\3\4\7\4\u00c8\n\4\f\4\16\4\u00cb"+
-		"\13\4\3\5\3\5\3\5\5\5\u00d0\n\5\5\5\u00d2\n\5\3\5\3\5\3\5\3\5\3\5\3\5"+
+		"\tI\4J\tJ\4K\tK\4L\tL\4M\tM\4N\tN\4O\tO\4P\tP\4Q\tQ\4R\tR\4S\tS\3\2\3"+
+		"\2\7\2\u00a9\n\2\f\2\16\2\u00ac\13\2\3\2\3\2\3\3\3\3\3\3\3\4\7\4\u00b4"+
+		"\n\4\f\4\16\4\u00b7\13\4\3\4\3\4\6\4\u00bb\n\4\r\4\16\4\u00bc\3\4\7\4"+
+		"\u00c0\n\4\f\4\16\4\u00c3\13\4\3\4\7\4\u00c6\n\4\f\4\16\4\u00c9\13\4\3"+
+		"\5\3\5\3\5\5\5\u00ce\n\5\5\5\u00d0\n\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5"+
 		"\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3"+
-		"\5\3\5\3\5\3\5\3\5\3\5\5\5\u00f1\n\5\3\6\3\6\3\6\3\6\3\6\5\6\u00f8\n\6"+
-		"\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0100\n\6\3\6\5\6\u0103\n\6\3\7\3\7\3\7\3"+
-		"\7\3\7\3\7\3\7\5\7\u010c\n\7\3\b\3\b\5\b\u0110\n\b\3\b\3\b\3\b\3\b\3\t"+
-		"\3\t\5\t\u0118\n\t\3\t\3\t\5\t\u011c\n\t\5\t\u011e\n\t\3\n\3\n\3\n\5\n"+
-		"\u0123\n\n\5\n\u0125\n\n\3\13\3\13\5\13\u0129\n\13\3\13\3\13\3\13\7\13"+
-		"\u012e\n\13\f\13\16\13\u0131\13\13\5\13\u0133\n\13\3\13\3\13\3\13\5\13"+
-		"\u0138\n\13\3\13\3\13\5\13\u013c\n\13\3\13\6\13\u013f\n\13\r\13\16\13"+
-		"\u0140\3\13\3\13\3\13\3\13\3\13\7\13\u0148\n\13\f\13\16\13\u014b\13\13"+
-		"\5\13\u014d\n\13\3\13\3\13\3\13\3\13\5\13\u0153\n\13\5\13\u0155\n\13\3"+
-		"\f\3\f\5\f\u0159\n\f\3\f\3\f\3\f\3\f\5\f\u015f\n\f\3\f\3\f\3\f\5\f\u0164"+
-		"\n\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\7\f\u016d\n\f\f\f\16\f\u0170\13\f\3\f"+
-		"\3\f\3\f\5\f\u0175\n\f\3\r\3\r\5\r\u0179\n\r\3\r\3\r\3\r\3\r\5\r\u017f"+
-		"\n\r\3\r\3\r\3\r\5\r\u0184\n\r\3\r\3\r\3\r\3\r\3\r\7\r\u018b\n\r\f\r\16"+
-		"\r\u018e\13\r\3\r\3\r\7\r\u0192\n\r\f\r\16\r\u0195\13\r\3\r\3\r\3\r\5"+
-		"\r\u019a\n\r\3\r\3\r\5\r\u019e\n\r\3\16\3\16\5\16\u01a2\n\16\3\16\3\16"+
-		"\3\16\3\16\5\16\u01a8\n\16\3\16\3\16\3\16\5\16\u01ad\n\16\3\16\3\16\3"+
-		"\16\3\16\3\16\5\16\u01b4\n\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\7\16"+
-		"\u01bd\n\16\f\16\16\16\u01c0\13\16\5\16\u01c2\n\16\5\16\u01c4\n\16\3\16"+
-		"\3\16\3\16\3\16\5\16\u01ca\n\16\3\16\3\16\3\16\3\16\5\16\u01d0\n\16\3"+
-		"\16\3\16\5\16\u01d4\n\16\3\16\3\16\3\16\3\16\3\16\5\16\u01db\n\16\3\16"+
-		"\3\16\6\16\u01df\n\16\r\16\16\16\u01e0\3\16\3\16\3\17\3\17\5\17\u01e7"+
-		"\n\17\3\17\3\17\3\17\3\17\5\17\u01ed\n\17\3\17\3\17\3\17\5\17\u01f2\n"+
-		"\17\3\17\3\17\3\17\3\17\3\20\3\20\3\20\3\20\3\20\3\20\5\20\u01fe\n\20"+
-		"\3\20\3\20\3\20\5\20\u0203\n\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\7\20"+
-		"\u020c\n\20\f\20\16\20\u020f\13\20\3\20\3\20\5\20\u0213\n\20\3\21\5\21"+
-		"\u0216\n\21\3\21\3\21\3\21\3\21\3\21\5\21\u021d\n\21\3\22\5\22\u0220\n"+
-		"\22\3\22\3\22\3\22\3\22\3\22\5\22\u0227\n\22\3\22\3\22\3\22\3\22\3\22"+
-		"\7\22\u022e\n\22\f\22\16\22\u0231\13\22\5\22\u0233\n\22\3\22\3\22\3\22"+
-		"\3\22\5\22\u0239\n\22\5\22\u023b\n\22\3\23\3\23\5\23\u023f\n\23\3\23\3"+
-		"\23\3\24\3\24\3\24\3\24\5\24\u0247\n\24\3\24\3\24\3\24\5\24\u024c\n\24"+
-		"\3\24\3\24\3\25\3\25\3\25\3\25\5\25\u0254\n\25\3\25\3\25\3\25\5\25\u0259"+
-		"\n\25\3\25\3\25\3\26\3\26\3\26\3\26\5\26\u0261\n\26\3\26\3\26\3\26\5\26"+
-		"\u0266\n\26\3\26\3\26\3\27\3\27\3\27\3\27\5\27\u026e\n\27\3\27\3\27\3"+
-		"\27\5\27\u0273\n\27\3\27\3\27\3\30\5\30\u0278\n\30\3\30\3\30\3\30\3\30"+
-		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\5\30"+
-		"\u028b\n\30\3\30\3\30\3\30\3\30\5\30\u0291\n\30\3\30\3\30\3\30\3\30\3"+
-		"\30\7\30\u0298\n\30\f\30\16\30\u029b\13\30\3\30\3\30\5\30\u029f\n\30\3"+
-		"\30\3\30\3\30\3\30\3\30\7\30\u02a6\n\30\f\30\16\30\u02a9\13\30\3\30\3"+
-		"\30\3\30\3\30\3\30\3\30\7\30\u02b1\n\30\f\30\16\30\u02b4\13\30\3\30\3"+
-		"\30\7\30\u02b8\n\30\f\30\16\30\u02bb\13\30\3\30\3\30\3\30\5\30\u02c0\n"+
-		"\30\3\31\3\31\3\31\3\31\5\31\u02c6\n\31\3\31\3\31\3\31\3\31\3\31\3\31"+
-		"\3\31\5\31\u02cf\n\31\3\32\3\32\3\32\3\32\3\32\5\32\u02d6\n\32\3\32\3"+
-		"\32\5\32\u02da\n\32\5\32\u02dc\n\32\3\33\3\33\5\33\u02e0\n\33\3\33\3\33"+
-		"\3\34\3\34\3\34\5\34\u02e7\n\34\5\34\u02e9\n\34\3\34\3\34\5\34\u02ed\n"+
-		"\34\3\34\5\34\u02f0\n\34\3\35\3\35\3\35\3\36\3\36\5\36\u02f7\n\36\3\36"+
-		"\3\36\3\36\7\36\u02fc\n\36\f\36\16\36\u02ff\13\36\5\36\u0301\n\36\3\36"+
-		"\3\36\3\36\3\36\3\36\3\36\7\36\u0309\n\36\f\36\16\36\u030c\13\36\5\36"+
-		"\u030e\n\36\3\36\3\36\3\36\3\36\5\36\u0314\n\36\5\36\u0316\n\36\3\37\3"+
-		"\37\5\37\u031a\n\37\3\37\3\37\3\37\7\37\u031f\n\37\f\37\16\37\u0322\13"+
-		"\37\5\37\u0324\n\37\3\37\3\37\3\37\3\37\7\37\u032a\n\37\f\37\16\37\u032d"+
-		"\13\37\3\37\3\37\3\37\3\37\3\37\7\37\u0334\n\37\f\37\16\37\u0337\13\37"+
-		"\5\37\u0339\n\37\3\37\3\37\3\37\3\37\5\37\u033f\n\37\5\37\u0341\n\37\3"+
-		" \5 \u0344\n \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \5 \u0351\n \3 \3 \3 \3"+
-		" \3 \3 \3 \3 \3 \3 \7 \u035d\n \f \16 \u0360\13 \3 \3 \5 \u0364\n \3!"+
-		"\5!\u0367\n!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\3!\5!\u0374\n!\3!\3!\3!\3!"+
-		"\3!\3!\3!\3!\3!\3!\7!\u0380\n!\f!\16!\u0383\13!\3!\3!\5!\u0387\n!\3!\3"+
-		"!\3!\3!\3!\7!\u038e\n!\f!\16!\u0391\13!\5!\u0393\n!\3!\3!\3!\3!\5!\u0399"+
-		"\n!\5!\u039b\n!\3\"\3\"\3#\3#\5#\u03a1\n#\3#\7#\u03a4\n#\f#\16#\u03a7"+
-		"\13#\3$\6$\u03aa\n$\r$\16$\u03ab\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\5$\u03b8"+
-		"\n$\3%\3%\5%\u03bc\n%\3%\3%\3%\5%\u03c1\n%\3%\3%\5%\u03c5\n%\3%\5%\u03c8"+
-		"\n%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\3%\5%\u03da\n%\3%\3%"+
-		"\3%\5%\u03df\n%\3&\3&\3&\5&\u03e4\n&\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3"+
-		"\'\5\'\u03ef\n\'\3\'\3\'\3\'\5\'\u03f4\n\'\3\'\3\'\3\'\3\'\5\'\u03fa\n"+
-		"\'\3\'\3\'\3\'\7\'\u03ff\n\'\f\'\16\'\u0402\13\'\3\'\5\'\u0405\n\'\3\'"+
-		"\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u0415\n\'\3\'"+
-		"\5\'\u0418\n\'\3\'\3\'\3\'\5\'\u041d\n\'\3\'\3\'\3\'\3\'\5\'\u0423\n\'"+
-		"\3\'\3\'\3\'\3\'\3\'\6\'\u042a\n\'\r\'\16\'\u042b\3\'\3\'\5\'\u0430\n"+
-		"\'\3\'\3\'\3\'\5\'\u0435\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3"+
-		"\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'"+
-		"\5\'\u0453\n\'\3\'\3\'\3\'\5\'\u0458\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3"+
-		"\'\3\'\3\'\5\'\u0464\n\'\3\'\3\'\3\'\3\'\5\'\u046a\n\'\3\'\3\'\3\'\3\'"+
-		"\3\'\5\'\u0471\n\'\3\'\3\'\5\'\u0475\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\7"+
-		"\'\u047e\n\'\f\'\16\'\u0481\13\'\5\'\u0483\n\'\3\'\3\'\3\'\3\'\5\'\u0489"+
-		"\n\'\3\'\5\'\u048c\n\'\7\'\u048e\n\'\f\'\16\'\u0491\13\'\3(\3(\3(\3(\3"+
-		"(\3(\7(\u0499\n(\f(\16(\u049c\13(\3(\3(\5(\u04a0\n(\3(\3(\3(\3(\3(\3("+
-		"\3(\3(\3(\3(\5(\u04ac\n(\3(\3(\5(\u04b0\n(\7(\u04b2\n(\f(\16(\u04b5\13"+
-		"(\3(\5(\u04b8\n(\3(\3(\3(\3(\3(\5(\u04bf\n(\5(\u04c1\n(\3)\3)\3)\3)\3"+
-		")\3)\5)\u04c9\n)\3)\3)\3*\3*\3*\5*\u04d0\n*\3*\5*\u04d3\n*\3+\3+\5+\u04d7"+
-		"\n+\3+\3+\3+\5+\u04dc\n+\3+\3+\3+\3+\7+\u04e2\n+\f+\16+\u04e5\13+\3+\3"+
-		"+\3+\3+\3+\3+\3+\3+\3+\3+\3+\3+\3+\3+\7+\u04f5\n+\f+\16+\u04f8\13+\3+"+
-		"\3+\3+\5+\u04fd\n+\3,\3,\5,\u0501\n,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,"+
-		"\3,\7,\u050f\n,\f,\16,\u0512\13,\3-\3-\3-\5-\u0517\n-\3-\3-\3-\3-\3-\3"+
-		"-\5-\u051f\n-\3.\3.\3.\5.\u0524\n.\3.\5.\u0527\n.\3/\3/\3/\5/\u052c\n"+
-		"/\3\60\3\60\3\60\3\60\3\60\7\60\u0533\n\60\f\60\16\60\u0536\13\60\3\60"+
-		"\3\60\5\60\u053a\n\60\3\60\3\60\3\60\3\60\3\60\3\61\3\61\3\61\3\61\3\61"+
-		"\3\61\3\61\5\61\u0548\n\61\3\61\5\61\u054b\n\61\5\61\u054d\n\61\3\62\3"+
-		"\62\3\62\5\62\u0552\n\62\3\62\3\62\5\62\u0556\n\62\3\62\5\62\u0559\n\62"+
-		"\3\62\3\62\3\62\3\62\3\62\5\62\u0560\n\62\3\62\3\62\3\62\3\62\7\62\u0566"+
-		"\n\62\f\62\16\62\u0569\13\62\3\62\5\62\u056c\n\62\3\62\3\62\5\62\u0570"+
-		"\n\62\3\62\5\62\u0573\n\62\3\62\3\62\3\62\3\62\5\62\u0579\n\62\3\62\5"+
-		"\62\u057c\n\62\5\62\u057e\n\62\3\63\3\63\3\63\3\63\3\63\7\63\u0585\n\63"+
-		"\f\63\16\63\u0588\13\63\3\64\3\64\5\64\u058c\n\64\3\64\3\64\5\64\u0590"+
-		"\n\64\3\64\3\64\5\64\u0594\n\64\3\64\5\64\u0597\n\64\3\65\3\65\3\65\3"+
-		"\65\3\65\3\65\3\65\7\65\u05a0\n\65\f\65\16\65\u05a3\13\65\3\65\3\65\5"+
-		"\65\u05a7\n\65\3\66\3\66\5\66\u05ab\n\66\3\66\3\66\3\66\3\66\3\66\7\66"+
-		"\u05b2\n\66\f\66\16\66\u05b5\13\66\3\66\5\66\u05b8\n\66\5\66\u05ba\n\66"+
-		"\3\66\3\66\3\66\3\66\3\66\3\66\7\66\u05c2\n\66\f\66\16\66\u05c5\13\66"+
-		"\3\66\3\66\5\66\u05c9\n\66\5\66\u05cb\n\66\3\66\3\66\3\66\3\66\3\66\7"+
-		"\66\u05d2\n\66\f\66\16\66\u05d5\13\66\3\66\3\66\3\66\3\66\3\66\3\66\7"+
-		"\66\u05dd\n\66\f\66\16\66\u05e0\13\66\3\66\3\66\7\66\u05e4\n\66\f\66\16"+
-		"\66\u05e7\13\66\5\66\u05e9\n\66\3\67\3\67\3\67\7\67\u05ee\n\67\f\67\16"+
-		"\67\u05f1\13\67\38\38\58\u05f5\n8\39\39\39\39\39\59\u05fc\n9\3:\3:\3:"+
-		"\3:\3:\7:\u0603\n:\f:\16:\u0606\13:\3:\3:\5:\u060a\n:\3;\5;\u060d\n;\3"+
-		";\3;\3<\3<\3=\3=\3>\3>\3>\3>\3>\3>\3>\3>\3>\3>\3>\3>\5>\u0621\n>\3?\3"+
-		"?\3@\3@\5@\u0627\n@\3A\3A\3B\3B\3C\3C\3D\3D\3E\3E\3F\3F\3G\3G\3H\3H\3"+
-		"I\3I\3J\3J\3K\3K\3L\3L\3M\3M\3N\3N\3O\3O\3P\3P\3Q\3Q\3R\3R\3S\3S\3T\3"+
-		"T\3T\3T\3T\3T\3T\5T\u0656\nT\3T\2\3LU\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080"+
-		"\u0082\u0084\u0086\u0088\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098"+
-		"\u009a\u009c\u009e\u00a0\u00a2\u00a4\u00a6\2\24\5\2<<GGTT\4\2\61\61DD"+
-		"\4\2\7\7ll\3\2\u0085\u0086\4\2$$>>\7\2\33\33JJSS||\177\177\4\2\t\t\16"+
-		"\17\3\2\n\13\3\2\20\23\3\2\24\27\6\2OOcceexx\4\2==\u008d\u008d\5\2\33"+
-		"\33JJ\177\177\4\2\37\37@@\6\2\668jj\u0098\u0098\u009a\u009b\4\2\n\fhh"+
-		"\4\2\u0097\u0097\u009a\u009a\3\2\33\u0096\u0750\2\u00ac\3\2\2\2\4\u00b1"+
-		"\3\2\2\2\6\u00b7\3\2\2\2\b\u00d1\3\2\2\2\n\u00f2\3\2\2\2\f\u0104\3\2\2"+
-		"\2\16\u010d\3\2\2\2\20\u0115\3\2\2\2\22\u011f\3\2\2\2\24\u0132\3\2\2\2"+
-		"\26\u0156\3\2\2\2\30\u0176\3\2\2\2\32\u019f\3\2\2\2\34\u01e4\3\2\2\2\36"+
-		"\u01f7\3\2\2\2 \u0215\3\2\2\2\"\u021f\3\2\2\2$\u023c\3\2\2\2&\u0242\3"+
-		"\2\2\2(\u024f\3\2\2\2*\u025c\3\2\2\2,\u0269\3\2\2\2.\u0277\3\2\2\2\60"+
-		"\u02c1\3\2\2\2\62\u02d0\3\2\2\2\64\u02dd\3\2\2\2\66\u02e3\3\2\2\28\u02f1"+
-		"\3\2\2\2:\u0300\3\2\2\2<\u0323\3\2\2\2>\u0343\3\2\2\2@\u0366\3\2\2\2B"+
-		"\u039c\3\2\2\2D\u039e\3\2\2\2F\u03a9\3\2\2\2H\u03bb\3\2\2\2J\u03e3\3\2"+
-		"\2\2L\u0434\3\2\2\2N\u0492\3\2\2\2P\u04c2\3\2\2\2R\u04cc\3\2\2\2T\u04d6"+
-		"\3\2\2\2V\u04fe\3\2\2\2X\u0516\3\2\2\2Z\u0520\3\2\2\2\\\u052b\3\2\2\2"+
-		"^\u052d\3\2\2\2`\u054c\3\2\2\2b\u057d\3\2\2\2d\u057f\3\2\2\2f\u0596\3"+
-		"\2\2\2h\u05a6\3\2\2\2j\u05e8\3\2\2\2l\u05ea\3\2\2\2n\u05f4\3\2\2\2p\u05fb"+
-		"\3\2\2\2r\u05fd\3\2\2\2t\u060c\3\2\2\2v\u0610\3\2\2\2x\u0612\3\2\2\2z"+
-		"\u0620\3\2\2\2|\u0622\3\2\2\2~\u0626\3\2\2\2\u0080\u0628\3\2\2\2\u0082"+
-		"\u062a\3\2\2\2\u0084\u062c\3\2\2\2\u0086\u062e\3\2\2\2\u0088\u0630\3\2"+
-		"\2\2\u008a\u0632\3\2\2\2\u008c\u0634\3\2\2\2\u008e\u0636\3\2\2\2\u0090"+
-		"\u0638\3\2\2\2\u0092\u063a\3\2\2\2\u0094\u063c\3\2\2\2\u0096\u063e\3\2"+
-		"\2\2\u0098\u0640\3\2\2\2\u009a\u0642\3\2\2\2\u009c\u0644\3\2\2\2\u009e"+
-		"\u0646\3\2\2\2\u00a0\u0648\3\2\2\2\u00a2\u064a\3\2\2\2\u00a4\u064c\3\2"+
-		"\2\2\u00a6\u0655\3\2\2\2\u00a8\u00ab\5\6\4\2\u00a9\u00ab\5\4\3\2\u00aa"+
-		"\u00a8\3\2\2\2\u00aa\u00a9\3\2\2\2\u00ab\u00ae\3\2\2\2\u00ac\u00aa\3\2"+
-		"\2\2\u00ac\u00ad\3\2\2\2\u00ad\u00af\3\2\2\2\u00ae\u00ac\3\2\2\2\u00af"+
-		"\u00b0\7\2\2\3\u00b0\3\3\2\2\2\u00b1\u00b2\7\u009f\2\2\u00b2\u00b3\b\3"+
-		"\1\2\u00b3\5\3\2\2\2\u00b4\u00b6\7\3\2\2\u00b5\u00b4\3\2\2\2\u00b6\u00b9"+
-		"\3\2\2\2\u00b7\u00b5\3\2\2\2\u00b7\u00b8\3\2\2\2\u00b8\u00ba\3\2\2\2\u00b9"+
-		"\u00b7\3\2\2\2\u00ba\u00c3\5\b\5\2\u00bb\u00bd\7\3\2\2\u00bc\u00bb\3\2"+
-		"\2\2\u00bd\u00be\3\2\2\2\u00be\u00bc\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf"+
-		"\u00c0\3\2\2\2\u00c0\u00c2\5\b\5\2\u00c1\u00bc\3\2\2\2\u00c2\u00c5\3\2"+
-		"\2\2\u00c3\u00c1\3\2\2\2\u00c3\u00c4\3\2\2\2\u00c4\u00c9\3\2\2\2\u00c5"+
-		"\u00c3\3\2\2\2\u00c6\u00c8\7\3\2\2\u00c7\u00c6\3\2\2\2\u00c8\u00cb\3\2"+
-		"\2\2\u00c9\u00c7\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\7\3\2\2\2\u00cb\u00c9"+
-		"\3\2\2\2\u00cc\u00cf\7I\2\2\u00cd\u00ce\7t\2\2\u00ce\u00d0\7q\2\2\u00cf"+
-		"\u00cd\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00d2\3\2\2\2\u00d1\u00cc\3\2"+
-		"\2\2\u00d1\u00d2\3\2\2\2\u00d2\u00f0\3\2\2\2\u00d3\u00f1\5\n\6\2\u00d4"+
-		"\u00f1\5\f\7\2\u00d5\u00f1\5\16\b\2\u00d6\u00f1\5\20\t\2\u00d7\u00f1\5"+
-		"\22\n\2\u00d8\u00f1\5\24\13\2\u00d9\u00f1\5\26\f\2\u00da\u00f1\5\30\r"+
-		"\2\u00db\u00f1\5\32\16\2\u00dc\u00f1\5\34\17\2\u00dd\u00f1\5\36\20\2\u00de"+
-		"\u00f1\5 \21\2\u00df\u00f1\5\"\22\2\u00e0\u00f1\5$\23\2\u00e1\u00f1\5"+
-		"&\24\2\u00e2\u00f1\5(\25\2\u00e3\u00f1\5*\26\2\u00e4\u00f1\5,\27\2\u00e5"+
-		"\u00f1\5.\30\2\u00e6\u00f1\5\60\31\2\u00e7\u00f1\5\62\32\2\u00e8\u00f1"+
-		"\5\64\33\2\u00e9\u00f1\5\66\34\2\u00ea\u00f1\58\35\2\u00eb\u00f1\5:\36"+
-		"\2\u00ec\u00f1\5<\37\2\u00ed\u00f1\5> \2\u00ee\u00f1\5@!\2\u00ef\u00f1"+
-		"\5B\"\2\u00f0\u00d3\3\2\2\2\u00f0\u00d4\3\2\2\2\u00f0\u00d5\3\2\2\2\u00f0"+
-		"\u00d6\3\2\2\2\u00f0\u00d7\3\2\2\2\u00f0\u00d8\3\2\2\2\u00f0\u00d9\3\2"+
-		"\2\2\u00f0\u00da\3\2\2\2\u00f0\u00db\3\2\2\2\u00f0\u00dc\3\2\2\2\u00f0"+
-		"\u00dd\3\2\2\2\u00f0\u00de\3\2\2\2\u00f0\u00df\3\2\2\2\u00f0\u00e0\3\2"+
-		"\2\2\u00f0\u00e1\3\2\2\2\u00f0\u00e2\3\2\2\2\u00f0\u00e3\3\2\2\2\u00f0"+
-		"\u00e4\3\2\2\2\u00f0\u00e5\3\2\2\2\u00f0\u00e6\3\2\2\2\u00f0\u00e7\3\2"+
-		"\2\2\u00f0\u00e8\3\2\2\2\u00f0\u00e9\3\2\2\2\u00f0\u00ea\3\2\2\2\u00f0"+
-		"\u00eb\3\2\2\2\u00f0\u00ec\3\2\2\2\u00f0\u00ed\3\2\2\2\u00f0\u00ee\3\2"+
-		"\2\2\u00f0\u00ef\3\2\2\2\u00f1\t\3\2\2\2\u00f2\u00f3\7 \2\2\u00f3\u00f7"+
-		"\7\u0084\2\2\u00f4\u00f5\5\u0088E\2\u00f5\u00f6\7\4\2\2\u00f6\u00f8\3"+
-		"\2\2\2\u00f7\u00f4\3\2\2\2\u00f7\u00f8\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9"+
-		"\u0102\5\u008aF\2\u00fa\u00fb\7{\2\2\u00fb\u00fc\7\u0088\2\2\u00fc\u0103"+
-		"\5\u008eH\2\u00fd\u00ff\7\35\2\2\u00fe\u0100\7\60\2\2\u00ff\u00fe\3\2"+
-		"\2\2\u00ff\u0100\3\2\2\2\u0100\u0101\3\2\2\2\u0101\u0103\5D#\2\u0102\u00fa"+
-		"\3\2\2\2\u0102\u00fd\3\2\2\2\u0103\13\3\2\2\2\u0104\u010b\7!\2\2\u0105"+
-		"\u010c\5\u0088E\2\u0106\u010c\5\u008cG\2\u0107\u0108\5\u0088E\2\u0108"+
-		"\u0109\7\4\2\2\u0109\u010a\5\u008cG\2\u010a\u010c\3\2\2\2\u010b\u0105"+
-		"\3\2\2\2\u010b\u0106\3\2\2\2\u010b\u0107\3\2\2\2\u010b\u010c\3\2\2\2\u010c"+
-		"\r\3\2\2\2\u010d\u010f\7%\2\2\u010e\u0110\79\2\2\u010f\u010e\3\2\2\2\u010f"+
-		"\u0110\3\2\2\2\u0110\u0111\3\2\2\2\u0111\u0112\5L\'\2\u0112\u0113\7#\2"+
-		"\2\u0113\u0114\5\u0088E\2\u0114\17\3\2\2\2\u0115\u0117\7(\2\2\u0116\u0118"+
-		"\t\2\2\2\u0117\u0116\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u011d\3\2\2\2\u0119"+
-		"\u011b\7\u0089\2\2\u011a\u011c\5\u00a4S\2\u011b\u011a\3\2\2\2\u011b\u011c"+
-		"\3\2\2\2\u011c\u011e\3\2\2\2\u011d\u0119\3\2\2\2\u011d\u011e\3\2\2\2\u011e"+
-		"\21\3\2\2\2\u011f\u0124\t\3\2\2\u0120\u0122\7\u0089\2\2\u0121\u0123\5"+
-		"\u00a4S\2\u0122\u0121\3\2\2\2\u0122\u0123\3\2\2\2\u0123\u0125\3\2\2\2"+
-		"\u0124\u0120\3\2\2\2\u0124\u0125\3\2\2\2\u0125\23\3\2\2\2\u0126\u0128"+
-		"\7\u0095\2\2\u0127\u0129\7v\2\2\u0128\u0127\3\2\2\2\u0128\u0129\3\2\2"+
-		"\2\u0129\u012a\3\2\2\2\u012a\u012f\5^\60\2\u012b\u012c\7\7\2\2\u012c\u012e"+
-		"\5^\60\2\u012d\u012b\3\2\2\2\u012e\u0131\3\2\2\2\u012f\u012d\3\2\2\2\u012f"+
-		"\u0130\3\2\2\2\u0130\u0133\3\2\2\2\u0131\u012f\3\2\2\2\u0132\u0126\3\2"+
-		"\2\2\u0132\u0133\3\2\2\2\u0133\u0134\3\2\2\2\u0134\u013e\5j\66\2\u0135"+
-		"\u0137\7\u008b\2\2\u0136\u0138\7\37\2\2\u0137\u0136\3\2\2\2\u0137\u0138"+
-		"\3\2\2\2\u0138\u013c\3\2\2\2\u0139\u013c\7\\\2\2\u013a\u013c\7F\2\2\u013b"+
-		"\u0135\3\2\2\2\u013b\u0139\3\2\2\2\u013b\u013a\3\2\2\2\u013c\u013d\3\2"+
-		"\2\2\u013d\u013f\5j\66\2\u013e\u013b\3\2\2\2\u013f\u0140\3\2\2\2\u0140"+
-		"\u013e\3\2\2\2\u0140\u0141\3\2\2\2\u0141\u014c\3\2\2\2\u0142\u0143\7o"+
-		"\2\2\u0143\u0144\7*\2\2\u0144\u0149\5Z.\2\u0145\u0146\7\7\2\2\u0146\u0148"+
-		"\5Z.\2\u0147\u0145\3\2\2\2\u0148\u014b\3\2\2\2\u0149\u0147\3\2\2\2\u0149"+
-		"\u014a\3\2\2\2\u014a\u014d\3\2\2\2\u014b\u0149\3\2\2\2\u014c\u0142\3\2"+
-		"\2\2\u014c\u014d\3\2\2\2\u014d\u0154\3\2\2\2\u014e\u014f\7d\2\2\u014f"+
-		"\u0152\5L\'\2\u0150\u0151\t\4\2\2\u0151\u0153\5L\'\2\u0152\u0150\3\2\2"+
-		"\2\u0152\u0153\3\2\2\2\u0153\u0155\3\2\2\2\u0154\u014e\3\2\2\2\u0154\u0155"+
-		"\3\2\2\2\u0155\25\3\2\2\2\u0156\u0158\7\64\2\2\u0157\u0159\7\u008c\2\2"+
-		"\u0158\u0157\3\2\2\2\u0158\u0159\3\2\2\2\u0159\u015a\3\2\2\2\u015a\u015e"+
-		"\7V\2\2\u015b\u015c\7R\2\2\u015c\u015d\7h\2\2\u015d\u015f\7H\2\2\u015e"+
-		"\u015b\3\2\2\2\u015e\u015f\3\2\2\2\u015f\u0163\3\2\2\2\u0160\u0161\5\u0088"+
-		"E\2\u0161\u0162\7\4\2\2\u0162\u0164\3\2\2\2\u0163\u0160\3\2\2\2\u0163"+
-		"\u0164\3\2\2\2\u0164\u0165\3\2\2\2\u0165\u0166\5\u0096L\2\u0166\u0167"+
-		"\7m\2\2\u0167\u0168\5\u008aF\2\u0168\u0169\7\5\2\2\u0169\u016e\5R*\2\u016a"+
-		"\u016b\7\7\2\2\u016b\u016d\5R*\2\u016c\u016a\3\2\2\2\u016d\u0170\3\2\2"+
-		"\2\u016e\u016c\3\2\2\2\u016e\u016f\3\2\2\2\u016f\u0171\3\2\2\2\u0170\u016e"+
-		"\3\2\2\2\u0171\u0174\7\6\2\2\u0172\u0173\7\u0094\2\2\u0173\u0175\5L\'"+
-		"\2\u0174\u0172\3\2\2\2\u0174\u0175\3\2\2\2\u0175\27\3\2\2\2\u0176\u0178"+
-		"\7\64\2\2\u0177\u0179\t\5\2\2\u0178\u0177\3\2\2\2\u0178\u0179\3\2\2\2"+
-		"\u0179\u017a\3\2\2\2\u017a\u017e\7\u0084\2\2\u017b\u017c\7R\2\2\u017c"+
-		"\u017d\7h\2\2\u017d\u017f\7H\2\2\u017e\u017b\3\2\2\2\u017e\u017f\3\2\2"+
-		"\2\u017f\u0183\3\2\2\2\u0180\u0181\5\u0088E\2\u0181\u0182\7\4\2\2\u0182"+
-		"\u0184\3\2\2\2\u0183\u0180\3\2\2\2\u0183\u0184\3\2\2\2\u0184\u0185\3\2"+
-		"\2\2\u0185\u019d\5\u008aF\2\u0186\u0187\7\5\2\2\u0187\u018c\5D#\2\u0188"+
-		"\u0189\7\7\2\2\u0189\u018b\5D#\2\u018a\u0188\3\2\2\2\u018b\u018e\3\2\2"+
-		"\2\u018c\u018a\3\2\2\2\u018c\u018d\3\2\2\2\u018d\u0193\3\2\2\2\u018e\u018c"+
-		"\3\2\2\2\u018f\u0190\7\7\2\2\u0190\u0192\5T+\2\u0191\u018f\3\2\2\2\u0192"+
-		"\u0195\3\2\2\2\u0193\u0191\3\2\2\2\u0193\u0194\3\2\2\2\u0194\u0196\3\2"+
-		"\2\2\u0195\u0193\3\2\2\2\u0196\u0199\7\6\2\2\u0197\u0198\7\u0096\2\2\u0198"+
-		"\u019a\7\u0097\2\2\u0199\u0197\3\2\2\2\u0199\u019a\3\2\2\2\u019a\u019e"+
-		"\3\2\2\2\u019b\u019c\7#\2\2\u019c\u019e\5<\37\2\u019d\u0186\3\2\2\2\u019d"+
-		"\u019b\3\2\2\2\u019e\31\3\2\2\2\u019f\u01a1\7\64\2\2\u01a0\u01a2\t\5\2"+
-		"\2\u01a1\u01a0\3\2\2\2\u01a1\u01a2\3\2\2\2\u01a2\u01a3\3\2\2\2\u01a3\u01a7"+
-		"\7\u008a\2\2\u01a4\u01a5\7R\2\2\u01a5\u01a6\7h\2\2\u01a6\u01a8\7H\2\2"+
-		"\u01a7\u01a4\3\2\2\2\u01a7\u01a8\3\2\2\2\u01a8\u01ac\3\2\2\2\u01a9\u01aa"+
-		"\5\u0088E\2\u01aa\u01ab\7\4\2\2\u01ab\u01ad\3\2\2\2\u01ac\u01a9\3\2\2"+
-		"\2\u01ac\u01ad\3\2\2\2\u01ad\u01ae\3\2\2\2\u01ae\u01b3\5\u0098M\2\u01af"+
-		"\u01b4\7\'\2\2\u01b0\u01b4\7\36\2\2\u01b1\u01b2\7[\2\2\u01b2\u01b4\7k"+
-		"\2\2\u01b3\u01af\3\2\2\2\u01b3\u01b0\3\2\2\2\u01b3\u01b1\3\2\2\2\u01b3"+
-		"\u01b4\3\2\2\2\u01b4\u01c3\3\2\2\2\u01b5\u01c4\7=\2\2\u01b6\u01c4\7Z\2"+
-		"\2\u01b7\u01c1\7\u008d\2\2\u01b8\u01b9\7k\2\2\u01b9\u01be\5\u0090I\2\u01ba"+
-		"\u01bb\7\7\2\2\u01bb\u01bd\5\u0090I\2\u01bc\u01ba\3\2\2\2\u01bd\u01c0"+
-		"\3\2\2\2\u01be\u01bc\3\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01c2\3\2\2\2\u01c0"+
-		"\u01be\3\2\2\2\u01c1\u01b8\3\2\2\2\u01c1\u01c2\3\2\2\2\u01c2\u01c4\3\2"+
-		"\2\2\u01c3\u01b5\3\2\2\2\u01c3\u01b6\3\2\2\2\u01c3\u01b7\3\2\2\2\u01c4"+
-		"\u01c5\3\2\2\2\u01c5\u01c9\7m\2\2\u01c6\u01c7\5\u0088E\2\u01c7\u01c8\7"+
-		"\4\2\2\u01c8\u01ca\3\2\2\2\u01c9\u01c6\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca"+
-		"\u01cb\3\2\2\2\u01cb\u01cf\5\u008aF\2\u01cc\u01cd\7K\2\2\u01cd\u01ce\7"+
-		"B\2\2\u01ce\u01d0\7\u0080\2\2\u01cf\u01cc\3\2\2\2\u01cf\u01d0\3\2\2\2"+
-		"\u01d0\u01d3\3\2\2\2\u01d1\u01d2\7\u0093\2\2\u01d2\u01d4\5L\'\2\u01d3"+
-		"\u01d1\3\2\2\2\u01d3\u01d4\3\2\2\2\u01d4\u01d5\3\2\2\2\u01d5\u01de\7("+
-		"\2\2\u01d6\u01db\5> \2\u01d7\u01db\5.\30\2\u01d8\u01db\5 \21\2\u01d9\u01db"+
-		"\5<\37\2\u01da\u01d6\3\2\2\2\u01da\u01d7\3\2\2\2\u01da\u01d8\3\2\2\2\u01da"+
-		"\u01d9\3\2\2\2\u01db\u01dc\3\2\2\2\u01dc\u01dd\7\3\2\2\u01dd\u01df\3\2"+
-		"\2\2\u01de\u01da\3\2\2\2\u01df\u01e0\3\2\2\2\u01e0\u01de\3\2\2\2\u01e0"+
-		"\u01e1\3\2\2\2\u01e1\u01e2\3\2\2\2\u01e2\u01e3\7D\2\2\u01e3\33\3\2\2\2"+
-		"\u01e4\u01e6\7\64\2\2\u01e5\u01e7\t\5\2\2\u01e6\u01e5\3\2\2\2\u01e6\u01e7"+
-		"\3\2\2\2\u01e7\u01e8\3\2\2\2\u01e8\u01ec\7\u0091\2\2\u01e9\u01ea\7R\2"+
-		"\2\u01ea\u01eb\7h\2\2\u01eb\u01ed\7H\2\2\u01ec\u01e9\3\2\2\2\u01ec\u01ed"+
-		"\3\2\2\2\u01ed\u01f1\3\2\2\2\u01ee\u01ef\5\u0088E\2\u01ef\u01f0\7\4\2"+
-		"\2\u01f0\u01f2\3\2\2\2\u01f1\u01ee\3\2\2\2\u01f1\u01f2\3\2\2\2\u01f2\u01f3"+
-		"\3\2\2\2\u01f3\u01f4\5\u009aN\2\u01f4\u01f5\7#\2\2\u01f5\u01f6\5<\37\2"+
-		"\u01f6\35\3\2\2\2\u01f7\u01f8\7\64\2\2\u01f8\u01f9\7\u0092\2\2\u01f9\u01fd"+
-		"\7\u0084\2\2\u01fa\u01fb\7R\2\2\u01fb\u01fc\7h\2\2\u01fc\u01fe\7H\2\2"+
-		"\u01fd\u01fa\3\2\2\2\u01fd\u01fe\3\2\2\2\u01fe\u0202\3\2\2\2\u01ff\u0200"+
-		"\5\u0088E\2\u0200\u0201\7\4\2\2\u0201\u0203\3\2\2\2\u0202\u01ff\3\2\2"+
-		"\2\u0202\u0203\3\2\2\2\u0203\u0204\3\2\2\2\u0204\u0205\5\u008aF\2\u0205"+
-		"\u0206\7\u008e\2\2\u0206\u0212\5\u009cO\2\u0207\u0208\7\5\2\2\u0208\u020d"+
-		"\5~@\2\u0209\u020a\7\7\2\2\u020a\u020c\5~@\2\u020b\u0209\3\2\2\2\u020c"+
-		"\u020f\3\2\2\2\u020d\u020b\3\2\2\2\u020d\u020e\3\2\2\2\u020e\u0210\3\2"+
-		"\2\2\u020f\u020d\3\2\2\2\u0210\u0211\7\6\2\2\u0211\u0213\3\2\2\2\u0212"+
-		"\u0207\3\2\2\2\u0212\u0213\3\2\2\2\u0213\37\3\2\2\2\u0214\u0216\5V,\2"+
-		"\u0215\u0214\3\2\2\2\u0215\u0216\3\2\2\2\u0216\u0217\3\2\2\2\u0217\u0218"+
-		"\7=\2\2\u0218\u0219\7M\2\2\u0219\u021c\5X-\2\u021a\u021b\7\u0094\2\2\u021b"+
-		"\u021d\5L\'\2\u021c\u021a\3\2\2\2\u021c\u021d\3\2\2\2\u021d!\3\2\2\2\u021e"+
-		"\u0220\5V,\2\u021f\u021e\3\2\2\2\u021f\u0220\3\2\2\2\u0220\u0221\3\2\2"+
-		"\2\u0221\u0222\7=\2\2\u0222\u0223\7M\2\2\u0223\u0226\5X-\2\u0224\u0225"+
-		"\7\u0094\2\2\u0225\u0227\5L\'\2\u0226\u0224\3\2\2\2\u0226\u0227\3\2\2"+
-		"\2\u0227\u023a\3\2\2\2\u0228\u0229\7o\2\2\u0229\u022a\7*\2\2\u022a\u022f"+
-		"\5Z.\2\u022b\u022c\7\7\2\2\u022c\u022e\5Z.\2\u022d\u022b\3\2\2\2\u022e"+
-		"\u0231\3\2\2\2\u022f\u022d\3\2\2\2\u022f\u0230\3\2\2\2\u0230\u0233\3\2"+
-		"\2\2\u0231\u022f\3\2\2\2\u0232\u0228\3\2\2\2\u0232\u0233\3\2\2\2\u0233"+
-		"\u0234\3\2\2\2\u0234\u0235\7d\2\2\u0235\u0238\5L\'\2\u0236\u0237\t\4\2"+
-		"\2\u0237\u0239\5L\'\2\u0238\u0236\3\2\2\2\u0238\u0239\3\2\2\2\u0239\u023b"+
-		"\3\2\2\2\u023a\u0232\3\2\2\2\u023a\u023b\3\2\2\2\u023b#\3\2\2\2\u023c"+
-		"\u023e\7?\2\2\u023d\u023f\79\2\2\u023e\u023d\3\2\2\2\u023e\u023f\3\2\2"+
-		"\2\u023f\u0240\3\2\2\2\u0240\u0241\5\u0088E\2\u0241%\3\2\2\2\u0242\u0243"+
-		"\7A\2\2\u0243\u0246\7V\2\2\u0244\u0245\7R\2\2\u0245\u0247\7H\2\2\u0246"+
-		"\u0244\3\2\2\2\u0246\u0247\3\2\2\2\u0247\u024b\3\2\2\2\u0248\u0249\5\u0088"+
-		"E\2\u0249\u024a\7\4\2\2\u024a\u024c\3\2\2\2\u024b\u0248\3\2\2\2\u024b"+
-		"\u024c\3\2\2\2\u024c\u024d\3\2\2\2\u024d\u024e\5\u0096L\2\u024e\'\3\2"+
-		"\2\2\u024f\u0250\7A\2\2\u0250\u0253\7\u0084\2\2\u0251\u0252\7R\2\2\u0252"+
-		"\u0254\7H\2\2\u0253\u0251\3\2\2\2\u0253\u0254\3\2\2\2\u0254\u0258\3\2"+
-		"\2\2\u0255\u0256\5\u0088E\2\u0256\u0257\7\4\2\2\u0257\u0259\3\2\2\2\u0258"+
-		"\u0255\3\2\2\2\u0258\u0259\3\2\2\2\u0259\u025a\3\2\2\2\u025a\u025b\5\u008a"+
-		"F\2\u025b)\3\2\2\2\u025c\u025d\7A\2\2\u025d\u0260\7\u008a\2\2\u025e\u025f"+
-		"\7R\2\2\u025f\u0261\7H\2\2\u0260\u025e\3\2\2\2\u0260\u0261\3\2\2\2\u0261"+
-		"\u0265\3\2\2\2\u0262\u0263\5\u0088E\2\u0263\u0264\7\4\2\2\u0264\u0266"+
-		"\3\2\2\2\u0265\u0262\3\2\2\2\u0265\u0266\3\2\2\2\u0266\u0267\3\2\2\2\u0267"+
-		"\u0268\5\u0098M\2\u0268+\3\2\2\2\u0269\u026a\7A\2\2\u026a\u026d\7\u0091"+
-		"\2\2\u026b\u026c\7R\2\2\u026c\u026e\7H\2\2\u026d\u026b\3\2\2\2\u026d\u026e"+
-		"\3\2\2\2\u026e\u0272\3\2\2\2\u026f\u0270\5\u0088E\2\u0270\u0271\7\4\2"+
-		"\2\u0271\u0273\3\2\2\2\u0272\u026f\3\2\2\2\u0272\u0273\3\2\2\2\u0273\u0274"+
-		"\3\2\2\2\u0274\u0275\5\u009aN\2\u0275-\3\2\2\2\u0276\u0278\5V,\2\u0277"+
-		"\u0276\3\2\2\2\u0277\u0278\3\2\2\2\u0278\u028a\3\2\2\2\u0279\u028b\7Z"+
-		"\2\2\u027a\u028b\7|\2\2\u027b\u027c\7Z\2\2\u027c\u027d\7n\2\2\u027d\u028b"+
-		"\7|\2\2\u027e\u027f\7Z\2\2\u027f\u0280\7n\2\2\u0280\u028b\7\177\2\2\u0281"+
-		"\u0282\7Z\2\2\u0282\u0283\7n\2\2\u0283\u028b\7\33\2\2\u0284\u0285\7Z\2"+
-		"\2\u0285\u0286\7n\2\2\u0286\u028b\7J\2\2\u0287\u0288\7Z\2\2\u0288\u0289"+
-		"\7n\2\2\u0289\u028b\7S\2\2\u028a\u0279\3\2\2\2\u028a\u027a\3\2\2\2\u028a"+
-		"\u027b\3\2\2\2\u028a\u027e\3\2\2\2\u028a\u0281\3\2\2\2\u028a\u0284\3\2"+
-		"\2\2\u028a\u0287\3\2\2\2\u028b\u028c\3\2\2\2\u028c\u0290\7]\2\2\u028d"+
-		"\u028e\5\u0088E\2\u028e\u028f\7\4\2\2\u028f\u0291\3\2\2\2\u0290\u028d"+
-		"\3\2\2\2\u0290\u0291\3\2\2\2\u0291\u0292\3\2\2\2\u0292\u029e\5\u008aF"+
-		"\2\u0293\u0294\7\5\2\2\u0294\u0299\5\u0090I\2\u0295\u0296\7\7\2\2\u0296"+
-		"\u0298\5\u0090I\2\u0297\u0295\3\2\2\2\u0298\u029b\3\2\2\2\u0299\u0297"+
-		"\3\2\2\2\u0299\u029a\3\2\2\2\u029a\u029c\3\2\2\2\u029b\u0299\3\2\2\2\u029c"+
-		"\u029d\7\6\2\2\u029d\u029f\3\2\2\2\u029e\u0293\3\2\2\2\u029e\u029f\3\2"+
-		"\2\2\u029f\u02bf\3\2\2\2\u02a0\u02a1\7\u0090\2\2\u02a1\u02a2\7\5\2\2\u02a2"+
-		"\u02a7\5L\'\2\u02a3\u02a4\7\7\2\2\u02a4\u02a6\5L\'\2\u02a5\u02a3\3\2\2"+
-		"\2\u02a6\u02a9\3\2\2\2\u02a7\u02a5\3\2\2\2\u02a7\u02a8\3\2\2\2\u02a8\u02aa"+
-		"\3\2\2\2\u02a9\u02a7\3\2\2\2\u02aa\u02b9\7\6\2\2\u02ab\u02ac\7\7\2\2\u02ac"+
-		"\u02ad\7\5\2\2\u02ad\u02b2\5L\'\2\u02ae\u02af\7\7\2\2\u02af\u02b1\5L\'"+
-		"\2\u02b0\u02ae\3\2\2\2\u02b1\u02b4\3\2\2\2\u02b2\u02b0\3\2\2\2\u02b2\u02b3"+
-		"\3\2\2\2\u02b3\u02b5\3\2\2\2\u02b4\u02b2\3\2\2\2\u02b5\u02b6\7\6\2\2\u02b6"+
-		"\u02b8\3\2\2\2\u02b7\u02ab\3\2\2\2\u02b8\u02bb\3\2\2\2\u02b9\u02b7\3\2"+
-		"\2\2\u02b9\u02ba\3\2\2\2\u02ba\u02c0\3\2\2\2\u02bb\u02b9\3\2\2\2\u02bc"+
-		"\u02c0\5<\37\2\u02bd\u02be\7:\2\2\u02be\u02c0\7\u0090\2\2\u02bf\u02a0"+
-		"\3\2\2\2\u02bf\u02bc\3\2\2\2\u02bf\u02bd\3\2\2\2\u02c0/\3\2\2\2\u02c1"+
-		"\u02c5\7r\2\2\u02c2\u02c3\5\u0088E\2\u02c3\u02c4\7\4\2\2\u02c4\u02c6\3"+
-		"\2\2\2\u02c5\u02c2\3\2\2\2\u02c5\u02c6\3\2\2\2\u02c6\u02c7\3\2\2\2\u02c7"+
-		"\u02ce\5\u009eP\2\u02c8\u02c9\7\b\2\2\u02c9\u02cf\5\\/\2\u02ca\u02cb\7"+
-		"\5\2\2\u02cb\u02cc\5\\/\2\u02cc\u02cd\7\6\2\2\u02cd\u02cf\3\2\2\2\u02ce"+
-		"\u02c8\3\2\2\2\u02ce\u02ca\3\2\2\2\u02ce\u02cf\3\2\2\2\u02cf\61\3\2\2"+
-		"\2\u02d0\u02db\7y\2\2\u02d1\u02dc\5\u0092J\2\u02d2\u02d3\5\u0088E\2\u02d3"+
-		"\u02d4\7\4\2\2\u02d4\u02d6\3\2\2\2\u02d5\u02d2\3\2\2\2\u02d5\u02d6\3\2"+
-		"\2\2\u02d6\u02d9\3\2\2\2\u02d7\u02da\5\u008aF\2\u02d8\u02da\5\u0096L\2"+
-		"\u02d9\u02d7\3\2\2\2\u02d9\u02d8\3\2\2\2\u02da\u02dc\3\2\2\2\u02db\u02d1"+
-		"\3\2\2\2\u02db\u02d5\3\2\2\2\u02db\u02dc\3\2\2\2\u02dc\63\3\2\2\2\u02dd"+
-		"\u02df\7z\2\2\u02de\u02e0\7\u0081\2\2\u02df\u02de\3\2\2\2\u02df\u02e0"+
-		"\3\2\2\2\u02e0\u02e1\3\2\2\2\u02e1\u02e2\5\u00a0Q\2\u02e2\65\3\2\2\2\u02e3"+
-		"\u02e8\7\177\2\2\u02e4\u02e6\7\u0089\2\2\u02e5\u02e7\5\u00a4S\2\u02e6"+
-		"\u02e5\3\2\2\2\u02e6\u02e7\3\2\2\2\u02e7\u02e9\3\2\2\2\u02e8\u02e4\3\2"+
-		"\2\2\u02e8\u02e9\3\2\2\2\u02e9\u02ef\3\2\2\2\u02ea\u02ec\7\u0088\2\2\u02eb"+
-		"\u02ed\7\u0081\2\2\u02ec\u02eb\3\2\2\2\u02ec\u02ed\3\2\2\2\u02ed\u02ee"+
-		"\3\2\2\2\u02ee\u02f0\5\u00a0Q\2\u02ef\u02ea\3\2\2\2\u02ef\u02f0\3\2\2"+
-		"\2\u02f0\67\3\2\2\2\u02f1\u02f2\7\u0081\2\2\u02f2\u02f3\5\u00a0Q\2\u02f3"+
-		"9\3\2\2\2\u02f4\u02f6\7\u0095\2\2\u02f5\u02f7\7v\2\2\u02f6\u02f5\3\2\2"+
-		"\2\u02f6\u02f7\3\2\2\2\u02f7\u02f8\3\2\2\2\u02f8\u02fd\5^\60\2\u02f9\u02fa"+
-		"\7\7\2\2\u02fa\u02fc\5^\60\2\u02fb\u02f9\3\2\2\2\u02fc\u02ff\3\2\2\2\u02fd"+
-		"\u02fb\3\2\2\2\u02fd\u02fe\3\2\2\2\u02fe\u0301\3\2\2\2\u02ff\u02fd\3\2"+
-		"\2\2\u0300\u02f4\3\2\2\2\u0300\u0301\3\2\2\2\u0301\u0302\3\2\2\2\u0302"+
-		"\u030d\5j\66\2\u0303\u0304\7o\2\2\u0304\u0305\7*\2\2\u0305\u030a\5Z.\2"+
-		"\u0306\u0307\7\7\2\2\u0307\u0309\5Z.\2\u0308\u0306\3\2\2\2\u0309\u030c"+
-		"\3\2\2\2\u030a\u0308\3\2\2\2\u030a\u030b\3\2\2\2\u030b\u030e\3\2\2\2\u030c"+
-		"\u030a\3\2\2\2\u030d\u0303\3\2\2\2\u030d\u030e\3\2\2\2\u030e\u0315\3\2"+
-		"\2\2\u030f\u0310\7d\2\2\u0310\u0313\5L\'\2\u0311\u0312\t\4\2\2\u0312\u0314"+
-		"\5L\'\2\u0313\u0311\3\2\2\2\u0313\u0314\3\2\2\2\u0314\u0316\3\2\2\2\u0315"+
-		"\u030f\3\2\2\2\u0315\u0316\3\2\2\2\u0316;\3\2\2\2\u0317\u0319\7\u0095"+
-		"\2\2\u0318\u031a\7v\2\2\u0319\u0318\3\2\2\2\u0319\u031a\3\2\2\2\u031a"+
-		"\u031b\3\2\2\2\u031b\u0320\5^\60\2\u031c\u031d\7\7\2\2\u031d\u031f\5^"+
-		"\60\2\u031e\u031c\3\2\2\2\u031f\u0322\3\2\2\2\u0320\u031e\3\2\2\2\u0320"+
-		"\u0321\3\2\2\2\u0321\u0324\3\2\2\2\u0322\u0320\3\2\2\2\u0323\u0317\3\2"+
-		"\2\2\u0323\u0324\3\2\2\2\u0324\u0325\3\2\2\2\u0325\u032b\5j\66\2\u0326"+
-		"\u0327\5p9\2\u0327\u0328\5j\66\2\u0328\u032a\3\2\2\2\u0329\u0326\3\2\2"+
-		"\2\u032a\u032d\3\2\2\2\u032b\u0329\3\2\2\2\u032b\u032c\3\2\2\2\u032c\u0338"+
-		"\3\2\2\2\u032d\u032b\3\2\2\2\u032e\u032f\7o\2\2\u032f\u0330\7*\2\2\u0330"+
-		"\u0335\5Z.\2\u0331\u0332\7\7\2\2\u0332\u0334\5Z.\2\u0333\u0331\3\2\2\2"+
-		"\u0334\u0337\3\2\2\2\u0335\u0333\3\2\2\2\u0335\u0336\3\2\2\2\u0336\u0339"+
-		"\3\2\2\2\u0337\u0335\3\2\2\2\u0338\u032e\3\2\2\2\u0338\u0339\3\2\2\2\u0339"+
-		"\u0340\3\2\2\2\u033a\u033b\7d\2\2\u033b\u033e\5L\'\2\u033c\u033d\t\4\2"+
-		"\2\u033d\u033f\5L\'\2\u033e\u033c\3\2\2\2\u033e\u033f\3\2\2\2\u033f\u0341"+
-		"\3\2\2\2\u0340\u033a\3\2\2\2\u0340\u0341\3\2\2\2\u0341=\3\2\2\2\u0342"+
-		"\u0344\5V,\2\u0343\u0342\3\2\2\2\u0343\u0344\3\2\2\2\u0344\u0345\3\2\2"+
-		"\2\u0345\u0350\7\u008d\2\2\u0346\u0347\7n\2\2\u0347\u0351\7\177\2\2\u0348"+
-		"\u0349\7n\2\2\u0349\u0351\7\33\2\2\u034a\u034b\7n\2\2\u034b\u0351\7|\2"+
-		"\2\u034c\u034d\7n\2\2\u034d\u0351\7J\2\2\u034e\u034f\7n\2\2\u034f\u0351"+
-		"\7S\2\2\u0350\u0346\3\2\2\2\u0350\u0348\3\2\2\2\u0350\u034a\3\2\2\2\u0350"+
-		"\u034c\3\2\2\2\u0350\u034e\3\2\2\2\u0350\u0351\3\2\2\2\u0351\u0352\3\2"+
-		"\2\2\u0352\u0353\5X-\2\u0353\u0354\7\u0083\2\2\u0354\u0355\5\u0090I\2"+
-		"\u0355\u0356\7\b\2\2\u0356\u035e\5L\'\2\u0357\u0358\7\7\2\2\u0358\u0359"+
-		"\5\u0090I\2\u0359\u035a\7\b\2\2\u035a\u035b\5L\'\2\u035b\u035d\3\2\2\2"+
-		"\u035c\u0357\3\2\2\2\u035d\u0360\3\2\2\2\u035e\u035c\3\2\2\2\u035e\u035f"+
-		"\3\2\2\2\u035f\u0363\3\2\2\2\u0360\u035e\3\2\2\2\u0361\u0362\7\u0094\2"+
-		"\2\u0362\u0364\5L\'\2\u0363\u0361\3\2\2\2\u0363\u0364\3\2\2\2\u0364?\3"+
-		"\2\2\2\u0365\u0367\5V,\2\u0366\u0365\3\2\2\2\u0366\u0367\3\2\2\2\u0367"+
-		"\u0368\3\2\2\2\u0368\u0373\7\u008d\2\2\u0369\u036a\7n\2\2\u036a\u0374"+
-		"\7\177\2\2\u036b\u036c\7n\2\2\u036c\u0374\7\33\2\2\u036d\u036e\7n\2\2"+
-		"\u036e\u0374\7|\2\2\u036f\u0370\7n\2\2\u0370\u0374\7J\2\2\u0371\u0372"+
-		"\7n\2\2\u0372\u0374\7S\2\2\u0373\u0369\3\2\2\2\u0373\u036b\3\2\2\2\u0373"+
-		"\u036d\3\2\2\2\u0373\u036f\3\2\2\2\u0373\u0371\3\2\2\2\u0373\u0374\3\2"+
-		"\2\2\u0374\u0375\3\2\2\2\u0375\u0376\5X-\2\u0376\u0377\7\u0083\2\2\u0377"+
-		"\u0378\5\u0090I\2\u0378\u0379\7\b\2\2\u0379\u0381\5L\'\2\u037a\u037b\7"+
-		"\7\2\2\u037b\u037c\5\u0090I\2\u037c\u037d\7\b\2\2\u037d\u037e\5L\'\2\u037e"+
-		"\u0380\3\2\2\2\u037f\u037a\3\2\2\2\u0380\u0383\3\2\2\2\u0381\u037f\3\2"+
-		"\2\2\u0381\u0382\3\2\2\2\u0382\u0386\3\2\2\2\u0383\u0381\3\2\2\2\u0384"+
-		"\u0385\7\u0094\2\2\u0385\u0387\5L\'\2\u0386\u0384\3\2\2\2\u0386\u0387"+
-		"\3\2\2\2\u0387\u039a\3\2\2\2\u0388\u0389\7o\2\2\u0389\u038a\7*\2\2\u038a"+
-		"\u038f\5Z.\2\u038b\u038c\7\7\2\2\u038c\u038e\5Z.\2\u038d\u038b\3\2\2\2"+
-		"\u038e\u0391\3\2\2\2\u038f\u038d\3\2\2\2\u038f\u0390\3\2\2\2\u0390\u0393"+
-		"\3\2\2\2\u0391\u038f\3\2\2\2\u0392\u0388\3\2\2\2\u0392\u0393\3\2\2\2\u0393"+
-		"\u0394\3\2\2\2\u0394\u0395\7d\2\2\u0395\u0398\5L\'\2\u0396\u0397\t\4\2"+
-		"\2\u0397\u0399\5L\'\2\u0398\u0396\3\2\2\2\u0398\u0399\3\2\2\2\u0399\u039b"+
-		"\3\2\2\2\u039a\u0392\3\2\2\2\u039a\u039b\3\2\2\2\u039bA\3\2\2\2\u039c"+
-		"\u039d\7\u008f\2\2\u039dC\3\2\2\2\u039e\u03a0\5\u0090I\2\u039f\u03a1\5"+
-		"F$\2\u03a0\u039f\3\2\2\2\u03a0\u03a1\3\2\2\2\u03a1\u03a5\3\2\2\2\u03a2"+
-		"\u03a4\5H%\2\u03a3\u03a2\3\2\2\2\u03a4\u03a7\3\2\2\2\u03a5\u03a3\3\2\2"+
-		"\2\u03a5\u03a6\3\2\2\2\u03a6E\3\2\2\2\u03a7\u03a5\3\2\2\2\u03a8\u03aa"+
-		"\5\u0084C\2\u03a9\u03a8\3\2\2\2\u03aa\u03ab\3\2\2\2\u03ab\u03a9\3\2\2"+
-		"\2\u03ab\u03ac\3\2\2\2\u03ac\u03b7\3\2\2\2\u03ad\u03ae\7\5\2\2\u03ae\u03af"+
-		"\5t;\2\u03af\u03b0\7\6\2\2\u03b0\u03b8\3\2\2\2\u03b1\u03b2\7\5\2\2\u03b2"+
-		"\u03b3\5t;\2\u03b3\u03b4\7\7\2\2\u03b4\u03b5\5t;\2\u03b5\u03b6\7\6\2\2"+
-		"\u03b6\u03b8\3\2\2\2\u03b7\u03ad\3\2\2\2\u03b7\u03b1\3\2\2\2\u03b7\u03b8"+
-		"\3\2\2\2\u03b8G\3\2\2\2\u03b9\u03ba\7\63\2\2\u03ba\u03bc\5\u0084C\2\u03bb"+
-		"\u03b9\3\2\2\2\u03bb\u03bc\3\2\2\2\u03bc\u03de\3\2\2\2\u03bd\u03be\7s"+
-		"\2\2\u03be\u03c0\7a\2\2\u03bf\u03c1\t\6\2\2\u03c0\u03bf\3\2\2\2\u03c0"+
-		"\u03c1\3\2\2\2\u03c1\u03c2\3\2\2\2\u03c2\u03c4\5J&\2\u03c3\u03c5\7&\2"+
-		"\2\u03c4\u03c3\3\2\2\2\u03c4\u03c5\3\2\2\2\u03c5\u03df\3\2\2\2\u03c6\u03c8"+
-		"\7h\2\2\u03c7\u03c6\3\2\2\2\u03c7\u03c8\3\2\2\2\u03c8\u03c9\3\2\2\2\u03c9"+
-		"\u03ca\7j\2\2\u03ca\u03df\5J&\2\u03cb\u03cc\7\u008c\2\2\u03cc\u03df\5"+
-		"J&\2\u03cd\u03ce\7.\2\2\u03ce\u03cf\7\5\2\2\u03cf\u03d0\5L\'\2\u03d0\u03d1"+
-		"\7\6\2\2\u03d1\u03df\3\2\2\2\u03d2\u03d9\7:\2\2\u03d3\u03da\5t;\2\u03d4"+
-		"\u03da\5v<\2\u03d5\u03d6\7\5\2\2\u03d6\u03d7\5L\'\2\u03d7\u03d8\7\6\2"+
-		"\2\u03d8\u03da\3\2\2\2\u03d9\u03d3\3\2\2\2\u03d9\u03d4\3\2\2\2\u03d9\u03d5"+
-		"\3\2\2\2\u03da\u03df\3\2\2\2\u03db\u03dc\7/\2\2\u03dc\u03df\5\u0092J\2"+
-		"\u03dd\u03df\5N(\2\u03de\u03bd\3\2\2\2\u03de\u03c7\3\2\2\2\u03de\u03cb"+
-		"\3\2\2\2\u03de\u03cd\3\2\2\2\u03de\u03d2\3\2\2\2\u03de\u03db\3\2\2\2\u03de"+
-		"\u03dd\3\2\2\2\u03dfI\3\2\2\2\u03e0\u03e1\7m\2\2\u03e1\u03e2\7\62\2\2"+
-		"\u03e2\u03e4\t\7\2\2\u03e3\u03e0\3\2\2\2\u03e3\u03e4\3\2\2\2\u03e4K\3"+
-		"\2\2\2\u03e5\u03e6\b\'\1\2\u03e6\u03e7\5x=\2\u03e7\u03e8\5L\'\27\u03e8"+
-		"\u0435\3\2\2\2\u03e9\u0435\5v<\2\u03ea\u0435\7\u0099\2\2\u03eb\u03ec\5"+
-		"\u0088E\2\u03ec\u03ed\7\4\2\2\u03ed\u03ef\3\2\2\2\u03ee\u03eb\3\2\2\2"+
-		"\u03ee\u03ef\3\2\2\2\u03ef\u03f0\3\2\2\2\u03f0\u03f1\5\u008aF\2\u03f1"+
-		"\u03f2\7\4\2\2\u03f2\u03f4\3\2\2\2\u03f3\u03ee\3\2\2\2\u03f3\u03f4\3\2"+
-		"\2\2\u03f4\u03f5\3\2\2\2\u03f5\u0435\5\u0090I\2\u03f6\u03f7\5\u0086D\2"+
-		"\u03f7\u0404\7\5\2\2\u03f8\u03fa\7@\2\2\u03f9\u03f8\3\2\2\2\u03f9\u03fa"+
-		"\3\2\2\2\u03fa\u03fb\3\2\2\2\u03fb\u0400\5L\'\2\u03fc\u03fd\7\7\2\2\u03fd"+
-		"\u03ff\5L\'\2\u03fe\u03fc\3\2\2\2\u03ff\u0402\3\2\2\2\u0400\u03fe\3\2"+
-		"\2\2\u0400\u0401\3\2\2\2\u0401\u0405\3\2\2\2\u0402\u0400\3\2\2\2\u0403"+
-		"\u0405\7\t\2\2\u0404\u03f9\3\2\2\2\u0404\u0403\3\2\2\2\u0404\u0405\3\2"+
-		"\2\2\u0405\u0406\3\2\2\2\u0406\u0407\7\6\2\2\u0407\u0435\3\2\2\2\u0408"+
-		"\u0409\7\5\2\2\u0409\u040a\5L\'\2\u040a\u040b\7\6\2\2\u040b\u0435\3\2"+
-		"\2\2\u040c\u040d\7-\2\2\u040d\u040e\7\5\2\2\u040e\u040f\5L\'\2\u040f\u0410"+
-		"\7#\2\2\u0410\u0411\5F$\2\u0411\u0412\7\6\2\2\u0412\u0435\3\2\2\2\u0413"+
-		"\u0415\7h\2\2\u0414\u0413\3\2\2\2\u0414\u0415\3\2\2\2\u0415\u0416\3\2"+
-		"\2\2\u0416\u0418\7H\2\2\u0417\u0414\3\2\2\2\u0417\u0418\3\2\2\2\u0418"+
-		"\u0419\3\2\2\2\u0419\u041c\7\5\2\2\u041a\u041d\5:\36\2\u041b\u041d\5<"+
-		"\37\2\u041c\u041a\3\2\2\2\u041c\u041b\3\2\2\2\u041d\u041e\3\2\2\2\u041e"+
-		"\u041f\7\6\2\2\u041f\u0435\3\2\2\2\u0420\u0422\7,\2\2\u0421\u0423\5L\'"+
-		"\2\u0422\u0421\3\2\2\2\u0422\u0423\3\2\2\2\u0423\u0429\3\2\2\2\u0424\u0425"+
-		"\7\u0093\2\2\u0425\u0426\5L\'\2\u0426\u0427\7\u0087\2\2\u0427\u0428\5"+
-		"L\'\2\u0428\u042a\3\2\2\2\u0429\u0424\3\2\2\2\u042a\u042b\3\2\2\2\u042b"+
-		"\u0429\3\2\2\2\u042b\u042c\3\2\2\2\u042c\u042f\3\2\2\2\u042d\u042e\7C"+
-		"\2\2\u042e\u0430\5L\'\2\u042f\u042d\3\2\2\2\u042f\u0430\3\2\2\2\u0430"+
-		"\u0431\3\2\2\2\u0431\u0432\7D\2\2\u0432\u0435\3\2\2\2\u0433\u0435\5P)"+
-		"\2\u0434\u03e5\3\2\2\2\u0434\u03e9\3\2\2\2\u0434\u03ea\3\2\2\2\u0434\u03f3"+
-		"\3\2\2\2\u0434\u03f6\3\2\2\2\u0434\u0408\3\2\2\2\u0434\u040c\3\2\2\2\u0434"+
-		"\u0417\3\2\2\2\u0434\u0420\3\2\2\2\u0434\u0433\3\2\2\2\u0435\u048f\3\2"+
-		"\2\2\u0436\u0437\f\26\2\2\u0437\u0438\7\r\2\2\u0438\u048e\5L\'\27\u0439"+
-		"\u043a\f\25\2\2\u043a\u043b\t\b\2\2\u043b\u048e\5L\'\26\u043c\u043d\f"+
-		"\24\2\2\u043d\u043e\t\t\2\2\u043e\u048e\5L\'\25\u043f\u0440\f\23\2\2\u0440"+
-		"\u0441\t\n\2\2\u0441\u048e\5L\'\24\u0442\u0443\f\22\2\2\u0443\u0444\t"+
-		"\13\2\2\u0444\u048e\5L\'\23\u0445\u0446\f\21\2\2\u0446\u0447\5z>\2\u0447"+
-		"\u0448\5L\'\22\u0448\u048e\3\2\2\2\u0449\u044a\f\20\2\2\u044a\u044b\7"+
-		"\"\2\2\u044b\u048e\5L\'\21\u044c\u044d\f\17\2\2\u044d\u044e\7n\2\2\u044e"+
-		"\u048e\5L\'\20\u044f\u0450\f\b\2\2\u0450\u0452\7^\2\2\u0451\u0453\7h\2"+
-		"\2\u0452\u0451\3\2\2\2\u0452\u0453\3\2\2\2\u0453\u0454\3\2\2\2\u0454\u048e"+
-		"\5L\'\t\u0455\u0457\f\7\2\2\u0456\u0458\7h\2\2\u0457\u0456\3\2\2\2\u0457"+
-		"\u0458\3\2\2\2\u0458\u0459\3\2\2\2\u0459\u045a\7)\2\2\u045a\u045b\5L\'"+
-		"\2\u045b\u045c\7\"\2\2\u045c\u045d\5L\'\b\u045d\u048e\3\2\2\2\u045e\u045f"+
-		"\f\13\2\2\u045f\u0460\7/\2\2\u0460\u048e\5\u0092J\2\u0461\u0463\f\n\2"+
-		"\2\u0462\u0464\7h\2\2\u0463\u0462\3\2\2\2\u0463\u0464\3\2\2\2\u0464\u0465"+
-		"\3\2\2\2\u0465\u0466\t\f\2\2\u0466\u0469\5L\'\2\u0467\u0468\7E\2\2\u0468"+
-		"\u046a\5L\'\2\u0469\u0467\3\2\2\2\u0469\u046a\3\2\2\2\u046a\u048e\3\2"+
-		"\2\2\u046b\u0470\f\t\2\2\u046c\u0471\7_\2\2\u046d\u0471\7i\2\2\u046e\u046f"+
-		"\7h\2\2\u046f\u0471\7j\2\2\u0470\u046c\3\2\2\2\u0470\u046d\3\2\2\2\u0470"+
-		"\u046e\3\2\2\2\u0471\u048e\3\2\2\2\u0472\u0474\f\6\2\2\u0473\u0475\7h"+
-		"\2\2\u0474\u0473\3\2\2\2\u0474\u0475\3\2\2\2\u0475\u0476\3\2\2\2\u0476"+
-		"\u048b\7U\2\2\u0477\u0482\7\5\2\2\u0478\u0483\5:\36\2\u0479\u0483\5<\37"+
-		"\2\u047a\u047f\5L\'\2\u047b\u047c\7\7\2\2\u047c\u047e\5L\'\2\u047d\u047b"+
-		"\3\2\2\2\u047e\u0481\3\2\2\2\u047f\u047d\3\2\2\2\u047f\u0480\3\2\2\2\u0480"+
-		"\u0483\3\2\2\2\u0481\u047f\3\2\2\2\u0482\u0478\3\2\2\2\u0482\u0479\3\2"+
-		"\2\2\u0482\u047a\3\2\2\2\u0482\u0483\3\2\2\2\u0483\u0484\3\2\2\2\u0484"+
-		"\u048c\7\6\2\2\u0485\u0486\5\u0088E\2\u0486\u0487\7\4\2\2\u0487\u0489"+
-		"\3\2\2\2\u0488\u0485\3\2\2\2\u0488\u0489\3\2\2\2\u0489\u048a\3\2\2\2\u048a"+
-		"\u048c\5\u008aF\2\u048b\u0477\3\2\2\2\u048b\u0488\3\2\2\2\u048c\u048e"+
-		"\3\2\2\2\u048d\u0436\3\2\2\2\u048d\u0439\3\2\2\2\u048d\u043c\3\2\2\2\u048d"+
-		"\u043f\3\2\2\2\u048d\u0442\3\2\2\2\u048d\u0445\3\2\2\2\u048d\u0449\3\2"+
-		"\2\2\u048d\u044c\3\2\2\2\u048d\u044f\3\2\2\2\u048d\u0455\3\2\2\2\u048d"+
-		"\u045e\3\2\2\2\u048d\u0461\3\2\2\2\u048d\u046b\3\2\2\2\u048d\u0472\3\2"+
-		"\2\2\u048e\u0491\3\2\2\2\u048f\u048d\3\2\2\2\u048f\u0490\3\2\2\2\u0490"+
-		"M\3\2\2\2\u0491\u048f\3\2\2\2\u0492\u0493\7w\2\2\u0493\u049f\5\u0094K"+
-		"\2\u0494\u0495\7\5\2\2\u0495\u049a\5\u0090I\2\u0496\u0497\7\7\2\2\u0497"+
-		"\u0499\5\u0090I\2\u0498\u0496\3\2\2\2\u0499\u049c\3\2\2\2\u049a\u0498"+
-		"\3\2\2\2\u049a\u049b\3\2\2\2\u049b\u049d\3\2\2\2\u049c\u049a\3\2\2\2\u049d"+
-		"\u049e\7\6\2\2\u049e\u04a0\3\2\2\2\u049f\u0494\3\2\2\2\u049f\u04a0\3\2"+
-		"\2\2\u04a0\u04b3\3\2\2\2\u04a1\u04a2\7m\2\2\u04a2\u04ab\t\r\2\2\u04a3"+
-		"\u04a4\7\u0083\2\2\u04a4\u04ac\7j\2\2\u04a5\u04a6\7\u0083\2\2\u04a6\u04ac"+
-		"\7:\2\2\u04a7\u04ac\7+\2\2\u04a8\u04ac\7}\2\2\u04a9\u04aa\7g\2\2\u04aa"+
-		"\u04ac\7\34\2\2\u04ab\u04a3\3\2\2\2\u04ab\u04a5\3\2\2\2\u04ab\u04a7\3"+
-		"\2\2\2\u04ab\u04a8\3\2\2\2\u04ab\u04a9\3\2\2\2\u04ac\u04b0\3\2\2\2\u04ad"+
-		"\u04ae\7e\2\2\u04ae\u04b0\5\u0084C\2\u04af\u04a1\3\2\2\2\u04af\u04ad\3"+
-		"\2\2\2\u04b0\u04b2\3\2\2\2\u04b1\u04af\3\2\2\2\u04b2\u04b5\3\2\2\2\u04b3"+
-		"\u04b1\3\2\2\2\u04b3\u04b4\3\2\2\2\u04b4\u04c0\3\2\2\2\u04b5\u04b3\3\2"+
-		"\2\2\u04b6\u04b8\7h\2\2\u04b7\u04b6\3\2\2\2\u04b7\u04b8\3\2\2\2\u04b8"+
-		"\u04b9\3\2\2\2\u04b9\u04be\7;\2\2\u04ba\u04bb\7X\2\2\u04bb\u04bf\7<\2"+
-		"\2\u04bc\u04bd\7X\2\2\u04bd\u04bf\7T\2\2\u04be\u04ba\3\2\2\2\u04be\u04bc"+
-		"\3\2\2\2\u04be\u04bf\3\2\2\2\u04bf\u04c1\3\2\2\2\u04c0\u04b7\3\2\2\2\u04c0"+
-		"\u04c1\3\2\2\2\u04c1O\3\2\2\2\u04c2\u04c3\7u\2\2\u04c3\u04c8\7\5\2\2\u04c4"+
-		"\u04c9\7S\2\2\u04c5\u04c6\t\16\2\2\u04c6\u04c7\7\7\2\2\u04c7\u04c9\5|"+
-		"?\2\u04c8\u04c4\3\2\2\2\u04c8\u04c5\3\2\2\2\u04c9\u04ca\3\2\2\2\u04ca"+
-		"\u04cb\7\6\2\2\u04cbQ\3\2\2\2\u04cc\u04cf\5\u0090I\2\u04cd\u04ce\7/\2"+
-		"\2\u04ce\u04d0\5\u0092J\2\u04cf\u04cd\3\2\2\2\u04cf\u04d0\3\2\2\2\u04d0"+
-		"\u04d2\3\2\2\2\u04d1\u04d3\t\6\2\2\u04d2\u04d1\3\2\2\2\u04d2\u04d3\3\2"+
-		"\2\2\u04d3S\3\2\2\2\u04d4\u04d5\7\63\2\2\u04d5\u04d7\5\u0084C\2\u04d6"+
-		"\u04d4\3\2\2\2\u04d6\u04d7\3\2\2\2\u04d7\u04fc\3\2\2\2\u04d8\u04d9\7s"+
-		"\2\2\u04d9\u04dc\7a\2\2\u04da\u04dc\7\u008c\2\2\u04db\u04d8\3\2\2\2\u04db"+
-		"\u04da\3\2\2\2\u04dc\u04dd\3\2\2\2\u04dd\u04de\7\5\2\2\u04de\u04e3\5R"+
-		"*\2\u04df\u04e0\7\7\2\2\u04e0\u04e2\5R*\2\u04e1\u04df\3\2\2\2\u04e2\u04e5"+
-		"\3\2\2\2\u04e3\u04e1\3\2\2\2\u04e3\u04e4\3\2\2\2\u04e4\u04e6\3\2\2\2\u04e5"+
-		"\u04e3\3\2\2\2\u04e6\u04e7\7\6\2\2\u04e7\u04e8\5J&\2\u04e8\u04fd\3\2\2"+
-		"\2\u04e9\u04ea\7.\2\2\u04ea\u04eb\7\5\2\2\u04eb\u04ec\5L\'\2\u04ec\u04ed"+
-		"\7\6\2\2\u04ed\u04fd\3\2\2\2\u04ee\u04ef\7L\2\2\u04ef\u04f0\7a\2\2\u04f0"+
-		"\u04f1\7\5\2\2\u04f1\u04f6\5\u0090I\2\u04f2\u04f3\7\7\2\2\u04f3\u04f5"+
-		"\5\u0090I\2\u04f4\u04f2\3\2\2\2\u04f5\u04f8\3\2\2\2\u04f6\u04f4\3\2\2"+
-		"\2\u04f6\u04f7\3\2\2\2\u04f7\u04f9\3\2\2\2\u04f8\u04f6\3\2\2\2\u04f9\u04fa"+
-		"\7\6\2\2\u04fa\u04fb\5N(\2\u04fb\u04fd\3\2\2\2\u04fc\u04db\3\2\2\2\u04fc"+
-		"\u04e9\3\2\2\2\u04fc\u04ee\3\2\2\2\u04fdU\3\2\2\2\u04fe\u0500\7\u0095"+
-		"\2\2\u04ff\u0501\7v\2\2\u0500\u04ff\3\2\2\2\u0500\u0501\3\2\2\2\u0501"+
-		"\u0502\3\2\2\2\u0502\u0503\5r:\2\u0503\u0504\7#\2\2\u0504\u0505\7\5\2"+
-		"\2\u0505\u0506\5<\37\2\u0506\u0510\7\6\2\2\u0507\u0508\7\7\2\2\u0508\u0509"+
-		"\5r:\2\u0509\u050a\7#\2\2\u050a\u050b\7\5\2\2\u050b\u050c\5<\37\2\u050c"+
-		"\u050d\7\6\2\2\u050d\u050f\3\2\2\2\u050e\u0507\3\2\2\2\u050f\u0512\3\2"+
-		"\2\2\u0510\u050e\3\2\2\2\u0510\u0511\3\2\2\2\u0511W\3\2\2\2\u0512\u0510"+
-		"\3\2\2\2\u0513\u0514\5\u0088E\2\u0514\u0515\7\4\2\2\u0515\u0517\3\2\2"+
-		"\2\u0516\u0513\3\2\2\2\u0516\u0517\3\2\2\2\u0517\u0518\3\2\2\2\u0518\u051e"+
-		"\5\u008aF\2\u0519\u051a\7W\2\2\u051a\u051b\7*\2\2\u051b\u051f\5\u0096"+
-		"L\2\u051c\u051d\7h\2\2\u051d\u051f\7W\2\2\u051e\u0519\3\2\2\2\u051e\u051c"+
-		"\3\2\2\2\u051e\u051f\3\2\2\2\u051fY\3\2\2\2\u0520\u0523\5L\'\2\u0521\u0522"+
-		"\7/\2\2\u0522\u0524\5\u0092J\2\u0523\u0521\3\2\2\2\u0523\u0524\3\2\2\2"+
-		"\u0524\u0526\3\2\2\2\u0525\u0527\t\6\2\2\u0526\u0525\3\2\2\2\u0526\u0527"+
-		"\3\2\2\2\u0527[\3\2\2\2\u0528\u052c\5t;\2\u0529\u052c\5\u0084C\2\u052a"+
-		"\u052c\7\u009a\2\2\u052b\u0528\3\2\2\2\u052b\u0529\3\2\2\2\u052b\u052a"+
-		"\3\2\2\2\u052c]\3\2\2\2\u052d\u0539\5\u008aF\2\u052e\u052f\7\5\2\2\u052f"+
-		"\u0534\5\u0090I\2\u0530\u0531\7\7\2\2\u0531\u0533\5\u0090I\2\u0532\u0530"+
-		"\3\2\2\2\u0533\u0536\3\2\2\2\u0534\u0532\3\2\2\2\u0534\u0535\3\2\2\2\u0535"+
-		"\u0537\3\2\2\2\u0536\u0534\3\2\2\2\u0537\u0538\7\6\2\2\u0538\u053a\3\2"+
-		"\2\2\u0539\u052e\3\2\2\2\u0539\u053a\3\2\2\2\u053a\u053b\3\2\2\2\u053b"+
-		"\u053c\7#\2\2\u053c\u053d\7\5\2\2\u053d\u053e\5<\37\2\u053e\u053f\7\6"+
-		"\2\2\u053f_\3\2\2\2\u0540\u054d\7\t\2\2\u0541\u0542\5\u008aF\2\u0542\u0543"+
-		"\7\4\2\2\u0543\u0544\7\t\2\2\u0544\u054d\3\2\2\2\u0545\u054a\5L\'\2\u0546"+
-		"\u0548\7#\2\2\u0547\u0546\3\2\2\2\u0547\u0548\3\2\2\2\u0548\u0549\3\2"+
-		"\2\2\u0549\u054b\5\u0080A\2\u054a\u0547\3\2\2\2\u054a\u054b\3\2\2\2\u054b"+
-		"\u054d\3\2\2\2\u054c\u0540\3\2\2\2\u054c\u0541\3\2\2\2\u054c\u0545\3\2"+
-		"\2\2\u054da\3\2\2\2\u054e\u054f\5\u0088E\2\u054f\u0550\7\4\2\2\u0550\u0552"+
-		"\3\2\2\2\u0551\u054e\3\2\2\2\u0551\u0552\3\2\2\2\u0552\u0553\3\2\2\2\u0553"+
-		"\u0558\5\u008aF\2\u0554\u0556\7#\2\2\u0555\u0554\3\2\2\2\u0555\u0556\3"+
-		"\2\2\2\u0556\u0557\3\2\2\2\u0557\u0559\5\u00a2R\2\u0558\u0555\3\2\2\2"+
-		"\u0558\u0559\3\2\2\2\u0559\u055f\3\2\2\2\u055a\u055b\7W\2\2\u055b\u055c"+
-		"\7*\2\2\u055c\u0560\5\u0096L\2\u055d\u055e\7h\2\2\u055e\u0560\7W\2\2\u055f"+
-		"\u055a\3\2\2\2\u055f\u055d\3\2\2\2\u055f\u0560\3\2\2\2\u0560\u057e\3\2"+
-		"\2\2\u0561\u056b\7\5\2\2\u0562\u0567\5b\62\2\u0563\u0564\7\7\2\2\u0564"+
-		"\u0566\5b\62\2\u0565\u0563\3\2\2\2\u0566\u0569\3\2\2\2\u0567\u0565\3\2"+
-		"\2\2\u0567\u0568\3\2\2\2\u0568\u056c\3\2\2\2\u0569\u0567\3\2\2\2\u056a"+
-		"\u056c\5d\63\2\u056b\u0562\3\2\2\2\u056b\u056a\3\2\2\2\u056c\u056d\3\2"+
-		"\2\2\u056d\u0572\7\6\2\2\u056e\u0570\7#\2\2\u056f\u056e\3\2\2\2\u056f"+
-		"\u0570\3\2\2\2\u0570\u0571\3\2\2\2\u0571\u0573\5\u00a2R\2\u0572\u056f"+
-		"\3\2\2\2\u0572\u0573\3\2\2\2\u0573\u057e\3\2\2\2\u0574\u0575\7\5\2\2\u0575"+
-		"\u0576\5<\37\2\u0576\u057b\7\6\2\2\u0577\u0579\7#\2\2\u0578\u0577\3\2"+
-		"\2\2\u0578\u0579\3\2\2\2\u0579\u057a\3\2\2\2\u057a\u057c\5\u00a2R\2\u057b"+
-		"\u0578\3\2\2\2\u057b\u057c\3\2\2\2\u057c\u057e\3\2\2\2\u057d\u0551\3\2"+
-		"\2\2\u057d\u0561\3\2\2\2\u057d\u0574\3\2\2\2\u057ec\3\2\2\2\u057f\u0586"+
-		"\5b\62\2\u0580\u0581\5f\64\2\u0581\u0582\5b\62\2\u0582\u0583\5h\65\2\u0583"+
-		"\u0585\3\2\2\2\u0584\u0580\3\2\2\2\u0585\u0588\3\2\2\2\u0586\u0584\3\2"+
-		"\2\2\u0586\u0587\3\2\2\2\u0587e\3\2\2\2\u0588\u0586\3\2\2\2\u0589\u0597"+
-		"\7\7\2\2\u058a\u058c\7f\2\2\u058b\u058a\3\2\2\2\u058b\u058c\3\2\2\2\u058c"+
-		"\u0593\3\2\2\2\u058d\u058f\7b\2\2\u058e\u0590\7p\2\2\u058f\u058e\3\2\2"+
-		"\2\u058f\u0590\3\2\2\2\u0590\u0594\3\2\2\2\u0591\u0594\7Y\2\2\u0592\u0594"+
-		"\7\65\2\2\u0593\u058d\3\2\2\2\u0593\u0591\3\2\2\2\u0593\u0592\3\2\2\2"+
-		"\u0593\u0594\3\2\2\2\u0594\u0595\3\2\2\2\u0595\u0597\7`\2\2\u0596\u0589"+
-		"\3\2\2\2\u0596\u058b\3\2\2\2\u0597g\3\2\2\2\u0598\u0599\7m\2\2\u0599\u05a7"+
-		"\5L\'\2\u059a\u059b\7\u008e\2\2\u059b\u059c\7\5\2\2\u059c\u05a1\5\u0090"+
-		"I\2\u059d\u059e\7\7\2\2\u059e\u05a0\5\u0090I\2\u059f\u059d\3\2\2\2\u05a0"+
-		"\u05a3\3\2\2\2\u05a1\u059f\3\2\2\2\u05a1\u05a2\3\2\2\2\u05a2\u05a4\3\2"+
-		"\2\2\u05a3\u05a1\3\2\2\2\u05a4\u05a5\7\6\2\2\u05a5\u05a7\3\2\2\2\u05a6"+
-		"\u0598\3\2\2\2\u05a6\u059a\3\2\2\2\u05a6\u05a7\3\2\2\2\u05a7i\3\2\2\2"+
-		"\u05a8\u05aa\7\u0082\2\2\u05a9\u05ab\t\17\2\2\u05aa\u05a9\3\2\2\2\u05aa"+
-		"\u05ab\3\2\2\2\u05ab\u05ac\3\2\2\2\u05ac\u05b9\5l\67\2\u05ad\u05b7\7M"+
-		"\2\2\u05ae\u05b3\5b\62\2\u05af\u05b0\7\7\2\2\u05b0\u05b2\5b\62\2\u05b1"+
-		"\u05af\3\2\2\2\u05b2\u05b5\3\2\2\2\u05b3\u05b1\3\2\2\2\u05b3\u05b4\3\2"+
-		"\2\2\u05b4\u05b8\3\2\2\2\u05b5\u05b3\3\2\2\2\u05b6\u05b8\5d\63\2\u05b7"+
-		"\u05ae\3\2\2\2\u05b7\u05b6\3\2\2\2\u05b8\u05ba\3\2\2\2\u05b9\u05ad\3\2"+
-		"\2\2\u05b9\u05ba\3\2\2\2\u05ba\u05bb\3\2\2\2\u05bb\u05ca\5n8\2\u05bc\u05bd"+
-		"\7P\2\2\u05bd\u05be\7*\2\2\u05be\u05c3\5L\'\2\u05bf\u05c0\7\7\2\2\u05c0"+
-		"\u05c2\5L\'\2\u05c1\u05bf\3\2\2\2\u05c2\u05c5\3\2\2\2\u05c3\u05c1\3\2"+
-		"\2\2\u05c3\u05c4\3\2\2\2\u05c4\u05c8\3\2\2\2\u05c5\u05c3\3\2\2\2\u05c6"+
-		"\u05c7\7Q\2\2\u05c7\u05c9\5L\'\2\u05c8\u05c6\3\2\2\2\u05c8\u05c9\3\2\2"+
-		"\2\u05c9\u05cb\3\2\2\2\u05ca\u05bc\3\2\2\2\u05ca\u05cb\3\2\2\2\u05cb\u05e9"+
-		"\3\2\2\2\u05cc\u05cd\7\u0090\2\2\u05cd\u05ce\7\5\2\2\u05ce\u05d3\5L\'"+
-		"\2\u05cf\u05d0\7\7\2\2\u05d0\u05d2\5L\'\2\u05d1\u05cf\3\2\2\2\u05d2\u05d5"+
-		"\3\2\2\2\u05d3\u05d1\3\2\2\2\u05d3\u05d4\3\2\2\2\u05d4\u05d6\3\2\2\2\u05d5"+
-		"\u05d3\3\2\2\2\u05d6\u05e5\7\6\2\2\u05d7\u05d8\7\7\2\2\u05d8\u05d9\7\5"+
-		"\2\2\u05d9\u05de\5L\'\2\u05da\u05db\7\7\2\2\u05db\u05dd\5L\'\2\u05dc\u05da"+
-		"\3\2\2\2\u05dd\u05e0\3\2\2\2\u05de\u05dc\3\2\2\2\u05de\u05df\3\2\2\2\u05df"+
-		"\u05e1\3\2\2\2\u05e0\u05de\3\2\2\2\u05e1\u05e2\7\6\2\2\u05e2\u05e4\3\2"+
-		"\2\2\u05e3\u05d7\3\2\2\2\u05e4\u05e7\3\2\2\2\u05e5\u05e3\3\2\2\2\u05e5"+
-		"\u05e6\3\2\2\2\u05e6\u05e9\3\2\2\2\u05e7\u05e5\3\2\2\2\u05e8\u05a8\3\2"+
-		"\2\2\u05e8\u05cc\3\2\2\2\u05e9k\3\2\2\2\u05ea\u05ef\5`\61\2\u05eb\u05ec"+
-		"\7\7\2\2\u05ec\u05ee\5`\61\2\u05ed\u05eb\3\2\2\2\u05ee\u05f1\3\2\2\2\u05ef"+
-		"\u05ed\3\2\2\2\u05ef\u05f0\3\2\2\2\u05f0m\3\2\2\2\u05f1\u05ef\3\2\2\2"+
-		"\u05f2\u05f3\7\u0094\2\2\u05f3\u05f5\5L\'\2\u05f4\u05f2\3\2\2\2\u05f4"+
-		"\u05f5\3\2\2\2\u05f5o\3\2\2\2\u05f6\u05fc\7\u008b\2\2\u05f7\u05f8\7\u008b"+
-		"\2\2\u05f8\u05fc\7\37\2\2\u05f9\u05fc\7\\\2\2\u05fa\u05fc\7F\2\2\u05fb"+
-		"\u05f6\3\2\2\2\u05fb\u05f7\3\2\2\2\u05fb\u05f9\3\2\2\2\u05fb\u05fa\3\2"+
-		"\2\2\u05fcq\3\2\2\2\u05fd\u0609\5\u008aF\2\u05fe\u05ff\7\5\2\2\u05ff\u0604"+
-		"\5\u0090I\2\u0600\u0601\7\7\2\2\u0601\u0603\5\u0090I\2\u0602\u0600\3\2"+
-		"\2\2\u0603\u0606\3\2\2\2\u0604\u0602\3\2\2\2\u0604\u0605\3\2\2\2\u0605"+
-		"\u0607\3\2\2\2\u0606\u0604\3\2\2\2\u0607\u0608\7\6\2\2\u0608\u060a\3\2"+
-		"\2\2\u0609\u05fe\3\2\2\2\u0609\u060a\3\2\2\2\u060as\3\2\2\2\u060b\u060d"+
-		"\t\t\2\2\u060c\u060b\3\2\2\2\u060c\u060d\3\2\2\2\u060d\u060e\3\2\2\2\u060e"+
-		"\u060f\7\u0098\2\2\u060fu\3\2\2\2\u0610\u0611\t\20\2\2\u0611w\3\2\2\2"+
-		"\u0612\u0613\t\21\2\2\u0613y\3\2\2\2\u0614\u0621\7\b\2\2\u0615\u0621\7"+
-		"\30\2\2\u0616\u0621\7\31\2\2\u0617\u0621\7\32\2\2\u0618\u0621\7^\2\2\u0619"+
-		"\u061a\7^\2\2\u061a\u0621\7h\2\2\u061b\u0621\7U\2\2\u061c\u0621\7c\2\2"+
-		"\u061d\u0621\7O\2\2\u061e\u0621\7e\2\2\u061f\u0621\7x\2\2\u0620\u0614"+
-		"\3\2\2\2\u0620\u0615\3\2\2\2\u0620\u0616\3\2\2\2\u0620\u0617\3\2\2\2\u0620"+
-		"\u0618\3\2\2\2\u0620\u0619\3\2\2\2\u0620\u061b\3\2\2\2\u0620\u061c\3\2"+
-		"\2\2\u0620\u061d\3\2\2\2\u0620\u061e\3\2\2\2\u0620\u061f\3\2\2\2\u0621"+
-		"{\3\2\2\2\u0622\u0623\7\u009a\2\2\u0623}\3\2\2\2\u0624\u0627\5L\'\2\u0625"+
-		"\u0627\5D#\2\u0626\u0624\3\2\2\2\u0626\u0625\3\2\2\2\u0627\177\3\2\2\2"+
-		"\u0628\u0629\t\22\2\2\u0629\u0081\3\2\2\2\u062a\u062b\t\23\2\2\u062b\u0083"+
-		"\3\2\2\2\u062c\u062d\5\u00a6T\2\u062d\u0085\3\2\2\2\u062e\u062f\5\u00a6"+
-		"T\2\u062f\u0087\3\2\2\2\u0630\u0631\5\u00a6T\2\u0631\u0089\3\2\2\2\u0632"+
-		"\u0633\5\u00a6T\2\u0633\u008b\3\2\2\2\u0634\u0635\5\u00a6T\2\u0635\u008d"+
-		"\3\2\2\2\u0636\u0637\5\u00a6T\2\u0637\u008f\3\2\2\2\u0638\u0639\5\u00a6"+
-		"T\2\u0639\u0091\3\2\2\2\u063a\u063b\5\u00a6T\2\u063b\u0093\3\2\2\2\u063c"+
-		"\u063d\5\u00a6T\2\u063d\u0095\3\2\2\2\u063e\u063f\5\u00a6T\2\u063f\u0097"+
-		"\3\2\2\2\u0640\u0641\5\u00a6T\2\u0641\u0099\3\2\2\2\u0642\u0643\5\u00a6"+
-		"T\2\u0643\u009b\3\2\2\2\u0644\u0645\5\u00a6T\2\u0645\u009d\3\2\2\2\u0646"+
-		"\u0647\5\u00a6T\2\u0647\u009f\3\2\2\2\u0648\u0649\5\u00a6T\2\u0649\u00a1"+
-		"\3\2\2\2\u064a\u064b\5\u00a6T\2\u064b\u00a3\3\2\2\2\u064c\u064d\5\u00a6"+
-		"T\2\u064d\u00a5\3\2\2\2\u064e\u0656\7\u0097\2\2\u064f\u0656\5\u0082B\2"+
-		"\u0650\u0656\7\u009a\2\2\u0651\u0652\7\5\2\2\u0652\u0653\5\u00a6T\2\u0653"+
-		"\u0654\7\6\2\2\u0654\u0656\3\2\2\2\u0655\u064e\3\2\2\2\u0655\u064f\3\2"+
-		"\2\2\u0655\u0650\3\2\2\2\u0655\u0651\3\2\2\2\u0656\u00a7\3\2\2\2\u00e2"+
-		"\u00aa\u00ac\u00b7\u00be\u00c3\u00c9\u00cf\u00d1\u00f0\u00f7\u00ff\u0102"+
-		"\u010b\u010f\u0117\u011b\u011d\u0122\u0124\u0128\u012f\u0132\u0137\u013b"+
-		"\u0140\u0149\u014c\u0152\u0154\u0158\u015e\u0163\u016e\u0174\u0178\u017e"+
-		"\u0183\u018c\u0193\u0199\u019d\u01a1\u01a7\u01ac\u01b3\u01be\u01c1\u01c3"+
-		"\u01c9\u01cf\u01d3\u01da\u01e0\u01e6\u01ec\u01f1\u01fd\u0202\u020d\u0212"+
-		"\u0215\u021c\u021f\u0226\u022f\u0232\u0238\u023a\u023e\u0246\u024b\u0253"+
-		"\u0258\u0260\u0265\u026d\u0272\u0277\u028a\u0290\u0299\u029e\u02a7\u02b2"+
-		"\u02b9\u02bf\u02c5\u02ce\u02d5\u02d9\u02db\u02df\u02e6\u02e8\u02ec\u02ef"+
-		"\u02f6\u02fd\u0300\u030a\u030d\u0313\u0315\u0319\u0320\u0323\u032b\u0335"+
-		"\u0338\u033e\u0340\u0343\u0350\u035e\u0363\u0366\u0373\u0381\u0386\u038f"+
-		"\u0392\u0398\u039a\u03a0\u03a5\u03ab\u03b7\u03bb\u03c0\u03c4\u03c7\u03d9"+
-		"\u03de\u03e3\u03ee\u03f3\u03f9\u0400\u0404\u0414\u0417\u041c\u0422\u042b"+
-		"\u042f\u0434\u0452\u0457\u0463\u0469\u0470\u0474\u047f\u0482\u0488\u048b"+
-		"\u048d\u048f\u049a\u049f\u04ab\u04af\u04b3\u04b7\u04be\u04c0\u04c8\u04cf"+
-		"\u04d2\u04d6\u04db\u04e3\u04f6\u04fc\u0500\u0510\u0516\u051e\u0523\u0526"+
-		"\u052b\u0534\u0539\u0547\u054a\u054c\u0551\u0555\u0558\u055f\u0567\u056b"+
-		"\u056f\u0572\u0578\u057b\u057d\u0586\u058b\u058f\u0593\u0596\u05a1\u05a6"+
-		"\u05aa\u05b3\u05b7\u05b9\u05c3\u05c8\u05ca\u05d3\u05de\u05e5\u05e8\u05ef"+
-		"\u05f4\u05fb\u0604\u0609\u060c\u0620\u0626\u0655";
+		"\5\3\5\3\5\5\5\u00ee\n\5\3\6\3\6\3\6\3\6\3\6\5\6\u00f5\n\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\5\6\u00fd\n\6\3\6\5\6\u0100\n\6\3\7\3\7\3\7\3\7\3\7\3\7\3"+
+		"\7\5\7\u0109\n\7\3\b\3\b\5\b\u010d\n\b\3\b\3\b\3\b\3\b\3\t\3\t\5\t\u0115"+
+		"\n\t\3\t\3\t\5\t\u0119\n\t\5\t\u011b\n\t\3\n\3\n\3\n\5\n\u0120\n\n\5\n"+
+		"\u0122\n\n\3\13\3\13\5\13\u0126\n\13\3\13\3\13\3\13\7\13\u012b\n\13\f"+
+		"\13\16\13\u012e\13\13\5\13\u0130\n\13\3\13\3\13\3\13\5\13\u0135\n\13\3"+
+		"\13\3\13\5\13\u0139\n\13\3\13\6\13\u013c\n\13\r\13\16\13\u013d\3\13\3"+
+		"\13\3\13\3\13\3\13\7\13\u0145\n\13\f\13\16\13\u0148\13\13\5\13\u014a\n"+
+		"\13\3\13\3\13\3\13\3\13\5\13\u0150\n\13\5\13\u0152\n\13\3\f\3\f\5\f\u0156"+
+		"\n\f\3\f\3\f\3\f\3\f\5\f\u015c\n\f\3\f\3\f\3\f\5\f\u0161\n\f\3\f\3\f\3"+
+		"\f\3\f\3\f\3\f\3\f\7\f\u016a\n\f\f\f\16\f\u016d\13\f\3\f\3\f\3\f\5\f\u0172"+
+		"\n\f\3\r\3\r\5\r\u0176\n\r\3\r\3\r\3\r\3\r\5\r\u017c\n\r\3\r\3\r\3\r\5"+
+		"\r\u0181\n\r\3\r\3\r\3\r\3\r\3\r\7\r\u0188\n\r\f\r\16\r\u018b\13\r\3\r"+
+		"\3\r\7\r\u018f\n\r\f\r\16\r\u0192\13\r\3\r\3\r\3\r\5\r\u0197\n\r\3\r\3"+
+		"\r\5\r\u019b\n\r\3\16\3\16\5\16\u019f\n\16\3\16\3\16\3\16\3\16\5\16\u01a5"+
+		"\n\16\3\16\3\16\3\16\5\16\u01aa\n\16\3\16\3\16\3\16\3\16\3\16\5\16\u01b1"+
+		"\n\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\7\16\u01ba\n\16\f\16\16\16\u01bd"+
+		"\13\16\5\16\u01bf\n\16\5\16\u01c1\n\16\3\16\3\16\3\16\3\16\5\16\u01c7"+
+		"\n\16\3\16\3\16\3\16\3\16\5\16\u01cd\n\16\3\16\3\16\5\16\u01d1\n\16\3"+
+		"\16\3\16\3\16\3\16\3\16\5\16\u01d8\n\16\3\16\3\16\6\16\u01dc\n\16\r\16"+
+		"\16\16\u01dd\3\16\3\16\3\17\3\17\5\17\u01e4\n\17\3\17\3\17\3\17\3\17\5"+
+		"\17\u01ea\n\17\3\17\3\17\3\17\5\17\u01ef\n\17\3\17\3\17\3\17\3\17\3\20"+
+		"\3\20\3\20\3\20\3\20\3\20\5\20\u01fb\n\20\3\20\3\20\3\20\5\20\u0200\n"+
+		"\20\3\20\3\20\3\20\3\20\3\20\3\20\3\20\7\20\u0209\n\20\f\20\16\20\u020c"+
+		"\13\20\3\20\3\20\5\20\u0210\n\20\3\21\5\21\u0213\n\21\3\21\3\21\3\21\3"+
+		"\21\3\21\5\21\u021a\n\21\3\22\5\22\u021d\n\22\3\22\3\22\3\22\3\22\3\22"+
+		"\5\22\u0224\n\22\3\22\3\22\3\22\3\22\3\22\7\22\u022b\n\22\f\22\16\22\u022e"+
+		"\13\22\5\22\u0230\n\22\3\22\3\22\3\22\3\22\5\22\u0236\n\22\5\22\u0238"+
+		"\n\22\3\23\3\23\5\23\u023c\n\23\3\23\3\23\3\24\3\24\3\24\3\24\5\24\u0244"+
+		"\n\24\3\24\3\24\3\24\5\24\u0249\n\24\3\24\3\24\3\25\3\25\3\25\3\25\5\25"+
+		"\u0251\n\25\3\25\3\25\3\25\5\25\u0256\n\25\3\25\3\25\3\26\3\26\3\26\3"+
+		"\26\5\26\u025e\n\26\3\26\3\26\3\26\5\26\u0263\n\26\3\26\3\26\3\27\3\27"+
+		"\3\27\3\27\5\27\u026b\n\27\3\27\3\27\3\27\5\27\u0270\n\27\3\27\3\27\3"+
+		"\30\5\30\u0275\n\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30\3\30"+
+		"\3\30\3\30\3\30\3\30\3\30\3\30\3\30\5\30\u0288\n\30\3\30\3\30\3\30\3\30"+
+		"\5\30\u028e\n\30\3\30\3\30\3\30\3\30\3\30\7\30\u0295\n\30\f\30\16\30\u0298"+
+		"\13\30\3\30\3\30\5\30\u029c\n\30\3\30\3\30\3\30\3\30\3\30\7\30\u02a3\n"+
+		"\30\f\30\16\30\u02a6\13\30\3\30\3\30\3\30\3\30\3\30\3\30\7\30\u02ae\n"+
+		"\30\f\30\16\30\u02b1\13\30\3\30\3\30\7\30\u02b5\n\30\f\30\16\30\u02b8"+
+		"\13\30\3\30\3\30\3\30\5\30\u02bd\n\30\3\31\3\31\3\31\3\31\5\31\u02c3\n"+
+		"\31\3\31\3\31\3\31\3\31\3\31\3\31\3\31\5\31\u02cc\n\31\3\32\3\32\3\32"+
+		"\3\32\3\32\5\32\u02d3\n\32\3\32\3\32\5\32\u02d7\n\32\5\32\u02d9\n\32\3"+
+		"\33\3\33\5\33\u02dd\n\33\3\33\3\33\3\34\3\34\3\34\5\34\u02e4\n\34\5\34"+
+		"\u02e6\n\34\3\34\3\34\5\34\u02ea\n\34\3\34\5\34\u02ed\n\34\3\35\3\35\3"+
+		"\35\3\36\3\36\5\36\u02f4\n\36\3\36\3\36\3\36\7\36\u02f9\n\36\f\36\16\36"+
+		"\u02fc\13\36\5\36\u02fe\n\36\3\36\3\36\3\36\3\36\7\36\u0304\n\36\f\36"+
+		"\16\36\u0307\13\36\3\36\3\36\3\36\3\36\3\36\7\36\u030e\n\36\f\36\16\36"+
+		"\u0311\13\36\5\36\u0313\n\36\3\36\3\36\3\36\3\36\5\36\u0319\n\36\5\36"+
+		"\u031b\n\36\3\37\5\37\u031e\n\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37\3"+
+		"\37\3\37\3\37\3\37\5\37\u032b\n\37\3\37\3\37\3\37\3\37\3\37\3\37\3\37"+
+		"\3\37\3\37\3\37\7\37\u0337\n\37\f\37\16\37\u033a\13\37\3\37\3\37\5\37"+
+		"\u033e\n\37\3 \5 \u0341\n \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \5 \u034e\n"+
+		" \3 \3 \3 \3 \3 \3 \3 \3 \3 \3 \7 \u035a\n \f \16 \u035d\13 \3 \3 \5 "+
+		"\u0361\n \3 \3 \3 \3 \3 \7 \u0368\n \f \16 \u036b\13 \5 \u036d\n \3 \3"+
+		" \3 \3 \5 \u0373\n \5 \u0375\n \3!\3!\3\"\3\"\5\"\u037b\n\"\3\"\7\"\u037e"+
+		"\n\"\f\"\16\"\u0381\13\"\3#\6#\u0384\n#\r#\16#\u0385\3#\3#\3#\3#\3#\3"+
+		"#\3#\3#\3#\3#\5#\u0392\n#\3$\3$\5$\u0396\n$\3$\3$\3$\5$\u039b\n$\3$\3"+
+		"$\5$\u039f\n$\3$\5$\u03a2\n$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3$\3"+
+		"$\3$\3$\5$\u03b4\n$\3$\3$\3$\5$\u03b9\n$\3%\3%\3%\5%\u03be\n%\3&\3&\3"+
+		"&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\3&\5&\u03d1\n&\3\'\3\'\3\'\3"+
+		"\'\3\'\3\'\3\'\3\'\3\'\5\'\u03dc\n\'\3\'\3\'\3\'\5\'\u03e1\n\'\3\'\3\'"+
+		"\3\'\3\'\5\'\u03e7\n\'\3\'\3\'\3\'\7\'\u03ec\n\'\f\'\16\'\u03ef\13\'\3"+
+		"\'\5\'\u03f2\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3"+
+		"\'\5\'\u0402\n\'\3\'\5\'\u0405\n\'\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u040d\n"+
+		"\'\3\'\3\'\3\'\3\'\3\'\6\'\u0414\n\'\r\'\16\'\u0415\3\'\3\'\5\'\u041a"+
+		"\n\'\3\'\3\'\3\'\5\'\u041f\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'"+
+		"\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u0437\n\'\3\'\3\'"+
+		"\3\'\5\'\u043c\n\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\3\'\5\'\u0448\n"+
+		"\'\3\'\3\'\3\'\3\'\5\'\u044e\n\'\3\'\3\'\3\'\3\'\3\'\5\'\u0455\n\'\3\'"+
+		"\3\'\5\'\u0459\n\'\3\'\3\'\3\'\3\'\3\'\3\'\7\'\u0461\n\'\f\'\16\'\u0464"+
+		"\13\'\5\'\u0466\n\'\3\'\3\'\3\'\3\'\5\'\u046c\n\'\3\'\5\'\u046f\n\'\7"+
+		"\'\u0471\n\'\f\'\16\'\u0474\13\'\3(\3(\3(\3(\3(\3(\7(\u047c\n(\f(\16("+
+		"\u047f\13(\3(\3(\5(\u0483\n(\3(\3(\3(\3(\3(\3(\3(\3(\3(\3(\5(\u048f\n"+
+		"(\3(\3(\5(\u0493\n(\7(\u0495\n(\f(\16(\u0498\13(\3(\5(\u049b\n(\3(\3("+
+		"\3(\3(\3(\5(\u04a2\n(\5(\u04a4\n(\3)\3)\3)\3)\3)\3)\5)\u04ac\n)\3)\3)"+
+		"\3*\3*\3*\5*\u04b3\n*\3*\5*\u04b6\n*\3+\3+\5+\u04ba\n+\3+\3+\3+\5+\u04bf"+
+		"\n+\3+\3+\3+\3+\7+\u04c5\n+\f+\16+\u04c8\13+\3+\3+\3+\3+\3+\3+\3+\3+\3"+
+		"+\3+\3+\3+\3+\3+\7+\u04d8\n+\f+\16+\u04db\13+\3+\3+\3+\5+\u04e0\n+\3,"+
+		"\3,\5,\u04e4\n,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\7,\u04f2\n,\f,\16"+
+		",\u04f5\13,\3-\3-\3-\5-\u04fa\n-\3-\3-\3-\3-\3-\3-\5-\u0502\n-\3.\3.\3"+
+		".\5.\u0507\n.\3.\5.\u050a\n.\3/\3/\3/\5/\u050f\n/\3\60\3\60\3\60\3\60"+
+		"\3\60\7\60\u0516\n\60\f\60\16\60\u0519\13\60\3\60\3\60\5\60\u051d\n\60"+
+		"\3\60\3\60\3\60\3\60\3\60\3\61\3\61\3\61\3\61\3\61\3\61\3\61\5\61\u052b"+
+		"\n\61\3\61\5\61\u052e\n\61\5\61\u0530\n\61\3\62\3\62\3\62\5\62\u0535\n"+
+		"\62\3\62\3\62\5\62\u0539\n\62\3\62\5\62\u053c\n\62\3\62\3\62\3\62\3\62"+
+		"\3\62\5\62\u0543\n\62\3\62\3\62\3\62\3\62\7\62\u0549\n\62\f\62\16\62\u054c"+
+		"\13\62\3\62\5\62\u054f\n\62\3\62\3\62\5\62\u0553\n\62\3\62\5\62\u0556"+
+		"\n\62\3\62\3\62\3\62\3\62\5\62\u055c\n\62\3\62\5\62\u055f\n\62\5\62\u0561"+
+		"\n\62\3\63\3\63\3\63\3\63\3\63\7\63\u0568\n\63\f\63\16\63\u056b\13\63"+
+		"\3\64\3\64\5\64\u056f\n\64\3\64\3\64\5\64\u0573\n\64\3\64\3\64\5\64\u0577"+
+		"\n\64\3\64\5\64\u057a\n\64\3\65\3\65\3\65\3\65\3\65\3\65\3\65\7\65\u0583"+
+		"\n\65\f\65\16\65\u0586\13\65\3\65\3\65\5\65\u058a\n\65\3\66\3\66\5\66"+
+		"\u058e\n\66\3\66\3\66\3\66\3\66\3\66\7\66\u0595\n\66\f\66\16\66\u0598"+
+		"\13\66\3\66\5\66\u059b\n\66\5\66\u059d\n\66\3\66\3\66\3\66\3\66\3\66\3"+
+		"\66\7\66\u05a5\n\66\f\66\16\66\u05a8\13\66\3\66\3\66\5\66\u05ac\n\66\5"+
+		"\66\u05ae\n\66\3\66\3\66\3\66\3\66\3\66\7\66\u05b5\n\66\f\66\16\66\u05b8"+
+		"\13\66\3\66\3\66\3\66\3\66\3\66\3\66\7\66\u05c0\n\66\f\66\16\66\u05c3"+
+		"\13\66\3\66\3\66\7\66\u05c7\n\66\f\66\16\66\u05ca\13\66\5\66\u05cc\n\66"+
+		"\3\67\3\67\3\67\7\67\u05d1\n\67\f\67\16\67\u05d4\13\67\38\38\58\u05d8"+
+		"\n8\39\39\39\39\39\59\u05df\n9\3:\3:\3:\3:\3:\7:\u05e6\n:\f:\16:\u05e9"+
+		"\13:\3:\3:\5:\u05ed\n:\3;\5;\u05f0\n;\3;\3;\3<\3<\3=\3=\3>\3>\3?\3?\5"+
+		"?\u05fc\n?\3@\3@\3A\3A\3B\3B\3C\3C\3D\3D\3E\3E\3F\3F\3G\3G\3H\3H\3I\3"+
+		"I\3J\3J\3K\3K\3L\3L\3M\3M\3N\3N\3O\3O\3P\3P\3Q\3Q\3R\3R\3S\3S\3S\3S\3"+
+		"S\3S\3S\5S\u062b\nS\3S\2\3LT\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \""+
+		"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084"+
+		"\u0086\u0088\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c"+
+		"\u009e\u00a0\u00a2\u00a4\2\23\5\2<<GGTT\4\2\61\61DD\4\2\7\7ll\3\2\u0085"+
+		"\u0086\4\2$$>>\7\2\33\33JJSS||\177\177\4\2\t\t\16\17\3\2\n\13\3\2\20\23"+
+		"\6\2OOcceexx\4\2==\u008d\u008d\5\2\33\33JJ\177\177\4\2\37\37@@\6\2\66"+
+		"8jj\u0098\u0098\u009a\u009b\4\2\n\fhh\4\2\u0097\u0097\u009a\u009a\3\2"+
+		"\33\u0096\u071f\2\u00aa\3\2\2\2\4\u00af\3\2\2\2\6\u00b5\3\2\2\2\b\u00cf"+
+		"\3\2\2\2\n\u00ef\3\2\2\2\f\u0101\3\2\2\2\16\u010a\3\2\2\2\20\u0112\3\2"+
+		"\2\2\22\u011c\3\2\2\2\24\u012f\3\2\2\2\26\u0153\3\2\2\2\30\u0173\3\2\2"+
+		"\2\32\u019c\3\2\2\2\34\u01e1\3\2\2\2\36\u01f4\3\2\2\2 \u0212\3\2\2\2\""+
+		"\u021c\3\2\2\2$\u0239\3\2\2\2&\u023f\3\2\2\2(\u024c\3\2\2\2*\u0259\3\2"+
+		"\2\2,\u0266\3\2\2\2.\u0274\3\2\2\2\60\u02be\3\2\2\2\62\u02cd\3\2\2\2\64"+
+		"\u02da\3\2\2\2\66\u02e0\3\2\2\28\u02ee\3\2\2\2:\u02fd\3\2\2\2<\u031d\3"+
+		"\2\2\2>\u0340\3\2\2\2@\u0376\3\2\2\2B\u0378\3\2\2\2D\u0383\3\2\2\2F\u0395"+
+		"\3\2\2\2H\u03bd\3\2\2\2J\u03d0\3\2\2\2L\u041e\3\2\2\2N\u0475\3\2\2\2P"+
+		"\u04a5\3\2\2\2R\u04af\3\2\2\2T\u04b9\3\2\2\2V\u04e1\3\2\2\2X\u04f9\3\2"+
+		"\2\2Z\u0503\3\2\2\2\\\u050e\3\2\2\2^\u0510\3\2\2\2`\u052f\3\2\2\2b\u0560"+
+		"\3\2\2\2d\u0562\3\2\2\2f\u0579\3\2\2\2h\u0589\3\2\2\2j\u05cb\3\2\2\2l"+
+		"\u05cd\3\2\2\2n\u05d7\3\2\2\2p\u05de\3\2\2\2r\u05e0\3\2\2\2t\u05ef\3\2"+
+		"\2\2v\u05f3\3\2\2\2x\u05f5\3\2\2\2z\u05f7\3\2\2\2|\u05fb\3\2\2\2~\u05fd"+
+		"\3\2\2\2\u0080\u05ff\3\2\2\2\u0082\u0601\3\2\2\2\u0084\u0603\3\2\2\2\u0086"+
+		"\u0605\3\2\2\2\u0088\u0607\3\2\2\2\u008a\u0609\3\2\2\2\u008c\u060b\3\2"+
+		"\2\2\u008e\u060d\3\2\2\2\u0090\u060f\3\2\2\2\u0092\u0611\3\2\2\2\u0094"+
+		"\u0613\3\2\2\2\u0096\u0615\3\2\2\2\u0098\u0617\3\2\2\2\u009a\u0619\3\2"+
+		"\2\2\u009c\u061b\3\2\2\2\u009e\u061d\3\2\2\2\u00a0\u061f\3\2\2\2\u00a2"+
+		"\u0621\3\2\2\2\u00a4\u062a\3\2\2\2\u00a6\u00a9\5\6\4\2\u00a7\u00a9\5\4"+
+		"\3\2\u00a8\u00a6\3\2\2\2\u00a8\u00a7\3\2\2\2\u00a9\u00ac\3\2\2\2\u00aa"+
+		"\u00a8\3\2\2\2\u00aa\u00ab\3\2\2\2\u00ab\u00ad\3\2\2\2\u00ac\u00aa\3\2"+
+		"\2\2\u00ad\u00ae\7\2\2\3\u00ae\3\3\2\2\2\u00af\u00b0\7\u009f\2\2\u00b0"+
+		"\u00b1\b\3\1\2\u00b1\5\3\2\2\2\u00b2\u00b4\7\3\2\2\u00b3\u00b2\3\2\2\2"+
+		"\u00b4\u00b7\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\u00b8"+
+		"\3\2\2\2\u00b7\u00b5\3\2\2\2\u00b8\u00c1\5\b\5\2\u00b9\u00bb\7\3\2\2\u00ba"+
+		"\u00b9\3\2\2\2\u00bb\u00bc\3\2\2\2\u00bc\u00ba\3\2\2\2\u00bc\u00bd\3\2"+
+		"\2\2\u00bd\u00be\3\2\2\2\u00be\u00c0\5\b\5\2\u00bf\u00ba\3\2\2\2\u00c0"+
+		"\u00c3\3\2\2\2\u00c1\u00bf\3\2\2\2\u00c1\u00c2\3\2\2\2\u00c2\u00c7\3\2"+
+		"\2\2\u00c3\u00c1\3\2\2\2\u00c4\u00c6\7\3\2\2\u00c5\u00c4\3\2\2\2\u00c6"+
+		"\u00c9\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c7\u00c8\3\2\2\2\u00c8\7\3\2\2\2"+
+		"\u00c9\u00c7\3\2\2\2\u00ca\u00cd\7I\2\2\u00cb\u00cc\7t\2\2\u00cc\u00ce"+
+		"\7q\2\2\u00cd\u00cb\3\2\2\2\u00cd\u00ce\3\2\2\2\u00ce\u00d0\3\2\2\2\u00cf"+
+		"\u00ca\3\2\2\2\u00cf\u00d0\3\2\2\2\u00d0\u00ed\3\2\2\2\u00d1\u00ee\5\n"+
+		"\6\2\u00d2\u00ee\5\f\7\2\u00d3\u00ee\5\16\b\2\u00d4\u00ee\5\20\t\2\u00d5"+
+		"\u00ee\5\22\n\2\u00d6\u00ee\5\24\13\2\u00d7\u00ee\5\26\f\2\u00d8\u00ee"+
+		"\5\30\r\2\u00d9\u00ee\5\32\16\2\u00da\u00ee\5\34\17\2\u00db\u00ee\5\36"+
+		"\20\2\u00dc\u00ee\5 \21\2\u00dd\u00ee\5\"\22\2\u00de\u00ee\5$\23\2\u00df"+
+		"\u00ee\5&\24\2\u00e0\u00ee\5(\25\2\u00e1\u00ee\5*\26\2\u00e2\u00ee\5,"+
+		"\27\2\u00e3\u00ee\5.\30\2\u00e4\u00ee\5\60\31\2\u00e5\u00ee\5\62\32\2"+
+		"\u00e6\u00ee\5\64\33\2\u00e7\u00ee\5\66\34\2\u00e8\u00ee\58\35\2\u00e9"+
+		"\u00ee\5:\36\2\u00ea\u00ee\5<\37\2\u00eb\u00ee\5> \2\u00ec\u00ee\5@!\2"+
+		"\u00ed\u00d1\3\2\2\2\u00ed\u00d2\3\2\2\2\u00ed\u00d3\3\2\2\2\u00ed\u00d4"+
+		"\3\2\2\2\u00ed\u00d5\3\2\2\2\u00ed\u00d6\3\2\2\2\u00ed\u00d7\3\2\2\2\u00ed"+
+		"\u00d8\3\2\2\2\u00ed\u00d9\3\2\2\2\u00ed\u00da\3\2\2\2\u00ed\u00db\3\2"+
+		"\2\2\u00ed\u00dc\3\2\2\2\u00ed\u00dd\3\2\2\2\u00ed\u00de\3\2\2\2\u00ed"+
+		"\u00df\3\2\2\2\u00ed\u00e0\3\2\2\2\u00ed\u00e1\3\2\2\2\u00ed\u00e2\3\2"+
+		"\2\2\u00ed\u00e3\3\2\2\2\u00ed\u00e4\3\2\2\2\u00ed\u00e5\3\2\2\2\u00ed"+
+		"\u00e6\3\2\2\2\u00ed\u00e7\3\2\2\2\u00ed\u00e8\3\2\2\2\u00ed\u00e9\3\2"+
+		"\2\2\u00ed\u00ea\3\2\2\2\u00ed\u00eb\3\2\2\2\u00ed\u00ec\3\2\2\2\u00ee"+
+		"\t\3\2\2\2\u00ef\u00f0\7 \2\2\u00f0\u00f4\7\u0084\2\2\u00f1\u00f2\5\u0086"+
+		"D\2\u00f2\u00f3\7\4\2\2\u00f3\u00f5\3\2\2\2\u00f4\u00f1\3\2\2\2\u00f4"+
+		"\u00f5\3\2\2\2\u00f5\u00f6\3\2\2\2\u00f6\u00ff\5\u0088E\2\u00f7\u00f8"+
+		"\7{\2\2\u00f8\u00f9\7\u0088\2\2\u00f9\u0100\5\u008cG\2\u00fa\u00fc\7\35"+
+		"\2\2\u00fb\u00fd\7\60\2\2\u00fc\u00fb\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd"+
+		"\u00fe\3\2\2\2\u00fe\u0100\5B\"\2\u00ff\u00f7\3\2\2\2\u00ff\u00fa\3\2"+
+		"\2\2\u0100\13\3\2\2\2\u0101\u0108\7!\2\2\u0102\u0109\5\u0086D\2\u0103"+
+		"\u0109\5\u008aF\2\u0104\u0105\5\u0086D\2\u0105\u0106\7\4\2\2\u0106\u0107"+
+		"\5\u008aF\2\u0107\u0109\3\2\2\2\u0108\u0102\3\2\2\2\u0108\u0103\3\2\2"+
+		"\2\u0108\u0104\3\2\2\2\u0108\u0109\3\2\2\2\u0109\r\3\2\2\2\u010a\u010c"+
+		"\7%\2\2\u010b\u010d\79\2\2\u010c\u010b\3\2\2\2\u010c\u010d\3\2\2\2\u010d"+
+		"\u010e\3\2\2\2\u010e\u010f\5L\'\2\u010f\u0110\7#\2\2\u0110\u0111\5\u0086"+
+		"D\2\u0111\17\3\2\2\2\u0112\u0114\7(\2\2\u0113\u0115\t\2\2\2\u0114\u0113"+
+		"\3\2\2\2\u0114\u0115\3\2\2\2\u0115\u011a\3\2\2\2\u0116\u0118\7\u0089\2"+
+		"\2\u0117\u0119\5\u00a2R\2\u0118\u0117\3\2\2\2\u0118\u0119\3\2\2\2\u0119"+
+		"\u011b\3\2\2\2\u011a\u0116\3\2\2\2\u011a\u011b\3\2\2\2\u011b\21\3\2\2"+
+		"\2\u011c\u0121\t\3\2\2\u011d\u011f\7\u0089\2\2\u011e\u0120\5\u00a2R\2"+
+		"\u011f\u011e\3\2\2\2\u011f\u0120\3\2\2\2\u0120\u0122\3\2\2\2\u0121\u011d"+
+		"\3\2\2\2\u0121\u0122\3\2\2\2\u0122\23\3\2\2\2\u0123\u0125\7\u0095\2\2"+
+		"\u0124\u0126\7v\2\2\u0125\u0124\3\2\2\2\u0125\u0126\3\2\2\2\u0126\u0127"+
+		"\3\2\2\2\u0127\u012c\5^\60\2\u0128\u0129\7\7\2\2\u0129\u012b\5^\60\2\u012a"+
+		"\u0128\3\2\2\2\u012b\u012e\3\2\2\2\u012c\u012a\3\2\2\2\u012c\u012d\3\2"+
+		"\2\2\u012d\u0130\3\2\2\2\u012e\u012c\3\2\2\2\u012f\u0123\3\2\2\2\u012f"+
+		"\u0130\3\2\2\2\u0130\u0131\3\2\2\2\u0131\u013b\5j\66\2\u0132\u0134\7\u008b"+
+		"\2\2\u0133\u0135\7\37\2\2\u0134\u0133\3\2\2\2\u0134\u0135\3\2\2\2\u0135"+
+		"\u0139\3\2\2\2\u0136\u0139\7\\\2\2\u0137\u0139\7F\2\2\u0138\u0132\3\2"+
+		"\2\2\u0138\u0136\3\2\2\2\u0138\u0137\3\2\2\2\u0139\u013a\3\2\2\2\u013a"+
+		"\u013c\5j\66\2\u013b\u0138\3\2\2\2\u013c\u013d\3\2\2\2\u013d\u013b\3\2"+
+		"\2\2\u013d\u013e\3\2\2\2\u013e\u0149\3\2\2\2\u013f\u0140\7o\2\2\u0140"+
+		"\u0141\7*\2\2\u0141\u0146\5Z.\2\u0142\u0143\7\7\2\2\u0143\u0145\5Z.\2"+
+		"\u0144\u0142\3\2\2\2\u0145\u0148\3\2\2\2\u0146\u0144\3\2\2\2\u0146\u0147"+
+		"\3\2\2\2\u0147\u014a\3\2\2\2\u0148\u0146\3\2\2\2\u0149\u013f\3\2\2\2\u0149"+
+		"\u014a\3\2\2\2\u014a\u0151\3\2\2\2\u014b\u014c\7d\2\2\u014c\u014f\5L\'"+
+		"\2\u014d\u014e\t\4\2\2\u014e\u0150\5L\'\2\u014f\u014d\3\2\2\2\u014f\u0150"+
+		"\3\2\2\2\u0150\u0152\3\2\2\2\u0151\u014b\3\2\2\2\u0151\u0152\3\2\2\2\u0152"+
+		"\25\3\2\2\2\u0153\u0155\7\64\2\2\u0154\u0156\7\u008c\2\2\u0155\u0154\3"+
+		"\2\2\2\u0155\u0156\3\2\2\2\u0156\u0157\3\2\2\2\u0157\u015b\7V\2\2\u0158"+
+		"\u0159\7R\2\2\u0159\u015a\7h\2\2\u015a\u015c\7H\2\2\u015b\u0158\3\2\2"+
+		"\2\u015b\u015c\3\2\2\2\u015c\u0160\3\2\2\2\u015d\u015e\5\u0086D\2\u015e"+
+		"\u015f\7\4\2\2\u015f\u0161\3\2\2\2\u0160\u015d\3\2\2\2\u0160\u0161\3\2"+
+		"\2\2\u0161\u0162\3\2\2\2\u0162\u0163\5\u0094K\2\u0163\u0164\7m\2\2\u0164"+
+		"\u0165\5\u0088E\2\u0165\u0166\7\5\2\2\u0166\u016b\5R*\2\u0167\u0168\7"+
+		"\7\2\2\u0168\u016a\5R*\2\u0169\u0167\3\2\2\2\u016a\u016d\3\2\2\2\u016b"+
+		"\u0169\3\2\2\2\u016b\u016c\3\2\2\2\u016c\u016e\3\2\2\2\u016d\u016b\3\2"+
+		"\2\2\u016e\u0171\7\6\2\2\u016f\u0170\7\u0094\2\2\u0170\u0172\5L\'\2\u0171"+
+		"\u016f\3\2\2\2\u0171\u0172\3\2\2\2\u0172\27\3\2\2\2\u0173\u0175\7\64\2"+
+		"\2\u0174\u0176\t\5\2\2\u0175\u0174\3\2\2\2\u0175\u0176\3\2\2\2\u0176\u0177"+
+		"\3\2\2\2\u0177\u017b\7\u0084\2\2\u0178\u0179\7R\2\2\u0179\u017a\7h\2\2"+
+		"\u017a\u017c\7H\2\2\u017b\u0178\3\2\2\2\u017b\u017c\3\2\2\2\u017c\u0180"+
+		"\3\2\2\2\u017d\u017e\5\u0086D\2\u017e\u017f\7\4\2\2\u017f\u0181\3\2\2"+
+		"\2\u0180\u017d\3\2\2\2\u0180\u0181\3\2\2\2\u0181\u0182\3\2\2\2\u0182\u019a"+
+		"\5\u0088E\2\u0183\u0184\7\5\2\2\u0184\u0189\5B\"\2\u0185\u0186\7\7\2\2"+
+		"\u0186\u0188\5B\"\2\u0187\u0185\3\2\2\2\u0188\u018b\3\2\2\2\u0189\u0187"+
+		"\3\2\2\2\u0189\u018a\3\2\2\2\u018a\u0190\3\2\2\2\u018b\u0189\3\2\2\2\u018c"+
+		"\u018d\7\7\2\2\u018d\u018f\5T+\2\u018e\u018c\3\2\2\2\u018f\u0192\3\2\2"+
+		"\2\u0190\u018e\3\2\2\2\u0190\u0191\3\2\2\2\u0191\u0193\3\2\2\2\u0192\u0190"+
+		"\3\2\2\2\u0193\u0196\7\6\2\2\u0194\u0195\7\u0096\2\2\u0195\u0197\7\u0097"+
+		"\2\2\u0196\u0194\3\2\2\2\u0196\u0197\3\2\2\2\u0197\u019b\3\2\2\2\u0198"+
+		"\u0199\7#\2\2\u0199\u019b\5:\36\2\u019a\u0183\3\2\2\2\u019a\u0198\3\2"+
+		"\2\2\u019b\31\3\2\2\2\u019c\u019e\7\64\2\2\u019d\u019f\t\5\2\2\u019e\u019d"+
+		"\3\2\2\2\u019e\u019f\3\2\2\2\u019f\u01a0\3\2\2\2\u01a0\u01a4\7\u008a\2"+
+		"\2\u01a1\u01a2\7R\2\2\u01a2\u01a3\7h\2\2\u01a3\u01a5\7H\2\2\u01a4\u01a1"+
+		"\3\2\2\2\u01a4\u01a5\3\2\2\2\u01a5\u01a9\3\2\2\2\u01a6\u01a7\5\u0086D"+
+		"\2\u01a7\u01a8\7\4\2\2\u01a8\u01aa\3\2\2\2\u01a9\u01a6\3\2\2\2\u01a9\u01aa"+
+		"\3\2\2\2\u01aa\u01ab\3\2\2\2\u01ab\u01b0\5\u0096L\2\u01ac\u01b1\7\'\2"+
+		"\2\u01ad\u01b1\7\36\2\2\u01ae\u01af\7[\2\2\u01af\u01b1\7k\2\2\u01b0\u01ac"+
+		"\3\2\2\2\u01b0\u01ad\3\2\2\2\u01b0\u01ae\3\2\2\2\u01b0\u01b1\3\2\2\2\u01b1"+
+		"\u01c0\3\2\2\2\u01b2\u01c1\7=\2\2\u01b3\u01c1\7Z\2\2\u01b4\u01be\7\u008d"+
+		"\2\2\u01b5\u01b6\7k\2\2\u01b6\u01bb\5\u008eH\2\u01b7\u01b8\7\7\2\2\u01b8"+
+		"\u01ba\5\u008eH\2\u01b9\u01b7\3\2\2\2\u01ba\u01bd\3\2\2\2\u01bb\u01b9"+
+		"\3\2\2\2\u01bb\u01bc\3\2\2\2\u01bc\u01bf\3\2\2\2\u01bd\u01bb\3\2\2\2\u01be"+
+		"\u01b5\3\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01c1\3\2\2\2\u01c0\u01b2\3\2"+
+		"\2\2\u01c0\u01b3\3\2\2\2\u01c0\u01b4\3\2\2\2\u01c1\u01c2\3\2\2\2\u01c2"+
+		"\u01c6\7m\2\2\u01c3\u01c4\5\u0086D\2\u01c4\u01c5\7\4\2\2\u01c5\u01c7\3"+
+		"\2\2\2\u01c6\u01c3\3\2\2\2\u01c6\u01c7\3\2\2\2\u01c7\u01c8\3\2\2\2\u01c8"+
+		"\u01cc\5\u0088E\2\u01c9\u01ca\7K\2\2\u01ca\u01cb\7B\2\2\u01cb\u01cd\7"+
+		"\u0080\2\2\u01cc\u01c9\3\2\2\2\u01cc\u01cd\3\2\2\2\u01cd\u01d0\3\2\2\2"+
+		"\u01ce\u01cf\7\u0093\2\2\u01cf\u01d1\5L\'\2\u01d0\u01ce\3\2\2\2\u01d0"+
+		"\u01d1\3\2\2\2\u01d1\u01d2\3\2\2\2\u01d2\u01db\7(\2\2\u01d3\u01d8\5<\37"+
+		"\2\u01d4\u01d8\5.\30\2\u01d5\u01d8\5 \21\2\u01d6\u01d8\5:\36\2\u01d7\u01d3"+
+		"\3\2\2\2\u01d7\u01d4\3\2\2\2\u01d7\u01d5\3\2\2\2\u01d7\u01d6\3\2\2\2\u01d8"+
+		"\u01d9\3\2\2\2\u01d9\u01da\7\3\2\2\u01da\u01dc\3\2\2\2\u01db\u01d7\3\2"+
+		"\2\2\u01dc\u01dd\3\2\2\2\u01dd\u01db\3\2\2\2\u01dd\u01de\3\2\2\2\u01de"+
+		"\u01df\3\2\2\2\u01df\u01e0\7D\2\2\u01e0\33\3\2\2\2\u01e1\u01e3\7\64\2"+
+		"\2\u01e2\u01e4\t\5\2\2\u01e3\u01e2\3\2\2\2\u01e3\u01e4\3\2\2\2\u01e4\u01e5"+
+		"\3\2\2\2\u01e5\u01e9\7\u0091\2\2\u01e6\u01e7\7R\2\2\u01e7\u01e8\7h\2\2"+
+		"\u01e8\u01ea\7H\2\2\u01e9\u01e6\3\2\2\2\u01e9\u01ea\3\2\2\2\u01ea\u01ee"+
+		"\3\2\2\2\u01eb\u01ec\5\u0086D\2\u01ec\u01ed\7\4\2\2\u01ed\u01ef\3\2\2"+
+		"\2\u01ee\u01eb\3\2\2\2\u01ee\u01ef\3\2\2\2\u01ef\u01f0\3\2\2\2\u01f0\u01f1"+
+		"\5\u0098M\2\u01f1\u01f2\7#\2\2\u01f2\u01f3\5:\36\2\u01f3\35\3\2\2\2\u01f4"+
+		"\u01f5\7\64\2\2\u01f5\u01f6\7\u0092\2\2\u01f6\u01fa\7\u0084\2\2\u01f7"+
+		"\u01f8\7R\2\2\u01f8\u01f9\7h\2\2\u01f9\u01fb\7H\2\2\u01fa\u01f7\3\2\2"+
+		"\2\u01fa\u01fb\3\2\2\2\u01fb\u01ff\3\2\2\2\u01fc\u01fd\5\u0086D\2\u01fd"+
+		"\u01fe\7\4\2\2\u01fe\u0200\3\2\2\2\u01ff\u01fc\3\2\2\2\u01ff\u0200\3\2"+
+		"\2\2\u0200\u0201\3\2\2\2\u0201\u0202\5\u0088E\2\u0202\u0203\7\u008e\2"+
+		"\2\u0203\u020f\5\u009aN\2\u0204\u0205\7\5\2\2\u0205\u020a\5|?\2\u0206"+
+		"\u0207\7\7\2\2\u0207\u0209\5|?\2\u0208\u0206\3\2\2\2\u0209\u020c\3\2\2"+
+		"\2\u020a\u0208\3\2\2\2\u020a\u020b\3\2\2\2\u020b\u020d\3\2\2\2\u020c\u020a"+
+		"\3\2\2\2\u020d\u020e\7\6\2\2\u020e\u0210\3\2\2\2\u020f\u0204\3\2\2\2\u020f"+
+		"\u0210\3\2\2\2\u0210\37\3\2\2\2\u0211\u0213\5V,\2\u0212\u0211\3\2\2\2"+
+		"\u0212\u0213\3\2\2\2\u0213\u0214\3\2\2\2\u0214\u0215\7=\2\2\u0215\u0216"+
+		"\7M\2\2\u0216\u0219\5X-\2\u0217\u0218\7\u0094\2\2\u0218\u021a\5L\'\2\u0219"+
+		"\u0217\3\2\2\2\u0219\u021a\3\2\2\2\u021a!\3\2\2\2\u021b\u021d\5V,\2\u021c"+
+		"\u021b\3\2\2\2\u021c\u021d\3\2\2\2\u021d\u021e\3\2\2\2\u021e\u021f\7="+
+		"\2\2\u021f\u0220\7M\2\2\u0220\u0223\5X-\2\u0221\u0222\7\u0094\2\2\u0222"+
+		"\u0224\5L\'\2\u0223\u0221\3\2\2\2\u0223\u0224\3\2\2\2\u0224\u0237\3\2"+
+		"\2\2\u0225\u0226\7o\2\2\u0226\u0227\7*\2\2\u0227\u022c\5Z.\2\u0228\u0229"+
+		"\7\7\2\2\u0229\u022b\5Z.\2\u022a\u0228\3\2\2\2\u022b\u022e\3\2\2\2\u022c"+
+		"\u022a\3\2\2\2\u022c\u022d\3\2\2\2\u022d\u0230\3\2\2\2\u022e\u022c\3\2"+
+		"\2\2\u022f\u0225\3\2\2\2\u022f\u0230\3\2\2\2\u0230\u0231\3\2\2\2\u0231"+
+		"\u0232\7d\2\2\u0232\u0235\5L\'\2\u0233\u0234\t\4\2\2\u0234\u0236\5L\'"+
+		"\2\u0235\u0233\3\2\2\2\u0235\u0236\3\2\2\2\u0236\u0238\3\2\2\2\u0237\u022f"+
+		"\3\2\2\2\u0237\u0238\3\2\2\2\u0238#\3\2\2\2\u0239\u023b\7?\2\2\u023a\u023c"+
+		"\79\2\2\u023b\u023a\3\2\2\2\u023b\u023c\3\2\2\2\u023c\u023d\3\2\2\2\u023d"+
+		"\u023e\5\u0086D\2\u023e%\3\2\2\2\u023f\u0240\7A\2\2\u0240\u0243\7V\2\2"+
+		"\u0241\u0242\7R\2\2\u0242\u0244\7H\2\2\u0243\u0241\3\2\2\2\u0243\u0244"+
+		"\3\2\2\2\u0244\u0248\3\2\2\2\u0245\u0246\5\u0086D\2\u0246\u0247\7\4\2"+
+		"\2\u0247\u0249\3\2\2\2\u0248\u0245\3\2\2\2\u0248\u0249\3\2\2\2\u0249\u024a"+
+		"\3\2\2\2\u024a\u024b\5\u0094K\2\u024b\'\3\2\2\2\u024c\u024d\7A\2\2\u024d"+
+		"\u0250\7\u0084\2\2\u024e\u024f\7R\2\2\u024f\u0251\7H\2\2\u0250\u024e\3"+
+		"\2\2\2\u0250\u0251\3\2\2\2\u0251\u0255\3\2\2\2\u0252\u0253\5\u0086D\2"+
+		"\u0253\u0254\7\4\2\2\u0254\u0256\3\2\2\2\u0255\u0252\3\2\2\2\u0255\u0256"+
+		"\3\2\2\2\u0256\u0257\3\2\2\2\u0257\u0258\5\u0088E\2\u0258)\3\2\2\2\u0259"+
+		"\u025a\7A\2\2\u025a\u025d\7\u008a\2\2\u025b\u025c\7R\2\2\u025c\u025e\7"+
+		"H\2\2\u025d\u025b\3\2\2\2\u025d\u025e\3\2\2\2\u025e\u0262\3\2\2\2\u025f"+
+		"\u0260\5\u0086D\2\u0260\u0261\7\4\2\2\u0261\u0263\3\2\2\2\u0262\u025f"+
+		"\3\2\2\2\u0262\u0263\3\2\2\2\u0263\u0264\3\2\2\2\u0264\u0265\5\u0096L"+
+		"\2\u0265+\3\2\2\2\u0266\u0267\7A\2\2\u0267\u026a\7\u0091\2\2\u0268\u0269"+
+		"\7R\2\2\u0269\u026b\7H\2\2\u026a\u0268\3\2\2\2\u026a\u026b\3\2\2\2\u026b"+
+		"\u026f\3\2\2\2\u026c\u026d\5\u0086D\2\u026d\u026e\7\4\2\2\u026e\u0270"+
+		"\3\2\2\2\u026f\u026c\3\2\2\2\u026f\u0270\3\2\2\2\u0270\u0271\3\2\2\2\u0271"+
+		"\u0272\5\u0098M\2\u0272-\3\2\2\2\u0273\u0275\5V,\2\u0274\u0273\3\2\2\2"+
+		"\u0274\u0275\3\2\2\2\u0275\u0287\3\2\2\2\u0276\u0288\7Z\2\2\u0277\u0288"+
+		"\7|\2\2\u0278\u0279\7Z\2\2\u0279\u027a\7n\2\2\u027a\u0288\7|\2\2\u027b"+
+		"\u027c\7Z\2\2\u027c\u027d\7n\2\2\u027d\u0288\7\177\2\2\u027e\u027f\7Z"+
+		"\2\2\u027f\u0280\7n\2\2\u0280\u0288\7\33\2\2\u0281\u0282\7Z\2\2\u0282"+
+		"\u0283\7n\2\2\u0283\u0288\7J\2\2\u0284\u0285\7Z\2\2\u0285\u0286\7n\2\2"+
+		"\u0286\u0288\7S\2\2\u0287\u0276\3\2\2\2\u0287\u0277\3\2\2\2\u0287\u0278"+
+		"\3\2\2\2\u0287\u027b\3\2\2\2\u0287\u027e\3\2\2\2\u0287\u0281\3\2\2\2\u0287"+
+		"\u0284\3\2\2\2\u0288\u0289\3\2\2\2\u0289\u028d\7]\2\2\u028a\u028b\5\u0086"+
+		"D\2\u028b\u028c\7\4\2\2\u028c\u028e\3\2\2\2\u028d\u028a\3\2\2\2\u028d"+
+		"\u028e\3\2\2\2\u028e\u028f\3\2\2\2\u028f\u029b\5\u0088E\2\u0290\u0291"+
+		"\7\5\2\2\u0291\u0296\5\u008eH\2\u0292\u0293\7\7\2\2\u0293\u0295\5\u008e"+
+		"H\2\u0294\u0292\3\2\2\2\u0295\u0298\3\2\2\2\u0296\u0294\3\2\2\2\u0296"+
+		"\u0297\3\2\2\2\u0297\u0299\3\2\2\2\u0298\u0296\3\2\2\2\u0299\u029a\7\6"+
+		"\2\2\u029a\u029c\3\2\2\2\u029b\u0290\3\2\2\2\u029b\u029c\3\2\2\2\u029c"+
+		"\u02bc\3\2\2\2\u029d\u029e\7\u0090\2\2\u029e\u029f\7\5\2\2\u029f\u02a4"+
+		"\5L\'\2\u02a0\u02a1\7\7\2\2\u02a1\u02a3\5L\'\2\u02a2\u02a0\3\2\2\2\u02a3"+
+		"\u02a6\3\2\2\2\u02a4\u02a2\3\2\2\2\u02a4\u02a5\3\2\2\2\u02a5\u02a7\3\2"+
+		"\2\2\u02a6\u02a4\3\2\2\2\u02a7\u02b6\7\6\2\2\u02a8\u02a9\7\7\2\2\u02a9"+
+		"\u02aa\7\5\2\2\u02aa\u02af\5L\'\2\u02ab\u02ac\7\7\2\2\u02ac\u02ae\5L\'"+
+		"\2\u02ad\u02ab\3\2\2\2\u02ae\u02b1\3\2\2\2\u02af\u02ad\3\2\2\2\u02af\u02b0"+
+		"\3\2\2\2\u02b0\u02b2\3\2\2\2\u02b1\u02af\3\2\2\2\u02b2\u02b3\7\6\2\2\u02b3"+
+		"\u02b5\3\2\2\2\u02b4\u02a8\3\2\2\2\u02b5\u02b8\3\2\2\2\u02b6\u02b4\3\2"+
+		"\2\2\u02b6\u02b7\3\2\2\2\u02b7\u02bd\3\2\2\2\u02b8\u02b6\3\2\2\2\u02b9"+
+		"\u02bd\5:\36\2\u02ba\u02bb\7:\2\2\u02bb\u02bd\7\u0090\2\2\u02bc\u029d"+
+		"\3\2\2\2\u02bc\u02b9\3\2\2\2\u02bc\u02ba\3\2\2\2\u02bd/\3\2\2\2\u02be"+
+		"\u02c2\7r\2\2\u02bf\u02c0\5\u0086D\2\u02c0\u02c1\7\4\2\2\u02c1\u02c3\3"+
+		"\2\2\2\u02c2\u02bf\3\2\2\2\u02c2\u02c3\3\2\2\2\u02c3\u02c4\3\2\2\2\u02c4"+
+		"\u02cb\5\u009cO\2\u02c5\u02c6\7\b\2\2\u02c6\u02cc\5\\/\2\u02c7\u02c8\7"+
+		"\5\2\2\u02c8\u02c9\5\\/\2\u02c9\u02ca\7\6\2\2\u02ca\u02cc\3\2\2\2\u02cb"+
+		"\u02c5\3\2\2\2\u02cb\u02c7\3\2\2\2\u02cb\u02cc\3\2\2\2\u02cc\61\3\2\2"+
+		"\2\u02cd\u02d8\7y\2\2\u02ce\u02d9\5\u0090I\2\u02cf\u02d0\5\u0086D\2\u02d0"+
+		"\u02d1\7\4\2\2\u02d1\u02d3\3\2\2\2\u02d2\u02cf\3\2\2\2\u02d2\u02d3\3\2"+
+		"\2\2\u02d3\u02d6\3\2\2\2\u02d4\u02d7\5\u0088E\2\u02d5\u02d7\5\u0094K\2"+
+		"\u02d6\u02d4\3\2\2\2\u02d6\u02d5\3\2\2\2\u02d7\u02d9\3\2\2\2\u02d8\u02ce"+
+		"\3\2\2\2\u02d8\u02d2\3\2\2\2\u02d8\u02d9\3\2\2\2\u02d9\63\3\2\2\2\u02da"+
+		"\u02dc\7z\2\2\u02db\u02dd\7\u0081\2\2\u02dc\u02db\3\2\2\2\u02dc\u02dd"+
+		"\3\2\2\2\u02dd\u02de\3\2\2\2\u02de\u02df\5\u009eP\2\u02df\65\3\2\2\2\u02e0"+
+		"\u02e5\7\177\2\2\u02e1\u02e3\7\u0089\2\2\u02e2\u02e4\5\u00a2R\2\u02e3"+
+		"\u02e2\3\2\2\2\u02e3\u02e4\3\2\2\2\u02e4\u02e6\3\2\2\2\u02e5\u02e1\3\2"+
+		"\2\2\u02e5\u02e6\3\2\2\2\u02e6\u02ec\3\2\2\2\u02e7\u02e9\7\u0088\2\2\u02e8"+
+		"\u02ea\7\u0081\2\2\u02e9\u02e8\3\2\2\2\u02e9\u02ea\3\2\2\2\u02ea\u02eb"+
+		"\3\2\2\2\u02eb\u02ed\5\u009eP\2\u02ec\u02e7\3\2\2\2\u02ec\u02ed\3\2\2"+
+		"\2\u02ed\67\3\2\2\2\u02ee\u02ef\7\u0081\2\2\u02ef\u02f0\5\u009eP\2\u02f0"+
+		"9\3\2\2\2\u02f1\u02f3\7\u0095\2\2\u02f2\u02f4\7v\2\2\u02f3\u02f2\3\2\2"+
+		"\2\u02f3\u02f4\3\2\2\2\u02f4\u02f5\3\2\2\2\u02f5\u02fa\5^\60\2\u02f6\u02f7"+
+		"\7\7\2\2\u02f7\u02f9\5^\60\2\u02f8\u02f6\3\2\2\2\u02f9\u02fc\3\2\2\2\u02fa"+
+		"\u02f8\3\2\2\2\u02fa\u02fb\3\2\2\2\u02fb\u02fe\3\2\2\2\u02fc\u02fa\3\2"+
+		"\2\2\u02fd\u02f1\3\2\2\2\u02fd\u02fe\3\2\2\2\u02fe\u02ff\3\2\2\2\u02ff"+
+		"\u0305\5j\66\2\u0300\u0301\5p9\2\u0301\u0302\5j\66\2\u0302\u0304\3\2\2"+
+		"\2\u0303\u0300\3\2\2\2\u0304\u0307\3\2\2\2\u0305\u0303\3\2\2\2\u0305\u0306"+
+		"\3\2\2\2\u0306\u0312\3\2\2\2\u0307\u0305\3\2\2\2\u0308\u0309\7o\2\2\u0309"+
+		"\u030a\7*\2\2\u030a\u030f\5Z.\2\u030b\u030c\7\7\2\2\u030c\u030e\5Z.\2"+
+		"\u030d\u030b\3\2\2\2\u030e\u0311\3\2\2\2\u030f\u030d\3\2\2\2\u030f\u0310"+
+		"\3\2\2\2\u0310\u0313\3\2\2\2\u0311\u030f\3\2\2\2\u0312\u0308\3\2\2\2\u0312"+
+		"\u0313\3\2\2\2\u0313\u031a\3\2\2\2\u0314\u0315\7d\2\2\u0315\u0318\5L\'"+
+		"\2\u0316\u0317\t\4\2\2\u0317\u0319\5L\'\2\u0318\u0316\3\2\2\2\u0318\u0319"+
+		"\3\2\2\2\u0319\u031b\3\2\2\2\u031a\u0314\3\2\2\2\u031a\u031b\3\2\2\2\u031b"+
+		";\3\2\2\2\u031c\u031e\5V,\2\u031d\u031c\3\2\2\2\u031d\u031e\3\2\2\2\u031e"+
+		"\u031f\3\2\2\2\u031f\u032a\7\u008d\2\2\u0320\u0321\7n\2\2\u0321\u032b"+
+		"\7\177\2\2\u0322\u0323\7n\2\2\u0323\u032b\7\33\2\2\u0324\u0325\7n\2\2"+
+		"\u0325\u032b\7|\2\2\u0326\u0327\7n\2\2\u0327\u032b\7J\2\2\u0328\u0329"+
+		"\7n\2\2\u0329\u032b\7S\2\2\u032a\u0320\3\2\2\2\u032a\u0322\3\2\2\2\u032a"+
+		"\u0324\3\2\2\2\u032a\u0326\3\2\2\2\u032a\u0328\3\2\2\2\u032a\u032b\3\2"+
+		"\2\2\u032b\u032c\3\2\2\2\u032c\u032d\5X-\2\u032d\u032e\7\u0083\2\2\u032e"+
+		"\u032f\5\u008eH\2\u032f\u0330\7\b\2\2\u0330\u0338\5L\'\2\u0331\u0332\7"+
+		"\7\2\2\u0332\u0333\5\u008eH\2\u0333\u0334\7\b\2\2\u0334\u0335\5L\'\2\u0335"+
+		"\u0337\3\2\2\2\u0336\u0331\3\2\2\2\u0337\u033a\3\2\2\2\u0338\u0336\3\2"+
+		"\2\2\u0338\u0339\3\2\2\2\u0339\u033d\3\2\2\2\u033a\u0338\3\2\2\2\u033b"+
+		"\u033c\7\u0094\2\2\u033c\u033e\5L\'\2\u033d\u033b\3\2\2\2\u033d\u033e"+
+		"\3\2\2\2\u033e=\3\2\2\2\u033f\u0341\5V,\2\u0340\u033f\3\2\2\2\u0340\u0341"+
+		"\3\2\2\2\u0341\u0342\3\2\2\2\u0342\u034d\7\u008d\2\2\u0343\u0344\7n\2"+
+		"\2\u0344\u034e\7\177\2\2\u0345\u0346\7n\2\2\u0346\u034e\7\33\2\2\u0347"+
+		"\u0348\7n\2\2\u0348\u034e\7|\2\2\u0349\u034a\7n\2\2\u034a\u034e\7J\2\2"+
+		"\u034b\u034c\7n\2\2\u034c\u034e\7S\2\2\u034d\u0343\3\2\2\2\u034d\u0345"+
+		"\3\2\2\2\u034d\u0347\3\2\2\2\u034d\u0349\3\2\2\2\u034d\u034b\3\2\2\2\u034d"+
+		"\u034e\3\2\2\2\u034e\u034f\3\2\2\2\u034f\u0350\5X-\2\u0350\u0351\7\u0083"+
+		"\2\2\u0351\u0352\5\u008eH\2\u0352\u0353\7\b\2\2\u0353\u035b\5L\'\2\u0354"+
+		"\u0355\7\7\2\2\u0355\u0356\5\u008eH\2\u0356\u0357\7\b\2\2\u0357\u0358"+
+		"\5L\'\2\u0358\u035a\3\2\2\2\u0359\u0354\3\2\2\2\u035a\u035d\3\2\2\2\u035b"+
+		"\u0359\3\2\2\2\u035b\u035c\3\2\2\2\u035c\u0360\3\2\2\2\u035d\u035b\3\2"+
+		"\2\2\u035e\u035f\7\u0094\2\2\u035f\u0361\5L\'\2\u0360\u035e\3\2\2\2\u0360"+
+		"\u0361\3\2\2\2\u0361\u0374\3\2\2\2\u0362\u0363\7o\2\2\u0363\u0364\7*\2"+
+		"\2\u0364\u0369\5Z.\2\u0365\u0366\7\7\2\2\u0366\u0368\5Z.\2\u0367\u0365"+
+		"\3\2\2\2\u0368\u036b\3\2\2\2\u0369\u0367\3\2\2\2\u0369\u036a\3\2\2\2\u036a"+
+		"\u036d\3\2\2\2\u036b\u0369\3\2\2\2\u036c\u0362\3\2\2\2\u036c\u036d\3\2"+
+		"\2\2\u036d\u036e\3\2\2\2\u036e\u036f\7d\2\2\u036f\u0372\5L\'\2\u0370\u0371"+
+		"\t\4\2\2\u0371\u0373\5L\'\2\u0372\u0370\3\2\2\2\u0372\u0373\3\2\2\2\u0373"+
+		"\u0375\3\2\2\2\u0374\u036c\3\2\2\2\u0374\u0375\3\2\2\2\u0375?\3\2\2\2"+
+		"\u0376\u0377\7\u008f\2\2\u0377A\3\2\2\2\u0378\u037a\5\u008eH\2\u0379\u037b"+
+		"\5D#\2\u037a\u0379\3\2\2\2\u037a\u037b\3\2\2\2\u037b\u037f\3\2\2\2\u037c"+
+		"\u037e\5F$\2\u037d\u037c\3\2\2\2\u037e\u0381\3\2\2\2\u037f\u037d\3\2\2"+
+		"\2\u037f\u0380\3\2\2\2\u0380C\3\2\2\2\u0381\u037f\3\2\2\2\u0382\u0384"+
+		"\5\u0082B\2\u0383\u0382\3\2\2\2\u0384\u0385\3\2\2\2\u0385\u0383\3\2\2"+
+		"\2\u0385\u0386\3\2\2\2\u0386\u0391\3\2\2\2\u0387\u0388\7\5\2\2\u0388\u0389"+
+		"\5t;\2\u0389\u038a\7\6\2\2\u038a\u0392\3\2\2\2\u038b\u038c\7\5\2\2\u038c"+
+		"\u038d\5t;\2\u038d\u038e\7\7\2\2\u038e\u038f\5t;\2\u038f\u0390\7\6\2\2"+
+		"\u0390\u0392\3\2\2\2\u0391\u0387\3\2\2\2\u0391\u038b\3\2\2\2\u0391\u0392"+
+		"\3\2\2\2\u0392E\3\2\2\2\u0393\u0394\7\63\2\2\u0394\u0396\5\u0082B\2\u0395"+
+		"\u0393\3\2\2\2\u0395\u0396\3\2\2\2\u0396\u03b8\3\2\2\2\u0397\u0398\7s"+
+		"\2\2\u0398\u039a\7a\2\2\u0399\u039b\t\6\2\2\u039a\u0399\3\2\2\2\u039a"+
+		"\u039b\3\2\2\2\u039b\u039c\3\2\2\2\u039c\u039e\5H%\2\u039d\u039f\7&\2"+
+		"\2\u039e\u039d\3\2\2\2\u039e\u039f\3\2\2\2\u039f\u03b9\3\2\2\2\u03a0\u03a2"+
+		"\7h\2\2\u03a1\u03a0\3\2\2\2\u03a1\u03a2\3\2\2\2\u03a2\u03a3\3\2\2\2\u03a3"+
+		"\u03a4\7j\2\2\u03a4\u03b9\5H%\2\u03a5\u03a6\7\u008c\2\2\u03a6\u03b9\5"+
+		"H%\2\u03a7\u03a8\7.\2\2\u03a8\u03a9\7\5\2\2\u03a9\u03aa\5L\'\2\u03aa\u03ab"+
+		"\7\6\2\2\u03ab\u03b9\3\2\2\2\u03ac\u03b3\7:\2\2\u03ad\u03b4\5t;\2\u03ae"+
+		"\u03b4\5v<\2\u03af\u03b0\7\5\2\2\u03b0\u03b1\5L\'\2\u03b1\u03b2\7\6\2"+
+		"\2\u03b2\u03b4\3\2\2\2\u03b3\u03ad\3\2\2\2\u03b3\u03ae\3\2\2\2\u03b3\u03af"+
+		"\3\2\2\2\u03b4\u03b9\3\2\2\2\u03b5\u03b6\7/\2\2\u03b6\u03b9\5\u0090I\2"+
+		"\u03b7\u03b9\5N(\2\u03b8\u0397\3\2\2\2\u03b8\u03a1\3\2\2\2\u03b8\u03a5"+
+		"\3\2\2\2\u03b8\u03a7\3\2\2\2\u03b8\u03ac\3\2\2\2\u03b8\u03b5\3\2\2\2\u03b8"+
+		"\u03b7\3\2\2\2\u03b9G\3\2\2\2\u03ba\u03bb\7m\2\2\u03bb\u03bc\7\62\2\2"+
+		"\u03bc\u03be\t\7\2\2\u03bd\u03ba\3\2\2\2\u03bd\u03be\3\2\2\2\u03beI\3"+
+		"\2\2\2\u03bf\u03d1\7\b\2\2\u03c0\u03d1\7\30\2\2\u03c1\u03d1\7\31\2\2\u03c2"+
+		"\u03d1\7\32\2\2\u03c3\u03d1\7\r\2\2\u03c4\u03d1\7\24\2\2\u03c5\u03d1\7"+
+		"\25\2\2\u03c6\u03d1\7\26\2\2\u03c7\u03d1\7\27\2\2\u03c8\u03d1\7^\2\2\u03c9"+
+		"\u03ca\7^\2\2\u03ca\u03d1\7h\2\2\u03cb\u03d1\7U\2\2\u03cc\u03d1\7c\2\2"+
+		"\u03cd\u03d1\7O\2\2\u03ce\u03d1\7e\2\2\u03cf\u03d1\7x\2\2\u03d0\u03bf"+
+		"\3\2\2\2\u03d0\u03c0\3\2\2\2\u03d0\u03c1\3\2\2\2\u03d0\u03c2\3\2\2\2\u03d0"+
+		"\u03c3\3\2\2\2\u03d0\u03c4\3\2\2\2\u03d0\u03c5\3\2\2\2\u03d0\u03c6\3\2"+
+		"\2\2\u03d0\u03c7\3\2\2\2\u03d0\u03c8\3\2\2\2\u03d0\u03c9\3\2\2\2\u03d0"+
+		"\u03cb\3\2\2\2\u03d0\u03cc\3\2\2\2\u03d0\u03cd\3\2\2\2\u03d0\u03ce\3\2"+
+		"\2\2\u03d0\u03cf\3\2\2\2\u03d1K\3\2\2\2\u03d2\u03d3\b\'\1\2\u03d3\u03d4"+
+		"\5x=\2\u03d4\u03d5\5L\'\25\u03d5\u041f\3\2\2\2\u03d6\u041f\5v<\2\u03d7"+
+		"\u041f\7\u0099\2\2\u03d8\u03d9\5\u0086D\2\u03d9\u03da\7\4\2\2\u03da\u03dc"+
+		"\3\2\2\2\u03db\u03d8\3\2\2\2\u03db\u03dc\3\2\2\2\u03dc\u03dd\3\2\2\2\u03dd"+
+		"\u03de\5\u0088E\2\u03de\u03df\7\4\2\2\u03df\u03e1\3\2\2\2\u03e0\u03db"+
+		"\3\2\2\2\u03e0\u03e1\3\2\2\2\u03e1\u03e2\3\2\2\2\u03e2\u041f\5\u008eH"+
+		"\2\u03e3\u03e4\5\u0084C\2\u03e4\u03f1\7\5\2\2\u03e5\u03e7\7@\2\2\u03e6"+
+		"\u03e5\3\2\2\2\u03e6\u03e7\3\2\2\2\u03e7\u03e8\3\2\2\2\u03e8\u03ed\5L"+
+		"\'\2\u03e9\u03ea\7\7\2\2\u03ea\u03ec\5L\'\2\u03eb\u03e9\3\2\2\2\u03ec"+
+		"\u03ef\3\2\2\2\u03ed\u03eb\3\2\2\2\u03ed\u03ee\3\2\2\2\u03ee\u03f2\3\2"+
+		"\2\2\u03ef\u03ed\3\2\2\2\u03f0\u03f2\7\t\2\2\u03f1\u03e6\3\2\2\2\u03f1"+
+		"\u03f0\3\2\2\2\u03f1\u03f2\3\2\2\2\u03f2\u03f3\3\2\2\2\u03f3\u03f4\7\6"+
+		"\2\2\u03f4\u041f\3\2\2\2\u03f5\u03f6\7\5\2\2\u03f6\u03f7\5L\'\2\u03f7"+
+		"\u03f8\7\6\2\2\u03f8\u041f\3\2\2\2\u03f9\u03fa\7-\2\2\u03fa\u03fb\7\5"+
+		"\2\2\u03fb\u03fc\5L\'\2\u03fc\u03fd\7#\2\2\u03fd\u03fe\5D#\2\u03fe\u03ff"+
+		"\7\6\2\2\u03ff\u041f\3\2\2\2\u0400\u0402\7h\2\2\u0401\u0400\3\2\2\2\u0401"+
+		"\u0402\3\2\2\2\u0402\u0403\3\2\2\2\u0403\u0405\7H\2\2\u0404\u0401\3\2"+
+		"\2\2\u0404\u0405\3\2\2\2\u0405\u0406\3\2\2\2\u0406\u0407\7\5\2\2\u0407"+
+		"\u0408\5:\36\2\u0408\u0409\7\6\2\2\u0409\u041f\3\2\2\2\u040a\u040c\7,"+
+		"\2\2\u040b\u040d\5L\'\2\u040c\u040b\3\2\2\2\u040c\u040d\3\2\2\2\u040d"+
+		"\u0413\3\2\2\2\u040e\u040f\7\u0093\2\2\u040f\u0410\5L\'\2\u0410\u0411"+
+		"\7\u0087\2\2\u0411\u0412\5L\'\2\u0412\u0414\3\2\2\2\u0413\u040e\3\2\2"+
+		"\2\u0414\u0415\3\2\2\2\u0415\u0413\3\2\2\2\u0415\u0416\3\2\2\2\u0416\u0419"+
+		"\3\2\2\2\u0417\u0418\7C\2\2\u0418\u041a\5L\'\2\u0419\u0417\3\2\2\2\u0419"+
+		"\u041a\3\2\2\2\u041a\u041b\3\2\2\2\u041b\u041c\7D\2\2\u041c\u041f\3\2"+
+		"\2\2\u041d\u041f\5P)\2\u041e\u03d2\3\2\2\2\u041e\u03d6\3\2\2\2\u041e\u03d7"+
+		"\3\2\2\2\u041e\u03e0\3\2\2\2\u041e\u03e3\3\2\2\2\u041e\u03f5\3\2\2\2\u041e"+
+		"\u03f9\3\2\2\2\u041e\u0404\3\2\2\2\u041e\u040a\3\2\2\2\u041e\u041d\3\2"+
+		"\2\2\u041f\u0472\3\2\2\2\u0420\u0421\f\24\2\2\u0421\u0422\t\b\2\2\u0422"+
+		"\u0471\5L\'\25\u0423\u0424\f\23\2\2\u0424\u0425\t\t\2\2\u0425\u0471\5"+
+		"L\'\24\u0426\u0427\f\22\2\2\u0427\u0428\t\n\2\2\u0428\u0471\5L\'\23\u0429"+
+		"\u042a\f\21\2\2\u042a\u042b\5J&\2\u042b\u042c\5L\'\22\u042c\u0471\3\2"+
+		"\2\2\u042d\u042e\f\20\2\2\u042e\u042f\7\"\2\2\u042f\u0471\5L\'\21\u0430"+
+		"\u0431\f\17\2\2\u0431\u0432\7n\2\2\u0432\u0471\5L\'\20\u0433\u0434\f\b"+
+		"\2\2\u0434\u0436\7^\2\2\u0435\u0437\7h\2\2\u0436\u0435\3\2\2\2\u0436\u0437"+
+		"\3\2\2\2\u0437\u0438\3\2\2\2\u0438\u0471\5L\'\t\u0439\u043b\f\7\2\2\u043a"+
+		"\u043c\7h\2\2\u043b\u043a\3\2\2\2\u043b\u043c\3\2\2\2\u043c\u043d\3\2"+
+		"\2\2\u043d\u043e\7)\2\2\u043e\u043f\5L\'\2\u043f\u0440\7\"\2\2\u0440\u0441"+
+		"\5L\'\b\u0441\u0471\3\2\2\2\u0442\u0443\f\13\2\2\u0443\u0444\7/\2\2\u0444"+
+		"\u0471\5\u0090I\2\u0445\u0447\f\n\2\2\u0446\u0448\7h\2\2\u0447\u0446\3"+
+		"\2\2\2\u0447\u0448\3\2\2\2\u0448\u0449\3\2\2\2\u0449\u044a\t\13\2\2\u044a"+
+		"\u044d\5L\'\2\u044b\u044c\7E\2\2\u044c\u044e\5L\'\2\u044d\u044b\3\2\2"+
+		"\2\u044d\u044e\3\2\2\2\u044e\u0471\3\2\2\2\u044f\u0454\f\t\2\2\u0450\u0455"+
+		"\7_\2\2\u0451\u0455\7i\2\2\u0452\u0453\7h\2\2\u0453\u0455\7j\2\2\u0454"+
+		"\u0450\3\2\2\2\u0454\u0451\3\2\2\2\u0454\u0452\3\2\2\2\u0455\u0471\3\2"+
+		"\2\2\u0456\u0458\f\6\2\2\u0457\u0459\7h\2\2\u0458\u0457\3\2\2\2\u0458"+
+		"\u0459\3\2\2\2\u0459\u045a\3\2\2\2\u045a\u046e\7U\2\2\u045b\u0465\7\5"+
+		"\2\2\u045c\u0466\5:\36\2\u045d\u0462\5L\'\2\u045e\u045f\7\7\2\2\u045f"+
+		"\u0461\5L\'\2\u0460\u045e\3\2\2\2\u0461\u0464\3\2\2\2\u0462\u0460\3\2"+
+		"\2\2\u0462\u0463\3\2\2\2\u0463\u0466\3\2\2\2\u0464\u0462\3\2\2\2\u0465"+
+		"\u045c\3\2\2\2\u0465\u045d\3\2\2\2\u0465\u0466\3\2\2\2\u0466\u0467\3\2"+
+		"\2\2\u0467\u046f\7\6\2\2\u0468\u0469\5\u0086D\2\u0469\u046a\7\4\2\2\u046a"+
+		"\u046c\3\2\2\2\u046b\u0468\3\2\2\2\u046b\u046c\3\2\2\2\u046c\u046d\3\2"+
+		"\2\2\u046d\u046f\5\u0088E\2\u046e\u045b\3\2\2\2\u046e\u046b\3\2\2\2\u046f"+
+		"\u0471\3\2\2\2\u0470\u0420\3\2\2\2\u0470\u0423\3\2\2\2\u0470\u0426\3\2"+
+		"\2\2\u0470\u0429\3\2\2\2\u0470\u042d\3\2\2\2\u0470\u0430\3\2\2\2\u0470"+
+		"\u0433\3\2\2\2\u0470\u0439\3\2\2\2\u0470\u0442\3\2\2\2\u0470\u0445\3\2"+
+		"\2\2\u0470\u044f\3\2\2\2\u0470\u0456\3\2\2\2\u0471\u0474\3\2\2\2\u0472"+
+		"\u0470\3\2\2\2\u0472\u0473\3\2\2\2\u0473M\3\2\2\2\u0474\u0472\3\2\2\2"+
+		"\u0475\u0476\7w\2\2\u0476\u0482\5\u0092J\2\u0477\u0478\7\5\2\2\u0478\u047d"+
+		"\5\u008eH\2\u0479\u047a\7\7\2\2\u047a\u047c\5\u008eH\2\u047b\u0479\3\2"+
+		"\2\2\u047c\u047f\3\2\2\2\u047d\u047b\3\2\2\2\u047d\u047e\3\2\2\2\u047e"+
+		"\u0480\3\2\2\2\u047f\u047d\3\2\2\2\u0480\u0481\7\6\2\2\u0481\u0483\3\2"+
+		"\2\2\u0482\u0477\3\2\2\2\u0482\u0483\3\2\2\2\u0483\u0496\3\2\2\2\u0484"+
+		"\u0485\7m\2\2\u0485\u048e\t\f\2\2\u0486\u0487\7\u0083\2\2\u0487\u048f"+
+		"\7j\2\2\u0488\u0489\7\u0083\2\2\u0489\u048f\7:\2\2\u048a\u048f\7+\2\2"+
+		"\u048b\u048f\7}\2\2\u048c\u048d\7g\2\2\u048d\u048f\7\34\2\2\u048e\u0486"+
+		"\3\2\2\2\u048e\u0488\3\2\2\2\u048e\u048a\3\2\2\2\u048e\u048b\3\2\2\2\u048e"+
+		"\u048c\3\2\2\2\u048f\u0493\3\2\2\2\u0490\u0491\7e\2\2\u0491\u0493\5\u0082"+
+		"B\2\u0492\u0484\3\2\2\2\u0492\u0490\3\2\2\2\u0493\u0495\3\2\2\2\u0494"+
+		"\u0492\3\2\2\2\u0495\u0498\3\2\2\2\u0496\u0494\3\2\2\2\u0496\u0497\3\2"+
+		"\2\2\u0497\u04a3\3\2\2\2\u0498\u0496\3\2\2\2\u0499\u049b\7h\2\2\u049a"+
+		"\u0499\3\2\2\2\u049a\u049b\3\2\2\2\u049b\u049c\3\2\2\2\u049c\u04a1\7;"+
+		"\2\2\u049d\u049e\7X\2\2\u049e\u04a2\7<\2\2\u049f\u04a0\7X\2\2\u04a0\u04a2"+
+		"\7T\2\2\u04a1\u049d\3\2\2\2\u04a1\u049f\3\2\2\2\u04a1\u04a2\3\2\2\2\u04a2"+
+		"\u04a4\3\2\2\2\u04a3\u049a\3\2\2\2\u04a3\u04a4\3\2\2\2\u04a4O\3\2\2\2"+
+		"\u04a5\u04a6\7u\2\2\u04a6\u04ab\7\5\2\2\u04a7\u04ac\7S\2\2\u04a8\u04a9"+
+		"\t\r\2\2\u04a9\u04aa\7\7\2\2\u04aa\u04ac\5z>\2\u04ab\u04a7\3\2\2\2\u04ab"+
+		"\u04a8\3\2\2\2\u04ac\u04ad\3\2\2\2\u04ad\u04ae\7\6\2\2\u04aeQ\3\2\2\2"+
+		"\u04af\u04b2\5\u008eH\2\u04b0\u04b1\7/\2\2\u04b1\u04b3\5\u0090I\2\u04b2"+
+		"\u04b0\3\2\2\2\u04b2\u04b3\3\2\2\2\u04b3\u04b5\3\2\2\2\u04b4\u04b6\t\6"+
+		"\2\2\u04b5\u04b4\3\2\2\2\u04b5\u04b6\3\2\2\2\u04b6S\3\2\2\2\u04b7\u04b8"+
+		"\7\63\2\2\u04b8\u04ba\5\u0082B\2\u04b9\u04b7\3\2\2\2\u04b9\u04ba\3\2\2"+
+		"\2\u04ba\u04df\3\2\2\2\u04bb\u04bc\7s\2\2\u04bc\u04bf\7a\2\2\u04bd\u04bf"+
+		"\7\u008c\2\2\u04be\u04bb\3\2\2\2\u04be\u04bd\3\2\2\2\u04bf\u04c0\3\2\2"+
+		"\2\u04c0\u04c1\7\5\2\2\u04c1\u04c6\5R*\2\u04c2\u04c3\7\7\2\2\u04c3\u04c5"+
+		"\5R*\2\u04c4\u04c2\3\2\2\2\u04c5\u04c8\3\2\2\2\u04c6\u04c4\3\2\2\2\u04c6"+
+		"\u04c7\3\2\2\2\u04c7\u04c9\3\2\2\2\u04c8\u04c6\3\2\2\2\u04c9\u04ca\7\6"+
+		"\2\2\u04ca\u04cb\5H%\2\u04cb\u04e0\3\2\2\2\u04cc\u04cd\7.\2\2\u04cd\u04ce"+
+		"\7\5\2\2\u04ce\u04cf\5L\'\2\u04cf\u04d0\7\6\2\2\u04d0\u04e0\3\2\2\2\u04d1"+
+		"\u04d2\7L\2\2\u04d2\u04d3\7a\2\2\u04d3\u04d4\7\5\2\2\u04d4\u04d9\5\u008e"+
+		"H\2\u04d5\u04d6\7\7\2\2\u04d6\u04d8\5\u008eH\2\u04d7\u04d5\3\2\2\2\u04d8"+
+		"\u04db\3\2\2\2\u04d9\u04d7\3\2\2\2\u04d9\u04da\3\2\2\2\u04da\u04dc\3\2"+
+		"\2\2\u04db\u04d9\3\2\2\2\u04dc\u04dd\7\6\2\2\u04dd\u04de\5N(\2\u04de\u04e0"+
+		"\3\2\2\2\u04df\u04be\3\2\2\2\u04df\u04cc\3\2\2\2\u04df\u04d1\3\2\2\2\u04e0"+
+		"U\3\2\2\2\u04e1\u04e3\7\u0095\2\2\u04e2\u04e4\7v\2\2\u04e3\u04e2\3\2\2"+
+		"\2\u04e3\u04e4\3\2\2\2\u04e4\u04e5\3\2\2\2\u04e5\u04e6\5r:\2\u04e6\u04e7"+
+		"\7#\2\2\u04e7\u04e8\7\5\2\2\u04e8\u04e9\5:\36\2\u04e9\u04f3\7\6\2\2\u04ea"+
+		"\u04eb\7\7\2\2\u04eb\u04ec\5r:\2\u04ec\u04ed\7#\2\2\u04ed\u04ee\7\5\2"+
+		"\2\u04ee\u04ef\5:\36\2\u04ef\u04f0\7\6\2\2\u04f0\u04f2\3\2\2\2\u04f1\u04ea"+
+		"\3\2\2\2\u04f2\u04f5\3\2\2\2\u04f3\u04f1\3\2\2\2\u04f3\u04f4\3\2\2\2\u04f4"+
+		"W\3\2\2\2\u04f5\u04f3\3\2\2\2\u04f6\u04f7\5\u0086D\2\u04f7\u04f8\7\4\2"+
+		"\2\u04f8\u04fa\3\2\2\2\u04f9\u04f6\3\2\2\2\u04f9\u04fa\3\2\2\2\u04fa\u04fb"+
+		"\3\2\2\2\u04fb\u0501\5\u0088E\2\u04fc\u04fd\7W\2\2\u04fd\u04fe\7*\2\2"+
+		"\u04fe\u0502\5\u0094K\2\u04ff\u0500\7h\2\2\u0500\u0502\7W\2\2\u0501\u04fc"+
+		"\3\2\2\2\u0501\u04ff\3\2\2\2\u0501\u0502\3\2\2\2\u0502Y\3\2\2\2\u0503"+
+		"\u0506\5L\'\2\u0504\u0505\7/\2\2\u0505\u0507\5\u0090I\2\u0506\u0504\3"+
+		"\2\2\2\u0506\u0507\3\2\2\2\u0507\u0509\3\2\2\2\u0508\u050a\t\6\2\2\u0509"+
+		"\u0508\3\2\2\2\u0509\u050a\3\2\2\2\u050a[\3\2\2\2\u050b\u050f\5t;\2\u050c"+
+		"\u050f\5\u0082B\2\u050d\u050f\7\u009a\2\2\u050e\u050b\3\2\2\2\u050e\u050c"+
+		"\3\2\2\2\u050e\u050d\3\2\2\2\u050f]\3\2\2\2\u0510\u051c\5\u0088E\2\u0511"+
+		"\u0512\7\5\2\2\u0512\u0517\5\u008eH\2\u0513\u0514\7\7\2\2\u0514\u0516"+
+		"\5\u008eH\2\u0515\u0513\3\2\2\2\u0516\u0519\3\2\2\2\u0517\u0515\3\2\2"+
+		"\2\u0517\u0518\3\2\2\2\u0518\u051a\3\2\2\2\u0519\u0517\3\2\2\2\u051a\u051b"+
+		"\7\6\2\2\u051b\u051d\3\2\2\2\u051c\u0511\3\2\2\2\u051c\u051d\3\2\2\2\u051d"+
+		"\u051e\3\2\2\2\u051e\u051f\7#\2\2\u051f\u0520\7\5\2\2\u0520\u0521\5:\36"+
+		"\2\u0521\u0522\7\6\2\2\u0522_\3\2\2\2\u0523\u0530\7\t\2\2\u0524\u0525"+
+		"\5\u0088E\2\u0525\u0526\7\4\2\2\u0526\u0527\7\t\2\2\u0527\u0530\3\2\2"+
+		"\2\u0528\u052d\5L\'\2\u0529\u052b\7#\2\2\u052a\u0529\3\2\2\2\u052a\u052b"+
+		"\3\2\2\2\u052b\u052c\3\2\2\2\u052c\u052e\5~@\2\u052d\u052a\3\2\2\2\u052d"+
+		"\u052e\3\2\2\2\u052e\u0530\3\2\2\2\u052f\u0523\3\2\2\2\u052f\u0524\3\2"+
+		"\2\2\u052f\u0528\3\2\2\2\u0530a\3\2\2\2\u0531\u0532\5\u0086D\2\u0532\u0533"+
+		"\7\4\2\2\u0533\u0535\3\2\2\2\u0534\u0531\3\2\2\2\u0534\u0535\3\2\2\2\u0535"+
+		"\u0536\3\2\2\2\u0536\u053b\5\u0088E\2\u0537\u0539\7#\2\2\u0538\u0537\3"+
+		"\2\2\2\u0538\u0539\3\2\2\2\u0539\u053a\3\2\2\2\u053a\u053c\5\u00a0Q\2"+
+		"\u053b\u0538\3\2\2\2\u053b\u053c\3\2\2\2\u053c\u0542\3\2\2\2\u053d\u053e"+
+		"\7W\2\2\u053e\u053f\7*\2\2\u053f\u0543\5\u0094K\2\u0540\u0541\7h\2\2\u0541"+
+		"\u0543\7W\2\2\u0542\u053d\3\2\2\2\u0542\u0540\3\2\2\2\u0542\u0543\3\2"+
+		"\2\2\u0543\u0561\3\2\2\2\u0544\u054e\7\5\2\2\u0545\u054a\5b\62\2\u0546"+
+		"\u0547\7\7\2\2\u0547\u0549\5b\62\2\u0548\u0546\3\2\2\2\u0549\u054c\3\2"+
+		"\2\2\u054a\u0548\3\2\2\2\u054a\u054b\3\2\2\2\u054b\u054f\3\2\2\2\u054c"+
+		"\u054a\3\2\2\2\u054d\u054f\5d\63\2\u054e\u0545\3\2\2\2\u054e\u054d\3\2"+
+		"\2\2\u054f\u0550\3\2\2\2\u0550\u0555\7\6\2\2\u0551\u0553\7#\2\2\u0552"+
+		"\u0551\3\2\2\2\u0552\u0553\3\2\2\2\u0553\u0554\3\2\2\2\u0554\u0556\5\u00a0"+
+		"Q\2\u0555\u0552\3\2\2\2\u0555\u0556\3\2\2\2\u0556\u0561\3\2\2\2\u0557"+
+		"\u0558\7\5\2\2\u0558\u0559\5:\36\2\u0559\u055e\7\6\2\2\u055a\u055c\7#"+
+		"\2\2\u055b\u055a\3\2\2\2\u055b\u055c\3\2\2\2\u055c\u055d\3\2\2\2\u055d"+
+		"\u055f\5\u00a0Q\2\u055e\u055b\3\2\2\2\u055e\u055f\3\2\2\2\u055f\u0561"+
+		"\3\2\2\2\u0560\u0534\3\2\2\2\u0560\u0544\3\2\2\2\u0560\u0557\3\2\2\2\u0561"+
+		"c\3\2\2\2\u0562\u0569\5b\62\2\u0563\u0564\5f\64\2\u0564\u0565\5b\62\2"+
+		"\u0565\u0566\5h\65\2\u0566\u0568\3\2\2\2\u0567\u0563\3\2\2\2\u0568\u056b"+
+		"\3\2\2\2\u0569\u0567\3\2\2\2\u0569\u056a\3\2\2\2\u056ae\3\2\2\2\u056b"+
+		"\u0569\3\2\2\2\u056c\u057a\7\7\2\2\u056d\u056f\7f\2\2\u056e\u056d\3\2"+
+		"\2\2\u056e\u056f\3\2\2\2\u056f\u0576\3\2\2\2\u0570\u0572\7b\2\2\u0571"+
+		"\u0573\7p\2\2\u0572\u0571\3\2\2\2\u0572\u0573\3\2\2\2\u0573\u0577\3\2"+
+		"\2\2\u0574\u0577\7Y\2\2\u0575\u0577\7\65\2\2\u0576\u0570\3\2\2\2\u0576"+
+		"\u0574\3\2\2\2\u0576\u0575\3\2\2\2\u0576\u0577\3\2\2\2\u0577\u0578\3\2"+
+		"\2\2\u0578\u057a\7`\2\2\u0579\u056c\3\2\2\2\u0579\u056e\3\2\2\2\u057a"+
+		"g\3\2\2\2\u057b\u057c\7m\2\2\u057c\u058a\5L\'\2\u057d\u057e\7\u008e\2"+
+		"\2\u057e\u057f\7\5\2\2\u057f\u0584\5\u008eH\2\u0580\u0581\7\7\2\2\u0581"+
+		"\u0583\5\u008eH\2\u0582\u0580\3\2\2\2\u0583\u0586\3\2\2\2\u0584\u0582"+
+		"\3\2\2\2\u0584\u0585\3\2\2\2\u0585\u0587\3\2\2\2\u0586\u0584\3\2\2\2\u0587"+
+		"\u0588\7\6\2\2\u0588\u058a\3\2\2\2\u0589\u057b\3\2\2\2\u0589\u057d\3\2"+
+		"\2\2\u0589\u058a\3\2\2\2\u058ai\3\2\2\2\u058b\u058d\7\u0082\2\2\u058c"+
+		"\u058e\t\16\2\2\u058d\u058c\3\2\2\2\u058d\u058e\3\2\2\2\u058e\u058f\3"+
+		"\2\2\2\u058f\u059c\5l\67\2\u0590\u059a\7M\2\2\u0591\u0596\5b\62\2\u0592"+
+		"\u0593\7\7\2\2\u0593\u0595\5b\62\2\u0594\u0592\3\2\2\2\u0595\u0598\3\2"+
+		"\2\2\u0596\u0594\3\2\2\2\u0596\u0597\3\2\2\2\u0597\u059b\3\2\2\2\u0598"+
+		"\u0596\3\2\2\2\u0599\u059b\5d\63\2\u059a\u0591\3\2\2\2\u059a\u0599\3\2"+
+		"\2\2\u059b\u059d\3\2\2\2\u059c\u0590\3\2\2\2\u059c\u059d\3\2\2\2\u059d"+
+		"\u059e\3\2\2\2\u059e\u05ad\5n8\2\u059f\u05a0\7P\2\2\u05a0\u05a1\7*\2\2"+
+		"\u05a1\u05a6\5L\'\2\u05a2\u05a3\7\7\2\2\u05a3\u05a5\5L\'\2\u05a4\u05a2"+
+		"\3\2\2\2\u05a5\u05a8\3\2\2\2\u05a6\u05a4\3\2\2\2\u05a6\u05a7\3\2\2\2\u05a7"+
+		"\u05ab\3\2\2\2\u05a8\u05a6\3\2\2\2\u05a9\u05aa\7Q\2\2\u05aa\u05ac\5L\'"+
+		"\2\u05ab\u05a9\3\2\2\2\u05ab\u05ac\3\2\2\2\u05ac\u05ae\3\2\2\2\u05ad\u059f"+
+		"\3\2\2\2\u05ad\u05ae\3\2\2\2\u05ae\u05cc\3\2\2\2\u05af\u05b0\7\u0090\2"+
+		"\2\u05b0\u05b1\7\5\2\2\u05b1\u05b6\5L\'\2\u05b2\u05b3\7\7\2\2\u05b3\u05b5"+
+		"\5L\'\2\u05b4\u05b2\3\2\2\2\u05b5\u05b8\3\2\2\2\u05b6\u05b4\3\2\2\2\u05b6"+
+		"\u05b7\3\2\2\2\u05b7\u05b9\3\2\2\2\u05b8\u05b6\3\2\2\2\u05b9\u05c8\7\6"+
+		"\2\2\u05ba\u05bb\7\7\2\2\u05bb\u05bc\7\5\2\2\u05bc\u05c1\5L\'\2\u05bd"+
+		"\u05be\7\7\2\2\u05be\u05c0\5L\'\2\u05bf\u05bd\3\2\2\2\u05c0\u05c3\3\2"+
+		"\2\2\u05c1\u05bf\3\2\2\2\u05c1\u05c2\3\2\2\2\u05c2\u05c4\3\2\2\2\u05c3"+
+		"\u05c1\3\2\2\2\u05c4\u05c5\7\6\2\2\u05c5\u05c7\3\2\2\2\u05c6\u05ba\3\2"+
+		"\2\2\u05c7\u05ca\3\2\2\2\u05c8\u05c6\3\2\2\2\u05c8\u05c9\3\2\2\2\u05c9"+
+		"\u05cc\3\2\2\2\u05ca\u05c8\3\2\2\2\u05cb\u058b\3\2\2\2\u05cb\u05af\3\2"+
+		"\2\2\u05cck\3\2\2\2\u05cd\u05d2\5`\61\2\u05ce\u05cf\7\7\2\2\u05cf\u05d1"+
+		"\5`\61\2\u05d0\u05ce\3\2\2\2\u05d1\u05d4\3\2\2\2\u05d2\u05d0\3\2\2\2\u05d2"+
+		"\u05d3\3\2\2\2\u05d3m\3\2\2\2\u05d4\u05d2\3\2\2\2\u05d5\u05d6\7\u0094"+
+		"\2\2\u05d6\u05d8\5L\'\2\u05d7\u05d5\3\2\2\2\u05d7\u05d8\3\2\2\2\u05d8"+
+		"o\3\2\2\2\u05d9\u05df\7\u008b\2\2\u05da\u05db\7\u008b\2\2\u05db\u05df"+
+		"\7\37\2\2\u05dc\u05df\7\\\2\2\u05dd\u05df\7F\2\2\u05de\u05d9\3\2\2\2\u05de"+
+		"\u05da\3\2\2\2\u05de\u05dc\3\2\2\2\u05de\u05dd\3\2\2\2\u05dfq\3\2\2\2"+
+		"\u05e0\u05ec\5\u0088E\2\u05e1\u05e2\7\5\2\2\u05e2\u05e7\5\u008eH\2\u05e3"+
+		"\u05e4\7\7\2\2\u05e4\u05e6\5\u008eH\2\u05e5\u05e3\3\2\2\2\u05e6\u05e9"+
+		"\3\2\2\2\u05e7\u05e5\3\2\2\2\u05e7\u05e8\3\2\2\2\u05e8\u05ea\3\2\2\2\u05e9"+
+		"\u05e7\3\2\2\2\u05ea\u05eb\7\6\2\2\u05eb\u05ed\3\2\2\2\u05ec\u05e1\3\2"+
+		"\2\2\u05ec\u05ed\3\2\2\2\u05eds\3\2\2\2\u05ee\u05f0\t\t\2\2\u05ef\u05ee"+
+		"\3\2\2\2\u05ef\u05f0\3\2\2\2\u05f0\u05f1\3\2\2\2\u05f1\u05f2\7\u0098\2"+
+		"\2\u05f2u\3\2\2\2\u05f3\u05f4\t\17\2\2\u05f4w\3\2\2\2\u05f5\u05f6\t\20"+
+		"\2\2\u05f6y\3\2\2\2\u05f7\u05f8\7\u009a\2\2\u05f8{\3\2\2\2\u05f9\u05fc"+
+		"\5L\'\2\u05fa\u05fc\5B\"\2\u05fb\u05f9\3\2\2\2\u05fb\u05fa\3\2\2\2\u05fc"+
+		"}\3\2\2\2\u05fd\u05fe\t\21\2\2\u05fe\177\3\2\2\2\u05ff\u0600\t\22\2\2"+
+		"\u0600\u0081\3\2\2\2\u0601\u0602\5\u00a4S\2\u0602\u0083\3\2\2\2\u0603"+
+		"\u0604\5\u00a4S\2\u0604\u0085\3\2\2\2\u0605\u0606\5\u00a4S\2\u0606\u0087"+
+		"\3\2\2\2\u0607\u0608\5\u00a4S\2\u0608\u0089\3\2\2\2\u0609\u060a\5\u00a4"+
+		"S\2\u060a\u008b\3\2\2\2\u060b\u060c\5\u00a4S\2\u060c\u008d\3\2\2\2\u060d"+
+		"\u060e\5\u00a4S\2\u060e\u008f\3\2\2\2\u060f\u0610\5\u00a4S\2\u0610\u0091"+
+		"\3\2\2\2\u0611\u0612\5\u00a4S\2\u0612\u0093\3\2\2\2\u0613\u0614\5\u00a4"+
+		"S\2\u0614\u0095\3\2\2\2\u0615\u0616\5\u00a4S\2\u0616\u0097\3\2\2\2\u0617"+
+		"\u0618\5\u00a4S\2\u0618\u0099\3\2\2\2\u0619\u061a\5\u00a4S\2\u061a\u009b"+
+		"\3\2\2\2\u061b\u061c\5\u00a4S\2\u061c\u009d\3\2\2\2\u061d\u061e\5\u00a4"+
+		"S\2\u061e\u009f\3\2\2\2\u061f\u0620\5\u00a4S\2\u0620\u00a1\3\2\2\2\u0621"+
+		"\u0622\5\u00a4S\2\u0622\u00a3\3\2\2\2\u0623\u062b\7\u0097\2\2\u0624\u062b"+
+		"\5\u0080A\2\u0625\u062b\7\u009a\2\2\u0626\u0627\7\5\2\2\u0627\u0628\5"+
+		"\u00a4S\2\u0628\u0629\7\6\2\2\u0629\u062b\3\2\2\2\u062a\u0623\3\2\2\2"+
+		"\u062a\u0624\3\2\2\2\u062a\u0625\3\2\2\2\u062a\u0626\3\2\2\2\u062b\u00a5"+
+		"\3\2\2\2\u00da\u00a8\u00aa\u00b5\u00bc\u00c1\u00c7\u00cd\u00cf\u00ed\u00f4"+
+		"\u00fc\u00ff\u0108\u010c\u0114\u0118\u011a\u011f\u0121\u0125\u012c\u012f"+
+		"\u0134\u0138\u013d\u0146\u0149\u014f\u0151\u0155\u015b\u0160\u016b\u0171"+
+		"\u0175\u017b\u0180\u0189\u0190\u0196\u019a\u019e\u01a4\u01a9\u01b0\u01bb"+
+		"\u01be\u01c0\u01c6\u01cc\u01d0\u01d7\u01dd\u01e3\u01e9\u01ee\u01fa\u01ff"+
+		"\u020a\u020f\u0212\u0219\u021c\u0223\u022c\u022f\u0235\u0237\u023b\u0243"+
+		"\u0248\u0250\u0255\u025d\u0262\u026a\u026f\u0274\u0287\u028d\u0296\u029b"+
+		"\u02a4\u02af\u02b6\u02bc\u02c2\u02cb\u02d2\u02d6\u02d8\u02dc\u02e3\u02e5"+
+		"\u02e9\u02ec\u02f3\u02fa\u02fd\u0305\u030f\u0312\u0318\u031a\u031d\u032a"+
+		"\u0338\u033d\u0340\u034d\u035b\u0360\u0369\u036c\u0372\u0374\u037a\u037f"+
+		"\u0385\u0391\u0395\u039a\u039e\u03a1\u03b3\u03b8\u03bd\u03d0\u03db\u03e0"+
+		"\u03e6\u03ed\u03f1\u0401\u0404\u040c\u0415\u0419\u041e\u0436\u043b\u0447"+
+		"\u044d\u0454\u0458\u0462\u0465\u046b\u046e\u0470\u0472\u047d\u0482\u048e"+
+		"\u0492\u0496\u049a\u04a1\u04a3\u04ab\u04b2\u04b5\u04b9\u04be\u04c6\u04d9"+
+		"\u04df\u04e3\u04f3\u04f9\u0501\u0506\u0509\u050e\u0517\u051c\u052a\u052d"+
+		"\u052f\u0534\u0538\u053b\u0542\u054a\u054e\u0552\u0555\u055b\u055e\u0560"+
+		"\u0569\u056e\u0572\u0576\u0579\u0584\u0589\u058d\u0596\u059a\u059c\u05a6"+
+		"\u05ab\u05ad\u05b6\u05c1\u05c8\u05cb\u05d2\u05d7\u05de\u05e7\u05ec\u05ef"+
+		"\u05fb\u062a";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

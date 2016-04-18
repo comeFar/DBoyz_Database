@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public class DbInfo {
     public int FILE_SIZE = 10 * 1024 * 1024;
+    public int JOIN_BUFF_SIZE = 20;      // actual size = JOIN_BUFF_SIZE * FILE_SIZE
     public String TPC_DIR = "tpc";
     public String DB_DIR = "DB";
     public String COL_DB_DIR = DB_DIR + "/" + "column_based";
@@ -47,14 +48,14 @@ public class DbInfo {
             "R_REGIONKEY int", "R_NAME char", "R_COMMENT char"
     );
     public Map<String, List<String>> TABLE_NAMES = new HashMap<String, List<String>>(){{
-        put("part.tbl", PART_TABLE_ATTRS);
-        put("supplier.tbl", SUPPLIER_TABLE_ATTRS);
-        put("partsupp.tbl", PARTSUPP_TABLE_ATTRS);
-        put("customer.tbl", CUSTOMER_TABLE_ATTRS);
-        put("orders.tbl", ORDERS_TABLE_ATTRS);
-        put("lineitem.tbl", LINEITEM_TABLE_ATTRS);
-        put("nation.tbl", NATION_TABLE_ATTRS);
-        put("region.tbl", REGION_TABLE_ATTRS);
+        put("part", PART_TABLE_ATTRS);
+        put("supplier", SUPPLIER_TABLE_ATTRS);
+        put("partsupp", PARTSUPP_TABLE_ATTRS);
+        put("customer", CUSTOMER_TABLE_ATTRS);
+        put("orders", ORDERS_TABLE_ATTRS);
+        put("lineitem", LINEITEM_TABLE_ATTRS);
+        put("nation", NATION_TABLE_ATTRS);
+        put("region", REGION_TABLE_ATTRS);
     }};
 
     public Map<String, Table> TABLES;
@@ -99,5 +100,43 @@ public class DbInfo {
             this.type = type;
             this.offset = offset;
         }
+    }
+
+    public String getTableName(String s){
+        String header = s.split("_")[0];
+        String result;
+
+        switch (header.charAt(0)){
+            case 'c':
+                result = "customer";
+                break;
+            case 'l':
+                result = "lineitem";
+                break;
+            case 'n':
+                result = "nation";
+                break;
+            case 'o':
+                result = "orders";
+                break;
+            case 'p':
+                if (header.charAt(1) == 's'){
+                    result = "partsupp";
+                }else{
+                    result = "part";
+                }
+                break;
+            case 'r':
+                result = "region";
+                break;
+            case 's':
+                result = "supplier";
+                break;
+            default:
+                System.out.println("Unknow table name\n");
+                System.exit(-1);
+                return null;
+        }
+        return result;
     }
 }

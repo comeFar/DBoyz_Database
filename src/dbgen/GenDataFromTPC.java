@@ -19,7 +19,7 @@ public class GenDataFromTPC {
             String file = table.name;
 
             try {
-                FileReader fileReader = new FileReader(dbInfo.TPC_DIR + "/" + file);
+                FileReader fileReader = new FileReader(dbInfo.TPC_DIR + "/" + file + ".tbl");
                 BufferedReader bufferedReader = new BufferedReader(fileReader);
 
                 while((line = bufferedReader.readLine()) != null) {

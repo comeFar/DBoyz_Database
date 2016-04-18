@@ -179,12 +179,6 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSavepoint_stmt(DBoyzSQLParser.Savepoint_stmtContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DBoyzSQLParser#simple_select_stmt}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#select_stmt}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -233,6 +227,12 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConflict_clause(DBoyzSQLParser.Conflict_clauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code binaryOP}
 	 * labeled alternative in {@link DBoyzSQLParser#expr}.
 	 * @param ctx the parse tree
@@ -246,6 +246,13 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUndecided(DBoyzSQLParser.UndecidedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code function}
+	 * labeled alternative in {@link DBoyzSQLParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunction(DBoyzSQLParser.FunctionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#foreign_key_clause}.
 	 * @param ctx the parse tree
@@ -301,11 +308,11 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommon_table_expression(DBoyzSQLParser.Common_table_expressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DBoyzSQLParser#result_column}.
+	 * Visit a parse tree produced by {@link DBoyzSQLParser#projector}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitResult_column(DBoyzSQLParser.Result_columnContext ctx);
+	T visitProjector(DBoyzSQLParser.ProjectorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#table_or_subquery}.
 	 * @param ctx the parse tree
@@ -378,12 +385,6 @@ public interface DBoyzSQLVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUnary_operator(DBoyzSQLParser.Unary_operatorContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DBoyzSQLParser#error_message}.
 	 * @param ctx the parse tree

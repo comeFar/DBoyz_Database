@@ -288,16 +288,6 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 */
 	void exitSavepoint_stmt(DBoyzSQLParser.Savepoint_stmtContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DBoyzSQLParser#simple_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void enterSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DBoyzSQLParser#simple_select_stmt}.
-	 * @param ctx the parse tree
-	 */
-	void exitSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#select_stmt}.
 	 * @param ctx the parse tree
 	 */
@@ -378,6 +368,16 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 */
 	void exitConflict_clause(DBoyzSQLParser.Conflict_clauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code binaryOP}
 	 * labeled alternative in {@link DBoyzSQLParser#expr}.
 	 * @param ctx the parse tree
@@ -401,6 +401,18 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUndecided(DBoyzSQLParser.UndecidedContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code function}
+	 * labeled alternative in {@link DBoyzSQLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunction(DBoyzSQLParser.FunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code function}
+	 * labeled alternative in {@link DBoyzSQLParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunction(DBoyzSQLParser.FunctionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#foreign_key_clause}.
 	 * @param ctx the parse tree
@@ -492,15 +504,15 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 */
 	void exitCommon_table_expression(DBoyzSQLParser.Common_table_expressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DBoyzSQLParser#result_column}.
+	 * Enter a parse tree produced by {@link DBoyzSQLParser#projector}.
 	 * @param ctx the parse tree
 	 */
-	void enterResult_column(DBoyzSQLParser.Result_columnContext ctx);
+	void enterProjector(DBoyzSQLParser.ProjectorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DBoyzSQLParser#result_column}.
+	 * Exit a parse tree produced by {@link DBoyzSQLParser#projector}.
 	 * @param ctx the parse tree
 	 */
-	void exitResult_column(DBoyzSQLParser.Result_columnContext ctx);
+	void exitProjector(DBoyzSQLParser.ProjectorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#table_or_subquery}.
 	 * @param ctx the parse tree
@@ -621,16 +633,6 @@ public interface DBoyzSQLListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUnary_operator(DBoyzSQLParser.Unary_operatorContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
-	 * @param ctx the parse tree
-	 */
-	void enterBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DBoyzSQLParser#binary_operator}.
-	 * @param ctx the parse tree
-	 */
-	void exitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DBoyzSQLParser#error_message}.
 	 * @param ctx the parse tree

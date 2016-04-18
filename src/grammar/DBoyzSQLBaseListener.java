@@ -352,18 +352,6 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSimple_select_stmt(DBoyzSQLParser.Simple_select_stmtContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -460,6 +448,18 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBinaryOP(DBoyzSQLParser.BinaryOPContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -479,6 +479,18 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUndecided(DBoyzSQLParser.UndecidedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunction(DBoyzSQLParser.FunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunction(DBoyzSQLParser.FunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -592,13 +604,13 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterResult_column(DBoyzSQLParser.Result_columnContext ctx) { }
+	@Override public void enterProjector(DBoyzSQLParser.ProjectorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitResult_column(DBoyzSQLParser.Result_columnContext ctx) { }
+	@Override public void exitProjector(DBoyzSQLParser.ProjectorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -743,18 +755,6 @@ public class DBoyzSQLBaseListener implements DBoyzSQLListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUnary_operator(DBoyzSQLParser.Unary_operatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBinary_operator(DBoyzSQLParser.Binary_operatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

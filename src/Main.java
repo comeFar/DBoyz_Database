@@ -1,8 +1,8 @@
-import QueryUtils.QueryOptimizer;
 import grammar.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import preprocessor.Planer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -25,11 +25,11 @@ public class Main {
             DBoyzSQLParser parser = new DBoyzSQLParser(tokens);
             ParseTree tree = parser.parse();
 //            ParseTreeWalker walker = new ParseTreeWalker();
-//            walker.walk(new DBoyzAntlrListener(new QueryOptimizer()), tree);
+//            walker.walk(new DBoyzAntlrListener(new Planer()), tree);
             DBoyzAntlrVisitor visitor = new DBoyzAntlrVisitor();
             visitor.visit(tree);
-            QueryOptimizer optimizer = visitor.optimizer;
-            optimizer.execute();
+            Planer optimizer = visitor.optimizer;
+            optimizer.run();
             System.out.println("Finish\n");
         }
         catch (RuntimeException e){
