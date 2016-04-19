@@ -1,7 +1,6 @@
 package Symbols;
 
 import grammar.DBoyzSQLParser;
-
 import java.util.ArrayList;
 
 /**

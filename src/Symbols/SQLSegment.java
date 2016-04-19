@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Created by Yi on 4/16/2016.
  *
  */
-public class SQLSegment {
+public class SQLSegment{
     static public String GLOBAL_SCOPE = "global";
     static public String IDENTIFIER = "Identifier";
     static public String SUB_SQL = "Sub Sql";

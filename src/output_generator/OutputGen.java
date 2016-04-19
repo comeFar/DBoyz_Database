@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 /**
  * Created by Yi on 4/18/2016.
- *
  */
 public class OutputGen {
     private HashMap<PhysicalBlockBuff, String> buff;
@@ -21,12 +20,9 @@ public class OutputGen {
     }
 
     public void gen(){
-        StringBuilder builder = new StringBuilder();
         for (SQLSegment sql: projectors){
             Projector p = (Projector) sql;
-            builder.append(getOutput(p)).append("\t\t").append('|');
         }
-
     }
 
     private String getOutput(Projector p){

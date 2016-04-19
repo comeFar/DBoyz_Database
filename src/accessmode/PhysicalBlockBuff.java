@@ -46,6 +46,14 @@ public class PhysicalBlockBuff extends BlockBuff {
         }
     }
 
+    public boolean isEmpty(){
+        if (buff.size() == 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public void addValueList(String columnName, ArrayList<String> subList){
         if (buff.containsKey(columnName)){
             buff.get(columnName).add(subList);

@@ -46,6 +46,10 @@ public class SelectHandler {
         }
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public PhysicalBlockBuff getIntermediateBuff(){
         return this.intermediateResult;
     }
@@ -60,19 +64,35 @@ public class SelectHandler {
     }
 
     public PhysicalBlockBuff getNextNBlock(int number) throws IOException {
-        PhysicalBlockBuff physicalBlockBuff = new PhysicalBlockBuff();
-        for (int i = 0; i < number; i++){
-            PhysicalBlockBuff bb = getNextBlock();
-            if (null != bb){
-                physicalBlockBuff.merge(bb);
-            }else{
-                return null;
-            }
+        if (isProcessed()){
+            PhysicalBlockBuff buff = intermediateResult;
+            intermediateResult = null;
+            return buff;
         }
-        return physicalBlockBuff;
+
+        int num = 0;
+        PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
+        PhysicalBlockBuff tmp;
+        do {
+            tmp = getNextBlock();
+            aggregateBuff.merge(tmp);
+            num++;
+        }while((null != tmp) && (num < number));
+
+        if (aggregateBuff.isEmpty()){
+            return null;
+        }else{
+            return aggregateBuff;
+        }
     }
 
     public PhysicalBlockBuff getNextBlock() throws IOException {
+        if (isProcessed()){
+            PhysicalBlockBuff buff = intermediateResult;
+            intermediateResult = null;
+            return buff;
+        }
+
         if (blockIndex >= numOfBlocks){
             return null;
         }

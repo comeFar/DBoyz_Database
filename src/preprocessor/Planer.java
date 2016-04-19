@@ -1,7 +1,6 @@
 package preprocessor;
 
 import Symbols.*;
-import accessmode.BlockBuff;
 import accessmode.PhysicalBlockBuff;
 import accessmode.SelectHandler;
 import db_struct.DbInfo;
@@ -17,12 +16,12 @@ import java.util.*;
 public class Planer {
     public SQLSegment sqlTree;
     public DbInfo dbInfo;
-    public TreeMap<String, SelectHandler> pool;
+    public LinkedHashMap<String, SelectHandler> pool;
 
     public Planer(SQLSegment sqlTree){
         this.sqlTree = sqlTree;
         this.dbInfo = new DbInfo();
-        this.pool = new TreeMap<>();
+        this.pool = new LinkedHashMap<>();
     }
 
     public OutputGen run(){
@@ -84,6 +83,7 @@ public class Planer {
             String rightTableName = dbInfo.getTableName(j.right);
 
             pool.get(leftTableName).joins.put(rightTableName+"."+j.right, leftTableName+"."+j.left);
+            pool.get(rightTableName).joins.put(leftTableName+"."+j.left, rightTableName+"."+j.right);
 
             List<String> projectors = pool.get(leftTableName).projectors;
             if (!projectors.contains(j.left)){
@@ -130,17 +130,14 @@ public class Planer {
         PhysicalBlockBuff buff1 = handler.getNextBlock();
         PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
         SelectHandler joinTable = pool.get(joinTableName.split("\\.")[0]);
+        System.out.println("Join "+handler.getName() + " "+joinTableName);
         while (null != buff1) {
             PhysicalBlockBuff buff2;
-            if (joinTable.isProcessed()) {
-                buff2 = joinTable.getIntermediateBuff();
+
+            buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
+            while (buff2 != null) {
                 aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
-            }else{
                 buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
-                while (buff2 != null) {
-                    aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
-                    buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
-                }
             }
             buff1 = handler.getNextBlock();
         }
