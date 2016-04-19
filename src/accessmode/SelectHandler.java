@@ -284,6 +284,9 @@ public class SelectHandler {
                 System.out.println("Wrong date format");
                 return false;
             }
+        }else{
+            System.out.println("Fatal Error: Unknown data type");
+            return false;
         }
         return true;
     }
