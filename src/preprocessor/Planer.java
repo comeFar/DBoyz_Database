@@ -119,9 +119,16 @@ public class Planer {
 
         System.out.println("===================Done===================");
 
-        HashMap<PhysicalBlockBuff, String> result = new HashMap<>();
+        HashMap<PhysicalBlockBuff, String> reduceDup = new HashMap<>();
         for (SelectHandler s: pool.values()){
-            result.put(s.getIntermediateBuff(), "");
+            reduceDup.put(s.getIntermediateBuff(), "");
+        }
+        LinkedHashMap<String, ArrayList<ArrayList<String>>> result = new LinkedHashMap<>();
+        for (PhysicalBlockBuff buff: reduceDup.keySet()){
+            for (Map.Entry<String, ArrayList<ArrayList<String>>> entry: buff.buff.entrySet()){
+                assert(!result.containsKey(entry.getKey()));
+                result.put(entry.getKey(), entry.getValue());
+            }
         }
         return new OutputGen(result, stmt.getChild(SQLSegment.SELECT_PROJECTOR_SEG));
     }

@@ -2,19 +2,18 @@ package output_generator;
 
 import Symbols.Projector;
 import Symbols.SQLSegment;
-import accessmode.PhysicalBlockBuff;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Created by Yi on 4/18/2016.
  */
 public class OutputGen {
-    private HashMap<PhysicalBlockBuff, String> buff;
+    private LinkedHashMap<String, ArrayList<ArrayList<String>>> buff;
     private ArrayList<SQLSegment> projectors;
 
-    public OutputGen(HashMap<PhysicalBlockBuff, String> buff, ArrayList<SQLSegment> projectors){
+    public OutputGen(LinkedHashMap<String, ArrayList<ArrayList<String>>> buff, ArrayList<SQLSegment> projectors){
         this.buff = buff;
         this.projectors = projectors;
     }

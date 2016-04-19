@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public class PhysicalBlockBuff extends BlockBuff {
     public static int SUBLIST_SIZE = 10240;
-    private LinkedHashMap<String, ArrayList<ArrayList<String>>> buff;
+    public LinkedHashMap<String, ArrayList<ArrayList<String>>> buff;
 
     public PhysicalBlockBuff(){
         buff = new LinkedHashMap<>();
