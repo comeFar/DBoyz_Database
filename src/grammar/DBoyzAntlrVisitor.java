@@ -7,7 +7,7 @@ import preprocessor.Planer;
  *
  */
 public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<SQLSegment> {
-    public Planer planer;
+    private Planer planer;
 
     private SelectStmt currentSelectScope;
     private SQLSegment currentScope;
@@ -16,6 +16,10 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<SQLSegment> {
         this.currentScope = new SQLSegment(SQLSegment.GLOBAL_SCOPE);
         this.planer = new Planer(currentScope);
         this.currentSelectScope = null;
+    }
+
+    public Planer getPlaner(){
+        return this.planer;
     }
 
     @Override public SQLSegment visitSelect_stmt(DBoyzSQLParser.Select_stmtContext ctx){

@@ -4,6 +4,8 @@ import Symbols.*;
 import db_struct.DbInfo;
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -104,10 +106,9 @@ public class SelectHandler {
             return null;
         }
         if (projectors.size() == 0){
-            System.out.println("Table "+name+" has no projection and join, this means this table can be delete from your SQL sentence");
+            System.out.println("Table "+name+" has no projection and join, this means this table can be removed from your SQL sentence");
             return null;
         }
-        System.out.println("Get next block for " + name);
 
         FileReader fileReader;
         fileReader = new FileReader(folderName + Integer.toString(blockIndex++));
@@ -264,17 +265,30 @@ public class SelectHandler {
                     || (op.equals("!=") && leftValue.equals(rightValue))){
                 return false;
             }
+        }else if(type.equalsIgnoreCase("date")){
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date leftValue = fmt.parse(left);
+                Date rightValue = fmt.parse(right);
+                int res = leftValue.compareTo(rightValue);
+                if (((op.equals("=") || op.equals("==")) && (res != 0))
+                        || (op.equals(">") && (res <= 0))
+                        || (op.equals("<") && (res >= 0))
+                        || (op.equals(">=") && (res < 0))
+                        || (op.equals("<=") && (res > 0))
+                        || (op.equals("!=") && (res == 0))){
+                    return false;
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+                System.out.println("Wrong date format");
+                return false;
+            }
         }
         return true;
     }
 
     private DbInfo.Attribute getAttrProperty(String tableName, String attr){
         return dbInfo.TABLES.get(tableName).attrs.get(attr);
-    }
-
-    private void writeOutput(String s, String fileName) throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
-        writer.println(s);
-        writer.close();
     }
 }

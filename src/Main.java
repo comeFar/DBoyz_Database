@@ -25,11 +25,9 @@ public class Main {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             DBoyzSQLParser parser = new DBoyzSQLParser(tokens);
             ParseTree tree = parser.parse();
-//            ParseTreeWalker walker = new ParseTreeWalker();
-//            walker.walk(new DBoyzAntlrListener(new Planer()), tree);
             DBoyzAntlrVisitor visitor = new DBoyzAntlrVisitor();
             visitor.visit(tree);
-            Planer planer = visitor.planer;
+            Planer planer = visitor.getPlaner();
             OutputGen outputGen = planer.run();
             outputGen.gen();
         }
