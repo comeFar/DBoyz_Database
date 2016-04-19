@@ -38,7 +38,6 @@ public class OutputGen {
                     return;
                 }
             }
-            builder.append('\n');
             writer.println(builder.toString());
         }
     }
