@@ -4,9 +4,7 @@ import Symbols.*;
 import db_struct.DbInfo;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Yi on 4/17/2016.
@@ -16,6 +14,7 @@ public class SelectHandler {
     public List<Filter> filters;
     public List<String> projectors;
     public HashMap<String, String> joins;
+    public LinkedList<String> joinedTables;
 
     private PhysicalBlockBuff intermediateResult;
     private DbInfo dbInfo;
@@ -32,6 +31,7 @@ public class SelectHandler {
         filters = new ArrayList<>();
         projectors = new ArrayList<>();
         joins = new HashMap<>();
+        joinedTables = new LinkedList<>();
         this.dbInfo = dbInfo;
         processed = false;
         blockIndex = 0;
@@ -54,7 +54,14 @@ public class SelectHandler {
         return this.intermediateResult;
     }
 
-    public void setProcessed(PhysicalBlockBuff physicalBlockBuff){
+    public void setIntermediateResult(PhysicalBlockBuff buff) {
+        this.intermediateResult = buff;
+    }
+
+    public void setProcessed(PhysicalBlockBuff physicalBlockBuff, LinkedHashMap<String, SelectHandler> pool){
+        for (String s: joinedTables){
+            pool.get(s).setIntermediateResult(physicalBlockBuff);
+        }
         this.intermediateResult = physicalBlockBuff;
         processed = true;
     }

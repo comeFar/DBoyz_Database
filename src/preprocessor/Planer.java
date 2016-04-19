@@ -105,7 +105,7 @@ public class Planer {
                         aggregateBuff.merge(buff);
                         buff = next.getNextBlock();
                     }
-                    next.setProcessed(aggregateBuff);
+                    next.setProcessed(aggregateBuff, pool);
                 }else{
                     for (String joinTable: next.joins.keySet()){
                         nestedBlockJoin(next, joinTable);
@@ -126,23 +126,27 @@ public class Planer {
         return new OutputGen(result, stmt.getChild(SQLSegment.SELECT_PROJECTOR_SEG));
     }
 
-    public void nestedBlockJoin(SelectHandler handler, String joinTableName) throws IOException {
+    public void nestedBlockJoin(SelectHandler handler, String join) throws IOException {
+        String joinTableName = join.split("\\.")[0];
         PhysicalBlockBuff buff1 = handler.getNextBlock();
         PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
-        SelectHandler joinTable = pool.get(joinTableName.split("\\.")[0]);
+        SelectHandler joinTable = pool.get(joinTableName);
         System.out.println("Join "+handler.getName() + " "+joinTableName);
         while (null != buff1) {
             PhysicalBlockBuff buff2;
 
             buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
             while (buff2 != null) {
-                aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(joinTableName), joinTableName, buff2));
+                aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(join), join, buff2));
                 buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
             }
             buff1 = handler.getNextBlock();
         }
-        handler.setProcessed(aggregateBuff);
-        joinTable.setProcessed(aggregateBuff);
+
+        handler.setProcessed(aggregateBuff, pool);
+        joinTable.setProcessed(aggregateBuff, pool);
+        handler.joinedTables.add(joinTableName);
+        joinTable.joinedTables.add(handler.getName());
     }
 
     private SelectHandler getNextSelectHandler(){
