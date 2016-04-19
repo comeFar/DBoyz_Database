@@ -1,5 +1,7 @@
 package accessmode;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 /**
@@ -7,4 +9,9 @@ import java.util.LinkedHashMap;
  *
  */
 public class VirtualBlcokBuff extends BlockBuff{
+    LinkedHashMap<String, HashMap<PhysicalBlockBuff, ArrayList>> buff;
+
+    public VirtualBlcokBuff(){
+        buff = new LinkedHashMap<>();
+    }
 }

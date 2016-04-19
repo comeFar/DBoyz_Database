@@ -1,9 +1,11 @@
 package preprocessor;
 
 import Symbols.*;
+import accessmode.BlockBuff;
 import accessmode.PhysicalBlockBuff;
 import accessmode.SelectHandler;
 import db_struct.DbInfo;
+import output_generator.OutputGen;
 
 import java.io.IOException;
 import java.util.*;
@@ -23,24 +25,26 @@ public class Planer {
         this.pool = new TreeMap<>();
     }
 
-    public void run(){
+    public OutputGen run(){
         assert (Objects.equals(sqlTree.type, SQLSegment.GLOBAL_SCOPE));
-        executeSubSql(sqlTree);
+        return executeSubSql(sqlTree);
     }
 
-    public void executeSubSql(SQLSegment tree){
+    public OutputGen executeSubSql(SQLSegment tree){
+        OutputGen outputGen = null;
         for (SQLSegment sql: tree.getChild(SQLSegment.SUB_SQL)){
             assert (sql.subSqlType != null);
             if (sql.subSqlType.equals(SQLSegment.SELECT_SEG)) {
                 assert (sql instanceof SelectStmt);
-                runSelect((SelectStmt) sql);
+                outputGen = runSelect((SelectStmt) sql);
             } else if (sql.subSqlType.equals(SQLSegment.INSERT_SEG)) {
 //                    runInsert();
             }
         }
+        return outputGen;
     }
 
-    private void runSelect(SelectStmt stmt){
+    private OutputGen runSelect(SelectStmt stmt){
         executeSubSql(stmt);
 
         System.out.println("=================Select Start=================");
@@ -50,6 +54,7 @@ public class Planer {
             Table t = (Table) sqlSegment;
             pool.put(t.name, new SelectHandler(t.name, dbInfo));
         }
+
         for (SQLSegment sqlSegment: stmt.getChild(SQLSegment.SELECT_PROJECTOR_SEG)){
             Projector p = (Projector) sqlSegment;
             for (String s: p.columnNames){
@@ -58,7 +63,10 @@ public class Planer {
                     System.out.println("Fatal Error: tables you select from does not contain attr " + s);
                     System.exit(-1);
                 }
-                pool.get(tableName).projectors.add(s);
+                List<String> projectors = pool.get(tableName).projectors;
+                if (!projectors.contains(s)){
+                    projectors.add(s);
+                }
             }
         }
         for (SQLSegment sqlSegment: stmt.getChild(SQLSegment.SELECT_FILTERING_SEG)){
@@ -76,7 +84,15 @@ public class Planer {
             String rightTableName = dbInfo.getTableName(j.right);
 
             pool.get(leftTableName).joins.put(rightTableName+"."+j.right, leftTableName+"."+j.left);
-            pool.get(rightTableName).joins.put(leftTableName+"."+j.left, rightTableName+"."+j.right);
+
+            List<String> projectors = pool.get(leftTableName).projectors;
+            if (!projectors.contains(j.left)){
+                projectors.add(j.left);
+            }
+            projectors = pool.get(rightTableName).projectors;
+            if (!projectors.contains(j.right)){
+                projectors.add(j.right);
+            }
         }
 
         SelectHandler next = getNextSelectHandler();
@@ -102,7 +118,12 @@ public class Planer {
         }
 
         System.out.println("===================Done===================");
-//        System.out.println(pool.firstEntry().getValue().getIntermediateBuff().buff.toString());
+
+        HashMap<PhysicalBlockBuff, String> result = new HashMap<>();
+        for (SelectHandler s: pool.values()){
+            result.put(s.getIntermediateBuff(), "");
+        }
+        return new OutputGen(result, stmt.getChild(SQLSegment.SELECT_PROJECTOR_SEG));
     }
 
     public void nestedBlockJoin(SelectHandler handler, String joinTableName) throws IOException {

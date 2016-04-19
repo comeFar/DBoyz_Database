@@ -2,6 +2,7 @@ import grammar.*;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import output_generator.OutputGen;
 import preprocessor.Planer;
 
 import java.io.BufferedReader;
@@ -28,9 +29,9 @@ public class Main {
 //            walker.walk(new DBoyzAntlrListener(new Planer()), tree);
             DBoyzAntlrVisitor visitor = new DBoyzAntlrVisitor();
             visitor.visit(tree);
-            Planer optimizer = visitor.optimizer;
-            optimizer.run();
-            System.out.println("Finish\n");
+            Planer planer = visitor.planer;
+            OutputGen outputGen = planer.run();
+            outputGen.gen();
         }
         catch (RuntimeException e){
             System.out.println(e.toString());

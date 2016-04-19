@@ -7,14 +7,14 @@ import preprocessor.Planer;
  *
  */
 public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<SQLSegment> {
-    public Planer optimizer;
+    public Planer planer;
 
     private SelectStmt currentSelectScope;
     private SQLSegment currentScope;
 
     public DBoyzAntlrVisitor(){
         this.currentScope = new SQLSegment(SQLSegment.GLOBAL_SCOPE);
-        this.optimizer = new Planer(currentScope);
+        this.planer = new Planer(currentScope);
         this.currentSelectScope = null;
     }
 

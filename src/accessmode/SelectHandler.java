@@ -76,7 +76,7 @@ public class SelectHandler {
         if (blockIndex >= numOfBlocks){
             return null;
         }
-        if ((projectors.size() == 0) && (joins.size() == 0)){
+        if (projectors.size() == 0){
             System.out.println("Table "+name+" has no projection and join, this means this table can be delete from your SQL sentence");
             return null;
         }
@@ -125,13 +125,6 @@ public class SelectHandler {
     private void RB_project(String[] attrs, PhysicalBlockBuff physicalBlockBuff){
         for(String p: projectors){
             DbInfo.Attribute attrProperty = getAttrProperty(name, p);
-            String dbValue = attrs[attrProperty.offset];
-            physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue);
-        }
-
-        for(String s: joins.values()){
-            String[] list = s.split("\\.");
-            DbInfo.Attribute attrProperty = getAttrProperty(list[0], list[1]);
             String dbValue = attrs[attrProperty.offset];
             physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue);
         }

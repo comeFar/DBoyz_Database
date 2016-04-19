@@ -36,6 +36,16 @@ public class PhysicalBlockBuff extends BlockBuff {
         }
     }
 
+    public void print(){
+        for (ArrayList<ArrayList<String>> list: buff.values()){
+            for (ArrayList<String> subList: list){
+                for (String s: subList){
+                    System.out.println(s);
+                }
+            }
+        }
+    }
+
     public void addValueList(String columnName, ArrayList<String> subList){
         if (buff.containsKey(columnName)){
             buff.get(columnName).add(subList);
@@ -76,28 +86,35 @@ public class PhysicalBlockBuff extends BlockBuff {
         ArrayList<ArrayList<String>> selfValueList = this.buff.get(selfAttr);
         ArrayList<ArrayList<String>> otherValueList = other.buff.get(otherAttr);
 
+        int selfSubListIndex = 0;
         for (ArrayList<String> selfSubList: selfValueList){
+            int selfValueIndex = 0;
             for (String s: selfSubList){
 
-                int subListIndex = 0;
+
+                int otherSubListIndex = 0;
                 for (ArrayList<String> otherSubList: otherValueList){
-                    int valueIndex = 0;
+                    int otherValueIndex = 0;
                     for (String l: otherSubList){
 
                         if (s.equals(l)){
-
-                            for (Map.Entry<String, ArrayList<ArrayList<String>>> entry: other.buff.entrySet()){
-
+                            for (String selfKey: this.buff.keySet()){
+                                physicalBlockBuff.addValue(selfKey, this.buff.get(selfKey).get(selfSubListIndex).get(selfValueIndex));
                             }
-
+                            for (String otherKey: other.buff.keySet()){
+                                physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(otherSubListIndex).get(otherValueIndex));
+                            }
                         }
-                        valueIndex++;
 
+                        otherValueIndex++;
                     }
-                    subListIndex++;
+                    otherSubListIndex++;
                 }
 
+
+                selfValueIndex++;
             }
+            selfSubListIndex++;
         }
 
         return physicalBlockBuff;
