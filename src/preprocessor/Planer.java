@@ -108,7 +108,7 @@ public class Planer {
                     next.setProcessed(aggregateBuff, pool);
                 }else{
                     for (String joinTable: next.joins.keySet()){
-                        join(next, joinTable, PhysicalBlockBuff.MERGE_JOIN);
+                        join(next, joinTable, PhysicalBlockBuff.BLOCK_NESTED_JOIN);
                     }
                 }
             } catch (IOException e) {
@@ -125,7 +125,7 @@ public class Planer {
         }
         LinkedHashMap<String, ArrayList<ArrayList<String>>> result = new LinkedHashMap<>();
         for (PhysicalBlockBuff buff: reduceDup.keySet()){
-            for (Map.Entry<String, ArrayList<ArrayList<String>>> entry: buff.buff.entrySet()){
+            for (Map.Entry<String, ArrayList<ArrayList<String>>> entry: buff.getBuff().entrySet()){
                 assert(!result.containsKey(entry.getKey()));
                 result.put(entry.getKey(), entry.getValue());
             }
