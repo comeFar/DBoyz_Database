@@ -15,7 +15,7 @@ public class SQLSegment{
     static public String SELECT_SEG = "Select";
     static public String SELECT_PROJECTOR_SEG = "Select Projector";
     static public String SELECT_FILTERING_SEG = "Select Filter";
-    static public String SELECT_TABLE_SEG = "Select Table";
+    static public String SELECT_TABLE_SEG = "Select SelectFrom";
     static public String SELECT_JOIN_SEG = "Select Join";
 
     static public String INSERT_SEG = "Insert";

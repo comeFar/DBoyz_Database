@@ -53,7 +53,7 @@ public class DBoyzAntlrVisitor extends DBoyzSQLBaseVisitor<SQLSegment> {
             tableName = null;
         }
 
-        Table t = new Table(tableName);
+        SelectFrom t = new SelectFrom(tableName);
         pushScope(t);
 
         visitChildren(ctx);

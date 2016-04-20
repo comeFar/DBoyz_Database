@@ -50,7 +50,7 @@ public class Planer {
         stmt.printInfo();
 
         for (SQLSegment sqlSegment: stmt.getChild(SQLSegment.SELECT_TABLE_SEG)){
-            Table t = (Table) sqlSegment;
+            SelectFrom t = (SelectFrom) sqlSegment;
             pool.put(t.name, new SelectHandler(t.name, dbInfo));
         }
 
@@ -108,7 +108,7 @@ public class Planer {
                     next.setProcessed(aggregateBuff, pool);
                 }else{
                     for (String joinTable: next.joins.keySet()){
-                        nestedBlockJoin(next, joinTable);
+                        join(next, joinTable, PhysicalBlockBuff.MERGE_JOIN);
                     }
                 }
             } catch (IOException e) {
@@ -133,7 +133,7 @@ public class Planer {
         return new OutputGen(result, stmt.getChild(SQLSegment.SELECT_PROJECTOR_SEG));
     }
 
-    public void nestedBlockJoin(SelectHandler handler, String join) throws IOException {
+    public void join(SelectHandler handler, String join, int algorithm) throws IOException {
         String joinTableName = join.split("\\.")[0];
         PhysicalBlockBuff buff1 = handler.getNextBlock();
         PhysicalBlockBuff aggregateBuff = new PhysicalBlockBuff();
@@ -144,7 +144,11 @@ public class Planer {
 
             buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
             while (buff2 != null) {
-                aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(join), join, buff2));
+                if (algorithm == PhysicalBlockBuff.BLOCK_NESTED_JOIN){
+                    aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(join), join, buff2));
+                }else if (algorithm == PhysicalBlockBuff.MERGE_JOIN){
+                    aggregateBuff.merge(buff1.mergeJoin(handler.joins.get(join), join, buff2));
+                }
                 buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
             }
             buff1 = handler.getNextBlock();

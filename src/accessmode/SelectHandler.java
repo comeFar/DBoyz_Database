@@ -106,7 +106,7 @@ public class SelectHandler {
             return null;
         }
         if (projectors.size() == 0){
-            System.out.println("Table "+name+" has no projection and join, this means this table can be removed from your SQL sentence");
+            System.out.println("SelectFrom "+name+" has no projection and join, this means this table can be removed from your SQL sentence");
             return null;
         }
 

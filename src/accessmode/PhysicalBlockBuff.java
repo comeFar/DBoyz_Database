@@ -1,6 +1,9 @@
 package accessmode;
 
+import output_generator.BuffIterator;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -10,6 +13,9 @@ import java.util.Map;
  */
 public class PhysicalBlockBuff extends BlockBuff {
     public static int SUBLIST_SIZE = 10240;
+    public static int BLOCK_NESTED_JOIN = 1;
+    public static int MERGE_JOIN = 2;
+    public static int HASH_JOIN = 3;
     public LinkedHashMap<String, ArrayList<ArrayList<String>>> buff;
 
     public PhysicalBlockBuff(){
@@ -112,6 +118,69 @@ public class PhysicalBlockBuff extends BlockBuff {
                             for (String otherKey: other.buff.keySet()){
                                 physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(otherSubListIndex).get(otherValueIndex));
                             }
+                        }
+
+                        otherValueIndex++;
+                    }
+                    otherSubListIndex++;
+                }
+
+
+                selfValueIndex++;
+            }
+            selfSubListIndex++;
+        }
+
+        return physicalBlockBuff;
+    }
+
+    public PhysicalBlockBuff mergeJoin(String selfAttr, String otherAttr, PhysicalBlockBuff other){
+        PhysicalBlockBuff physicalBlockBuff = new PhysicalBlockBuff();
+        ArrayList<ArrayList<String>> selfValueList = this.buff.get(selfAttr);
+        ArrayList<ArrayList<String>> otherValueList = other.buff.get(otherAttr);
+
+
+        BuffIterator selfItr = new BuffIterator(selfValueList);
+        BuffIterator otherItr = new BuffIterator(otherValueList);
+
+        while(true){
+            if (!selfItr.hasNext() || !otherItr.hasNext()){
+                break;
+            }
+            //currently only support join by int value
+            int selfValue = Integer.parseInt(selfItr.next());
+            int otherValue = Integer.parseInt(otherItr.next());
+//            if (selfAttr > otherValue){
+//
+//            }
+        }
+
+        int selfSubListIndex = 0;
+        for (ArrayList<String> selfSubList: selfValueList){
+            int selfValueIndex = 0;
+            Collections.sort(selfSubList);
+            for (String s: selfSubList){
+
+
+                int otherSubListIndex = 0;
+                for (ArrayList<String> otherSubList: otherValueList){
+                    int otherValueIndex = 0;
+                    Collections.sort(otherSubList);
+                    for (String l: otherSubList){
+
+                        int a = Integer.parseInt(s);
+                        int b = Integer.parseInt(l);
+                        if (a == b){
+                            for (String selfKey: this.buff.keySet()){
+                                physicalBlockBuff.addValue(selfKey, this.buff.get(selfKey).get(selfSubListIndex).get(selfValueIndex));
+                            }
+                            for (String otherKey: other.buff.keySet()){
+                                physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(otherSubListIndex).get(otherValueIndex));
+                            }
+                        }else if (a < b){
+
+                        }else{
+
                         }
 
                         otherValueIndex++;
