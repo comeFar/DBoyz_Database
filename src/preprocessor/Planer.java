@@ -108,7 +108,7 @@ public class Planer {
                     next.setProcessed(aggregateBuff, pool);
                 }else{
                     for (String joinTable: next.joins.keySet()){
-                        join(next, joinTable, PhysicalBlockBuff.BLOCK_NESTED_JOIN);
+                        join(next, joinTable, PhysicalBlockBuff.HASH_JOIN);
                     }
                 }
             } catch (IOException e) {
@@ -148,6 +148,8 @@ public class Planer {
                     aggregateBuff.merge(buff1.blockNestedLoopJoin(handler.joins.get(join), join, buff2));
                 }else if (algorithm == PhysicalBlockBuff.MERGE_JOIN){
                     aggregateBuff.merge(buff1.mergeJoin(handler.joins.get(join), join, buff2));
+                }else if (algorithm == PhysicalBlockBuff.HASH_JOIN){
+                    aggregateBuff.merge(buff1.hashJoin(handler.joins.get(join), join, buff2));
                 }
                 buff2 = joinTable.getNextNBlock(dbInfo.JOIN_BUFF_SIZE);
             }

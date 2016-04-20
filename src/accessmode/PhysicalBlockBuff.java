@@ -15,7 +15,7 @@ public class PhysicalBlockBuff extends BlockBuff {
     public static int HASH_JOIN = 3;
 
     private LinkedHashMap<String, ArrayList<ArrayList<String>>> buff;
-    private LinkedHashMap<String, LinkedList<BuffIndex>> buffIndex;
+    private LinkedHashMap<String, LinkedHashMap<String, LinkedList<BuffIndex>>> buffIndex;
 
     public PhysicalBlockBuff(){
         buff = new LinkedHashMap<>();
@@ -26,24 +26,30 @@ public class PhysicalBlockBuff extends BlockBuff {
         return this.buff;
     }
 
-    public LinkedList<int[]> getValueIndex(String value){
+    public LinkedList<int[]> getValueIndex(String columnName, String value){
         LinkedList<int[]> list = new LinkedList<>();
-        if (buffIndex.containsKey(value)){
-            for (BuffIndex bi: buffIndex.get(value)){
-                for (int[] addr: bi.index){
-                    int[] newAddr = new int[2];
-                    newAddr[0] = addr[0] + bi.shift;
-                    newAddr[1] = addr[1];
-                    list.add(newAddr);
+        if (buffIndex.containsKey(columnName)){
+            LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = buffIndex.get(columnName);
+            if (columnIndex.containsKey(value)){
+                for (BuffIndex bi: columnIndex.get(value)){
+                    for (int[] addr: bi.index){
+                        int[] newAddr = new int[2];
+                        newAddr[0] = addr[0] + bi.shift;
+                        newAddr[1] = addr[1];
+                        list.add(newAddr);
+                    }
                 }
             }
+
         }
         return list;
     }
 
-    public void addValue(String columnName, String value){
+    public void addValue(String columnName, String value, boolean needIndex){
         int[] res = addValueToBuff(columnName, value);
-        addValueIndex(value, res);
+        if (needIndex){
+            addValueIndex(columnName, value, res);
+        }
     }
 
     private int[] addValueToBuff(String columnName, String value){
@@ -77,26 +83,46 @@ public class PhysicalBlockBuff extends BlockBuff {
         return address;
     }
 
-    private void addValueIndex(String value, int[] address){
-        if (buffIndex.containsKey(value)){
-            LinkedList<BuffIndex> list = buffIndex.get(value);
-            list.get(list.size()-1).add(address);
+    private void addValueIndex(String columnName, String value, int[] address){
+        if (buffIndex.containsKey(columnName)){
+            LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = buffIndex.get(columnName);
+            if (columnIndex.containsKey(value)){
+                LinkedList<BuffIndex> list = columnIndex.get(value);
+                list.get(list.size()-1).add(address);
+            }else{
+                BuffIndex bi = new BuffIndex(0);
+                bi.add(address);
+                LinkedList<BuffIndex> list = new LinkedList<>();
+                list.add(bi);
+                columnIndex.put(value, list);
+            }
         }else{
+            LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = new LinkedHashMap<>();
+            LinkedList<BuffIndex> valueIndex = new LinkedList<>();
             BuffIndex bi = new BuffIndex(0);
             bi.add(address);
-            LinkedList<BuffIndex> list = new LinkedList<>();
-            list.add(bi);
-            buffIndex.put(value, list);
+            valueIndex.add(bi);
+            columnIndex.put(value, valueIndex);
+            buffIndex.put(columnName, columnIndex);
         }
     }
 
-    private void addBuffIndex(BuffIndex bi, String key){
-        if (this.buffIndex.containsKey(key)){
-            this.buffIndex.get(key).add(bi);
+    private void addBuffIndex(String columnName, BuffIndex bi, String key){
+        if (this.buffIndex.containsKey(columnName)){
+            LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = this.buffIndex.get(columnName);
+            if (columnIndex.containsKey(key)){
+                columnIndex.get(key).add(bi);
+            }else{
+                LinkedList<BuffIndex> list = new LinkedList<>();
+                list.add(bi);
+                columnIndex.put(key, list);
+            }
         }else{
+            LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = new LinkedHashMap<>();
             LinkedList<BuffIndex> list = new LinkedList<>();
             list.add(bi);
-            this.buffIndex.put(key, list);
+            columnIndex.put(key, list);
+            this.buffIndex.put(columnName, columnIndex);
         }
     }
 
@@ -130,11 +156,12 @@ public class PhysicalBlockBuff extends BlockBuff {
         }
     }
 
-    private void mergeBuffIndex(LinkedHashMap<String, LinkedList<BuffIndex>> otherIndex, int offset){
-        for (Map.Entry<String, LinkedList<BuffIndex>> entry: otherIndex.entrySet()){
+    private void mergeBuffIndex(String columnName, LinkedHashMap<String, LinkedHashMap<String, LinkedList<BuffIndex>>> otherIndex, int offset){
+        LinkedHashMap<String, LinkedList<BuffIndex>> columnIndex = otherIndex.get(columnName);
+        for (Map.Entry<String, LinkedList<BuffIndex>> entry: columnIndex.entrySet()){
             for (BuffIndex bi: entry.getValue()){
                 bi.shift = offset;
-                addBuffIndex(bi, entry.getKey());
+                addBuffIndex(columnName, bi, entry.getKey());
             }
         }
     }
@@ -145,6 +172,7 @@ public class PhysicalBlockBuff extends BlockBuff {
         }
         if (this.buff.size() == 0){
             this.buff = other.buff;
+            this.buffIndex = other.buffIndex;
             return;
         }
         if ((this.buff.size() != other.buff.size())){
@@ -162,7 +190,7 @@ public class PhysicalBlockBuff extends BlockBuff {
             for (ArrayList<String> sublist: other.buff.get(key)){
                 this.addValueList(key, sublist);
             }
-            mergeBuffIndex(other.buffIndex, offset);
+            mergeBuffIndex(key, other.buffIndex, offset);
         }
     }
 
@@ -184,10 +212,10 @@ public class PhysicalBlockBuff extends BlockBuff {
 
                         if (s.equals(l)){
                             for (String selfKey: this.buff.keySet()){
-                                physicalBlockBuff.addValue(selfKey, this.buff.get(selfKey).get(selfSubListIndex).get(selfValueIndex));
+                                physicalBlockBuff.addValue(selfKey, this.buff.get(selfKey).get(selfSubListIndex).get(selfValueIndex), true);
                             }
                             for (String otherKey: other.buff.keySet()){
-                                physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(otherSubListIndex).get(otherValueIndex));
+                                physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(otherSubListIndex).get(otherValueIndex), true);
                             }
                         }
 
@@ -210,7 +238,6 @@ public class PhysicalBlockBuff extends BlockBuff {
         ArrayList<ArrayList<String>> selfValueList = this.buff.get(selfAttr);
         ArrayList<ArrayList<String>> otherValueList = other.buff.get(otherAttr);
 
-
         BuffIterator selfItr = new BuffIterator(selfValueList);
         BuffIterator otherItr = new BuffIterator(otherValueList);
 
@@ -225,6 +252,33 @@ public class PhysicalBlockBuff extends BlockBuff {
 //
 //            }
         }
+        return physicalBlockBuff;
+    }
+
+    public PhysicalBlockBuff hashJoin(String selfAttr, String otherAttr, PhysicalBlockBuff other){
+        PhysicalBlockBuff physicalBlockBuff = new PhysicalBlockBuff();
+        ArrayList<ArrayList<String>> selfSubList = this.buff.get(selfAttr);
+
+        int selfSubListIndex = 0;
+        for (ArrayList<String> list: selfSubList){
+            int selfValueIndex = 0;
+            for (String s: list){
+                LinkedList<int[]> indexes = other.getValueIndex(otherAttr, s);
+                if (indexes.size() != 0){
+                    for (String selfKey: this.buff.keySet()){
+                        physicalBlockBuff.addValue(selfKey, this.buff.get(selfKey).get(selfSubListIndex).get(selfValueIndex), true);
+                    }
+                    for (int[] addr: indexes){
+                        for (String otherKey: other.buff.keySet()){
+                            physicalBlockBuff.addValue(otherKey, other.buff.get(otherKey).get(addr[0]).get(addr[1]), true);
+                        }
+                    }
+                }
+                selfValueIndex++;
+            }
+            selfSubListIndex++;
+        }
+
         return physicalBlockBuff;
     }
 }

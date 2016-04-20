@@ -154,7 +154,7 @@ public class SelectHandler {
         for(String p: projectors){
             DbInfo.Attribute attrProperty = getAttrProperty(name, p);
             String dbValue = attrs[attrProperty.offset];
-            physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue);
+            physicalBlockBuff.addValue(name+"."+attrProperty.name, dbValue, attrProperty.needIndex);
         }
     }
 
