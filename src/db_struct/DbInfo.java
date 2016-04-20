@@ -42,7 +42,7 @@ public class DbInfo {
             "L_SHIPINSTRUCT char", "L_SHIPMODE char", "L_COMMENT char"
     );
     public List<String> NATION_TABLE_ATTRS = Arrays.asList(
-            "N_NATIONKEY int", "N_NAME char", "N_REGIONKEY int foreign", "N_COMMENT char"
+            "N_NATIONKEY int primary", "N_NAME char", "N_REGIONKEY int foreign", "N_COMMENT char"
     );
     public List<String> REGION_TABLE_ATTRS = Arrays.asList(
             "R_REGIONKEY int primary", "R_NAME char", "R_COMMENT char"
